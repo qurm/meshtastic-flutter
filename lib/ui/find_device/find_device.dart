@@ -8,9 +8,9 @@ import 'package:meshtastic_app/application/find_device/find_device_bloc.dart';
 import '../../application/connect_device/connect_device_bloc.dart';
 import '../../application/simple_bloc_observer.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
-//import 'infrastructure/mesh_api.dart';
-import '../../services/common.dart';
+import '../../services/bluetooth/ble_api.dart';
+import '../../services/mesh/mesh.dart';
+import '../../services/bluetooth/ble_common.dart';
 // import 'widgets.dart';
 import '../setup_device/widgets/scan_result.dart';
 import '../menu/drawer.dart';
@@ -22,7 +22,8 @@ import '../router/route_generator.dart';
 /// Find Devices screen
 class FindDevicesScreen extends StatelessWidget {
   const FindDevicesScreen({Key key, this.deviceConnect}) : super(key: key);
-  /// BLE device repository 
+
+  /// BLE device repository
   final DeviceConnect deviceConnect;
 
   @override

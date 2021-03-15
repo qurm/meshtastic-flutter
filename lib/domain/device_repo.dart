@@ -11,9 +11,9 @@ import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 // to do, make this injectable
-import '../services/ble_api.dart';
-import '../services/common.dart';
-import '../services/mesh_api.dart';
+import '../services/bluetooth/ble_api.dart';
+import '../services/bluetooth/ble_common.dart';
+import '../services/mesh/mesh.dart';
 import 'connect_failure.dart';
 import 'value_objects.dart';
 

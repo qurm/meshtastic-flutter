@@ -7,7 +7,8 @@ import '../../application/find_device/find_device_bloc.dart';
 import '../../application/setup_device/setup_device_bloc.dart';
 import '../../domain/commands/command.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
+
+import '../../services/mesh/mesh.dart';
 import '../setup_device/mesh_command.dart';
 import '../setup_device/mesh_command_list.dart';
 import '../find_device/find_device.dart';

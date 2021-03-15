@@ -4,14 +4,15 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 // import 'package:injectable/injectable.dart';
-import 'package:meshtastic_app/services/common.dart';
+import 'package:meshtastic_app/services/bluetooth/ble_common.dart';
 // import 'package:meshtastic_app/bloc/find_device/bloc/find_device_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../domain/connect_failure.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
+import '../../services/bluetooth/ble_api.dart';
+import '../../services/mesh/mesh.dart';
 
 part 'connect_device_bloc.freezed.dart';
 part 'connect_device_event.dart';

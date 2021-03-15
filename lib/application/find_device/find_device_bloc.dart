@@ -13,7 +13,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/connect_failure.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
+import '../../services/bluetooth/ble_api.dart';
+import '../../services/mesh/mesh.dart';
 import '../connect_device/connect_device_bloc.dart';
 
 part 'find_device_event.dart';

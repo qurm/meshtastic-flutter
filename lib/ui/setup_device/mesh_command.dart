@@ -7,7 +7,8 @@ import 'package:logger/logger.dart';
 import '../../application/setup_device/setup_device_bloc.dart';
 import '../../domain/commands/command.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
+import '../../services/bluetooth/bluetooth.dart';
+import '../../services/mesh/mesh.dart';
 import '../menu/drawer.dart';
 import 'mesh_command_list.dart';
 

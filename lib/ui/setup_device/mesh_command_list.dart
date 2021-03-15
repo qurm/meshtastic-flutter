@@ -8,11 +8,11 @@ import 'package:grouped_list/grouped_list.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../application/connect_device/connect_device_bloc.dart';
 import '../../application/setup_device/setup_device_bloc.dart';
 import '../../domain/commands/command.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
+
+import '../../services/mesh/mesh.dart';
 import '../router/route_generator.dart';
 part 'widgets/command_tiles.dart';
 

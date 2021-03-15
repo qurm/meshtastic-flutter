@@ -8,8 +8,8 @@ import 'package:injectable/injectable.dart';
 import '../../domain/commands/command.dart';
 import '../../domain/commands/command_failure.dart';
 import '../../domain/device_repo.dart';
-import '../../services/ble_api.dart';
-import '../../services/mesh_api.dart';
+import '../../services/bluetooth/ble_api.dart';
+import '../../services/mesh/mesh.dart';
 import '../connect_device/connect_device_bloc.dart';
 
 part 'setup_device_bloc.freezed.dart';
