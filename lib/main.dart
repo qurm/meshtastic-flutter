@@ -10,7 +10,7 @@ import 'package:wakelock/wakelock.dart';
 import 'application/connect_device/connect_device_bloc.dart';
 import 'application/simple_bloc_observer.dart';
 import 'domain/device_repo.dart';
-import 'services/ble_api.dart';
+import 'services/bluetooth/ble_api.dart';
 
 // import 'widgets.dart';
 import 'ui/menu/drawer.dart';

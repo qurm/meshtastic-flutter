@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter_blue/flutter_blue.dart';
-import '../../../services/ble_api.dart';
-import '../../../services/common.dart';
+import '../../../services/bluetooth/ble_api.dart';
+import '../../../services/bluetooth/ble_common.dart';
 
 class ServiceTile extends StatelessWidget {
   final BLEService service;

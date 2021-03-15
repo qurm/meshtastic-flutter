@@ -4,8 +4,8 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:logger/logger.dart';
 
 import '../domain/device_repo.dart';
-import '../services/ble_api.dart';
-import '../services/common.dart';
+import '../services/bluetooth/ble_api.dart';
+import '../services/bluetooth/ble_common.dart';
 //AF to expand this to report any permissions errors on startup
 
 class BluetoothOffScreen extends StatelessWidget {
