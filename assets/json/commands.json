@@ -1,0 +1,332 @@
+[
+  {
+    "id": 101,
+    "group": "Sleep times",
+    "command": "send_owner_interval",
+    "commandDescription": "Send our owner info at least this often (also we always send once at boot to rejoin the mesh).",
+    "params": [
+      {
+        "id": "send_owner_interval",
+        "pValue": "900",
+        "pDescription": "Time (s)",
+        "pDefault": "900"
+      }
+    ]
+  },
+  {
+    "id": 102,
+    "group": "Sleep times",
+    "command": "wait_bluetooth_secs",
+    "commandDescription": "set time for bluetooth to stay awake in seconds range 10 to ?.  Set 0 for default of 1 minute.",
+    "params": [
+      {
+        "id": "screen_on_secs",
+        "pValue": "27700",
+        "pDescription": "Time (s)",
+        "pDefault": "60",
+        "pMax": 28800,
+        "pMin": 60,
+        "pEdit": "false",
+        "pVisible": "true"
+      }
+    ]
+  },
+  {
+    "id": 103,
+    "group": "Sleep times",
+    "command": "screen_on_secs",
+    "commandDescription": "set time for Screen to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+    "params": [
+      {
+        "id": "screen_on_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 104,
+    "group": "Sleep times",
+    "command": "phone_timeout_secs",
+    "commandDescription": "set time for Phone?.  0 for default of 1 minute.",
+    "params": [
+      {
+        "id": "phone_timeout_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 105,
+    "group": "Sleep times Super-deep-sleep",
+    "command": "phone_sds_timeout_sec",
+    "commandDescription": "set time for Super-deep-sleep (SDS) screen to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+    "params": [
+      {
+        "id": "phone_sds_timeout_sec",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 106,
+    "group": "Sleep times Super-deep-sleep",
+    "command": "mesh_sds_timeout_secs",
+    "commandDescription": "set time for Super-deep-sleep (SDS)  to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+    "params": [
+      {
+        "id": "mesh_sds_timeout_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 107,
+    "group": "Sleep times Super-deep-sleep",
+    "command": "sds_secs",
+    "commandDescription": "set time for device Super-deep-sleep (SDS).",
+    "params": [
+      {
+        "id": "sds_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 108,
+    "group": "Sleep times Light-sleep",
+    "command": "ls_secs",
+    "commandDescription": "set time for device Light-sleep (LS), ",
+    "params": [
+      {
+        "id": "ls_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 109,
+    "group": "Sleep times",
+    "command": "min_wake_secs",
+    "commandDescription": "set minimum time for device to stay awake in seconds.",
+    "params": [
+      {
+        "id": "min_wake_secs",
+        "pValue": "28800",
+        "pDescription": "Time (s)",
+        "pDefault": "60"
+      }
+    ]
+  },
+  {
+    "id": 120,
+    "group": "Mesh Configuration",
+    "command": "num_missed_to_fail",
+    "commandDescription": "If we miss this many owner messages from a node, we declare the node offline (defaults to 3 - to allow for some lost packets) (FIXME not yet used)",
+    "params": [
+      {
+        "id": "num_missed_to_fail",
+        "pValue": "3",
+        "pDescription": "Count of missed messages",
+        "pDefault": "3",
+        "pType": "int"
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "group": "Wifi",
+    "command": "wifi_ssid",
+    "commandDescription": "If set, this node will try to join the specified wifi network and acquire an address via DHCP.",
+    "params": [
+      {
+        "id": "wifi_ssid",
+        "pValue": "",
+        "pDescription": "Wifi SSID string",
+        "pDefault": "",
+        "pType": "string"
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "group": "Wifi",
+    "command": "wifi_password",
+    "commandDescription": "If set, will be use to authenticate to the named wifi .",
+    "params": [
+      {
+        "id": "wifi_password",
+        "pValue": "",
+        "pDescription": "Wifi Password string",
+        "pDefault": "",
+        "pType": "string"
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "group": "Wifi",
+    "command": "wifi_ap_mode",
+    "commandDescription": " If set true, the node will operate as an AP (and DHCP server), otherwise it will be a station.",
+    "params": [
+      {
+        "id": "wifi_ap_mode",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false",
+        "pType": "bool"
+      }
+    ]
+  },
+  {
+    "id": 221,
+    "group": "Fixed Node",
+    "command": "is_router",
+    "commandDescription": "If set true, is operating as a router.  Changes behavior in the following ways: The device will only sleep for critically low battery level (i.e. always tries to stay alive for the mesh) In the future routing decisions will preferentially route packets through nodes with this attribute (because assumed good line of sight).",
+    "params": [
+      {
+        "id": "is_router",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false"
+      }
+    ]
+  },
+  {
+    "id": 230,
+    "group": "Power",
+    "command": "is_low_power",
+    "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+    "params": [
+      {
+        "id": "is_low_power",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false"
+      }
+    ]
+  },
+  {
+    "id": 240,
+    "group": "Fixed Node",
+    "command": "fixed_position",
+    "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+    "params": [
+      {
+        "id": "fixed_position",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false"
+      }
+    ]
+  },
+  {
+    "id": 241,
+    "group": "Mesh Location",
+    "command": "location_share",
+    "commandDescription": "How our location is shared with other nodes (or the local phone).",
+    "params": [
+      {
+        "id": "location_share",
+        "pValue": "",
+        "pDescription": "LocationSharing list",
+        "pDefault": ""
+      }
+    ]
+  },
+  {
+    "id": 242,
+    "group": "Mesh Location",
+    "command": "gps_operation",
+    "commandDescription": "How the GPS hardware in this unit is operated. Note: This is independent of how our location is shared with other devices.  For that see LocationSharing.",
+    "params": [
+      {
+        "id": "gps_operation",
+        "pValue": "",
+        "pDescription": "GpsOperation list",
+        "pDefault": ""
+      }
+    ]
+  },
+  {
+    "id": 243,
+    "group": "Mesh Location",
+    "command": "position_broadcast_secs",
+    "commandDescription": "How often should We should send our position this often (but only if it has changed significantly).  Defaults to 15 minutes, 900s.",
+    "params": [
+      {
+        "id": "position_broadcast_secs",
+        "pValue": "900",
+        "pDescription": "Time (s)",
+        "pDefault": "900"
+      }
+    ]
+  },
+  {
+    "id": 245,
+    "group": "Mesh Location",
+    "command": "gps_update_interval",
+    "commandDescription": "How often should we try to get GPS position (in seconds) when we are in GpsOpMobile mode? or zero for the default of once every 120 seconds or a very large value (maxint) to update only once at boot.",
+    "params": [
+      {
+        "id": "gps_update_interval",
+        "pValue": "120",
+        "pDescription": "Time (s)",
+        "pDefault": "120"
+      }
+    ]
+  },
+  {
+    "id": 246,
+    "group": "Mesh Location",
+    "command": "gps_attempt_time",
+    "commandDescription": "How long should we try to get our position during each gps_update_interval attempt? (in seconds)  Or if zero, use the default of 30 seconds. If we don't get a new gps fix in that time, the gps will be put into sleep until the next gps_update_rate window. .",
+    "params": [
+      {
+        "id": "gps_attempt_time",
+        "pValue": "30",
+        "pDescription": "Time (s)",
+        "pDefault": "30"
+      }
+    ]
+  },
+  {
+    "id": 900,
+    "group": "Reset",
+    "command": "factory_reset",
+    "commandDescription": "If set true, device will revert to firmware default values.",
+    "params": [
+      {
+        "id": "factory_reset",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false"
+      }
+    ]
+  },
+  {
+    "id": 901,
+    "group": "Debug",
+    "command": "debug_log_enabled",
+    "commandDescription": "If set true, enable debug log.",
+    "params": [
+      {
+        "id": "debug_log_enabled",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false"
+      }
+    ]
+  }
+]

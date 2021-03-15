@@ -1,0 +1,134 @@
+[
+  {
+    "id": 201,
+    "group": "Sleep times",
+    "command": "long_sleep_mode1",
+    "commandDescription": "If set, this node will try to join the specified Wifi network and acquire an address via DHCP.",
+    "params": [
+      {
+        "id": "screen_on_secs",
+        "pValue": "2777",
+        "pDescription": "Time (s)",
+        "pDefault": "60",
+        "pMax": 28800,
+        "pMin": 60,
+        "pEdit": "true",
+        "pVisible": "true"
+      },
+      {
+        "id": "wait_bluetooth_secs",
+        "pValue": "2888",
+        "pDescription": "Time (s)",
+        "pDefault": "60",
+        "pMax": 28800,
+        "pMin": 60
+      },
+      {
+        "id": "phone_timeout_secs",
+        "pValue": "2999",
+        "pDescription": "Time (s)",
+        "pDefault": "60",
+        "pMax": 28800,
+        "pMin": 60
+      }
+    ]
+  },
+  {
+    "id": 201,
+    "group": "WiFi Setup",
+    "command": "configure_wifi_station",
+    "commandDescription": "This configuration gets the node to try to join the specified local Wifi network and acquire an address via DHCP.",
+    "params": [
+      {
+        "id": "wifi_ap_mode",
+        "pValue": "false",
+        "pDescription": "If set true, the node will operate as an AP (and DHCP server), otherwise it will join a Wifi network as a station.",
+        "pDefault": "false",
+        "pType": "bool",
+        "pEdit": "false"
+      },
+      {
+        "id": "wifi_ssid",
+        "pValue": "MyWiFiSSID",
+        "pDescription": "Wifi SSID string.  Used to join named network, or is advertised as AP SSID.",
+        "pDefault": "",
+        "pType": "string",
+        "pEdit": "true",
+        "pMax": 32
+      },
+      {
+        "id": "wifi_password",
+        "pValue": "MyWiFiPassword",
+        "pDescription": "Wifi Password string. Used to join  to the named wifi, or required by clients joining this AP.",
+        "pDefault": "",
+        "pType": "string",
+        "pEdit": "true",
+        "pMax": 63
+      }
+    ]
+  },
+  {
+    "id": 202,
+    "group": "WiFi Setup",
+    "command": "configure_wifi_access_point",
+    "commandDescription": "If set, this node will try to join the specified Wifi network and acquire an address via DHCP.",
+    "params": [
+      {
+        "id": "wifi_ap_mode",
+        "pValue": "true",
+        "pDescription": "If set true, the node will operate as an AP (and DHCP server), otherwise it will join a Wifi network as a station.",
+        "pDefault": "false",
+        "pType": "bool",
+        "pEdit": "false"
+      },
+      {
+        "id": "wifi_ssid",
+        "pValue": "",
+        "pDescription": "Wifi SSID string.  Used to join named network, or is advertised as AP SSID.",
+        "pDefault": "",
+        "pType": "string",
+        "pMax": 32
+      },
+      {
+        "id": "wifi_password",
+        "pValue": "",
+        "pDescription": "Wifi Password string. Used to join  to the named wifi, or required by clients joining this AP.",
+        "pDefault": "",
+        "pType": "string",
+        "pMax": 63
+      }
+    ]
+  },
+  {
+    "id": 203,
+    "group": "WiFi Setup",
+    "command": "wifi_password",
+    "commandDescription": "If set, will be use to authenticate to the named wifi .",
+    "params": [
+      {
+        "id": "wifi_password",
+        "pValue": "",
+        "pDescription": "Wifi Password string",
+        "pDefault": "",
+        "pType": "string",
+        "pMax": 63
+      }
+    ]
+  },
+  {
+    "id": 204,
+    "group": "WiFi Setup",
+    "command": "disable_wifi",
+    "commandDescription": " If set true, the node will operate as an AP (and DHCP server), otherwise it will be a station.",
+    "params": [
+      {
+        "id": "wifi_ap_mode",
+        "pValue": "false",
+        "pDescription": "true/false",
+        "pDefault": "false",
+        "pType": "bool",
+        "pEdit": "false"
+      }
+    ]
+  }
+]

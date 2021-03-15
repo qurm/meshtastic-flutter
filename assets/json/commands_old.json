@@ -1,0 +1,306 @@
+[
+    {
+        "id": 101,
+        "command": "send_owner_interval",
+        "commandDescription": "Send our owner info at least this often (also we always send once at boot to rejoin the mesh).",
+        "params": [
+            {
+                "id": 101,
+                "param": "900",
+                "paramDescription": "Time (s)",
+                "paramDefault": "900"
+            }
+        ]
+    },
+    {
+        "id": 102,
+        "command": "wait_bluetooth_secs",
+        "commandDescription": "set time for bluetooth to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 103,
+        "command": "screen_on_secs",
+        "commandDescription": "set time for Screen to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 104,
+        "command": "phone_timeout_secs",
+        "commandDescription": "set time for Phone?.  0 for default of 1 minute.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 105,
+        "command": "phone_sds_timeout_sec",
+        "commandDescription": "set time for Super-deep-sleep (SDS) screen to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 106,
+        "command": "mesh_sds_timeout_secs",
+        "commandDescription": "set time for Super-deep-sleep (SDS)  to stay awake in seconds range 10 to ?.  0 for default of 1 minute.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 107,
+        "command": "sds_secs",
+        "commandDescription": "set time for device Super-deep-sleep (SDS).",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 108,
+        "command": "ls_secs",
+        "commandDescription": "set time for device Light-sleep (LS), ",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+            }
+        ]
+    },
+    {
+        "id": 109,
+        "command": "min_wake_secs",
+        "commandDescription": "set minimum time for device to stay awake in seconds.",
+        "params": [
+            {
+                "id": 101,
+                "param": "28800",
+                "paramDescription": "Time (s)",
+                "paramDefault": "60"
+                
+            }
+        ]
+    },
+    {
+        "id": 120,
+        "command": "num_missed_to_fail",
+        "commandDescription": "If we miss this many owner messages from a node, we declare the node offline (defaults to 3 - to allow for some lost packets) (FIXME not yet used)",
+        "params": [
+            {
+                "id": 101,
+                "param": "3",
+                "paramDescription": "Count of missed messages",
+                "paramDefault": "3",
+                "paramType": "int"
+            }
+        ]
+    },
+    {
+        "id": 201,
+        "command": "wifi_ssid",
+        "commandDescription": "If set, this node will try to join the specified wifi network and acquire an address via DHCP.",
+        "params": [
+            {
+                "id": 101,
+                "param": "",
+                "paramDescription": "Wifi SSID string",
+                "paramDefault": "",
+                "paramType": "string"
+            }
+        ]
+    },
+    {
+        "id": 202,
+        "command": "wifi_password",
+        "commandDescription": "If set, will be use to authenticate to the named wifi .",
+        "params": [
+            {
+                "id": 101,
+                "param": "",
+                "paramDescription": "Wifi Password string",
+                "paramDefault": "",
+                "paramType": "string"
+            }
+        ]
+    },
+    {
+        "id": 203,
+        "command": "wifi_ap_mode",
+        "commandDescription": " If set true, the node will operate as an AP (and DHCP server), otherwise it will be a station.",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false",
+                "paramType": "bool"
+            }
+        ]
+    },
+    {
+        "id": 221,
+        "command": "is_router",
+        "commandDescription": "If set true, is operating as a router.  Changes behavior in the following ways: The device will only sleep for critically low battery level (i.e. always tries to stay alive for the mesh) In the future routing decisions will preferentially route packets through nodes with this attribute (because assumed good line of sight).",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false"
+            }
+        ]
+    },
+    {
+        "id": 230,
+        "command": "is_low_power",
+        "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false"
+            }
+        ]
+    },
+    {
+        "id": 240,
+        "command": "fixed_position",
+        "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false"
+            }
+        ]
+    },
+    {
+        "id": 241,
+        "command": "location_share",
+        "commandDescription": "How our location is shared with other nodes (or the local phone).",
+        "params": [
+            {
+                "id": 101,
+                "param": "",
+                "paramDescription": "LocationSharing list",
+                "paramDefault": ""
+            }
+        ]
+    },
+    {
+        "id": 242,
+        "command": "gps_operation",
+        "commandDescription": "How the GPS hardware in this unit is operated. Note: This is independent of how our location is shared with other devices.  For that see LocationSharing.",
+        "params": [
+            {
+                "id": 101,
+                "param": "",
+                "paramDescription": "GpsOperation list",
+                "paramDefault": ""
+            }
+        ]
+    },
+    {
+        "id": 243,
+        "command": "position_broadcast_secs",
+        "commandDescription": "How often should We should send our position this often (but only if it has changed significantly).  Defaults to 15 minutes, 900s.",
+        "params": [
+            {
+                "id": 101,
+                "param": "900",
+                "paramDescription": "Time (s)",
+                "paramDefault": "900"
+            }
+        ]
+    },
+    {
+        "id": 245,
+        "command": "gps_update_interval",
+        "commandDescription": "How often should we try to get GPS position (in seconds) when we are in GpsOpMobile mode? or zero for the default of once every 120 seconds or a very large value (maxint) to update only once at boot.",
+        "params": [
+            {
+                "id": 101,
+                "param": "120",
+                "paramDescription": "Time (s)",
+                "paramDefault": "120"
+            }
+        ]
+    },
+    {
+        "id": 246,
+        "command": "gps_attempt_time",
+        "commandDescription": "How long should we try to get our position during each gps_update_interval attempt? (in seconds)  Or if zero, use the default of 30 seconds. If we don't get a new gps fix in that time, the gps will be put into sleep until the next gps_update_rate window. .",
+        "params": [
+            {
+                "id": 101,
+                "param": "30",
+                "paramDescription": "Time (s)",
+                "paramDefault": "30"
+            }
+        ]
+    },
+    {
+        "id": 900,
+        "command": "factory_reset",
+        "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false"
+            }
+        ]
+    },
+    {
+        "id": 901,
+        "command": "debug_log_enabled",
+        "commandDescription": "If set true, we are powered from a low-current source (i.e. solar), so even if it looks like we have power flowing in we should try to minimize power consumption as much as possible.  YOU DO NOT NEED TO SET THIS IF YOU'VE set is_router (it is implied in that case).",
+        "params": [
+            {
+                "id": 101,
+                "param": "false",
+                "paramDescription": "true/false",
+                "paramDefault": "false"
+            }
+        ]
+    }
+]

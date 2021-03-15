@@ -1,0 +1,19 @@
+# include: package:effective_dart/analysis_options.yaml
+# include: package:pedantic/analysis_options.yaml
+include: package:very_good_analysis/analysis_options.yaml
+
+analyzer:
+  exclude: 
+    - build/**
+    - lib/infrastructure/proto/**
+    - lib/**/*.freezed.dart
+    
+  strong-mode:
+    implicit-casts: false
+
+linter:
+  rules:
+    - camel_case_types
+    - await_only_futures
+    - unawaited_futures
+    # - lines_longer_than_80_chars: false

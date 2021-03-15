@@ -1,0 +1,15 @@
+{
+    "launch": {
+    
+        "configurations": [        {
+            "name": "Dart",
+            "program": "bin/main.dart",
+            "request": "launch",
+            "type": "dart",
+            "vmAdditionalArgs": [
+                "--enable-experiment=non-nullable",
+            ],
+        }],
+        "compounds": []
+    }
+}
