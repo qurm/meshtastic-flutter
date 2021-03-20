@@ -2,6 +2,25 @@
 ## To Do 
 
 
+Porting Python
+Should the stack sendData, sendPacket be all Async?  Or where to break it?
+
+https://stackoverflow.com/questions/40660933/why-copyfrom-is-used-during-the-creation-of-the-constant-tensor
+Python:     toRadio.packet.CopyFrom(meshPacket)
+Dart:       toRadio.packet = meshPacket;
+
+p.setChannel.CopyFrom(self.channels[channelIndex]);
+p.setChannel.CopyFrom(self.channels[channelIndex]);
+
+if c.role == channel_pb2.Channel.Role.DISABLED:
+
+
+  void _handlePacketFromRadio(MeshPacket meshPacket) {
+    //not needed Dict - work with object
+    //add fromId and toId fields based on the node ID
+    //TODO do porting
+    // AF 17/03/21 updated from Python v1.20
+
 
 seems to connect and initialise mesh twice  FIXED - repeated bloc initialisation due to refactor
 automatic connect does show only one, no scanned devs bug?

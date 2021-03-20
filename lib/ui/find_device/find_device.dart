@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -88,8 +89,10 @@ class FindDevicesScreen extends StatelessWidget {
                         style: Theme.of(context).textTheme.subtitle2);
                   }
                 }),
+
                 Text('List of Scanned devices',
                     style: Theme.of(context).textTheme.subtitle2),
+                //includes a StreamBuilder, independent of bloc State, but Stream must be created.
                 AllDevicesTiles(
                   connectDeviceBloc: _connectDeviceBloc,
                   devices: BlocProvider.of<FindDeviceBloc>(context).allDevices,

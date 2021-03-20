@@ -1,6 +1,7 @@
+// @dart=2.9
 import 'package:dartz/dartz.dart';
 import 'package:logger/logger.dart';
-import 'package:logger_flutter/logger_flutter.dart';
+// import 'package:logger_flutter/logger_flutter.dart';
 
 // logger.v("Verbose log");
 // logger.d("Debug log");
@@ -11,7 +12,7 @@ import 'package:logger_flutter/logger_flutter.dart';
 
 Logger appLogger = Logger(
   // output: ExampleLogOutput(),
-  level: Level.info,
+  level: Level.debug,
   printer: PrettyPrinter(
     methodCount: 4, // number of method calls to be displayed
     errorMethodCount: 8,
@@ -34,13 +35,13 @@ Logger userLogger =
 // instanceName: 'userLogger');
 
 //used in logger_flutter
-class ExampleLogOutput extends ConsoleOutput {
+/* class ExampleLogOutput extends ConsoleOutput {
   @override
   void output(OutputEvent event) {
     super.output(event);
     LogConsole.add(event);
   }
-}
+} */
 
 // see https://github.com/leisim/logger/issues/31
 

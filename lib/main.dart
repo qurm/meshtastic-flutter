@@ -1,8 +1,9 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:logger/logger.dart';
-import 'package:logger_flutter/logger_flutter.dart';
+// import 'package:logger_flutter/logger_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:get_it/get_it.dart';
 import 'package:wakelock/wakelock.dart';

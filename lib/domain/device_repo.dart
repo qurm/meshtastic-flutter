@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:collection/collection.dart';
@@ -5,7 +6,7 @@ import 'package:collection/collection.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 //AF not sure that this is required/correct in the repo,
-// but iusing the BluetoothState.on - should avaoid.
+// but using the BluetoothState.on - should avaoid.
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
@@ -122,8 +123,6 @@ class DeviceConnect {
   /// [id] must be valid MAC, like c4:4f:33:6a:a3:cb in lowercase
   /// called from FindDevice bloc on FindStarted
   Future<Either<ConnectFailure, BLEDevice2>> scanConnect(String id) async {
-    // Stream<List<ScanResult>> devices;
-    // ScanResult _scanResult;
     BLEDevice2 _device;
     try {
       //get the device [id] if already connected
@@ -148,18 +147,7 @@ class DeviceConnect {
       } else {
         return left(const ConnectFailure.noKnownDevice());
       }
-
-      //   //to do process this stream, and log each item
-      //   await for (var device in devices) {
-      //     print(device.toString());
-      //     //todo go into services
-      //   }
-      //   // try to filter by the GUID for Mesh
-      //   return right(devices);
     } catch (e) {
-      //   if (e.message.contains('error') != null) {
-      //     return left(const ConnectFailure.noDevice());
-      //   } //todo add further elseif
       //always return some Failure here
       return left(const ConnectFailure.noKnownDevice());
     }

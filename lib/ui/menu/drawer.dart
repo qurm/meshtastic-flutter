@@ -1,9 +1,10 @@
+// @dart=2.9
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
 import '../router/route_generator.dart';
 import 'package:logger/logger.dart';
-import 'package:logger_flutter/logger_flutter.dart';
+// import 'package:logger_flutter/logger_flutter.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -32,10 +33,10 @@ class AppDrawer extends StatelessWidget {
                   context, '/meshCommandListScreen')),
           const Divider(),
           _createDrawerItem(icon: Icons.collections_bookmark, text: 'Setup'),
-          _createDrawerItem(
-              icon: Icons.collections_bookmark,
-              text: 'Log Console',
-              onTap: () => LogConsole.open(context)),
+          // _createDrawerItem(
+          //     icon: Icons.collections_bookmark,
+          //     text: 'Log Console',
+          //     onTap: () => LogConsole.open(context)),
           _createDrawerItem(icon: Icons.face, text: 'Authors'),
           _createDrawerItem(
               icon: Icons.account_box, text: 'Flutter Documentation'),

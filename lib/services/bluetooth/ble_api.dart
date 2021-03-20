@@ -1,3 +1,4 @@
+// @dart=2.9
 /// infrastruture layer
 /// communicate with the phone bluetooth
 /// really just a generic interface to flutter_blue api - may differ for nrf52 etc.
@@ -277,6 +278,7 @@ class BlueAPIClient {
   /// Checks for presence of [serviceUuid] on a connected device [d]
   Future<bool> hasGATTService(BluetoothDevice d, Guid serviceUuid) async {
     try {
+      /// Exception if try to discover when not connected.  See this for non-Meshtastic devices.
       final List<BluetoothService> serviceList =
           await d.discoverServices() ?? [];
       final mesh = serviceList.where((s) => s.uuid == serviceUuid);
@@ -287,6 +289,7 @@ class BlueAPIClient {
       // PlatformException (PlatformException(discover_services_error,
       appLogger
           .e('hasMeshtasticService: handled PlatformException from ${d.id}');
+      throw err;
       return false;
     } catch (err) {
       // if (e = )
@@ -343,10 +346,12 @@ class BlueAPIClient {
           //   rethrow;
           // }
 
-          _isMeshDevice = await hasGATTService(d, meshServiceUuid);
+          // _isMeshDevice = await hasGATTService(d, meshServiceUuid);
+          _isMeshDevice = true;
           if (_isMeshDevice) {
             currentDevices[d.id.toString()] = MeshDevice(d);
-            appLogger.i('Device added to currentDevices ${d.id}');
+            appLogger.i(
+                'Device added to currentDevices ${d.id} ${currentDevices.toString()}');
           }
         }
       });
@@ -428,15 +433,13 @@ class BlueAPIClient {
   Future<ScanResult> scanResultDevice(String id) async {
     Stream<List<ScanResult>> _scanList;
     ScanResult _scanResult;
-    //todo change the log, error handling
+
     try {
-      // _scanList = flutterBlue.scanResults.handleError((e) => print(e));
       _scanList = flutterBlue.scanResults;
-      // await for (var resultList in _scanList) {
       List<ScanResult> resultList = await _scanList.first;
 
       appLogger.d('get scanResultDevice ${resultList.length} devices');
-      if (!resultList.isEmpty) {
+      if (resultList.isNotEmpty) {
         appLogger.d(
             'list id ${resultList.first.device.id.toString().toLowerCase()}');
         appLogger.d('our id ${id.toLowerCase()}');
@@ -448,8 +451,6 @@ class BlueAPIClient {
       } else {
         return null;
       }
-      // }
-      // on StateError
     } catch (e) {
       appLogger.e('get scanResultDevice ${e.toString()}');
       rethrow;

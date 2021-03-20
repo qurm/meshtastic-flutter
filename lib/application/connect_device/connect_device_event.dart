@@ -1,3 +1,4 @@
+// @dart=2.9
 part of 'connect_device_bloc.dart';
 
 /// see https://bloclibrary.dev/#/blocnamingconventions

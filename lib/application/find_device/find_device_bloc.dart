@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -52,6 +53,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
 
   // List<MeshDevice> connectedDevices = [];
   String _lastDevice;
+  bool findDeviceAutoReconnect = false;
   final _appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
   Stream<List<ScannedDevice>> _allDevices;
 
@@ -88,7 +90,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
       _lastDevice = _prefs.getString('lastGoodDevice');
       yield const FindRequestedState();
       try {
-        if (_lastDevice.isNotEmpty) {
+        if (findDeviceAutoReconnect && _lastDevice.isNotEmpty) {
           _appLogger
               .i('FindStarted: try connecting to last device $_lastDevice');
           // TODO check bluetooth is running -and repo is initial.  This is first call to BLE
@@ -155,6 +157,8 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
         await _connectRepo.startScan(4000);
         //can only listen once
         _allDevices = _connectRepo.scanResults;
+        _appLogger
+            .d('FindScanRequestedEvent scan list has: ${_allDevices.length}');
         //  final Stream<List<ScannedDevice>> allDevices = _connectRepo.scanResults;
 
         // final _connectedDevices = await _connectRepo.connectedDevices3;
@@ -172,7 +176,12 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
 
         // yield FindCompletedScan(allDevices, await connectedDevices);
         yield const FindCompletedScanState();
-        // yield CompletedScan(allDevices);
+
+        // } on PlatformException catch (err) {
+        //     // PlatformException when device is already connected via another app
+        //     // PlatformException (PlatformException(discover_services_error,
+        //     _appLogger.e(
+        //         'connectedDevices3: handled PlatformException ${err} from ${d.id}');
       } catch (_) {
         rethrow;
         //handle Failures from the repo - i.e. BLE off, no location services etc?

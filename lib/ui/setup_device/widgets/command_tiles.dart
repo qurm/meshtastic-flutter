@@ -1,3 +1,4 @@
+// @dart=2.9
 part of '../mesh_command_list.dart';
 
 // Mesh command contains widgets to build command list
@@ -154,7 +155,8 @@ class MeshCommandFormState extends State<MeshCommandForm> {
                                             BlocProvider.of<SetupDeviceBloc>(
                                                     context)
                                                 .add(
-                                              DeviceCommandEvent(widget.command),
+                                              DeviceCommandEvent(
+                                                  widget.command),
                                             );
                                             _showMessage(
                                                 context, 'Submitting form');

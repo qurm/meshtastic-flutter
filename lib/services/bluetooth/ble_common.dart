@@ -1,3 +1,4 @@
+// @dart=2.9
 // Common for Ennums and other objects required in multiple layers
 // Import into domain and service layer
 

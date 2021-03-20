@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -98,7 +99,8 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
         //     event.meshCommand.params.paramList[0].value);
         //TODO - handle writeConfig failures also
         if (possibleFailure.isRight()) {
-          await _connectFacade.bleInterface.writeConfig();
+          await _connectFacade.bleInterface.localNode
+              .writeConfig(); //Now on Node class
           msg = await _connectFacade.bleInterface.getConfig();
         }
         yield possibleFailure.fold(

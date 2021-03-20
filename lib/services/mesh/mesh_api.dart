@@ -1,3 +1,4 @@
+// @dart=2.9
 /// Interface classes for meshtastic devices, MeshInterface, BLEInterface
 import 'dart:async';
 import 'dart:convert';
@@ -5,14 +6,16 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-import 'package:get_it/get_it.dart';
-import 'package:logger/logger.dart';
-import 'package:recase/recase.dart';
+// import 'package:get_it/get_it.dart';
+// import 'package:logger/logger.dart';
+import 'package:meshtastic_app/services/mesh/mesh_node.dart';
+
+// import 'package:recase/recase.dart';
 
 import '../../domain/commands/command_failure.dart';
 import '../bluetooth/bluetooth.dart';
-import 'mesh_device.dart';
 import '../proto/proto.dart';
+import 'mesh_device.dart';
 
 const START1 = 0x94;
 const START2 = 0xc3;
@@ -38,25 +41,12 @@ const defaultHopLimit = 3;
 const OUR_APP_VERSION = 20120; //was   172;
 
 // Our standard BLE characteristics
-const TORADIO_UUID = "f75c76d2-129e-4dad-a1dd-7866124401e7";
-const FROMRADIO_UUID = "8ba2bcc2-ee02-4a55-a531-c525c5e454d5";
-const FROMNUM_UUID = "ed9da18c-a800-4f66-a670-aa7547e34453";
+const TORADIO_UUID = 'f75c76d2-129e-4dad-a1dd-7866124401e7';
+const FROMRADIO_UUID = '8ba2bcc2-ee02-4a55-a531-c525c5e454d5';
+const FROMNUM_UUID = 'ed9da18c-a800-4f66-a670-aa7547e34453';
 
-const base64Url =
-    const Base64Codec.urlSafe(); //A base64url encoder and decoder.
-
-// Available topics:</p>
-// <ul>
-// <li>meshtastic.connection.established - published once we've successfully connected to the radio and downloaded the node DB</li>
-// <li>meshtastic.connection.lost - published once we've lost our link to the radio</li>
-// <li>meshtastic.receive.text(packet) - delivers a received packet as a dictionary, if you only care about a particular
-// type of packet, you should subscribe to the full topic name.
-// If you want to see all packets, simply subscribe to "meshtastic.receive".</li>
-// <li>meshtastic.receive.position(packet)</li>
-// <li>meshtastic.receive.user(packet)</li>
-// <li>meshtastic.receive.data.portnum(packet) (where portnum is an integer or well known PortNum enum)</li>
-// <li>meshtastic.node.updated(node = NodeInfo) - published when a node in the DB changes (appears, location changed, username changed, etc&hellip;)</li>
-// </ul>
+///A base64url encoder and decoder.
+const base64Url = Base64Codec.urlSafe();
 
 enum MeshtasticReceive { data, text, position, user, node, established, lost }
 // connection established, lost are really device level events
@@ -115,9 +105,8 @@ enum MeshtasticReceive { data, text, position, user, node, established, lost }
 // }
 
 /// Interface class for meshtastic devices, extended by BLEInterface
+///
 /// [device] current Meshtastic device
-/// [radioConfig] - Current radio configuration and device settings, if you
-/// write to this the new settings will be applied to the device.
 /// [isConnected]
 /// [nodes] - The database of received nodes. Includes always up-to-date
 /// location and username information for each node in the mesh. This is a read-only datastructure.
@@ -125,17 +114,22 @@ enum MeshtasticReceive { data, text, position, user, node, established, lost }
 /// device (software version, hardware version, etc)
 ///     debugOut - unused?
 class MeshInterface {
-  MeshInterface(this.device, [this.debugOut]) {
+  MeshInterface(this.device, [this.debugOut, this.noProto]) {
     appLogger.i('MeshInterface constructor body: ');
+    localNode = MeshNode(this, -1);
   }
 // Properties:
   MeshDevice device;
   bool isConnected = false;
+  bool noProto;
+  MeshNode localNode; //how to pass self,
 
   /// Full information about a node on the mesh.
   /// Contains node `num`, `snr`, and `Position`, `User`.
   /// Initial empty Map.isEmpty = =true
   Map<int, NodeInfo> nodes = {}; //Python is Dict with strings like 'num, 'user'
+
+  /// from Python, not used yet
   int debugOut;
 
   /// Unique local debugging info for this node.
@@ -144,18 +138,20 @@ class MeshInterface {
   /// num_channels, hw_model, firmware_version, etc.
   MyNodeInfo myInfo; // = None;
 
-  /// A map from request ID to the handler
-  Map responseHandlers = {};
+  /// A map from request ID to the handler - unused
+  // Map responseHandlers = {};
+
+  ///  If we've encountered a fatal exception it will be kept here
+  Exception failure;
 
   /// NodeNum, MyNodeNum - up to 254 nodes, assume uint32 in proto
   /// You can however use a BigInt and use toUnsigned(32) after
   /// each operation you do to it.
   //Map nodes = {};  // nodes keyed by ID
   Map<int, NodeInfo> _nodesByNum = {}; // nodes keyed by nodenum
-  RadioConfig radioConfig; // = None;
+  // RadioConfig radioConfig; // now is in Node class
   FromRadio fromRadio; //set in _handlefromRadio, contains channelSettings
 
-// self.failure = None  # If we've encountered a fatal exception it will be kept here
 // random.seed()  # FIXME, we should not clobber the random seedval here, instead tell user they must call it
 // self.currentPacketId = random.randint(0, 0xffffffff)
 //TODO set to random, per Python
@@ -163,17 +159,17 @@ class MeshInterface {
 
   StreamController<MeshtasticReceive> controller;
 
-  /// Start device packets flowing
+  /// Start device packets flowing - not part of constructor as is async
   /// Clears internal structures, sends , then
   /// AF 10/1/2021 change to Future async, as _sendToRadio is async write
   Future<void> _startConfig() async {
     myInfo = MyNodeInfo();
-    nodes = Map(); // nodes keyed by ID, empty map
-    _nodesByNum = Map(); // nodes keyed by nodenum
-    radioConfig = RadioConfig(); //TODO empty object?
+    Map nodes = {}; // nodes keyed by ID, empty map
+    Map _nodesByNum = {}; // nodes keyed by nodenum
+    // radioConfig = RadioConfig(); //TODO empty object?  Now in Node class
     currentPacketId = 0; //TODO this default is Ok, not null?
 
-    var startConfig = ToRadio();
+    final startConfig = ToRadio();
     startConfig.wantConfigId = MY_CONFIG_ID; // we don't use this value
     await _sendToRadio(startConfig); //uses super BLEInterface
     controller = StreamController<MeshtasticReceive>.broadcast(
@@ -195,13 +191,14 @@ class MeshInterface {
   /// Returns the sent packet. The id field will be populated in this packet and can be used to track future message acks/naks.
   /// was dataType: Data_PortNum.CLEAR_TEXT, //Changed with new mesh.proto Jan 2020
   /// AF changed 8/1/20 for device v>1.20, in line with python app
-  MeshPacket sendText(
+  /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
+  Future<MeshPacket> sendText(
       {String text,
       int destinationId = BROADCAST_NUM,
       bool wantAck = false,
-      bool wantResponse = false}) {
+      bool wantResponse = false}) async {
     userLogger.i('MeshInterface sendText() $text');
-    return sendData(
+    return await sendData(
         byteData: utf8.encode(text),
         destinationId: destinationId,
         portNum: PortNum.PRIVATE_APP,
@@ -210,7 +207,7 @@ class MeshInterface {
   }
 
   /// [sendData] Send a data packet to some other node
-  /// Arguments:
+  ///
   /// [byteData] raw data as bytes (utf8 text, or other data types)
   /// [destinationId] {nodeId or nodeNum} -- where to send this message (default: {BROADCAST_ADDR})
   /// [portNum] - Meshtastic internal application type; see portnums.proto
@@ -224,7 +221,8 @@ class MeshInterface {
   /// Returns the sent packet. The id field will be populated in this packet and can be used to track future message acks/naks.
   /// AF changed 8/01/21 for device v>1.20, in line with python app
   /// AF changed 14/03/21 for device v1.20.10, new protobufs
-  MeshPacket sendData(
+  /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
+  Future<MeshPacket> sendData(
       {List<int> byteData,
       int destinationId = BROADCAST_NUM,
       PortNum portNum = PortNum.PRIVATE_APP,
@@ -232,7 +230,7 @@ class MeshInterface {
       bool wantResponse = false,
       int hopLimit = defaultHopLimit,
       Function onResponse = null, //callback?
-      int channelIndex = 0}) {
+      int channelIndex = 0}) async {
     // see https://github.com/dart-lang/protobuf/issues/305
     // subMessage is read-only, so build up as below:
     MeshPacket _meshPacket = MeshPacket()
@@ -242,22 +240,18 @@ class MeshInterface {
       ..payload = byteData
       ..portnum = portNum
       ..wantResponse = wantResponse;
-    // _subPacket.data = _data;
-    // _meshPacket.decoded = _subPacket;
-    // meshPacket.decoded.data.payload = byteData;
-    // meshPacket.decoded.data.typ = dataType;
     _meshPacket.decoded = _data;
-    var p = sendPacket(
+
+    return await sendPacket(
         meshPacket: _meshPacket,
         destinationId: destinationId,
         wantAck: wantAck,
         hopLimit: hopLimit);
 
-    if (onResponse != null) {
-      _addResponseHandler(p.id, onResponse);
-    }
-    ;
-    return p;
+    // 20/3/21 Response handling not really relevant for the Flutter app at this stage
+    // if (onResponse != null) {
+    //   _addResponseHandler(p.id, onResponse);
+    // }
   }
 
   /// Send a position packet to some other node (normally a broadcast)
@@ -266,14 +260,15 @@ class MeshInterface {
   /// If timeSec is not specified (recommended), we will use the local machine time.
   /// Returns the sent packet. The id field will be populated in this packet and can be used to track future message acks/naks.
   /// AF changed 08/01/21 for device v>1.20, in line with python app
-  MeshPacket sendPosition(
+  /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
+  Future<MeshPacket> sendPosition(
       {double latitude = 0.0,
       double longitude = 0.0,
       double altitude = 0,
       int timeSec = 0,
       int destinationId = BROADCAST_NUM,
       bool wantAck = false,
-      bool wantResponse = false}) {
+      bool wantResponse = false}) async {
     // MeshPacket _meshPacket = MeshPacket();
     Position _position = Position();
     if (latitude != 0.0) {
@@ -291,9 +286,7 @@ class MeshInterface {
     _position.time = (timeSec).toInt();
 
     // _meshPacket.decoded.position = _position;    //deprecated in device v1.20
-    //_meshPacket.decoded.wantResponse = wantResponse;
-    // was return sendPacket(
-    return sendData(
+    return await sendData(
         byteData: _position.writeToBuffer(), //AF changed with device 1.20
         //meshPacket: _meshPacket,
         destinationId: destinationId,
@@ -302,9 +295,10 @@ class MeshInterface {
         wantResponse: wantResponse);
   }
 
-  void _addResponseHandler(int requestId, Function callback) {
-    responseHandlers[requestId] = ResponseHandler(callback);
-  }
+  // 20/3/21 Response handling not really relevant for the Flutter app at this stage
+  // void _addResponseHandler(int requestId, Function callback) {
+  //   responseHandlers[requestId] = ResponseHandler(callback);
+  // }
 
   /// Send a [MeshPacket] to the specified node [destinationId] (or if unspecified, broadcast).
   /// For class Internal use - you probably don't want this - use sendData instead.
@@ -316,13 +310,14 @@ class MeshInterface {
   /// [hopLimit] Number of hops within the mesh, normally like 2,3 4
   /// The id field will be populated in this packet and can be used to track future message acks/naks.
   /// Port - changed BROADCAST_ADDR to BROADCAST_NUM
-  ///   /// AF changed 14/03/21 for device v1.20.10, new protobufs
+  /// AF changed 14/03/21 for device v1.20.10, new protobufs
+  /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
   /// Now  destinationId is String
-  MeshPacket sendPacket(
+  Future<MeshPacket> sendPacket(
       {MeshPacket meshPacket,
       int destinationId = BROADCAST_NUM,
       bool wantAck = false,
-      int hopLimit = defaultHopLimit}) {
+      int hopLimit = defaultHopLimit}) async {
     int nodeNum;
 
     // We allow users to talk to the local node before we've completed the full connection flow...
@@ -356,9 +351,9 @@ class MeshInterface {
     // # so the message can be tracked.
     if (meshPacket.id == 0) meshPacket.id = _generatePacketId();
     // Python: toRadio.packet.CopyFrom(meshPacket);
-    //TODO what is this doing Pyhon uses copyfrom
+    //TODO what is this doing Python uses copyfrom
     toRadio.packet = meshPacket;
-    _sendToRadio(toRadio);
+    await _sendToRadio(toRadio);
     return meshPacket;
   }
 
@@ -385,13 +380,14 @@ class MeshInterface {
   Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
     prefMap.forEach((key, value) {
       // direct reference to the .preferences, doesnt work with dotted path
-      final prefs = radioConfig.preferences;
+      // TODO - this is localNode, should also set remote Nodes?
+      final prefs = localNode.radioConfig.preferences; //Now in Node class
       final possibleFailure = _setPreference2(prefs, key, value);
       if (possibleFailure.isLeft()) {
         return possibleFailure;
       } else {
         // commit the change
-        radioConfig.preferences = prefs;
+        localNode.radioConfig.preferences = prefs;
       }
     });
     return right(true);
@@ -498,7 +494,7 @@ class MeshInterface {
   // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
   // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
   Either<CommandFailure, bool> _setPreference(String preference, String value) {
-    RadioConfig_UserPreferences prefs = radioConfig.preferences;
+    RadioConfig_UserPreferences prefs = localNode.radioConfig.preferences;
     // logger.d('setPreference prefs ${prefs.isFrozen}');
     // prefs = RadioConfig_UserPreferences();
 
@@ -519,15 +515,15 @@ class MeshInterface {
         //   return right(true);
         case 'wait_bluetooth_secs':
           prefs.waitBluetoothSecs = intVal;
-          radioConfig.preferences = prefs;
+          localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'screen_on_secs':
           prefs.screenOnSecs = intVal;
-          radioConfig.preferences = prefs;
+          localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'phone_timeout_secs':
           prefs.phoneTimeoutSecs = intVal;
-          radioConfig.preferences = prefs;
+          localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'phone_sds_timeout_sec':
           prefs.phoneSdsTimeoutSec = intVal;
@@ -566,7 +562,7 @@ class MeshInterface {
 
         case 'is_router':
           prefs.isRouter = (value.toLowerCase() == 'true');
-          radioConfig.preferences = prefs;
+          localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'is_low_power':
           prefs.isLowPower = (value.toLowerCase() == 'true');
@@ -622,7 +618,9 @@ class MeshInterface {
     return false;
   }
 
+  /// AF (ported from Python) 14/03/21 now in Node
   /// Write the current (edited) [radioConfig] to the device
+  /*
   Future<void> writeConfig() async {
     userLogger.i('MeshInterface writeConfig() ');
     if (!radioConfig.isInitialized()) {
@@ -634,6 +632,7 @@ class MeshInterface {
     // await _sendToRadio(t);
     await _sendAdmin(t);
   }
+  */
 
 //     //TODO set type NodeDict?
 //     /// Node fields are optional - TODO check for null, and handle?
@@ -648,45 +647,35 @@ class MeshInterface {
 //                 {return node?.user ?? emptyUser ;}}
 //         return emptyUser;}
 
-//     String getLongName(){
-//         final user = this.getMyNode();
-//         if (user is not None)
-//             {return user.get('longName', None);}
-//         return None;}
+  NodeInfo getMyNodeInfo() {
+    if (myInfo.isInitialized())
+      return _nodesByNum[myInfo.myNodeNum];
+    else
+      return null;
+  }
 
-//     String getShortName(){
-//         final user = this.getMyNode();
-//         if (user is not None)
-//             {return user.get('shortName', None);}
-//         return None;}
+  User getMyUser() {
+    final nodeInfo = getMyNodeInfo();
+    if (nodeInfo != null) {
+      return nodeInfo.user;
+    }
+    return null;
+  }
 
-// /// Set device owner name"""
-//     void setOwner({long_name, short_name=None}){
-//         const nChars = 3;
-//         const minChars = 2;
-//         if (long_name is not None)
-//             {long_name = long_name.strip();
-//             if (short_name is None)
-//                 {words = long_name.split()
-//                 if (len(long_name) <= nChars)
-//                     {short_name = long_name;}
-//                 else if (len(words) >= minChars)
-//                     {short_name = ''.join(map(lambda word: word[0], words));}
-//                 else
-//                     {trans = str.maketrans(dict.fromkeys('aeiouAEIOU'))
-//                     short_name = long_name[0] + long_name[1:].translate(trans)
-//                     if (len(short_name) < nChars)
-//                         {short_name = long_name[:nChars];}}}}
-//         ToRadio t = ToRadio()
-//         if (long_name is not None)
-//             {t.setOwner.longName = long_name;}
-//         if (short_name is not None)
-//             {short_name = short_name.strip();
-//             if (len(short_name) > nChars)
-//                 {short_name = short_name[:nChars]}
-//             t.setOwner.shortName = short_name;}
-//         _sendToRadio(t);}
+  String getLongName() {
+    final user = getMyUser();
+    if (user != null) return user.longName;
+    return null;
+  }
 
+  String getShortName() {
+    final user = this.getMyUser();
+    if (user != null) return user.shortName;
+    return null;
+  }
+
+/* 
+ /// AF (ported from Python) 14/03/21 now in Node class
   /// Property for sharable URL that describes the current channel
   /// see also https://stackoverflow.com/questions/56201074/how-to-encode-and-decode-base64-and-base64url-in-flutter-dart
   String get channelURL {
@@ -698,7 +687,10 @@ class MeshInterface {
     final s = base64UrlEncode(cs.writeToBuffer());
     return "https://www.meshtastic.org/c/#${s}";
   }
+ */
 
+/* 
+  /// AF (ported from Python) 14/03/21 now in Node class
   /// Set mesh network URL
   void setURL({String url, bool write = true}) {
     if (!radioConfig.isInitialized()) {
@@ -714,6 +706,7 @@ class MeshInterface {
       writeConfig();
     }
   }
+ */
 
 // Get a new unique packet ID
   int _generatePacketId() {
@@ -728,7 +721,7 @@ class MeshInterface {
 
   /// Called by subclasses to tell clients this interface has disconnected
   void _disconnected() {
-    this.isConnected = false;
+    isConnected = false;
     // raise event
     // pub.sendMessage("meshtastic.connection.lost", interface=self)
     controller.add(MeshtasticReceive.lost);
@@ -736,12 +729,18 @@ class MeshInterface {
   }
 
   /// Called by this class to tell clients we are now fully connected to a node
-  void _connected() {
-    this.isConnected = true;
-    // raise Event
-    // pub.sendMessage("meshtastic.connection.established", interface=self);
-    controller.add(MeshtasticReceive.established);
-    userLogger.i('meshtastic.connection.established ${device.id}');
+  /// AF was _connected, but called from Node class
+  void connected() {
+    // _connected might be called when remote Node
+    //  objects complete their config reads, don't generate redundant
+    // isConnected events   for the local interface
+    if (!isConnected) {
+      isConnected = true;
+      // raise Event
+      // pub.sendMessage("meshtastic.connection.established", interface=self);
+      controller.add(MeshtasticReceive.established);
+      userLogger.i('meshtastic.connection.established ${device.id}');
+    }
   }
 
   /// Send a ToRadio protobuf to the device
@@ -758,6 +757,12 @@ class MeshInterface {
         'Sending toradio called in MeshInterface - no BLEInterface? : ${toRadio}');
   }
 
+  /// Done with initial config messages, now send regular MeshPackets to ask for settings and channels
+  /// AF 17/03/21 updated from Python v1.20
+  void _handleConfigComplete() {
+    localNode.requestConfig();
+  }
+
   /// Handle a packet that arrived from the radio
   /// Called by subclasses.
   /// Packets from the radio to the phone will appear on the FromRadio char.
@@ -767,22 +772,39 @@ class MeshInterface {
   void _handleFromRadio(List<int> fromRadioBytes) {
     //error here InvalidProtocolBufferException due to MTU too small
     //AF 10/1/2021 - moved to class property, as used for ChannelURL
+    // AF 17/03/21 updated from Python v1.20
     fromRadio = new FromRadio.fromBuffer(fromRadioBytes);
-    userLogger.d("fromRadio Received: ${fromRadio.toDebugString()}");
+    userLogger.d('fromRadio Received: ${fromRadio.toDebugString()}');
     if (fromRadio.hasMyInfo()) {
       myInfo = fromRadio.myInfo;
+      localNode.nodeNum = myInfo.myNodeNum;
+
+      var msg = '';
       if (myInfo.minAppVersion > OUR_APP_VERSION) {
-        final msg =
+        msg =
             'This device version ${myInfo.minAppVersion} needs a later client than $OUR_APP_VERSION, please upgrade meshtastic';
-        controller.addError(msg);
-        throw Exception(msg);
       }
+      if (myInfo.maxChannels == 0) {
+        msg =
+            'This version of meshtastic-python requires device firmware version 1.2 or later. For more information see https://tinyurl.com/5bjsxu32';
+      }
+      if (msg.isNotEmpty) {
+        failure = Exception(msg);
+        controller.addError(msg);
+        //TODO - clean exit here?  RAise Exception to UI
+        // see Python
+        // close();
+      }
+
       // start assigning our packet IDs from the opposite side of where our local device is assigning them
-      currentPacketId = (myInfo.currentPacketId + 0x80000000) & 0xffffffff;
-    } else if (fromRadio.hasRadio()) {
-      radioConfig = fromRadio.radio;
-      appLogger.v(
-          'fromRadio radioConfig ${radioConfig.preferences.toDebugString()}');
+      // currentPacketId = (myInfo.currentPacketId + 0x80000000) & 0xffffffff;
+
+      // AF 17/03/21 removed as in Python v1.20
+      // } else if (fromRadio.hasRadio()) {
+      //   radioConfig = fromRadio.radio;
+      //   appLogger.v(
+      //       'fromRadio radioConfig ${radioConfig.preferences.toDebugString()}');
+
     } else if (fromRadio.hasNodeInfo()) {
       var node = fromRadio.nodeInfo;
       try {
@@ -794,15 +816,17 @@ class MeshInterface {
       _nodesByNum[node.num] = node; //add node to the map
       // Some nodes might not have user/ids assigned yet
       // Python: if ("user" in node) this.nodes[node["user"]["id"]] = node;
-      // TODO - adding a node, or replacing?
-      // if (node.hasUser()) this.nodes[node.user] = node;
+      // TODO - adding a node, or replacing?  Strin or int id.
+      // if (node.hasUser()) nodes[node.user.id] = node;
       // raise Event
       controller.add(MeshtasticReceive.node);
       userLogger.v('meshtastic.node.updated ${node.num}');
     }
     // we ignore the config_complete_id, it is unneeded for our stream API fromRadio.config_complete_id
     else if (fromRadio.configCompleteId == MY_CONFIG_ID)
-      _connected();
+      // AF 17/03/21 removed as in Python v1.20
+      // _connected();
+      _handleConfigComplete();
     else if (fromRadio.hasPacket())
       _handlePacketFromRadio(fromRadio.packet);
     else if (fromRadio.rebooted) {
@@ -834,17 +858,14 @@ class MeshInterface {
 
   /// Map a node node number to a node ID
   ///
-  /// Arguments:
-  ///     num {int} -- Node number
-  /// Returns:
-  ///     string -- Node ID
-  String _nodeNumToId(int num) {
-    if (num == BROADCAST_NUM) return BROADCAST_ADDR;
-
+  /// Arguments int nodeNum -- Node number
+  /// Returns string -- Node ID
+  String _nodeNumToId(int nodeNum) {
+    if (nodeNum == BROADCAST_NUM) return BROADCAST_ADDR;
     try {
-      return _nodesByNum[num].user.id.toString();
+      return _nodesByNum[nodeNum].user.id.toString();
     } catch (e) {
-      userLogger.w('Node not found for fromId $e');
+      userLogger.w('Node $nodeNum not found for fromId $e');
       return '';
     }
   }
@@ -870,24 +891,51 @@ class MeshInterface {
   }
 
   /// Handle a MeshPacket that just arrived from the radio
-  /// Changed with firmware >1.1.20 to App based "payload" [PortNum.UNKNOWN_APP]
+  ///
   /// Will handle one of the following packets, and raise events:
   /// - [meshtastic.receive.data.payload] (text, user, position, others in future)
   /// Will handle one of the following packets, and raise events:
-  /// - meshtastic.receive.text(packet = MeshPacket dictionary)
-  /// - meshtastic.receive.position(packet = MeshPacket dictionary)
-  /// - meshtastic.receive.user(packet = MeshPacket dictionary)
-  /// - meshtastic.receive.data(packet = MeshPacket dictionary)
+  /// - meshtastic.receive.text(packet = MeshPacket )
+  /// - meshtastic.receive.position(packet = MeshPacket )
+  /// - meshtastic.receive.user(packet = MeshPacket )
+  /// - meshtastic.receive.data(packet = MeshPacket )
+  /// Changed with firmware >1.1.20 to App based "payload" [PortNum.UNKNOWN_APP]
   void _handlePacketFromRadio(MeshPacket meshPacket) {
-    //not needed Dict - work with object
+    //not needed Dict as per Python - work with object
     //add fromId and toId fields based on the node ID
-    int fromId = meshPacket.from;
-    int toId = meshPacket.to;
+    //TODO do porting
+    // AF 17/03/21 updated from Python v1.20
+
+    // from, to might be missing if the nodenum was zero.
+    int fromId = meshPacket.hasFrom() ? meshPacket.from : 0;
+    int toId = meshPacket.hasTo() ? meshPacket.to : 0;
+
+    appLogger.w(
+        'Device returned a packet we sent, ignoring: ${meshPacket.toString()}');
+
+    //add fromId and toId fields based on the node ID
 
     // # We could provide our objects as DotMaps - which work with . notation or as dictionaries
     // # asObj = DotMap(asDict)
-    String topic = "meshtastic.receive"; // Generic unknown packet type
-    if (meshPacket.decoded.hasPosition()) {
+    // was meshPacket.decoded.hasPosition()
+    // now meshPacket.decoded.payload.
+
+    /// decoded (Data type) now has a PortNum and payload only
+    /// so we check PortNum and deal with it
+
+    /// UNKNOWN_APP is the default protobuf portnum value, and therefore if
+    /// not set it will not be populated at all
+    /// to make API usage easier, set it to prevent confusion
+    if (!meshPacket.decoded.hasPortnum()) {
+      meshPacket.decoded.portnum = PortNum.UNKNOWN_APP;
+    } // was Data_Type.OPAQUE;
+    String topic = 'meshtastic.receive.data.${meshPacket.decoded.portnum}';
+    controller.add(MeshtasticReceive.data);
+
+/*
+
+    // String topic = "meshtastic.receive"; // Generic unknown packet type
+    if (meshPacket.decoded.payload.hasPosition()) {
       userLogger.v(
           '_handlePacketFromRadio: ignoring old decoded.position message. Update firmware to >1.1.20');
       // topic = "meshtastic.receive.position";
@@ -917,57 +965,56 @@ class MeshInterface {
         meshPacket.decoded.data.portnum = PortNum.UNKNOWN_APP;
       } // was Data_Type.OPAQUE;
       controller.add(MeshtasticReceive.data);
+*/
+    // For text messages, we go ahead and decode the text to ascii for our users
+    // was Data_Type.CLEAR_TEXT
+    if (meshPacket.decoded.portnum == PortNum.TEXT_MESSAGE_APP) {
+      topic = 'meshtastic.receive.text';
 
-      // For text messages, we go ahead and decode the text to ascii for our users
-      // was Data_Type.CLEAR_TEXT
-      if (meshPacket.decoded.data.portnum == PortNum.TEXT_MESSAGE_APP) {
-        topic = 'meshtastic.receive.text';
-
-        // ignore: lines_longer_than_80_chars
-        // We don't throw if the utf8 is invalid in the text message.  Instead we just don't populate
-        // the decoded.data.text and we log an error message.  This at least allows some delivery to
-        // the app and the app can deal with the missing decoded representation.
-        // Usually btw this problem is caused by apps sending binary data but setting the payload type to
-        // text.
-        // A Dart string is a sequence of UTF-16 code units
-        try {
-          //TODO - extend class to hold decoded text
-          final String text =
-              Utf8Decoder().convert(meshPacket.decoded.data.payload);
-          userLogger.v(
-              '_handlePacketFromRadio: meshPacket.decoded.data.payload = $text');
-          controller.add(MeshtasticReceive.text);
-        } catch (ex) {
-          userLogger.e(
-              '_handlePacketFromRadio: Malformatted utf8 in text message: ${ex}');
-        }
-      }
-
-      if (meshPacket.decoded.data.portnum == PortNum.POSITION_APP) {
-        topic = 'meshtastic.receive.position';
-        _fixupPosition(Position.fromBuffer(meshPacket.decoded.data.payload));
-        // update node DB as needed, with new position
-        _getOrCreateByNum(meshPacket.from).position =
-            Position.fromBuffer(meshPacket.decoded.data.payload);
-        controller.add(MeshtasticReceive.position);
-      }
-      if (meshPacket.decoded.data.portnum == PortNum.NODEINFO_APP) {
-        topic = 'meshtastic.receive.user';
-        User u = User.fromBuffer(meshPacket.decoded.data.payload);
-        // update node DB as needed
-        NodeInfo n = _getOrCreateByNum(fromId);
-        n.user = u;
-        // We now have a node ID, update or add to the map
-        //nodes[fromId].user = u;
-        nodes.update(fromId, (v) {
-          v.user = u;
-          return v;
-        }, ifAbsent: () => n);
-        controller.add(MeshtasticReceive.user);
+      // We don't throw if the utf8 is invalid in the text message.
+      // Instead we just don't populate
+      // the decoded.data.text and we log an error message.
+      // This at least allows some delivery to
+      // the app and the app can deal with the missing decoded representation.
+      // Usually btw this problem is caused by apps sending binary data but setting the payload type to
+      // text.
+      // A Dart string is a sequence of UTF-16 code units
+      try {
+        //TODO - extend class to hold decoded text
+        final String text = Utf8Decoder().convert(meshPacket.decoded.payload);
+        controller.add(MeshtasticReceive.text);
+        userLogger
+            .v('_handlePacketFromRadio: meshPacket.decoded.payload = $text');
+      } catch (ex) {
+        userLogger.e(
+            '_handlePacketFromRadio: Malformatted utf8 in text message: ${ex}');
+        //TODO should raise error to controller.add(MeshtasticReceive.unknown?);
       }
     }
-    // TODO raise Event
-    // pub.sendMessage(topic, packet=asDict, interface=self);
+
+    if (meshPacket.decoded.portnum == PortNum.POSITION_APP) {
+      topic = 'meshtastic.receive.position';
+      _fixupPosition(Position.fromBuffer(meshPacket.decoded.payload));
+      // update node DB as needed, with new position
+      _getOrCreateByNum(meshPacket.from).position =
+          Position.fromBuffer(meshPacket.decoded.payload);
+      controller.add(MeshtasticReceive.position);
+    }
+
+    if (meshPacket.decoded.portnum == PortNum.NODEINFO_APP) {
+      topic = 'meshtastic.receive.user';
+      User u = User.fromBuffer(meshPacket.decoded.payload);
+      // update node DB as needed
+      NodeInfo n = _getOrCreateByNum(fromId);
+      n.user = u;
+      // We now have a node ID, update or add to the map
+      //nodes[fromId].user = u;
+      nodes.update(fromId, (v) {
+        v.user = u;
+        return v;
+      }, ifAbsent: () => n);
+      controller.add(MeshtasticReceive.user);
+    }
     userLogger.v('send message $topic');
   }
 }
@@ -1005,7 +1052,7 @@ class BLEInterface extends MeshInterface {
     if (_intialised) {
       await _readFromRadio();
       userLogger.v(
-          'BLEInterface init() Prefs: ${radioConfig.preferences.toString()}');
+          'BLEInterface init() Prefs: ${localNode.radioConfig.preferences.toString()}');
 
       ///AF 18/01/2021, setup stream on Notify for fromNum BLE characterisitic
       ///  TODO, add onerror, onclose functions
@@ -1026,9 +1073,10 @@ class BLEInterface extends MeshInterface {
   }
 
   /// Called by bloc on device state change to say this interface has fully connected/re-connected to a node
-  void connected() {
-    _connected();
-  }
+  /// AF made this a public method so can call from Node - any further cleanup
+  // void connected() {
+  //   connected();
+  // }
 
   /// Device has notified data is available
   /// type Uint8List , see https://medium.com/flutter-community/working-with-bytes-in-dart-6ece83455721
@@ -1087,8 +1135,8 @@ class BLEInterface extends MeshInterface {
     await _sendToRadio(getConfig); //uses super BLEInterface
     await _readFromRadio(); // will handle response and update local radioConfig
     userLogger.i(
-        'BLEInterface getConfig() Prefs:\n${radioConfig.preferences.toString()}');
-    return radioConfig.preferences.toString();
+        'BLEInterface getConfig() Prefs:\n${localNode.radioConfig.preferences.toString()}');
+    return localNode.radioConfig.preferences.toString();
   }
 
   //@override

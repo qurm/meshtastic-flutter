@@ -23,14 +23,14 @@ version: 1.0.0+1
 
 environment:
   # sdk: ">=2.11.0-213.0.dev <2.12.0" # for null safety test
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
   flutter: ">=1.22.00 <2.0.0"
 
 dependencies:
   # auto_route: ^0.6.9  # could not resolve package uri Dec 2020 - try again later?
   flutter:
     sdk: flutter
-  flutter_blue: ^0.7.3
+  flutter_blue: ^0.8.0
   bloc: ^6.1.1
   dartz: ^0.9.2
   flutter_bloc: ^6.1.2
@@ -44,12 +44,12 @@ dependencies:
   #  see https://github.com/leisim/logger_flutter/issues/6  
   # and https://github.com/ewertonrp/logger_flutter
   # logger_flutter: '^0.7.1'
-  logger_flutter:
-    git: https://github.com/ewertonrp/logger_flutter.git
+  # logger_flutter:
+  #   git: https://github.com/ewertonrp/logger_flutter.git
   logger: '^0.9.4'
-  recase: ^3.0.1
+  # recase: ^3.0.1
   shared_preferences: '>=0.5.12+4 <2.0.0'
-  preferences: '^5.2.1'
+  # preferences: '^5.2.1'   // see https://pub.dev/packages/pref
   wakelock: '^0.2.1+1'
   
   # The following adds the Cupertino Icons font to your application.

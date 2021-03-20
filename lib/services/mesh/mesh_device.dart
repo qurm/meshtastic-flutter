@@ -1,8 +1,7 @@
+// @dart=2.9
 import 'dart:async';
-import 'dart:convert';
-
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:logger/logger.dart';
+// import 'package:logger/logger.dart';
 
 import '../bluetooth/bluetooth.dart';
 
