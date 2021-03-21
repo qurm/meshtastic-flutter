@@ -189,7 +189,8 @@ class MeshCommandFormState extends State<MeshCommandForm> {
   }
 
   void _showMessage(BuildContext context, String message) {
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
+    ScaffoldMessenger.of(context)
+        .showSnackBar(SnackBar(content: Text(message)));
   }
 }
 

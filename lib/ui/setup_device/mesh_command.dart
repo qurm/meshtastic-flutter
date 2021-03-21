@@ -89,7 +89,8 @@ class MeshCommandScreen extends StatelessWidget {
                           onPressed: () {
                             Clipboard.setData(
                                 ClipboardData(text: state.message));
-                            Scaffold.of(context).showSnackBar(const SnackBar(
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
                               // backgroundColor: Colors.green,
                               content: Text('Copied to Clipboard}'),
                             ));
@@ -98,7 +99,7 @@ class MeshCommandScreen extends StatelessWidget {
               },
             );
           }
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             // backgroundColor: Colors.green[100],
             content: Text('SetupDeviceState ${state.toString()}'),
           ));
