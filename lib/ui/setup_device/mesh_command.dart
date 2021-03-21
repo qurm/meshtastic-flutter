@@ -59,7 +59,7 @@ class MeshCommandScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(device.name),
         actions: <Widget>[
-          FlatButton(
+          TextButton(
               onPressed: null, //onPressed,
               child: Text('BACK BUTTON?',
                   style: Theme.of(context).primaryTextTheme.button
@@ -78,13 +78,13 @@ class MeshCommandScreen extends StatelessWidget {
                     content: Text(state.message),
                     actions: <Widget>[
                       // usually buttons at the bottom of the dialog
-                      FlatButton(
+                      TextButton(
                           child: const Text('Close'),
                           onPressed: () {
                             Navigator.of(dialogContext).pop();
                             // Navigator.pop(context);
                           }),
-                      FlatButton(
+                      TextButton(
                           child: const Text('Copy'),
                           onPressed: () {
                             Clipboard.setData(
