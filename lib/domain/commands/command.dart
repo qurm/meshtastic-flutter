@@ -9,7 +9,7 @@ class MeshCommandList {
   });
 
   factory MeshCommandList.fromJson(List<dynamic> parsedJson) {
-    List<MeshCommand> commands = new List<MeshCommand>();
+    List<MeshCommand> commands = [];
     commands = parsedJson
         .map((i) => MeshCommand.fromJson(i as Map<String, dynamic>))
         .toList();
@@ -17,7 +17,7 @@ class MeshCommandList {
   }
 
   List<MeshCommand> fromJson2(List<dynamic> parsedJson) {
-    List<MeshCommand> commands = new List<MeshCommand>();
+    List<MeshCommand> commands = [];
     commands = parsedJson
         .map((i) => MeshCommand.fromJson(i as Map<String, dynamic>))
         .toList();
@@ -64,7 +64,7 @@ class MeshCommandParameterList {
   });
 
   factory MeshCommandParameterList.fromJson(List<dynamic> parsedJson) {
-    List<MeshCommandParameter> paramList = new List<MeshCommandParameter>();
+    List<MeshCommandParameter> paramList = [];
     paramList = parsedJson
         .map((i) => MeshCommandParameter.fromJson(i as Map<String, dynamic>))
         .toList();

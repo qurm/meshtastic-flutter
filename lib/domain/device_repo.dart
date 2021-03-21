@@ -102,7 +102,8 @@ class DeviceConnect {
   /// True if Bluetooth is scanning currently
   Stream<bool> get isScanning => blueAPIClient.isScanning;
 
-  /// Start BLE scan, with filter for Meshtastic devices only
+  /// Start BLE scan, with advertising filter for Meshtastic devices only.
+  ///
   ///  note, can supply   List<Guid> withServices = const [],
   /// Meshtastic device serviceUuids = [6ba1b218-15a8-461f-9fa8-5dcae273eafd]
   Future<void> startScan(int timeoutms) {
@@ -120,6 +121,7 @@ class DeviceConnect {
   }
 
   /// Find (known) device in the scan, and return so bloc can connect to it.
+  ///
   /// [id] must be valid MAC, like c4:4f:33:6a:a3:cb in lowercase
   /// called from FindDevice bloc on FindStarted
   Future<Either<ConnectFailure, BLEDevice2>> scanConnect(String id) async {

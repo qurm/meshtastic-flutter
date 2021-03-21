@@ -1,7 +1,7 @@
-// @dart=2.9
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
+// @dart=2.9
 part of 'connect_device_bloc.dart';
 
 // **************************************************************************
@@ -95,18 +95,18 @@ class _$ConnectDeviceEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $ConnectPressedCopyWith<$Res> {
-  factory $ConnectPressedCopyWith(
+abstract class $ConnectPressedEventCopyWith<$Res> {
+  factory $ConnectPressedEventCopyWith(
           ConnectPressedEvent value, $Res Function(ConnectPressedEvent) then) =
-      _$ConnectPressedCopyWithImpl<$Res>;
+      _$ConnectPressedEventCopyWithImpl<$Res>;
   $Res call({BLEDevice2 device});
 }
 
 /// @nodoc
-class _$ConnectPressedCopyWithImpl<$Res>
+class _$ConnectPressedEventCopyWithImpl<$Res>
     extends _$ConnectDeviceEventCopyWithImpl<$Res>
-    implements $ConnectPressedCopyWith<$Res> {
-  _$ConnectPressedCopyWithImpl(
+    implements $ConnectPressedEventCopyWith<$Res> {
+  _$ConnectPressedEventCopyWithImpl(
       ConnectPressedEvent _value, $Res Function(ConnectPressedEvent) _then)
       : super(_value, (v) => _then(v as ConnectPressedEvent));
 
@@ -124,10 +124,10 @@ class _$ConnectPressedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ConnectPressed
+class _$ConnectPressedEvent
     with DiagnosticableTreeMixin
     implements ConnectPressedEvent {
-  const _$ConnectPressed(this.device) : assert(device != null);
+  const _$ConnectPressedEvent(this.device) : assert(device != null);
 
   @override
   final BLEDevice2 device;
@@ -159,8 +159,8 @@ class _$ConnectPressed
 
   @JsonKey(ignore: true)
   @override
-  $ConnectPressedCopyWith<ConnectPressedEvent> get copyWith =>
-      _$ConnectPressedCopyWithImpl<ConnectPressedEvent>(this, _$identity);
+  $ConnectPressedEventCopyWith<ConnectPressedEvent> get copyWith =>
+      _$ConnectPressedEventCopyWithImpl<ConnectPressedEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -226,25 +226,25 @@ class _$ConnectPressed
 }
 
 abstract class ConnectPressedEvent implements ConnectDeviceEvent {
-  const factory ConnectPressedEvent(BLEDevice2 device) = _$ConnectPressed;
+  const factory ConnectPressedEvent(BLEDevice2 device) = _$ConnectPressedEvent;
 
   BLEDevice2 get device;
   @JsonKey(ignore: true)
-  $ConnectPressedCopyWith<ConnectPressedEvent> get copyWith;
+  $ConnectPressedEventCopyWith<ConnectPressedEvent> get copyWith;
 }
 
 /// @nodoc
-abstract class $ConnectCompletedCopyWith<$Res> {
-  factory $ConnectCompletedCopyWith(ConnectCompletedEvent value,
+abstract class $ConnectCompletedEventCopyWith<$Res> {
+  factory $ConnectCompletedEventCopyWith(ConnectCompletedEvent value,
           $Res Function(ConnectCompletedEvent) then) =
-      _$ConnectCompletedCopyWithImpl<$Res>;
+      _$ConnectCompletedEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ConnectCompletedCopyWithImpl<$Res>
+class _$ConnectCompletedEventCopyWithImpl<$Res>
     extends _$ConnectDeviceEventCopyWithImpl<$Res>
-    implements $ConnectCompletedCopyWith<$Res> {
-  _$ConnectCompletedCopyWithImpl(
+    implements $ConnectCompletedEventCopyWith<$Res> {
+  _$ConnectCompletedEventCopyWithImpl(
       ConnectCompletedEvent _value, $Res Function(ConnectCompletedEvent) _then)
       : super(_value, (v) => _then(v as ConnectCompletedEvent));
 
@@ -253,10 +253,10 @@ class _$ConnectCompletedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ConnectCompleted
+class _$ConnectCompletedEvent
     with DiagnosticableTreeMixin
     implements ConnectCompletedEvent {
-  const _$ConnectCompleted();
+  const _$ConnectCompletedEvent();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -342,21 +342,21 @@ class _$ConnectCompleted
 }
 
 abstract class ConnectCompletedEvent implements ConnectDeviceEvent {
-  const factory ConnectCompletedEvent() = _$ConnectCompleted;
+  const factory ConnectCompletedEvent() = _$ConnectCompletedEvent;
 }
 
 /// @nodoc
-abstract class $IntialiseRequestedCopyWith<$Res> {
-  factory $IntialiseRequestedCopyWith(IntialiseRequestedEvent value,
+abstract class $IntialiseRequestedEventCopyWith<$Res> {
+  factory $IntialiseRequestedEventCopyWith(IntialiseRequestedEvent value,
           $Res Function(IntialiseRequestedEvent) then) =
-      _$IntialiseRequestedCopyWithImpl<$Res>;
+      _$IntialiseRequestedEventCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$IntialiseRequestedCopyWithImpl<$Res>
+class _$IntialiseRequestedEventCopyWithImpl<$Res>
     extends _$ConnectDeviceEventCopyWithImpl<$Res>
-    implements $IntialiseRequestedCopyWith<$Res> {
-  _$IntialiseRequestedCopyWithImpl(IntialiseRequestedEvent _value,
+    implements $IntialiseRequestedEventCopyWith<$Res> {
+  _$IntialiseRequestedEventCopyWithImpl(IntialiseRequestedEvent _value,
       $Res Function(IntialiseRequestedEvent) _then)
       : super(_value, (v) => _then(v as IntialiseRequestedEvent));
 
@@ -365,10 +365,10 @@ class _$IntialiseRequestedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$IntialiseRequested
+class _$IntialiseRequestedEvent
     with DiagnosticableTreeMixin
     implements IntialiseRequestedEvent {
-  const _$IntialiseRequested();
+  const _$IntialiseRequestedEvent();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -454,22 +454,22 @@ class _$IntialiseRequested
 }
 
 abstract class IntialiseRequestedEvent implements ConnectDeviceEvent {
-  const factory IntialiseRequestedEvent() = _$IntialiseRequested;
+  const factory IntialiseRequestedEvent() = _$IntialiseRequestedEvent;
 }
 
 /// @nodoc
-abstract class $ConnectStateChangedCopyWith<$Res> {
-  factory $ConnectStateChangedCopyWith(ConnectStateChangedEvent value,
+abstract class $ConnectStateChangedEventCopyWith<$Res> {
+  factory $ConnectStateChangedEventCopyWith(ConnectStateChangedEvent value,
           $Res Function(ConnectStateChangedEvent) then) =
-      _$ConnectStateChangedCopyWithImpl<$Res>;
+      _$ConnectStateChangedEventCopyWithImpl<$Res>;
   $Res call({BLEDeviceState deviceState});
 }
 
 /// @nodoc
-class _$ConnectStateChangedCopyWithImpl<$Res>
+class _$ConnectStateChangedEventCopyWithImpl<$Res>
     extends _$ConnectDeviceEventCopyWithImpl<$Res>
-    implements $ConnectStateChangedCopyWith<$Res> {
-  _$ConnectStateChangedCopyWithImpl(ConnectStateChangedEvent _value,
+    implements $ConnectStateChangedEventCopyWith<$Res> {
+  _$ConnectStateChangedEventCopyWithImpl(ConnectStateChangedEvent _value,
       $Res Function(ConnectStateChangedEvent) _then)
       : super(_value, (v) => _then(v as ConnectStateChangedEvent));
 
@@ -490,10 +490,11 @@ class _$ConnectStateChangedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$ConnectStateChanged
+class _$ConnectStateChangedEvent
     with DiagnosticableTreeMixin
     implements ConnectStateChangedEvent {
-  const _$ConnectStateChanged(this.deviceState) : assert(deviceState != null);
+  const _$ConnectStateChangedEvent(this.deviceState)
+      : assert(deviceState != null);
 
   @override
   final BLEDeviceState deviceState;
@@ -526,8 +527,8 @@ class _$ConnectStateChanged
 
   @JsonKey(ignore: true)
   @override
-  $ConnectStateChangedCopyWith<ConnectStateChangedEvent> get copyWith =>
-      _$ConnectStateChangedCopyWithImpl<ConnectStateChangedEvent>(
+  $ConnectStateChangedEventCopyWith<ConnectStateChangedEvent> get copyWith =>
+      _$ConnectStateChangedEventCopyWithImpl<ConnectStateChangedEvent>(
           this, _$identity);
 
   @override
@@ -595,11 +596,11 @@ class _$ConnectStateChanged
 
 abstract class ConnectStateChangedEvent implements ConnectDeviceEvent {
   const factory ConnectStateChangedEvent(BLEDeviceState deviceState) =
-      _$ConnectStateChanged;
+      _$ConnectStateChangedEvent;
 
   BLEDeviceState get deviceState;
   @JsonKey(ignore: true)
-  $ConnectStateChangedCopyWith<ConnectStateChangedEvent> get copyWith;
+  $ConnectStateChangedEventCopyWith<ConnectStateChangedEvent> get copyWith;
 }
 
 /// @nodoc
@@ -825,18 +826,18 @@ abstract class Initial implements ConnectDeviceState {
 }
 
 /// @nodoc
-abstract class $ConnectedCopyWith<$Res> {
-  factory $ConnectedCopyWith(
+abstract class $ConnectedStateCopyWith<$Res> {
+  factory $ConnectedStateCopyWith(
           ConnectedState value, $Res Function(ConnectedState) then) =
-      _$ConnectedCopyWithImpl<$Res>;
+      _$ConnectedStateCopyWithImpl<$Res>;
   $Res call({BLEDevice2 device});
 }
 
 /// @nodoc
-class _$ConnectedCopyWithImpl<$Res>
+class _$ConnectedStateCopyWithImpl<$Res>
     extends _$ConnectDeviceStateCopyWithImpl<$Res>
-    implements $ConnectedCopyWith<$Res> {
-  _$ConnectedCopyWithImpl(
+    implements $ConnectedStateCopyWith<$Res> {
+  _$ConnectedStateCopyWithImpl(
       ConnectedState _value, $Res Function(ConnectedState) _then)
       : super(_value, (v) => _then(v as ConnectedState));
 
@@ -854,8 +855,8 @@ class _$ConnectedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$Connected with DiagnosticableTreeMixin implements ConnectedState {
-  const _$Connected(this.device) : assert(device != null);
+class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
+  const _$ConnectedState(this.device) : assert(device != null);
 
   @override
   final BLEDevice2 device;
@@ -887,8 +888,8 @@ class _$Connected with DiagnosticableTreeMixin implements ConnectedState {
 
   @JsonKey(ignore: true)
   @override
-  $ConnectedCopyWith<ConnectedState> get copyWith =>
-      _$ConnectedCopyWithImpl<ConnectedState>(this, _$identity);
+  $ConnectedStateCopyWith<ConnectedState> get copyWith =>
+      _$ConnectedStateCopyWithImpl<ConnectedState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -966,25 +967,25 @@ class _$Connected with DiagnosticableTreeMixin implements ConnectedState {
 }
 
 abstract class ConnectedState implements ConnectDeviceState {
-  const factory ConnectedState(BLEDevice2 device) = _$Connected;
+  const factory ConnectedState(BLEDevice2 device) = _$ConnectedState;
 
   BLEDevice2 get device;
   @JsonKey(ignore: true)
-  $ConnectedCopyWith<ConnectedState> get copyWith;
+  $ConnectedStateCopyWith<ConnectedState> get copyWith;
 }
 
 /// @nodoc
-abstract class $ConnectingCopyWith<$Res> {
-  factory $ConnectingCopyWith(
+abstract class $ConnectingStateCopyWith<$Res> {
+  factory $ConnectingStateCopyWith(
           ConnectingState value, $Res Function(ConnectingState) then) =
-      _$ConnectingCopyWithImpl<$Res>;
+      _$ConnectingStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$ConnectingCopyWithImpl<$Res>
+class _$ConnectingStateCopyWithImpl<$Res>
     extends _$ConnectDeviceStateCopyWithImpl<$Res>
-    implements $ConnectingCopyWith<$Res> {
-  _$ConnectingCopyWithImpl(
+    implements $ConnectingStateCopyWith<$Res> {
+  _$ConnectingStateCopyWithImpl(
       ConnectingState _value, $Res Function(ConnectingState) _then)
       : super(_value, (v) => _then(v as ConnectingState));
 
@@ -993,8 +994,10 @@ class _$ConnectingCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$Connecting with DiagnosticableTreeMixin implements ConnectingState {
-  const _$Connecting();
+class _$ConnectingState
+    with DiagnosticableTreeMixin
+    implements ConnectingState {
+  const _$ConnectingState();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1092,24 +1095,24 @@ class _$Connecting with DiagnosticableTreeMixin implements ConnectingState {
 }
 
 abstract class ConnectingState implements ConnectDeviceState {
-  const factory ConnectingState() = _$Connecting;
+  const factory ConnectingState() = _$ConnectingState;
 }
 
 /// @nodoc
-abstract class $NoDeviceCopyWith<$Res> {
-  factory $NoDeviceCopyWith(
+abstract class $NoDeviceStateCopyWith<$Res> {
+  factory $NoDeviceStateCopyWith(
           NoDeviceState value, $Res Function(NoDeviceState) then) =
-      _$NoDeviceCopyWithImpl<$Res>;
+      _$NoDeviceStateCopyWithImpl<$Res>;
   $Res call({ConnectFailure connectFailure});
 
   $ConnectFailureCopyWith<$Res> get connectFailure;
 }
 
 /// @nodoc
-class _$NoDeviceCopyWithImpl<$Res>
+class _$NoDeviceStateCopyWithImpl<$Res>
     extends _$ConnectDeviceStateCopyWithImpl<$Res>
-    implements $NoDeviceCopyWith<$Res> {
-  _$NoDeviceCopyWithImpl(
+    implements $NoDeviceStateCopyWith<$Res> {
+  _$NoDeviceStateCopyWithImpl(
       NoDeviceState _value, $Res Function(NoDeviceState) _then)
       : super(_value, (v) => _then(v as NoDeviceState));
 
@@ -1139,8 +1142,8 @@ class _$NoDeviceCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$NoDevice with DiagnosticableTreeMixin implements NoDeviceState {
-  const _$NoDevice(this.connectFailure) : assert(connectFailure != null);
+class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
+  const _$NoDeviceState(this.connectFailure) : assert(connectFailure != null);
 
   @override
   final ConnectFailure connectFailure;
@@ -1174,8 +1177,8 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDeviceState {
 
   @JsonKey(ignore: true)
   @override
-  $NoDeviceCopyWith<NoDeviceState> get copyWith =>
-      _$NoDeviceCopyWithImpl<NoDeviceState>(this, _$identity);
+  $NoDeviceStateCopyWith<NoDeviceState> get copyWith =>
+      _$NoDeviceStateCopyWithImpl<NoDeviceState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1253,26 +1256,26 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDeviceState {
 }
 
 abstract class NoDeviceState implements ConnectDeviceState {
-  const factory NoDeviceState(ConnectFailure connectFailure) = _$NoDevice;
+  const factory NoDeviceState(ConnectFailure connectFailure) = _$NoDeviceState;
 
   ConnectFailure get connectFailure;
   @JsonKey(ignore: true)
-  $NoDeviceCopyWith<NoDeviceState> get copyWith;
+  $NoDeviceStateCopyWith<NoDeviceState> get copyWith;
 }
 
 /// @nodoc
-abstract class $DeviceKnownCopyWith<$Res> {
-  factory $DeviceKnownCopyWith(
+abstract class $DeviceKnownStateCopyWith<$Res> {
+  factory $DeviceKnownStateCopyWith(
           DeviceKnownState value, $Res Function(DeviceKnownState) then) =
-      _$DeviceKnownCopyWithImpl<$Res>;
+      _$DeviceKnownStateCopyWithImpl<$Res>;
   $Res call({dynamic deviceList});
 }
 
 /// @nodoc
-class _$DeviceKnownCopyWithImpl<$Res>
+class _$DeviceKnownStateCopyWithImpl<$Res>
     extends _$ConnectDeviceStateCopyWithImpl<$Res>
-    implements $DeviceKnownCopyWith<$Res> {
-  _$DeviceKnownCopyWithImpl(
+    implements $DeviceKnownStateCopyWith<$Res> {
+  _$DeviceKnownStateCopyWithImpl(
       DeviceKnownState _value, $Res Function(DeviceKnownState) _then)
       : super(_value, (v) => _then(v as DeviceKnownState));
 
@@ -1290,8 +1293,10 @@ class _$DeviceKnownCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceKnown with DiagnosticableTreeMixin implements DeviceKnownState {
-  const _$DeviceKnown(this.deviceList) : assert(deviceList != null);
+class _$DeviceKnownState
+    with DiagnosticableTreeMixin
+    implements DeviceKnownState {
+  const _$DeviceKnownState(this.deviceList) : assert(deviceList != null);
 
   @override
   final dynamic deviceList;
@@ -1324,8 +1329,8 @@ class _$DeviceKnown with DiagnosticableTreeMixin implements DeviceKnownState {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceKnownCopyWith<DeviceKnownState> get copyWith =>
-      _$DeviceKnownCopyWithImpl<DeviceKnownState>(this, _$identity);
+  $DeviceKnownStateCopyWith<DeviceKnownState> get copyWith =>
+      _$DeviceKnownStateCopyWithImpl<DeviceKnownState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1403,25 +1408,25 @@ class _$DeviceKnown with DiagnosticableTreeMixin implements DeviceKnownState {
 }
 
 abstract class DeviceKnownState implements ConnectDeviceState {
-  const factory DeviceKnownState(dynamic deviceList) = _$DeviceKnown;
+  const factory DeviceKnownState(dynamic deviceList) = _$DeviceKnownState;
 
   dynamic get deviceList;
   @JsonKey(ignore: true)
-  $DeviceKnownCopyWith<DeviceKnownState> get copyWith;
+  $DeviceKnownStateCopyWith<DeviceKnownState> get copyWith;
 }
 
 /// @nodoc
-abstract class $DeviceOfflineCopyWith<$Res> {
-  factory $DeviceOfflineCopyWith(
+abstract class $DeviceOfflineStateCopyWith<$Res> {
+  factory $DeviceOfflineStateCopyWith(
           DeviceOfflineState value, $Res Function(DeviceOfflineState) then) =
-      _$DeviceOfflineCopyWithImpl<$Res>;
+      _$DeviceOfflineStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$DeviceOfflineCopyWithImpl<$Res>
+class _$DeviceOfflineStateCopyWithImpl<$Res>
     extends _$ConnectDeviceStateCopyWithImpl<$Res>
-    implements $DeviceOfflineCopyWith<$Res> {
-  _$DeviceOfflineCopyWithImpl(
+    implements $DeviceOfflineStateCopyWith<$Res> {
+  _$DeviceOfflineStateCopyWithImpl(
       DeviceOfflineState _value, $Res Function(DeviceOfflineState) _then)
       : super(_value, (v) => _then(v as DeviceOfflineState));
 
@@ -1430,10 +1435,10 @@ class _$DeviceOfflineCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceOffline
+class _$DeviceOfflineState
     with DiagnosticableTreeMixin
     implements DeviceOfflineState {
-  const _$DeviceOffline();
+  const _$DeviceOfflineState();
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
@@ -1531,5 +1536,5 @@ class _$DeviceOffline
 }
 
 abstract class DeviceOfflineState implements ConnectDeviceState {
-  const factory DeviceOfflineState() = _$DeviceOffline;
+  const factory DeviceOfflineState() = _$DeviceOfflineState;
 }

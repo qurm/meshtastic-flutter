@@ -25,27 +25,32 @@ part 'find_device_bloc.freezed.dart';
 // run this at terminal after changes to generate freezed code
 //  flutter pub run build_runner watch --delete-conflicting-outputs
 
-/// Purpose of this [FindDeviceBloc] is to manage getting a list of Mesh devices
+/// Purpose of [FindDeviceBloc] is to manage scanning and selecting Mesh devices.
+///
 /// Use [ConnectDeviceBloc] to connect to the selected device, has a reference
 /// and listened to here so that connection changes can update Find lists.
 /// See [setup_device] bloc for already connected device
 /// Application logic, and deals with UI and domain layers
 /// incoming events are transformed, yielded as States
-
 class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
   FindDeviceBloc() : super(const FindInitialState()) {
     _connectRepo = GetIt.I<DeviceConnect>();
-    _connectDeviceSubscription = connectDeviceBloc.listen((state) {
+    //set this early, so Scan list can show before any event button pressed
+    _allDevices = _connectRepo.scanResults;
+
+    _appLogger.i('FindDeviceBloc: initiasing.');
+    _connectDeviceSubscription = connectDeviceBloc.stream.listen((state) {
       if (state is ConnectedState) {
         // show the new connected list, and store to share prefs
         add(const FindRefreshRequestedEvent());
-        // TODO
+        // TODO not using the saved device yet
         _saveDevice(state.device.id);
       }
     });
     // moved this to the FindStarted event below
     // _initialiseBloc();
   }
+
   DeviceConnect _connectRepo;
   final ConnectDeviceBloc connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
   // StreamSubscription _periodicSubscription; //problematic, keeps running in bloc
@@ -83,7 +88,6 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
   Stream<FindDeviceState> mapEventToState(
     FindDeviceEvent event,
   ) async* {
-    // TODO: implement mapEventToState
     /// on Start, try to connect to lastGoodDevice
     if (event is FindStartedEvent) {
       final _prefs = await SharedPreferences.getInstance();
@@ -95,8 +99,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
               .i('FindStarted: try connecting to last device $_lastDevice');
           // TODO check bluetooth is running -and repo is initial.  This is first call to BLE
 
-          // scan devices
-          // find in scanResults, and connect
+          // scan devices, find in scanResults, and connect
           // get connected devices, first?
           final deviceEither = await _connectRepo.scanConnect(_lastDevice);
 
@@ -111,39 +114,9 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
           final _devices = await connectedDevices;
           yield deviceEither.fold((failure) => FindFailureState(failure),
               (r) => FindCompletedRefreshState(_devices));
-          // after a connect, rescan so that device is removed from list:
-          add(const FindScanRequestedEvent());
-
-          /// AF tried to get this working, but above is simpler and adequate
-          /// converts the Future into a Task
-          // final userOption =
-          // await Task(() => _connectRepo.scanConnect(_lastDevice))
-          //     // execute function above, catches exceptions into Left
-          //     .attempt()
-          //     // results in a Either<Failure, Unit>
-          //     .map(
-          //       // AF: do we need all of this, as connect is Either<Failure, Unit>:
-          //       // Grab only the *left* side of Either<Object, Post>
-          //       (either) => either.leftMap((obj) {
-          //         try {
-          //           // Cast the Object into a Failure
-          //           return obj as ConnectFailure;
-          //         } catch (e) {
-          //           // 'rethrow' the original exception
-          //           throw obj;
-          //         }
-          //       }),
-          //     )
-          //     .run();
-          // // AF here want to update the Either<, R>, but what with ?
-          // // .then((value) => ());
-          // .then((value) => connectDeviceBloc.add(ConnectPressed(r));
-
-          // yield userOption.fold(
-          //   () => const ConnectFailure.cancelledByUser(),
-          //   (_) => const ConnectDeviceState.deviceknown(),
-          // );
         }
+        // after a connect attempt, rescan so that device is removed from list:
+        add(const FindScanRequestedEvent());
       } catch (_) {
         rethrow;
         //handle Failures from the repo - i.e. BLE off, no location services etc?
@@ -155,10 +128,11 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
       yield const FindRequestedState();
       try {
         await _connectRepo.startScan(4000);
-        //can only listen once
-        _allDevices = _connectRepo.scanResults;
-        _appLogger
-            .d('FindScanRequestedEvent scan list has: ${_allDevices.length}');
+        //can only listen once - try on bloc initialise?
+        // _allDevices = _connectRepo.scanResults;
+        // _appLogger
+        //     .d('FindScanRequestedEvent scan list has: ${_allDevices.length}');
+
         //  final Stream<List<ScannedDevice>> allDevices = _connectRepo.scanResults;
 
         // final _connectedDevices = await _connectRepo.connectedDevices3;

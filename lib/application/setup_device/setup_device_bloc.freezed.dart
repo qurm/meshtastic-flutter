@@ -1,7 +1,7 @@
-// @dart=2.9
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
+// @dart=2.9
 part of 'setup_device_bloc.dart';
 
 // **************************************************************************
@@ -88,18 +88,18 @@ class _$SetupDeviceEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $DeviceStartedCopyWith<$Res> {
-  factory $DeviceStartedCopyWith(
+abstract class $DeviceStartedEventCopyWith<$Res> {
+  factory $DeviceStartedEventCopyWith(
           DeviceStartedEvent value, $Res Function(DeviceStartedEvent) then) =
-      _$DeviceStartedCopyWithImpl<$Res>;
+      _$DeviceStartedEventCopyWithImpl<$Res>;
   $Res call({MeshDevice device});
 }
 
 /// @nodoc
-class _$DeviceStartedCopyWithImpl<$Res>
+class _$DeviceStartedEventCopyWithImpl<$Res>
     extends _$SetupDeviceEventCopyWithImpl<$Res>
-    implements $DeviceStartedCopyWith<$Res> {
-  _$DeviceStartedCopyWithImpl(
+    implements $DeviceStartedEventCopyWith<$Res> {
+  _$DeviceStartedEventCopyWithImpl(
       DeviceStartedEvent _value, $Res Function(DeviceStartedEvent) _then)
       : super(_value, (v) => _then(v as DeviceStartedEvent));
 
@@ -117,8 +117,8 @@ class _$DeviceStartedCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceStarted implements DeviceStartedEvent {
-  const _$DeviceStarted(this.device) : assert(device != null);
+class _$DeviceStartedEvent implements DeviceStartedEvent {
+  const _$DeviceStartedEvent(this.device) : assert(device != null);
 
   @override
   final MeshDevice device;
@@ -142,8 +142,8 @@ class _$DeviceStarted implements DeviceStartedEvent {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceStartedCopyWith<DeviceStartedEvent> get copyWith =>
-      _$DeviceStartedCopyWithImpl<DeviceStartedEvent>(this, _$identity);
+  $DeviceStartedEventCopyWith<DeviceStartedEvent> get copyWith =>
+      _$DeviceStartedEventCopyWithImpl<DeviceStartedEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -203,26 +203,26 @@ class _$DeviceStarted implements DeviceStartedEvent {
 }
 
 abstract class DeviceStartedEvent implements SetupDeviceEvent {
-  const factory DeviceStartedEvent(MeshDevice device) = _$DeviceStarted;
+  const factory DeviceStartedEvent(MeshDevice device) = _$DeviceStartedEvent;
 
   MeshDevice get device;
   @JsonKey(ignore: true)
-  $DeviceStartedCopyWith<DeviceStartedEvent> get copyWith;
+  $DeviceStartedEventCopyWith<DeviceStartedEvent> get copyWith;
 }
 
 /// @nodoc
-abstract class $DeviceCommandCopyWith<$Res> {
-  factory $DeviceCommandCopyWith(
+abstract class $DeviceCommandEventCopyWith<$Res> {
+  factory $DeviceCommandEventCopyWith(
           DeviceCommandEvent value, $Res Function(DeviceCommandEvent) then) =
-      _$DeviceCommandCopyWithImpl<$Res>;
+      _$DeviceCommandEventCopyWithImpl<$Res>;
   $Res call({MeshCommand meshCommand});
 }
 
 /// @nodoc
-class _$DeviceCommandCopyWithImpl<$Res>
+class _$DeviceCommandEventCopyWithImpl<$Res>
     extends _$SetupDeviceEventCopyWithImpl<$Res>
-    implements $DeviceCommandCopyWith<$Res> {
-  _$DeviceCommandCopyWithImpl(
+    implements $DeviceCommandEventCopyWith<$Res> {
+  _$DeviceCommandEventCopyWithImpl(
       DeviceCommandEvent _value, $Res Function(DeviceCommandEvent) _then)
       : super(_value, (v) => _then(v as DeviceCommandEvent));
 
@@ -240,8 +240,8 @@ class _$DeviceCommandCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceCommand implements DeviceCommandEvent {
-  const _$DeviceCommand(this.meshCommand) : assert(meshCommand != null);
+class _$DeviceCommandEvent implements DeviceCommandEvent {
+  const _$DeviceCommandEvent(this.meshCommand) : assert(meshCommand != null);
 
   @override
   final MeshCommand meshCommand;
@@ -266,8 +266,8 @@ class _$DeviceCommand implements DeviceCommandEvent {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceCommandCopyWith<DeviceCommandEvent> get copyWith =>
-      _$DeviceCommandCopyWithImpl<DeviceCommandEvent>(this, _$identity);
+  $DeviceCommandEventCopyWith<DeviceCommandEvent> get copyWith =>
+      _$DeviceCommandEventCopyWithImpl<DeviceCommandEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -327,26 +327,27 @@ class _$DeviceCommand implements DeviceCommandEvent {
 }
 
 abstract class DeviceCommandEvent implements SetupDeviceEvent {
-  const factory DeviceCommandEvent(MeshCommand meshCommand) = _$DeviceCommand;
+  const factory DeviceCommandEvent(MeshCommand meshCommand) =
+      _$DeviceCommandEvent;
 
   MeshCommand get meshCommand;
   @JsonKey(ignore: true)
-  $DeviceCommandCopyWith<DeviceCommandEvent> get copyWith;
+  $DeviceCommandEventCopyWith<DeviceCommandEvent> get copyWith;
 }
 
 /// @nodoc
-abstract class $DeviceEventCopyWith<$Res> {
-  factory $DeviceEventCopyWith(
+abstract class $DeviceEventEventCopyWith<$Res> {
+  factory $DeviceEventEventCopyWith(
           DeviceEventEvent value, $Res Function(DeviceEventEvent) then) =
-      _$DeviceEventCopyWithImpl<$Res>;
+      _$DeviceEventEventCopyWithImpl<$Res>;
   $Res call({MeshtasticReceive meshEvent});
 }
 
 /// @nodoc
-class _$DeviceEventCopyWithImpl<$Res>
+class _$DeviceEventEventCopyWithImpl<$Res>
     extends _$SetupDeviceEventCopyWithImpl<$Res>
-    implements $DeviceEventCopyWith<$Res> {
-  _$DeviceEventCopyWithImpl(
+    implements $DeviceEventEventCopyWith<$Res> {
+  _$DeviceEventEventCopyWithImpl(
       DeviceEventEvent _value, $Res Function(DeviceEventEvent) _then)
       : super(_value, (v) => _then(v as DeviceEventEvent));
 
@@ -364,8 +365,8 @@ class _$DeviceEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceEvent implements DeviceEventEvent {
-  const _$DeviceEvent(this.meshEvent) : assert(meshEvent != null);
+class _$DeviceEventEvent implements DeviceEventEvent {
+  const _$DeviceEventEvent(this.meshEvent) : assert(meshEvent != null);
 
   @override
   final MeshtasticReceive meshEvent;
@@ -390,8 +391,8 @@ class _$DeviceEvent implements DeviceEventEvent {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceEventCopyWith<DeviceEventEvent> get copyWith =>
-      _$DeviceEventCopyWithImpl<DeviceEventEvent>(this, _$identity);
+  $DeviceEventEventCopyWith<DeviceEventEvent> get copyWith =>
+      _$DeviceEventEventCopyWithImpl<DeviceEventEvent>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -451,11 +452,12 @@ class _$DeviceEvent implements DeviceEventEvent {
 }
 
 abstract class DeviceEventEvent implements SetupDeviceEvent {
-  const factory DeviceEventEvent(MeshtasticReceive meshEvent) = _$DeviceEvent;
+  const factory DeviceEventEvent(MeshtasticReceive meshEvent) =
+      _$DeviceEventEvent;
 
   MeshtasticReceive get meshEvent;
   @JsonKey(ignore: true)
-  $DeviceEventCopyWith<DeviceEventEvent> get copyWith;
+  $DeviceEventEventCopyWith<DeviceEventEvent> get copyWith;
 }
 
 /// @nodoc
@@ -543,17 +545,17 @@ class _$SetupDeviceStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class $DeviceInitialCopyWith<$Res> {
-  factory $DeviceInitialCopyWith(
+abstract class $DeviceInitialStateCopyWith<$Res> {
+  factory $DeviceInitialStateCopyWith(
           DeviceInitialState value, $Res Function(DeviceInitialState) then) =
-      _$DeviceInitialCopyWithImpl<$Res>;
+      _$DeviceInitialStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$DeviceInitialCopyWithImpl<$Res>
+class _$DeviceInitialStateCopyWithImpl<$Res>
     extends _$SetupDeviceStateCopyWithImpl<$Res>
-    implements $DeviceInitialCopyWith<$Res> {
-  _$DeviceInitialCopyWithImpl(
+    implements $DeviceInitialStateCopyWith<$Res> {
+  _$DeviceInitialStateCopyWithImpl(
       DeviceInitialState _value, $Res Function(DeviceInitialState) _then)
       : super(_value, (v) => _then(v as DeviceInitialState));
 
@@ -562,8 +564,8 @@ class _$DeviceInitialCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceInitial implements DeviceInitialState {
-  const _$DeviceInitial();
+class _$DeviceInitialState implements DeviceInitialState {
+  const _$DeviceInitialState();
 
   @override
   String toString() {
@@ -642,21 +644,21 @@ class _$DeviceInitial implements DeviceInitialState {
 }
 
 abstract class DeviceInitialState implements SetupDeviceState {
-  const factory DeviceInitialState() = _$DeviceInitial;
+  const factory DeviceInitialState() = _$DeviceInitialState;
 }
 
 /// @nodoc
-abstract class $DeviceInProgressCopyWith<$Res> {
-  factory $DeviceInProgressCopyWith(DeviceInProgressState value,
+abstract class $DeviceInProgressStateCopyWith<$Res> {
+  factory $DeviceInProgressStateCopyWith(DeviceInProgressState value,
           $Res Function(DeviceInProgressState) then) =
-      _$DeviceInProgressCopyWithImpl<$Res>;
+      _$DeviceInProgressStateCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class _$DeviceInProgressCopyWithImpl<$Res>
+class _$DeviceInProgressStateCopyWithImpl<$Res>
     extends _$SetupDeviceStateCopyWithImpl<$Res>
-    implements $DeviceInProgressCopyWith<$Res> {
-  _$DeviceInProgressCopyWithImpl(
+    implements $DeviceInProgressStateCopyWith<$Res> {
+  _$DeviceInProgressStateCopyWithImpl(
       DeviceInProgressState _value, $Res Function(DeviceInProgressState) _then)
       : super(_value, (v) => _then(v as DeviceInProgressState));
 
@@ -665,8 +667,8 @@ class _$DeviceInProgressCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceInProgress implements DeviceInProgressState {
-  const _$DeviceInProgress();
+class _$DeviceInProgressState implements DeviceInProgressState {
+  const _$DeviceInProgressState();
 
   @override
   String toString() {
@@ -745,22 +747,22 @@ class _$DeviceInProgress implements DeviceInProgressState {
 }
 
 abstract class DeviceInProgressState implements SetupDeviceState {
-  const factory DeviceInProgressState() = _$DeviceInProgress;
+  const factory DeviceInProgressState() = _$DeviceInProgressState;
 }
 
 /// @nodoc
-abstract class $DeviceSuccessCopyWith<$Res> {
-  factory $DeviceSuccessCopyWith(
+abstract class $DeviceSuccessStateCopyWith<$Res> {
+  factory $DeviceSuccessStateCopyWith(
           DeviceSuccessState value, $Res Function(DeviceSuccessState) then) =
-      _$DeviceSuccessCopyWithImpl<$Res>;
+      _$DeviceSuccessStateCopyWithImpl<$Res>;
   $Res call({String message});
 }
 
 /// @nodoc
-class _$DeviceSuccessCopyWithImpl<$Res>
+class _$DeviceSuccessStateCopyWithImpl<$Res>
     extends _$SetupDeviceStateCopyWithImpl<$Res>
-    implements $DeviceSuccessCopyWith<$Res> {
-  _$DeviceSuccessCopyWithImpl(
+    implements $DeviceSuccessStateCopyWith<$Res> {
+  _$DeviceSuccessStateCopyWithImpl(
       DeviceSuccessState _value, $Res Function(DeviceSuccessState) _then)
       : super(_value, (v) => _then(v as DeviceSuccessState));
 
@@ -778,8 +780,8 @@ class _$DeviceSuccessCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceSuccess implements DeviceSuccessState {
-  const _$DeviceSuccess(this.message) : assert(message != null);
+class _$DeviceSuccessState implements DeviceSuccessState {
+  const _$DeviceSuccessState(this.message) : assert(message != null);
 
   @override
   final String message;
@@ -803,8 +805,8 @@ class _$DeviceSuccess implements DeviceSuccessState {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceSuccessCopyWith<DeviceSuccessState> get copyWith =>
-      _$DeviceSuccessCopyWithImpl<DeviceSuccessState>(this, _$identity);
+  $DeviceSuccessStateCopyWith<DeviceSuccessState> get copyWith =>
+      _$DeviceSuccessStateCopyWithImpl<DeviceSuccessState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -870,28 +872,28 @@ class _$DeviceSuccess implements DeviceSuccessState {
 }
 
 abstract class DeviceSuccessState implements SetupDeviceState {
-  const factory DeviceSuccessState(String message) = _$DeviceSuccess;
+  const factory DeviceSuccessState(String message) = _$DeviceSuccessState;
 
   String get message;
   @JsonKey(ignore: true)
-  $DeviceSuccessCopyWith<DeviceSuccessState> get copyWith;
+  $DeviceSuccessStateCopyWith<DeviceSuccessState> get copyWith;
 }
 
 /// @nodoc
-abstract class $DeviceFailureCopyWith<$Res> {
-  factory $DeviceFailureCopyWith(
+abstract class $DeviceFailureStateCopyWith<$Res> {
+  factory $DeviceFailureStateCopyWith(
           DeviceFailureState value, $Res Function(DeviceFailureState) then) =
-      _$DeviceFailureCopyWithImpl<$Res>;
+      _$DeviceFailureStateCopyWithImpl<$Res>;
   $Res call({CommandFailure failure});
 
   $CommandFailureCopyWith<$Res> get failure;
 }
 
 /// @nodoc
-class _$DeviceFailureCopyWithImpl<$Res>
+class _$DeviceFailureStateCopyWithImpl<$Res>
     extends _$SetupDeviceStateCopyWithImpl<$Res>
-    implements $DeviceFailureCopyWith<$Res> {
-  _$DeviceFailureCopyWithImpl(
+    implements $DeviceFailureStateCopyWith<$Res> {
+  _$DeviceFailureStateCopyWithImpl(
       DeviceFailureState _value, $Res Function(DeviceFailureState) _then)
       : super(_value, (v) => _then(v as DeviceFailureState));
 
@@ -919,8 +921,8 @@ class _$DeviceFailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
-class _$DeviceFailure implements DeviceFailureState {
-  const _$DeviceFailure(this.failure) : assert(failure != null);
+class _$DeviceFailureState implements DeviceFailureState {
+  const _$DeviceFailureState(this.failure) : assert(failure != null);
 
   @override
   final CommandFailure failure;
@@ -944,8 +946,8 @@ class _$DeviceFailure implements DeviceFailureState {
 
   @JsonKey(ignore: true)
   @override
-  $DeviceFailureCopyWith<DeviceFailureState> get copyWith =>
-      _$DeviceFailureCopyWithImpl<DeviceFailureState>(this, _$identity);
+  $DeviceFailureStateCopyWith<DeviceFailureState> get copyWith =>
+      _$DeviceFailureStateCopyWithImpl<DeviceFailureState>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1011,9 +1013,10 @@ class _$DeviceFailure implements DeviceFailureState {
 }
 
 abstract class DeviceFailureState implements SetupDeviceState {
-  const factory DeviceFailureState(CommandFailure failure) = _$DeviceFailure;
+  const factory DeviceFailureState(CommandFailure failure) =
+      _$DeviceFailureState;
 
   CommandFailure get failure;
   @JsonKey(ignore: true)
-  $DeviceFailureCopyWith<DeviceFailureState> get copyWith;
+  $DeviceFailureStateCopyWith<DeviceFailureState> get copyWith;
 }

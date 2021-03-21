@@ -61,10 +61,8 @@ class RouteGenerator {
               /// Start the Find Bloc immediately and raise FindStarted event
               builder: (_) => BlocProvider<FindDeviceBloc>(
                   lazy: false,
-                  create: (context) => FindDeviceBloc()
-                    // connectDeviceBloc: GetIt.I<ConnectDeviceBloc>())
-                    // BlocProvider.of<ConnectDeviceBloc>(context))
-                    ..add(const FindStartedEvent()),
+                  create: (context) =>
+                      FindDeviceBloc()..add(const FindStartedEvent()),
                   child: const FindDevicesScreen()));
         }
         return _errorRoute(settings.name);

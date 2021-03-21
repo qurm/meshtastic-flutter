@@ -30,7 +30,7 @@ class FindDevicesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
-    final _findDeviceBloc = BlocProvider.of<FindDeviceBloc>(context);
+    // final _findDeviceBloc = BlocProvider.of<FindDeviceBloc>(context);
     return Scaffold(
       drawer: AppDrawer(),
       appBar: AppBar(
@@ -92,7 +92,8 @@ class FindDevicesScreen extends StatelessWidget {
 
                 Text('List of Scanned devices',
                     style: Theme.of(context).textTheme.subtitle2),
-                //includes a StreamBuilder, independent of bloc State, but Stream must be created.
+                // includes StreamBuilder, independent of bloc State
+                // Stream created in FindDeviceBloc initialise.
                 AllDevicesTiles(
                   connectDeviceBloc: _connectDeviceBloc,
                   devices: BlocProvider.of<FindDeviceBloc>(context).allDevices,
@@ -260,8 +261,10 @@ class _ConnectedDevicesRadioTilesState
                           /// list connected devices with OPEN buttons
                           if (snapshot.data == BLEDeviceState.connected) {
                             return UseDeviceButton(d: d);
+                          } else {
+                            return const NoDeviceButton();
                           }
-                          return Text(snapshot.data.toString());
+                          // return Text(snapshot.data.toString());
                         },
                       ),
                     ))
@@ -290,5 +293,13 @@ class UseDeviceButton extends StatelessWidget {
                 arguments: MeshRouteArguments(device: d
                     // deviceConnect,
                     )));
+  }
+}
+
+class NoDeviceButton extends StatelessWidget {
+  const NoDeviceButton({Key key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return TextButton(child: const Text('N/A'), onPressed: () => null);
   }
 }

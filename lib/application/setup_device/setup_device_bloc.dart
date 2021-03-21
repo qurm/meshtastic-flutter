@@ -17,7 +17,8 @@ part 'setup_device_bloc.freezed.dart';
 part 'setup_device_event.dart';
 part 'setup_device_state.dart';
 
-/// Setup device bloc does the initialisation of the mesh device
+/// Setup device bloc initialises & sets preferences/config of the mesh device.S
+///
 /// and sends any commands that are requested.
 /// Used by mesh_command and "normal" startup
 /// Uses [ConnectDeviceBloc] to listen to the selected device,
@@ -25,7 +26,6 @@ part 'setup_device_state.dart';
 ///
 /// AF 11/01/2021 Now is intitialised in the [RouteGenerator]
 /// This may not need a bloc, just a cubit
-
 @injectable
 class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
   // SetupDeviceBloc({this.connectDeviceBloc}) : super(DeviceInitial()) {
@@ -56,7 +56,7 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
           add(DeviceEventEvent(event));
         });
 
-        _connectDeviceSubscription = connectDeviceBloc.listen((state) {
+        _connectDeviceSubscription = connectDeviceBloc.stream.listen((state) {
           //call back for connect changes
           //TEMP
           if (state is ConnectedState) {

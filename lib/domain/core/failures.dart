@@ -1,3 +1,4 @@
+// @dart=2.9
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'failures.freezed.dart';

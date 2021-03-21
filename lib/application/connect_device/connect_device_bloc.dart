@@ -21,6 +21,8 @@ part 'connect_device_state.dart';
 
 // run this at terminal after changes to generate freezed code:
 // flutter pub run build_runner watch --delete-conflicting-outputs
+// also try:
+// flutter pub get && flutter pub run build_runner build --delete-conflicting-outputs
 
 /// ConnectDevice Bloc
 /// Purpose of this bloc is to manage BLE connection to the selected device

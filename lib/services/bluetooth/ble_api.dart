@@ -114,8 +114,11 @@ class BLEDevice2 {
 
   /// Request to change the MTU Size
   /// Todo handle error - or setup as default for Meshtastic, part of initialist
+  /// https://github.com/pauldemarco/flutter_blue/pull/579
+  /// add this to flutter blue if needed
+  /// https://github.com/pauldemarco/flutter_blue/pull/579/commits/cdaa404fad61d0d9ef91b76dbda2cc900bb24480
   Future<void> requestMtu(int desiredMtu) async {
-    return _device.requestMtu(desiredMtu);
+    return await _device.requestMtu(desiredMtu);
   }
 
   /// Returns a Stream of List of Bluetooth GATT [services] offered by the remote device
@@ -380,7 +383,8 @@ class BlueAPIClient {
   // enum BluetoothDeviceState { disconnected, connecting, connected, disconnecting }
   // final Stream<BluetoothState> _state;
 
-  /// Start BLE scan. Follow this by getting ScanResults Stream
+  /// Start BLE scan. Follow this by getting ScanResults Stream.
+  ///
   /// note, can supply   List<Guid> [withServices] = const [],
   /// Meshtastic device serviceUuids = [6ba1b218-15a8-461f-9fa8-5dcae273eafd]
   Future<void> startScan({int timeoutms = 4000, String serviceUuid}) async {
@@ -392,6 +396,7 @@ class BlueAPIClient {
       print(e); //handle malformed UUID string; raise Exception
       guid = [];
     }
+    //TODO seems to start scan anyway?
     if (await flutterBlue.isOn == false || _scanning) {}
     try {
       await flutterBlue
@@ -414,20 +419,25 @@ class BlueAPIClient {
     }
   }
 
-  /// Process Scan results, return events to Repo in stream
-  /// Casts to type ScannedDevice for Repo usage
+  /// Process Scan results, return results to Repo in stream,
+  ///
+  /// Casts list to type ScannedDevice for Repo usage.
   Stream<List<ScannedDevice>> get scanResults async* {
     Stream<List<ScanResult>> _scanList;
-    //todo change the log, error handling
-    _scanList = flutterBlue.scanResults.handleError((e) => print(e));
-    await for (var event in _scanList) {
-      appLogger.d("get scanResults ${event.length} devices");
-      yield event.map((e) => ScannedDevice.fromScanResult(e)).toList();
+    //_scanList should be error free after handling
+    _scanList = flutterBlue.scanResults
+        .handleError((e) => appLogger.e("get scanResults stream error ${e}"));
+    await for (var results in _scanList) {
+      appLogger.d("get scanResults ${results.length} devices");
+      yield results
+          .map((result) => ScannedDevice.fromScanResult(result))
+          .toList();
     }
   }
 
-  /// Process Scan results, returns any result matching id
-  /// May return an empty ScanResult if no match
+  /// Process Scan results, returns any result matching id.
+  ///
+  /// May return an empty ScanResult if no match.
   /// called from repo scanConnect
   /// null-safe Future<ScanResult>?
   Future<ScanResult> scanResultDevice(String id) async {

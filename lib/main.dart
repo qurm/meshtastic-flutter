@@ -44,7 +44,7 @@ void main() {
 }
 
 class BLEApp extends StatelessWidget {
-  BLEApp({Key key, @required this.router}) : super(key: key);
+  BLEApp({Key /*?*/ key, /*required*/ @required this.router}) : super(key: key);
   final RouteGenerator router;
   final sl = GetIt.instance; //sl = service locator
   @override

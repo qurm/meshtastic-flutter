@@ -112,9 +112,10 @@ Connected devices
 - shows a long list after time on - filter/simplify to Mesh only
 
 
-logger_flutter setup
-enable log fom app menu DONE
-logger - sinlge line with icon
+logger_flutter setup 
+- TEMP disabled with Flutter 2.0 pending null-safe version
+- enable log fom app menu DONE
+- logger - sinlge line with icon
 
 https://medium.com/flutter-community/a-guide-to-setting-up-better-logging-in-flutter-3db8bab2000e
 Logging - developer uses appLogger
@@ -169,6 +170,38 @@ Mesh API
                 "paramDefault": "3",
                 "paramType": "int"
             }
+
+
+## Null Safety migration 
+
+dart pub outdated --mode=null-safety
+Resolving...
+Showing dependencies that are currently not opted in to null-safety.
+[✗] indicates versions without null safety support.
+[✓] indicates versions opting in to null safety.   
+
+Computing null safety support...
+Package Name        Current    Upgradable  Resolvable            Latest
+
+direct dependencies:
+dartz               ✗0.9.2     ✗0.9.2      ✓0.10.0-nullsafety.1  ✓0.10.0-nullsafety.1  
+flex_color_scheme   ✗1.4.1     ✗1.4.1      ✓2.0.0                ✓2.0.0
+freezed_annotation  ✗0.12.0    ✗0.12.0     ✓0.14.1               ✓0.14.1
+get_it              ✗5.0.6     ✗5.0.6      ✓6.0.0                ✓6.0.0
+grouped_list        ✗3.7.1     ✗3.7.1      ✓4.0.0-nullsafety.1   ✓4.0.0-nullsafety.1
+injectable          ✗1.1.2     ✗1.1.2      ✓1.2.2                ✓1.2.2
+logger              ✗0.9.4     ✗0.9.4      ✓1.0.0                ✓1.0.0
+shared_preferences  ✗0.5.12+4  ✗0.5.12+4   ✓2.0.5                ✓2.0.5
+wakelock            ✗0.2.1+1   ✗0.2.1+1    ✓0.5.0+2              ✓0.5.0+2
+
+dev_dependencies:
+build_runner        ✗1.11.5    ✗1.11.5     ✗1.11.5               ✗1.12.2
+freezed             ✗0.12.7    ✗0.12.7     ✓0.14.1               ✓0.14.1
+very_good_analysis  ✗1.0.4     ✗1.0.4      ✓2.0.0                ✓2.0.0
+
+11  dependencies are constrained to versions that are older than a resolvable version.
+To update these dependencies, edit pubspec.yaml, or run `dart pub upgrade --null-safety`.
+
 
 ## resources
 
