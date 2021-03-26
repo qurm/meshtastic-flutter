@@ -774,7 +774,7 @@ class MeshInterface {
     //AF 10/1/2021 - moved to class property, as used for ChannelURL
     // AF 17/03/21 updated from Python v1.20
     fromRadio = new FromRadio.fromBuffer(fromRadioBytes);
-    userLogger.d('fromRadio Received: ${fromRadio.toDebugString()}');
+    userLogger.d('_handleFromRadio Received: ${fromRadio.toDebugString()}');
     if (fromRadio.hasMyInfo()) {
       myInfo = fromRadio.myInfo;
       localNode.nodeNum = myInfo.myNodeNum;
@@ -847,7 +847,7 @@ class MeshInterface {
   /// Arguments:
   ///     position {Position dictionary} -- object ot fix up
   void _fixupPosition(Position position) {
-    appLogger.d("_fixupPosition called");
+    appLogger.d("_fixupPosition called lat ${position.latitudeI}");
     //TODO appears to be adding new properties to object - need a new Dart Position class
     //if (position.hasLatitudeI()) position.latitude = position.latitudeI * 1e-7;
     // if (position.hasLongitudeI())
@@ -910,8 +910,9 @@ class MeshInterface {
     int fromId = meshPacket.hasFrom() ? meshPacket.from : 0;
     int toId = meshPacket.hasTo() ? meshPacket.to : 0;
 
-    appLogger.w(
-        'Device returned a packet we sent, ignoring: ${meshPacket.toString()}');
+    // appLogger.w(
+    //     'Device returned a packet we sent, ignoring: ${meshPacket.toString()}');
+    appLogger.d('_handlePacketFromRadio Received: ${meshPacket.toString()}');
 
     //add fromId and toId fields based on the node ID
 
@@ -994,7 +995,8 @@ class MeshInterface {
 
     if (meshPacket.decoded.portnum == PortNum.POSITION_APP) {
       topic = 'meshtastic.receive.position';
-      _fixupPosition(Position.fromBuffer(meshPacket.decoded.payload));
+      //TODO - not required - can remove when all working 21/03/2021
+      // _fixupPosition(Position.fromBuffer(meshPacket.decoded.payload));
       // update node DB as needed, with new position
       _getOrCreateByNum(meshPacket.from).position =
           Position.fromBuffer(meshPacket.decoded.payload);
@@ -1029,7 +1031,7 @@ class BLEInterface extends MeshInterface {
   }
 
   /// Startup the interface and write/read from radio GATT characteristics
-  /// has async code, so not called in the constructor above
+  /// has async code, so not called in the constructor, but from meshServiceStart
   Future<bool> init() async {
     bool _intialised = false;
     userLogger.i('BLEInterface init() device: ${device.id}');
@@ -1048,11 +1050,11 @@ class BLEInterface extends MeshInterface {
     // await Future.delayed(Duration(seconds: 1));
     // can check some BLE status here?
 
-    //AF 9/1/20 trying await - yes this fixes it.  Ensure stable testing.
+    //AF 9/1/2021 trying await - yes this fixes it.  Ensure stable testing.
     if (_intialised) {
       await _readFromRadio();
-      userLogger.v(
-          'BLEInterface init() Prefs: ${localNode.radioConfig.preferences.toString()}');
+      // userLogger.v(
+      //     'BLEInterface init() Prefs: ${localNode.radioConfig.preferences.toString()}');
 
       ///AF 18/01/2021, setup stream on Notify for fromNum BLE characterisitic
       ///  TODO, add onerror, onclose functions

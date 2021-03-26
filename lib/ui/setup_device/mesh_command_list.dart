@@ -183,7 +183,7 @@ class MeshCommandListScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(device.name),
             actions: <Widget>[
-              FlatButton(
+              TextButton(
                   onPressed: () => device.disconnect(),
                   child: Text(
                     'DISCONNECT?',

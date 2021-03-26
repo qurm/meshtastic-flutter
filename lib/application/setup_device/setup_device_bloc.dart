@@ -29,7 +29,7 @@ part 'setup_device_state.dart';
 @injectable
 class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
   // SetupDeviceBloc({this.connectDeviceBloc}) : super(DeviceInitial()) {
-  SetupDeviceBloc() : super(const DeviceInitialState()) {}
+  SetupDeviceBloc() : super(const DeviceInitialState());
 
   //cannot run the DeviceStarted event on bloc create, as _device not initialised.:
   // add(DeviceStarted());
@@ -69,7 +69,7 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
 
         yield DeviceSuccessState('Connected to ${_device.id}');
       } catch (e) {
-        yield const DeviceFailureState(const CommandFailure.unexpected());
+        yield const DeviceFailureState(CommandFailure.unexpected());
         deviceRepoLogger.d('DeviceStarted event  unexpected falure: $e ');
       }
     }

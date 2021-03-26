@@ -2,8 +2,22 @@
 ## To Do 
 
 
+Excpetion in meshAPS
+
+    if (_intialised) {
+      await _readFromRadio();
+      userLogger.v(
+          'BLEInterface init() Prefs: ${localNode.radioConfig.preferences.toString()}');
+
+NoSuchMethodError (NoSuchMethodError: The getter 'preferences' was called on null.
+Receiver: null
+Tried calling: preferences)
+
+localNode has no RadioConfig - has not intialised.
+
 Porting Python
-Should the stack sendData, sendPacket be all Async?  Or where to break it?
+DONE  - changed stack to async.  To test,
+Should the stack sendData, sendPacket be all Async?  Or where to break it? 
 
 https://stackoverflow.com/questions/40660933/why-copyfrom-is-used-during-the-creation-of-the-constant-tensor
 Python:     toRadio.packet.CopyFrom(meshPacket)

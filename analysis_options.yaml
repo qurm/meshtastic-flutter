@@ -5,15 +5,19 @@ include: package:very_good_analysis/analysis_options.yaml
 analyzer:
   exclude: 
     - build/**
-    - lib/infrastructure/proto/**
+    - lib/services/proto/**
     - lib/**/*.freezed.dart
-    
+  errors:
+    - camel_case_types
+    - await_only_futures
+    - unawaited_futures
+
   strong-mode:
     implicit-casts: false
 
 linter:
   rules:
-    - camel_case_types
-    - await_only_futures
-    - unawaited_futures
-    # - lines_longer_than_80_chars: false
+    camel_case_types: true
+    await_only_futures: true
+    unawaited_futures: true
+    lines_longer_than_80_chars: false

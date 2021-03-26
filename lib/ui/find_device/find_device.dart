@@ -38,7 +38,7 @@ class FindDevicesScreen extends StatelessWidget {
       ),
       body: BlocListener<FindDeviceBloc, FindDeviceState>(
         listener: (context, state) {
-          Scaffold.of(context).showSnackBar(SnackBar(
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
             backgroundColor: Colors.green,
             content: Text('${state.toString()}'),
           ));

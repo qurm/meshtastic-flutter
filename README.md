@@ -1,6 +1,6 @@
 # meshtastic_app
 
-A new Flutter project.
+A application to configure and manage Meshtastic devices over BLE.
 
 ## Getting Started
 

@@ -11,7 +11,8 @@ import 'mesh_api.dart';
 /// A model of a (local or remote) node in the mesh
 /// Includes methods for radioConfig and channels
 /// Node has iface which is BLEInterface, extends MeshInterface
-/// Node is instantiated by MeshInterface
+/// Node is instantiated by MeshInterface, which instantiated as BLEInterface from
+///  repo meshServiceStart
 class MeshNode {
   MeshNode(this.iface, this.nodeNum);
 
