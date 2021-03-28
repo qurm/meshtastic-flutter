@@ -110,7 +110,8 @@ class ScanResultTile extends StatelessWidget {
     List<String> res = [];
     data.forEach((v) {
       if (v.toLowerCase() == meshServiceStr) {
-        res.add('Meshtastic (${v.toUpperCase()})');
+        // res.add('Meshtastic (${v.toUpperCase()})');  //shows name and UUID
+        res.add('Meshtastic');
       } else {
         res.add('${v.toUpperCase()}');
       }
@@ -123,7 +124,7 @@ class ScanResultTile extends StatelessWidget {
     return ExpansionTile(
       title: _buildTitle(context),
       leading: Text(result.rssi.toString()),
-      initiallyExpanded: true, //toggle this for expand/collapse layout
+      initiallyExpanded: false, //toggle this for expand/collapse layout
       trailing: OutlinedButton(
         child: (result.advertisementData.connectable)
             ? const Text('CONNECT')

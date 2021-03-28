@@ -49,13 +49,7 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
     if (event is DeviceStartedEvent) {
       yield const DeviceInProgressState();
       try {
-        // creates the BLEinterface
-        _device = event.device;
-        _meshInterface = await _connectFacade.meshServiceStart(_device);
-        _meshSubscription = _meshInterface.meshEvents.listen((event) {
-          add(DeviceEventEvent(event));
-        });
-
+        /// do this first so can check is connected
         _connectDeviceSubscription = connectDeviceBloc.stream.listen((state) {
           //call back for connect changes
           //TEMP
@@ -65,12 +59,20 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
           if (state is DeviceOfflineState) {
             _meshInterface.disconnected();
           }
+          appLogger.d('connectDeviceBloc state: ${state.toString()} ');
+        });
+
+        // creates the BLEinterface
+        _device = event.device;
+        _meshInterface = await _connectFacade.meshServiceStart(_device);
+        _meshSubscription = _meshInterface.meshEvents.listen((event) {
+          add(DeviceEventEvent(event));
         });
 
         yield DeviceSuccessState('Connected to ${_device.id}');
       } catch (e) {
         yield const DeviceFailureState(CommandFailure.unexpected());
-        deviceRepoLogger.d('DeviceStarted event  unexpected falure: $e ');
+        appLogger.d('DeviceStarted event  unexpected falure: $e ');
       }
     }
 

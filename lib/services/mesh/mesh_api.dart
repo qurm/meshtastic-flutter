@@ -6,8 +6,6 @@ import 'dart:typed_data';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
-// import 'package:get_it/get_it.dart';
-// import 'package:logger/logger.dart';
 import 'package:meshtastic_app/services/mesh/mesh_node.dart';
 
 // import 'package:recase/recase.dart';
@@ -115,13 +113,16 @@ enum MeshtasticReceive { data, text, position, user, node, established, lost }
 ///     debugOut - unused?
 class MeshInterface {
   MeshInterface(this.device, [this.debugOut, this.noProto]) {
-    appLogger.i('MeshInterface constructor body: ');
+    appLogger.i('MeshInterface constructor: ${device.id} ${device.hashCode}');
     localNode = MeshNode(this, -1);
   }
-// Properties:
+
+  /// current local BLE device
   MeshDevice device;
   bool isConnected = false;
   bool noProto;
+
+  /// current local logical Mesh node
   MeshNode localNode; //how to pass self,
 
   /// Full information about a node on the mesh.
@@ -159,7 +160,7 @@ class MeshInterface {
 
   StreamController<MeshtasticReceive> controller;
 
-  /// Start device packets flowing - not part of constructor as is async
+  /// Start device packets flowing - not part of constructor as is async.
   /// Clears internal structures, sends , then
   /// AF 10/1/2021 change to Future async, as _sendToRadio is async write
   Future<void> _startConfig() async {
@@ -171,12 +172,13 @@ class MeshInterface {
 
     final startConfig = ToRadio();
     startConfig.wantConfigId = MY_CONFIG_ID; // we don't use this value
-    await _sendToRadio(startConfig); //uses super BLEInterface
+    await _sendToRadio(
+        startConfig); //uses BLEInterface ovverrides MeshInterface.
     controller = StreamController<MeshtasticReceive>.broadcast(
         onListen: () => {}, onCancel: () => {});
   }
 
-  /// Broadcast Stream of events, like [MeshtasticReceive] { data, text, position, user, node }
+  /// Broadcast Stream of events, like [MeshtasticReceive] { data, text, position, user, node }.
   /// consumed by SetupDeviceBloc, and other UI blocs
   Stream<MeshtasticReceive> get meshEvents {
     return controller.stream;
@@ -254,7 +256,8 @@ class MeshInterface {
     // }
   }
 
-  /// Send a position packet to some other node (normally a broadcast)
+  /// Send a position packet to some other node (normally a broadcast).
+  ///
   /// Also, the device software will notice this packet and use it to
   /// automatically set its notion of the local position.
   /// If timeSec is not specified (recommended), we will use the local machine time.
@@ -328,7 +331,7 @@ class MeshInterface {
     // FIXME add support for non broadcast addresses
 
     //Check can convert to int
-    if (destinationId != null) {
+    if (destinationId == null) {
       throw Exception('destinationId must not be None');
     } else if (destinationId is int) {
       nodeNum = destinationId;
@@ -757,13 +760,15 @@ class MeshInterface {
         'Sending toradio called in MeshInterface - no BLEInterface? : ${toRadio}');
   }
 
-  /// Done with initial config messages, now send regular MeshPackets to ask for settings and channels
+  /// Done with initial config messages, now send regular MeshPackets to ask for settings and channels.
   /// AF 17/03/21 updated from Python v1.20
+  /// called from _handleFromRadio when configCompleteId received
   void _handleConfigComplete() {
+    appLogger.w('MeshInterface  _handleConfigComplete');
     localNode.requestConfig();
   }
 
-  /// Handle a packet that arrived from the radio
+  /// Handle a packet that arrived from the radio.
   /// Called by subclasses.
   /// Packets from the radio to the phone will appear on the FromRadio char.
   /// It will support READ and NOTIFY.
@@ -826,7 +831,7 @@ class MeshInterface {
     else if (fromRadio.configCompleteId == MY_CONFIG_ID)
       // AF 17/03/21 removed as in Python v1.20
       // _connected();
-      _handleConfigComplete();
+      _handleConfigComplete(); //initialise Node RadioConfig etc.
     else if (fromRadio.hasPacket())
       _handlePacketFromRadio(fromRadio.packet);
     else if (fromRadio.rebooted) {
@@ -1027,7 +1032,8 @@ class MeshInterface {
 /// [device] is connected MeshDevice
 class BLEInterface extends MeshInterface {
   BLEInterface(MeshDevice device) : super(device) {
-    appLogger.d('BLEInterface constructor body: ${device.hashCode}');
+    appLogger
+        .i('BLEInterface constructor body: ${device.id} ${device.hashCode}');
   }
 
   /// Startup the interface and write/read from radio GATT characteristics
@@ -1040,11 +1046,12 @@ class BLEInterface extends MeshInterface {
         onTimeout: () {
       throw Exception('BLEInterface requestMtu failed to complete');
       device.disconnect(); // disconnect after timeout.  Todo trap any error
+      return false;
     });
     // appLogger.d('BLEInterface init() 2: ${_intialised}');
     _intialised = await device.initialiseMeshService();
     // appLogger.d('BLEInterface init() 3: ${_intialised}');
-    if (_intialised) await super._startConfig();
+    if (_intialised) await super._startConfig(); // initialise MeshInterface
     // AF TODO - needs time to complete, async does not help
     appLogger.d('BLEInterface init() 4: ${_intialised}');
     // await Future.delayed(Duration(seconds: 1));

@@ -58,24 +58,26 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
 
   // List<MeshDevice> connectedDevices = [];
   String _lastDevice;
-  bool findDeviceAutoReconnect = false;
+
+  /// settings - will attempt reconnect to last known device.
+  bool findDeviceAutoReconnect = true;
   final _appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
   Stream<List<ScannedDevice>> _allDevices;
 
   Future<void> _initialiseBloc() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     _lastDevice = prefs.getString('lastGoodDevice');
     // try to connect to this device
   }
 
   Future<void> _saveDevice(String id) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.setString('lastGoodDevice', id);
   }
 
   //these were State properties, but moved to bloc property, simplifies.
 
-  /// pass  throug to the repo
+  /// pass through to the repo
   Future<List<MeshDevice>> get connectedDevices async {
     return await _connectRepo.connectedDevices3;
   }
@@ -88,13 +90,14 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
   Stream<FindDeviceState> mapEventToState(
     FindDeviceEvent event,
   ) async* {
-    /// on Start, try to connect to lastGoodDevice
+    /// on Startup, first connections.
     if (event is FindStartedEvent) {
       final _prefs = await SharedPreferences.getInstance();
       _lastDevice = _prefs.getString('lastGoodDevice');
       yield const FindRequestedState();
       try {
         if (findDeviceAutoReconnect && _lastDevice.isNotEmpty) {
+          // try to connect to lastGoodDevice
           _appLogger
               .i('FindStarted: try connecting to last device $_lastDevice');
           // TODO check bluetooth is running -and repo is initial.  This is first call to BLE

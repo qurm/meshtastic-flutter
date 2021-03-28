@@ -5,9 +5,9 @@ import 'package:flutter_blue/flutter_blue.dart';
 
 import '../bluetooth/bluetooth.dart';
 
-/// Class for addtional specific methods for a Mesh device
-/// extends the generic BLE device class
-/// has BLE type methods, whereas MeshNode has Meshtastic methods
+/// Class for addtional specific methods for a Mesh device.
+/// Extends the generic BLEDevice class
+/// has Meshtastic BLE/GATT  methods, whereas MeshNode has Meshtastic methods
 class MeshDevice extends BLEDevice2 {
   // BLEDevice2 device;
   BluetoothDevice device;
@@ -32,8 +32,8 @@ class MeshDevice extends BLEDevice2 {
     // initialiseMeshService();  //see below moved due to async
   }
 
-  /// Discover and setup Mesh Characteristics
-  /// some async calls, so cannot be in class constructor
+  /// Discover and setup Meshtastic GATT Characteristics.
+  /// has async calls, so cannot be in class constructor
   /// called from mesh BLEInterface init in mesh_api
   Future<bool> initialiseMeshService() async {
     //List<BLEService> _serviceList;

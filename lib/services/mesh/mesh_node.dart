@@ -5,16 +5,35 @@ import '../bluetooth/bluetooth.dart';
 import '../proto/proto.dart';
 import 'mesh_api.dart';
 
-/// Class for addtional specific methods for a Mesh Node
+///  Given an array of PSK bytes, decode them into a human readable (but privacy protecting) string.
+String pskToString(List<int> psk) {
+  if (psk.isEmpty) {
+    return 'unencrypted';
+  } else if (psk.length == 1) {
+    final b = psk[0];
+    if (b == 0)
+      return 'unencrypted';
+    else if (b == 1)
+      return 'default';
+    else
+      return 'simple${b - 1}';
+  } else
+    return 'secret';
+}
+
+/// Class for addtional specific methods for a Mesh Node.
 ///
-/// MeshNode has Meshtastic methods, whereas MeshDevice has BLE type methods,
+/// MeshNode has Meshtastic methods, whereas MeshDevice has BLE/GATT methods.
 /// A model of a (local or remote) node in the mesh
 /// Includes methods for radioConfig and channels
 /// Node has iface which is BLEInterface, extends MeshInterface
 /// Node is instantiated by MeshInterface, which instantiated as BLEInterface from
 ///  repo meshServiceStart
 class MeshNode {
-  MeshNode(this.iface, this.nodeNum);
+  MeshNode(this.iface, this.nodeNum) {
+    appLogger
+        .i('MeshNode constructor: ${iface.device.id} ${iface.device.hashCode}');
+  }
 
   /// interface for Node, normally the Mesh, BLEInterface
   MeshInterface iface;
@@ -28,13 +47,7 @@ class MeshNode {
 
   /// actual channels available on Node
   List<Channel> channels = [];
-  List<Channel> partialChannels;
-  // def __init__(self, iface, nodeNum):
-  //     """Constructor"""
-  //     self.iface = iface
-  //     self.nodeNum = nodeNum
-  //     self.radioConfig = None
-  //     self.channels = None
+  List<Channel> partialChannels = [];
 
   // def showInfo(self):
   //     // print(self.radioConfig)
@@ -45,16 +58,22 @@ class MeshNode {
   //             print(f"  {channel_pb2.Channel.Role.Name(c.role)} {cStr}")
   //     print(f"\nChannel URL {self.channelURL}")
 
-  ///Show human readable description of our node
+  /// Show/log human readable description of our node.
   void showInfo() {
-    // print(self.radioConfig)
-    // print("Channels:")
+    userLogger
+        .i('showInfo radioConfig: ${radioConfig.preferences.toProto3Json()}');
+    showChannels();
+  }
+
+  /// Show/log human readable description of our channels
+  void showChannels() {
+    userLogger.i('showChannels Channels:');
     for (final c in channels) {
       if (c.role != Channel_Role.DISABLED) {
-        var cStr = c.settings.toProto3Json(); //.replace("\n", "")
+        var cStr = c.settings.toProto3Json();
+        userLogger
+            .i(' ${c.role.name} psk=${pskToString(c.settings.psk)} $cStr');
       }
-      // print(f"  {channel_pb2.Channel.Role.Name(c.role)} {cStr}")
-      // print(f"\nChannel URL {self.channelURL}")
     }
   }
 
@@ -67,12 +86,14 @@ class MeshNode {
   //     self.partialChannels = []  # We keep our channels in a temp array until finished
   //     self._requestSettings()
 
-  ///Send regular MeshPackets to ask for settings and channels
+  /// Initialise Node radioconfig and channels from the mesh.
+  ///
+  /// Uses regular MeshPackets to ask for settings and channels.
+  /// Called on Interface handleConfigComplete when configCompleteId received.
   void requestConfig() {
-    radioConfig = null;
-    channels = null;
-    // We keep our channels in a temp array until finished
-    partialChannels = [];
+    radioConfig = RadioConfig(); //empty, avoid null
+    channels = []; //empty list, avoid null
+    partialChannels = []; // keep our channels in a temp array until finished
     _requestSettings();
   }
 
@@ -81,6 +102,7 @@ class MeshNode {
       """Block until radio config is received. Returns True if config has been received.
       return waitForSet(self, attrs=('radioConfig', 'channels'), maxsecs=maxsecs)
  */
+
   /// waitForConfig - not required in flutter (ported from Python)
   /// (self, sleep=0.1, maxsecs=20, attrs=('myInfo', 'nodes', 'radioConfig'))
   /// Block until radioConfig is received. Returns True if config has been received.
@@ -107,20 +129,17 @@ def writeConfig(self):
       logging.debug("Wrote config") 
 */
 
+  /// Write the current (edited) [radioConfig] to the device.
+  ///
   /// AF (ported from Python) 14/03/21 now in Node
-  /// Write the current (edited) [radioConfig] to the device
   Future<void> writeConfig() async {
-    userLogger.i('MeshInterface writeConfig() ');
+    userLogger.i('Node.writeConfig called ');
     if (!radioConfig.isInitialized()) {
-      throw Exception('No RadioConfig has been read');
+      throw Exception('Node.writeConfig RadioConfig has been read');
     }
-    // final t = ToRadio();
-    final t = AdminMessage();
-    //p.set_radio.CopyFrom(self.radioConfig)
-    t.setRadio = radioConfig;
-    // await _sendToRadio(t);
-    await _sendAdmin(p: t);
-    //TODO should be a chain of Async calls?
+    final p = AdminMessage();
+    p.setRadio = radioConfig;
+    await _sendAdmin(p: p);
   }
 /* 
   def writeChannel(self, channelIndex):
@@ -133,12 +152,12 @@ def writeConfig(self):
       logging.debug("Wrote channel {channelIndex}")
 */
 
-  ///Write the current (edited) channel to the device
-  void writeChannel(int channelIndex) {
+  /// Write the current (edited) channel to the device.
+  void writeChannel(int channelIndex, {int adminIndex = 0}) {
     final p = AdminMessage();
     p.setChannel = channels[channelIndex];
-    _sendAdmin(p: p);
-    // logging.debug("Wrote channel {channelIndex}")
+    _sendAdmin(p: p, adminIndex: adminIndex);
+    appLogger.i('MeshNode.writeChannel Wrote channel: ${channelIndex}');
   }
 
 /* 
@@ -189,10 +208,10 @@ def writeConfig(self):
   ///Return the channel number of the admin channel, or 0 if no reserved channel
   int _getAdminChannelIndex() {
     final c = getChannelByName('admin');
-    if (c != null)
+    if (c.index is int)
       return c.index;
     else
-      return 0;
+      return 0; //initially single Channel  name is '', index 0, DISABLED
   }
 
   /* def setOwner(self, long_name, short_name=None):
@@ -366,32 +385,40 @@ def writeConfig(self):
       p.get_radio_request = True
  */
 
-  /// Done with initial config messages, now send regular MeshPackets to ask for settings
-  void _requestSettings() {
+  /// Done with initial config messages, now send regular MeshPackets to ask for settings.
+  ///
+  void _requestSettings() async {
     final p = AdminMessage();
     p.getRadioRequest = true;
-  }
 
-  //     def onResponse(p):
-  //         """A closure to handle the response packet"""
-  //         self.radioConfig = p["decoded"]["admin"]["raw"].get_radio_response
-  //         logging.debug("Received radio config, now fetching channels...")
-  //         self._requestChannel(0) # now start fetching channels
+    //     def onResponse(p):
+    //         """A closure to handle the response packet"""
+    //         self.radioConfig = p["decoded"]["admin"]["raw"].get_radio_response
+    //         logging.debug("Received radio config, now fetching channels...")
+    //         self._requestChannel(0) # now start fetching channels
 
-  //     return self._sendAdmin(p,
-  //                            wantResponse=True,
-  //                            onResponse=onResponse)
+    // return _sendAdmin(p: p, wantResponse: true, onResponse: onResponse);
 
-  ///A closure/function to handle the response packet
-  /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
-  Future<MeshPacket> onResponse(AdminMessage p) async {
-    // radioConfig = p["decoded"]["admin"]["raw"].get_radio_response;
-    //TODO is this ported OK?
-    radioConfig = p.getRadioResponse;
-    // logging.debug("Received radio config, now fetching channels...")
-    _requestChannel(0); //now start fetching channels
-
-    return await _sendAdmin(p: p, wantResponse: true, onResponse: onResponse);
+    ///A closure/function to handle the response packet
+    /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
+    // Future<MeshPacket> onResponse(AdminMessage p) async {
+    //   // radioConfig = p["decoded"]["admin"]["raw"].get_radio_response;
+    //   //TODO is this ported OK?
+    //   radioConfig = p.getRadioResponse;
+    //   // logging.debug("Received radio config, now fetching channels...")
+    //   _requestChannel(0); //now start fetching channels
+    // }
+    final meshPacket = await _sendAdmin(
+      p: p,
+      wantResponse: true,
+    );
+    if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
+      radioConfig = RadioConfig.fromBuffer(meshPacket.decoded.payload);
+      appLogger
+          .i('_requestSettings Received radio config, now fetching channels..');
+      _requestChannel(0); //now start fetching channels
+    } else
+      appLogger.wtf('_requestSettings Received unexpected!!');
   }
 /* 
   def _requestChannel(self, channelNum: int):
@@ -440,14 +467,14 @@ def writeConfig(self):
  */
 
   /// Done with initial config messages, now send regular MeshPackets to ask for settings
-  void _requestChannel(int channelNum) {
+  void _requestChannel(int channelNum) async {
     final p = AdminMessage();
     p.getChannelRequest = channelNum + 1;
-    appLogger.d('Requesting channel ${channelNum}');
+    appLogger.d('_requestChannel Requesting channel ${channelNum}');
 
-    ///A closure to handle the response packet
+    /// A closure to handle the response packet - we use async await instead.
     /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
-    Future<MeshPacket> onResponse(AdminMessage p) async {
+/*     Future<MeshPacket> onResponse(AdminMessage p) async {
       // c = p["decoded"]["admin"]["raw"].get_channel_response
       final c = p.getChannelResponse;
       partialChannels.add(c);
@@ -479,9 +506,45 @@ def writeConfig(self):
       } else {
         _requestChannel(index + 1);
       }
+    } */
 
-      return await _sendAdmin(p: p, wantResponse: true, onResponse: onResponse);
-    }
+    final meshPacket = await _sendAdmin(
+      p: p,
+      wantResponse: true,
+    );
+    if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
+      final c = Channel.fromBuffer(meshPacket.decoded.payload);
+      partialChannels.add(c);
+      appLogger.d('_requestChannel Received channel ${c.toString()}');
+      int index = c.index;
+
+      // for stress testing, we can always download all channels
+      var fastChannelDownload = true;
+
+      //  Once we see a response that has NO settings, assume we are at the end of channels and stop fetching
+      var quitEarly = (c.role == Channel_Role.DISABLED) && fastChannelDownload;
+
+      if (quitEarly || (index >= iface.myInfo.maxChannels - 1)) {
+        appLogger.d('_requestChannel Finished downloading channels');
+
+        // Fill the rest of array with DISABLED channels
+        index += 1;
+        while (index < iface.myInfo.maxChannels) {
+          var ch = Channel();
+          ch.role = Channel_Role.DISABLED;
+          ch.index = index;
+          partialChannels.add(ch);
+          index += 1;
+        }
+
+        channels = partialChannels;
+        // # FIXME, the following should only be called after we have settings and channels
+        iface.connected(); // Tell everone else we are ready to go
+      } else {
+        _requestChannel(index + 1);
+      }
+    } else
+      appLogger.wtf('_requestChannel Received unexpected packet!!');
   }
 /*   
 def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,
@@ -499,7 +562,10 @@ def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,
   ///Send an admin message to the specified node (or the local node if destNodeNum is zero)
   // AF 20/3/2021 change to Future async, as _sendToRadio is async write
   Future<MeshPacket> _sendAdmin(
-      {AdminMessage p, bool wantResponse = false, Function onResponse}) async {
+      {AdminMessage p,
+      bool wantResponse = false,
+      Function onResponse = null,
+      int adminIndex = 0}) async {
     return await iface.sendData(
         byteData: p.writeToBuffer(),
         destinationId: nodeNum,
@@ -507,6 +573,6 @@ def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,
         wantAck: true,
         wantResponse: wantResponse,
         onResponse: onResponse,
-        channelIndex: iface.localNode._getAdminChannelIndex());
+        channelIndex: adminIndex);
   }
 }

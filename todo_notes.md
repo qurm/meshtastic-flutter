@@ -15,6 +15,13 @@ Tried calling: preferences)
 
 localNode has no RadioConfig - has not intialised.
 
+
+AFTER Firmware upgrade - still connected but get this
+Exception has occurred.
+PlatformException (PlatformException(requestMtu, no instance of BluetoothGatt, have you connected first?, java.lang.Exception: no instance of BluetoothGatt, have you connected first?
+ Worked OK after repair
+ so trap exception and tell user that.
+
 Porting Python
 DONE  - changed stack to async.  To test,
 Should the stack sendData, sendPacket be all Async?  Or where to break it? 

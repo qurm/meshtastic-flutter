@@ -118,7 +118,20 @@ class BLEDevice2 {
   /// add this to flutter blue if needed
   /// https://github.com/pauldemarco/flutter_blue/pull/579/commits/cdaa404fad61d0d9ef91b76dbda2cc900bb24480
   Future<void> requestMtu(int desiredMtu) async {
-    return await _device.requestMtu(desiredMtu);
+    try {
+      /// Exception if try to discover when not connected.  See this for non-Meshtastic devices.
+      return await _device.requestMtu(desiredMtu);
+    } on PlatformException catch (err) {
+      // PlatformException when device is not available
+      appLogger
+          .e('requestMtu: handled PlatformException from ${_device.id} $err');
+      rethrow;
+    } catch (err) {
+      // if (e = )
+      appLogger.e('requestMtu: $err');
+
+      rethrow;
+    }
   }
 
   /// Returns a Stream of List of Bluetooth GATT [services] offered by the remote device
@@ -329,8 +342,10 @@ class BlueAPIClient {
     if (deviceList.isNotEmpty) {
       //https://stackoverflow.com/questions/42467663/async-await-in-list-foreach
       await Future.forEach(deviceList, (BluetoothDevice d) async {
+        appLogger.i('connectedDevices Device reported: ${d.id}');
         if (currentDevices.containsKey(d.id.toString())) {
-          appLogger.i('Device already in currentDevices ${d.id}');
+          appLogger
+              .i('connectedDevices Device already in currentDevices ${d.id}');
         } else {
           // _isMeshDevice = true;
           //platform exception seen with Flutter 2.0 for non-Mesh devices here
@@ -354,7 +369,7 @@ class BlueAPIClient {
           if (_isMeshDevice) {
             currentDevices[d.id.toString()] = MeshDevice(d);
             appLogger.i(
-                'Device added to currentDevices ${d.id} ${currentDevices.toString()}');
+                'connectedDevices Device added to currentDevices ${d.id} ${currentDevices.toString()}');
           }
         }
       });

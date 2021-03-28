@@ -13,7 +13,7 @@ import '../../services/bluetooth/ble_api.dart';
 import '../../services/mesh/mesh.dart';
 import '../../services/bluetooth/ble_common.dart';
 // import 'widgets.dart';
-import '../setup_device/widgets/scan_result.dart';
+import 'widgets/scan_result.dart';
 import '../menu/drawer.dart';
 import '../router/route_generator.dart';
 
@@ -251,7 +251,13 @@ class _ConnectedDevicesRadioTilesState
                                   .withOpacity(0.9)),
                         ],
                       ),
-                      subtitle: Text(d.id.toString()),
+                      subtitle: Text(
+                        d.id.toString(),
+                        style: Theme.of(context)
+                            .textTheme
+                            .caption
+                            .apply(color: Colors.green),
+                      ),
                       onChanged: (String index) =>
                           setState(() => _value = index),
                       secondary: StreamBuilder<BLEDeviceState>(

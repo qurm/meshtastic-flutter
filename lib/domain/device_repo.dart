@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 //AF not sure that this is required/correct in the repo,
 // but using the BluetoothState.on - should avaoid.
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
@@ -25,13 +26,14 @@ import 'value_objects.dart';
 /// return them as Failures.
 ///
 
-Logger deviceRepoLogger = Logger(
-    printer: PrettyPrinter(
-  methodCount: 4, // number of method calls to be displayed
-  errorMethodCount: 8,
-) // number of method calls if stacktrace is pr),
+final deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
-    );
+// Logger deviceRepoLogger = Logger(
+//     printer: PrettyPrinter(
+//   methodCount: 4, // number of method calls to be displayed
+//   errorMethodCount: 8,
+// ) // number of method calls if stacktrace is pr),
+//     );
 
 /// Typical scan for a
 /// ScanResult{device: BluetoothDevice{id: C4:4F:33:6A:B6:17, name: Meshtastic_b615, type: BluetoothDeviceType.le, isDiscoveringServices: false, _services: [], advertisementData:
@@ -138,6 +140,8 @@ class DeviceConnect {
           deviceRepoLogger.d('matches id ${_devices.first.id.toString()}');
           return right(_device);
         }
+      } else {
+        deviceRepoLogger.d('no match for ${id} in BLE connected devices');
       }
       //not connected already, so scan for [id]
       await startScan(2500);
@@ -181,6 +185,7 @@ class DeviceConnect {
     currentDevice = meshd;
     deviceRepoLogger.i('meshServiceStart with device ${meshd.id.toString()}');
     bleInterface = new BLEInterface(currentDevice);
+    //may be first call to BLE/GATT - triggers any Platform exceptions
     await bleInterface.init();
     return bleInterface;
   }

@@ -43,16 +43,14 @@ void main() {
   WidgetsFlutterBinding
       .ensureInitialized(); //required before running plugin code
   final sl = GetIt.instance; //sl = service locator
+  //global logging instance - visible to user, do we need second instance for user?
+  sl.registerSingleton<Logger>(log.appLogger, instanceName: 'appLogger');
+  sl.registerSingleton<Logger>(log.userLogger, instanceName: 'userLogger');
+  Bloc.observer = SimpleBlocObserver(sl.get<Logger>(instanceName: 'appLogger'));
+
   final deviceConnectRepository = DeviceConnect(blueAPIClient: BlueAPIClient());
   sl.registerSingleton<DeviceConnect>(deviceConnectRepository);
   sl.registerSingleton<ConnectDeviceBloc>(ConnectDeviceBloc());
-  //global logging instance - visible to user, do we need second instance for user?
-
-  sl.registerSingleton<Logger>(log.appLogger, instanceName: 'appLogger');
-
-  sl.registerSingleton<Logger>(log.userLogger, instanceName: 'userLogger');
-
-  Bloc.observer = SimpleBlocObserver(sl.get<Logger>(instanceName: 'appLogger'));
 
   Wakelock.enable(); //force screen unlocked, for dev only
 
