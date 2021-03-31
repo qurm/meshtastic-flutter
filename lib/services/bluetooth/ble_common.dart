@@ -139,10 +139,8 @@ class BLECharacteristic {
   }
 
   /// Writes the value of a characteristic.
-  /// [withoutResponse]: the write is not
-  /// guaranteed and will return immediately with success.
-  /// [withResponse] the method will return after the
-  /// write operation has either passed or failed.
+  /// [withoutResponse]: the write is not guaranteed and will return immediately with success.
+  /// [withResponse] the method will return after the write operation has either passed or failed.
   Future<Null> write(List<int> value, {bool withoutResponse}) async {
     final type = withoutResponse ? true : false;
     return await _characteristic.write(value, withoutResponse: type);

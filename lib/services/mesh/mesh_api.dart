@@ -173,7 +173,7 @@ class MeshInterface {
     final startConfig = ToRadio();
     startConfig.wantConfigId = MY_CONFIG_ID; // we don't use this value
     await _sendToRadio(
-        startConfig); //uses BLEInterface ovverrides MeshInterface.
+        startConfig); //uses BLEInterface overrides MeshInterface.
     controller = StreamController<MeshtasticReceive>.broadcast(
         onListen: () => {}, onCancel: () => {});
   }
@@ -344,7 +344,7 @@ class MeshInterface {
       //why lookup in the nodes map?
       // python: nodeNum = this.nodes[destinationId]['num'];
     } else {
-      nodeNum = this.nodes[destinationId].num;
+      nodeNum = nodes[destinationId].num;
     }
     meshPacket.to = nodeNum;
     meshPacket.wantAck = wantAck;
@@ -360,31 +360,26 @@ class MeshInterface {
     return meshPacket;
   }
 
-  /// setPreferenceList sets a list of attributes in [UserPreferences]
+  /// setPreferenceList sets a list of attributes in [UserPreferences].
+  ///
   /// the preference is validated to exist
   /// returns Option< ,true> or a Failure from [CommandFailure]
-  /// Then must follow this with a call to writeConfig to send to the device
+  /// Then must follow this with a call to writeConfig to send to the device.
   /// called from setup device bloc on event DeviceCommand
   // Uses string type for value, as most versatile
   // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
   // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
-  Either<CommandFailure, bool> setPreferenceList3(Map<String, String> prefMap) {
-    // RadioConfig_UserPreferences prefs = radioConfig.preferences;
-
-    prefMap.forEach((key, value) {
-      final possibleFailure = _setPreference(key, value);
-      if (possibleFailure.isLeft()) {
-        return possibleFailure;
-      }
-    });
-    return right(true);
-  }
-
   Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
+    // direct reference to the .preferences, doesnt work with dotted path
+    // TODO - this is localNode, should also set remote Nodes?
+    // final prefs = localNode.preferences; //Now in Node class
+    //TODO - need to get a copy of
+    // final prefs = RadioConfig_UserPreferences();
+    final prefs = localNode.radioConfig.preferences.clone(); //Now in Node class
+    // localNode.radioConfig.getExtension(deepCopy());
+    // localNode.radioConfig.clone();
+    appLogger.i('setPreferenceList prefs: ${prefs.hashCode}');
     prefMap.forEach((key, value) {
-      // direct reference to the .preferences, doesnt work with dotted path
-      // TODO - this is localNode, should also set remote Nodes?
-      final prefs = localNode.radioConfig.preferences; //Now in Node class
       final possibleFailure = _setPreference2(prefs, key, value);
       if (possibleFailure.isLeft()) {
         return possibleFailure;
@@ -713,12 +708,14 @@ class MeshInterface {
 
 // Get a new unique packet ID
   int _generatePacketId() {
-    if (this.currentPacketId == null) //todo null on zero
+    if (currentPacketId == null) //todo null on zero
     {
-      throw Exception("Not connected yet, can not generate packet");
+      throw Exception(
+          '_generatePacketId: Not connected yet, can not generate packet');
     } else {
-      this.currentPacketId = (this.currentPacketId + 1) & 0xffffffff;
-      return this.currentPacketId;
+      currentPacketId = (currentPacketId + 1) & 0xffffffff;
+      appLogger.i('_generatePacketId ${currentPacketId}');
+      return currentPacketId;
     }
   }
 
@@ -728,7 +725,7 @@ class MeshInterface {
     // raise event
     // pub.sendMessage("meshtastic.connection.lost", interface=self)
     controller.add(MeshtasticReceive.lost);
-    userLogger.i("meshtastic.connection.lost ${device.id}'");
+    userLogger.i('meshtastic.connection.lost ${device.id}');
   }
 
   /// Called by this class to tell clients we are now fully connected to a node
@@ -1062,10 +1059,8 @@ class BLEInterface extends MeshInterface {
     //AF 9/1/2021 trying await - yes this fixes it.  Ensure stable testing.
     if (_intialised) {
       await _readFromRadio();
-      // userLogger.v(
-      //     'BLEInterface init() Prefs: ${localNode.radioConfig.preferences.toString()}');
 
-      ///AF 18/01/2021, setup stream on Notify for fromNum BLE characterisitic
+      /// AF 18/01/2021, setup stream on Notify for fromNum BLE characterisitic
       ///  TODO, add onerror, onclose functions
       await device.fromNum.setNotifyValue(true);
       device.fromNum.value.listen((event) {
@@ -1089,7 +1084,8 @@ class BLEInterface extends MeshInterface {
   //   connected();
   // }
 
-  /// Device has notified data is available
+  /// Device has notified data is available. DOES THIS WORK, GET CALLED?
+  ///
   /// type Uint8List , see https://medium.com/flutter-community/working-with-bytes-in-dart-6ece83455721
   /// need to check small/big-endian on android
   Future<void> _handleFromNumNotify(List<int> byteList) async {
@@ -1098,15 +1094,15 @@ class BLEInterface extends MeshInterface {
     //seems to notify, then bytelist is zero length
     //int _packetNumber = bytes.getInt8(0);
     // int _packetNumber = bytes.getInt16(0);
-    userLogger
-        .v("_handleFromNumNotify BLE Notify: ${byteData.buffer.toString()} }");
+    userLogger.i("_handleFromNumNotify BLE Notify: ${bytes.lengthInBytes} }");
     // read packet number
     // fetch fromRadio packet, handle it.  Should repeat until up to number
     await _readFromRadio();
     // TODO, there may be multiple messages queued up
   }
 
-  /// Send a ToRadio protobuf to the device
+  /// Send a ToRadio protobuf to the device.
+  ///
   /// Packets/commands to the radio will be written (reliably) to
   /// the [toRadio] characteristic. Once the write completes the phone can
   /// assume it is handled. Contains one of [MeshPacket], [RadioConfig],
@@ -1143,28 +1139,27 @@ class BLEInterface extends MeshInterface {
 
     var getConfig = ToRadio();
     getConfig.wantConfigId = MY_CONFIG_ID; // we don't use this value
-    await _sendToRadio(getConfig); //uses super BLEInterface
-    await _readFromRadio(); // will handle response and update local radioConfig
+    await _sendToRadio(getConfig); //uses BLEInterface overrides MeshInterface.
+    /// AF 31/03/2021 - not needed as there is already a listener setup in BLEInterface.init
+    /// that calls _handleFromNumNotify(event)
+    // await _readFromRadio(); // will handle response and update local radioConfig
+    // To DO - can we wait for the sendRadio to complete, and then show user ?
     userLogger.i(
         'BLEInterface getConfig() Prefs:\n${localNode.radioConfig.preferences.toString()}');
     return localNode.radioConfig.preferences.toString();
   }
 
-  //@override
+  /// Read from Mesh device Characteristic until empty.
+  ///
+  /// Called from _handleFromNumNotify on GATT Notify.
+  /// AF 23/2/21 Changed to a Future.doWhile(() with async code.
   Future<void> _readFromRadio() async {
-    // appLogger.d("Reading from Radio: ");
     bool wasEmpty = false;
 
-    // read from Mesh device until empty
-    // AF 23/2/21 need a Future.doWhile(() with async code
     // TODO - when reading two reads, do we need to concatenate the bytes?
     //   Or does a whole command arrive.
     // add error handling, as _handleFromRadio can throw
     await Future.doWhile(() async {
-      // Leads to Exception has occurred.
-      // PlatformException (PlatformException(read_characteristic_error, unknown reason,
-      // may occur if readCharacteristic was called before last read finished., null, null))
-
       // AF 9/1/20 try: CrazyAndy from https://github.com/pauldemarco/flutter_blue/issues/432
       // get PlatformException(set_notification_error, could not locate CCCD descriptor
       //  for characteristic: 8ba2bcc2-ee02-4a55-a531-c525c5e454d5, null, null)

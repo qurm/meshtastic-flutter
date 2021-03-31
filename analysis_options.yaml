@@ -4,9 +4,9 @@ include: package:pedantic/analysis_options.yaml
 
 analyzer:
   exclude: 
-    build/**
-    lib/services/proto/**
-    lib/**/*.freezed.dart
+    build/**: true
+    lib/services/proto/**: true
+    lib/**/*.freezed.dart: true
   errors:
     avoid_void_async: error
     camel_case_types: error

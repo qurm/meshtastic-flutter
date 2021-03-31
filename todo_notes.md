@@ -1,6 +1,9 @@
 
 ## To Do 
 
+seeing two instances of this in widget tree - are they same Singleton.
+SetupDeviceBloc
+
 
 Excpetion in meshAPS
 

@@ -48,6 +48,7 @@ dependencies:
   #   git: https://github.com/ewertonrp/logger_flutter.git
   logger: ^1.0.0
   # recase: ^3.0.1
+  protobuf: ^2.0.0      # flutter blue also uses
   shared_preferences: ^2.0.5
   # preferences: '^5.2.1'   // see https://pub.dev/packages/pref
   wakelock: ^0.5.0+2

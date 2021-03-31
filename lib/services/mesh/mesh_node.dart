@@ -44,10 +44,15 @@ class MeshNode {
   /// [radioConfig] - Current radio configuration and device settings, if you
   /// write to this the new settings will be applied to the device.
   RadioConfig radioConfig;
+  // RadioConfig_UserPreferences preferences;
 
   /// actual channels available on Node
   List<Channel> channels = [];
   List<Channel> partialChannels = [];
+
+  RadioConfig_UserPreferences get preferences {
+    return radioConfig.preferences;
+  }
 
   // def showInfo(self):
   //     // print(self.radioConfig)
@@ -95,6 +100,8 @@ class MeshNode {
     // https://github.com/dart-lang/protobuf/issues/305
     radioConfig = RadioConfig()
       ..preferences = RadioConfig_UserPreferences(); // avoid null
+    // ..preferences = preferences; // avoid null
+    // appLogger.i('requestConfig prefs: ${preferences.hashCode}');
     channels = []; //empty list, avoid null
     partialChannels = []; // keep our channels in a temp array until finished
     await _requestSettings();

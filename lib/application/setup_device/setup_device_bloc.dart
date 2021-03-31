@@ -103,7 +103,9 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
         if (possibleFailure.isRight()) {
           await _connectFacade.bleInterface.localNode
               .writeConfig(); //Now on Node class
-          msg = await _connectFacade.bleInterface.getConfig();
+          // TODO temp disable
+          // msg = await _connectFacade.bleInterface.getConfig();
+          msg = 'Config sent to devices';
         }
         yield possibleFailure.fold(
           (failure) => DeviceFailureState(failure),
