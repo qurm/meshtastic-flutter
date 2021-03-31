@@ -96,9 +96,6 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
         final possibleFailure =
             _connectFacade.bleInterface.setPreferenceList(prefMap);
 
-        // final possibleFailure = _connectFacade.bleInterface.setPreference(
-        //     event.meshCommand.command,
-        //     event.meshCommand.params.paramList[0].value);
         //TODO - handle writeConfig failures also
         if (possibleFailure.isRight()) {
           await _connectFacade.bleInterface.localNode

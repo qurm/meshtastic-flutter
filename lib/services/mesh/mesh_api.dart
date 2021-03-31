@@ -14,6 +14,7 @@ import '../../domain/commands/command_failure.dart';
 import '../bluetooth/bluetooth.dart';
 import '../proto/proto.dart';
 import 'mesh_device.dart';
+import 'mesh_preferences.dart';
 
 const START1 = 0x94;
 const START2 = 0xc3;
@@ -360,249 +361,6 @@ class MeshInterface {
     return meshPacket;
   }
 
-  /// setPreferenceList sets a list of attributes in [UserPreferences].
-  ///
-  /// the preference is validated to exist
-  /// returns Option< ,true> or a Failure from [CommandFailure]
-  /// Then must follow this with a call to writeConfig to send to the device.
-  /// called from setup device bloc on event DeviceCommand
-  // Uses string type for value, as most versatile
-  // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
-  // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
-  Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
-    // direct reference to the .preferences, doesnt work with dotted path
-    // TODO - this is localNode, should also set remote Nodes?
-    // final prefs = localNode.preferences; //Now in Node class
-    //TODO - need to get a copy of
-    // final prefs = RadioConfig_UserPreferences();
-    final prefs = localNode.radioConfig.preferences.clone(); //Now in Node class
-    // localNode.radioConfig.getExtension(deepCopy());
-    // localNode.radioConfig.clone();
-    appLogger.i('setPreferenceList prefs: ${prefs.hashCode}');
-    prefMap.forEach((key, value) {
-      final possibleFailure = _setPreference2(prefs, key, value);
-      if (possibleFailure.isLeft()) {
-        return possibleFailure;
-      } else {
-        // commit the change
-        localNode.radioConfig.preferences = prefs;
-      }
-    });
-    return right(true);
-  }
-
-  /// setPreference sets a single (string) attribute in [UserPreferences]
-  /// [preference] is in snakecase, as used on Python meshtastisc, here is
-  /// converted to camelCase, used by dart protobufs
-  /// the preference is validated to exist
-  /// returns Option< ,true> or a Failure from [CommandFailure]
-  /// Then must follow this with a call to writeConfig to send to the device
-  Either<CommandFailure, bool> _setPreference2(
-      RadioConfig_UserPreferences prefs, String preference, String value) {
-    // logger.d('setPreference prefs ${prefs.isFrozen}');
-    // prefs = RadioConfig_UserPreferences();
-
-    int intVal = int.tryParse(value); //null
-    userLogger.i('MeshInterface setPreference $preference: $value');
-    // Note preference is in send_owner_interval format to align with Python and other Meshtastic apps
-    // whereas the Dart Protobuf implementation uses sendOwnerInterval format
-    try {
-      switch (preference) {
-        case 'position_broadcast_secs':
-          prefs.positionBroadcastSecs = intVal;
-          return right(true);
-        case 'send_owner_interval':
-          prefs.sendOwnerInterval = intVal;
-          return right(true);
-        // case 'num_missed_to_fail':
-        //   prefs.numMissedToFail = intVal;
-        //   return right(true);
-        case 'wait_bluetooth_secs':
-          prefs.waitBluetoothSecs = intVal;
-          return right(true);
-        case 'screen_on_secs':
-          prefs.screenOnSecs = intVal;
-          return right(true);
-        case 'phone_timeout_secs':
-          prefs.phoneTimeoutSecs = intVal;
-          return right(true);
-        case 'phone_sds_timeout_sec':
-          prefs.phoneSdsTimeoutSec = intVal;
-          return right(true);
-        case 'mesh_sds_timeout_secs':
-          prefs.meshSdsTimeoutSecs = intVal;
-          return right(true);
-        case 'sds_secs':
-          prefs.sdsSecs = intVal;
-          return right(true);
-        case 'ls_secs':
-          prefs.lsSecs = intVal;
-          return right(true);
-        case 'min_wake_secs':
-          prefs.minWakeSecs = intVal;
-          return right(true);
-        // start string values
-        case 'wifi_ssid':
-          prefs.wifiSsid = value;
-          return right(true);
-        case 'wifi_password':
-          prefs.wifiPassword = value;
-          return right(true);
-        case 'wifi_ap_mode':
-          prefs.wifiApMode = (value.toLowerCase() == 'true');
-          return right(true);
-
-        case 'region':
-          prefs.region = RegionCode.values
-              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
-          return right(true);
-
-        case 'factory_reset':
-          prefs.factoryReset = (value.toLowerCase() == 'true');
-          return right(true);
-
-        case 'is_router':
-          prefs.isRouter = (value.toLowerCase() == 'true');
-          return right(true);
-        case 'is_low_power':
-          prefs.isLowPower = (value.toLowerCase() == 'true');
-          return right(true);
-
-        //TODO needs some special setter, as is a list of ignore Nodes
-        // case 'ignoreIncoming':
-        //   prefs.ignoreIncoming = value;
-        //   return right(true);
-        default:
-          return left(const CommandFailure.incorrectParameter());
-        //raise failure - unknown command
-      }
-    } catch (e) {
-      // needs more to handle parameter type fails
-      appLogger.e('setPreference unexpected: $e');
-      return left(const CommandFailure.incorrectParameter());
-    }
-  }
-
-  /// setPreference sets a single (string) attribute in [UserPreferences]
-  /// the preference is validated to exist
-  /// returns Option< ,true> or a Failure from [CommandFailure]
-  /// Then must follow this with a call to writeConfig to send to the device
-  /// called from setup device bloc on event DeviceCommand
-  // Uses string type for value, as most versatile
-  // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
-  // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
-  Either<CommandFailure, bool> _setPreference(String preference, String value) {
-    RadioConfig_UserPreferences prefs = localNode.radioConfig.preferences;
-    // logger.d('setPreference prefs ${prefs.isFrozen}');
-    // prefs = RadioConfig_UserPreferences();
-
-    int intVal = int.tryParse(value); //null
-    userLogger.i('MeshInterface setPreference $preference: $value');
-    // Note preference is in send_owner_interval format to align with Python and other Meshtastic apps
-    // whereas the Dart Protobuf implementation uses sendOwnerInterval format
-    try {
-      switch (preference) {
-        case 'position_broadcast_secs':
-          prefs.positionBroadcastSecs = intVal;
-          return right(true);
-        case 'send_owner_interval':
-          prefs.sendOwnerInterval = intVal;
-          return right(true);
-        // case 'num_missed_to_fail':
-        //   prefs.numMissedToFail = intVal;
-        //   return right(true);
-        case 'wait_bluetooth_secs':
-          prefs.waitBluetoothSecs = intVal;
-          // localNode.radioConfig.preferences = prefs;
-          return right(true);
-        case 'screen_on_secs':
-          prefs.screenOnSecs = intVal;
-          // localNode.radioConfig.preferences = prefs;
-          return right(true);
-        case 'phone_timeout_secs':
-          prefs.phoneTimeoutSecs = intVal;
-          // localNode.radioConfig.preferences = prefs;
-          return right(true);
-        case 'phone_sds_timeout_sec':
-          prefs.phoneSdsTimeoutSec = intVal;
-          return right(true);
-        case 'mesh_sds_timeout_secs':
-          prefs.meshSdsTimeoutSecs = intVal;
-          return right(true);
-        case 'sds_secs':
-          prefs.sdsSecs = intVal;
-          return right(true);
-        case 'ls_secs':
-          prefs.lsSecs = intVal;
-          return right(true);
-        case 'min_wake_secs':
-          prefs.minWakeSecs = intVal;
-          return right(true);
-        // start string values
-        case 'wifi_ssid':
-          prefs.wifiSsid = value;
-          return right(true);
-        case 'wifi_password':
-          prefs.wifiPassword = value;
-          return right(true);
-        case 'wifi_ap_mode':
-          prefs.wifiApMode = (value.toLowerCase() == 'true');
-          return right(true);
-
-        case 'region':
-          prefs.region = RegionCode.values
-              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
-          return right(true);
-
-        case 'factory_reset':
-          prefs.factoryReset = (value.toLowerCase() == 'true');
-          return right(true);
-
-        case 'is_router':
-          prefs.isRouter = (value.toLowerCase() == 'true');
-          // localNode.radioConfig.preferences = prefs;
-          return right(true);
-        case 'is_low_power':
-          prefs.isLowPower = (value.toLowerCase() == 'true');
-          return right(true);
-
-        //TODO needs some special setter, as is a list of ignore Nodes
-        // case 'ignoreIncoming':
-        //   prefs.ignoreIncoming = value;
-        //   return right(true);
-
-        default:
-          return left(const CommandFailure.incorrectParameter());
-        //raise failure - unknown command
-      }
-    } catch (e) {
-      // needs more to handle parameter type fails
-      appLogger.w('setPreference unexpected: $e');
-      return left(const CommandFailure.incorrectParameter());
-    }
-  }
-
-  //do BLE set - wait for connection
-
-  //timeout send error
-
-  //return
-  ///check the state, either reconnect or scan
-  ///
-  // try {
-  //   final state = blueAPIClient.state;
-  //   if (state == BluetoothState.on) {
-  //     return right(unit);
-  //   }
-  // } catch (e) {
-  //   if (e.message.contains('error')) {
-  //     return left(const ConnectFailure.nobluetooth());
-  //   } //todo add further elseif
-
-  // }
-
-  // radioConfig.preferences
-
   /// waitForConfig - not required in flutter (ported from Python)
   /// (self, sleep=0.1, maxsecs=20, attrs=('myInfo', 'nodes', 'radioConfig'))
   /// Block until radioConfig is received. Returns True if config has been received.
@@ -615,22 +373,6 @@ class MeshInterface {
     }
     return false;
   }
-
-  /// AF (ported from Python) 14/03/21 now in Node
-  /// Write the current (edited) [radioConfig] to the device
-  /*
-  Future<void> writeConfig() async {
-    userLogger.i('MeshInterface writeConfig() ');
-    if (!radioConfig.isInitialized()) {
-      throw Exception("No RadioConfig has been read");
-    }
-    // final t = ToRadio();
-    final t = AdminMessage();
-    t.setRadio = radioConfig;
-    // await _sendToRadio(t);
-    await _sendAdmin(t);
-  }
-  */
 
 //     //TODO set type NodeDict?
 //     /// Node fields are optional - TODO check for null, and handle?
@@ -1022,6 +764,259 @@ class MeshInterface {
     }
     userLogger.v('send message $topic');
   }
+
+  /// setPreferenceList sets a list of attributes in [UserPreferences].
+  ///
+  /// the preference is validated to exist
+  /// returns Option< ,true> or a Failure from [CommandFailure]
+  /// Then must follow this with a call to writeConfig to send to the device.
+  /// called from setup device bloc on event DeviceCommand
+// Uses string type for value, as most versatile
+// https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
+// aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
+  Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
+    // direct reference to the .preferences, doesnt work with dotted path
+    // TODO - this is localNode, should also set remote Nodes?
+    // final prefs = localNode.preferences; //Now in Node class
+    //TODO - need to get a copy of
+    // final prefs = RadioConfig_UserPreferences();
+    final prefs = localNode.radioConfig.preferences.clone(); //Now in Node class
+    // localNode.radioConfig.getExtension(deepCopy());
+    // localNode.radioConfig.clone();
+    appLogger.i('setPreferenceList prefs: ${prefs.hashCode}');
+    prefMap.forEach((key, value) {
+      final possibleFailure = _setPreference2(prefs, key, value);
+      if (possibleFailure.isLeft()) {
+        return possibleFailure;
+      } else {
+        // commit the change
+        localNode.radioConfig.preferences = prefs;
+      }
+    });
+    return right(true);
+  }
+
+  /// setPreference sets a single (string) attribute in [UserPreferences].
+  ///
+  /// [preference] is in snakecase, as used on Python meshtastic, here is
+  /// converted to camelCase, used by dart protobufs
+  /// the preference is validated to exist
+  /// returns Option< ,true> or a Failure from [CommandFailure]
+  /// Then must follow this with a call to writeConfig to send to the device.
+  /// AF 01/04/21 Updated for all current protobuf [RadioConfig_UserPreferences]
+  Either<CommandFailure, bool> _setPreference2(
+      RadioConfig_UserPreferences prefs, String preference, String value) {
+    // logger.d('setPreference prefs ${prefs.isFrozen}');
+    // prefs = RadioConfig_UserPreferences();
+
+    int intVal = int.tryParse(value); //null
+    userLogger.i('MeshInterface setPreference $preference: $value');
+    // Note preference is in send_owner_interval format to align with Python and other Meshtastic apps
+    // whereas the Dart Protobuf implementation uses sendOwnerInterval format
+    // There is no (nice) Dart way to call a method name based on a string value.
+    try {
+      switch (preference) {
+        // start int values
+        case 'position_broadcast_secs':
+          prefs.positionBroadcastSecs = intVal;
+          return right(true);
+        case 'send_owner_interval':
+          prefs.sendOwnerInterval = intVal;
+          return right(true);
+        case 'wait_bluetooth_secs':
+          prefs.waitBluetoothSecs = intVal;
+          return right(true);
+        case 'screen_on_secs':
+          prefs.screenOnSecs = intVal;
+          return right(true);
+        case 'phone_timeout_secs':
+          prefs.phoneTimeoutSecs = intVal;
+          return right(true);
+        case 'phone_sds_timeout_sec':
+          prefs.phoneSdsTimeoutSec = intVal;
+          return right(true);
+        case 'mesh_sds_timeout_secs':
+          prefs.meshSdsTimeoutSecs = intVal;
+          return right(true);
+        case 'sds_secs':
+          prefs.sdsSecs = intVal;
+          return right(true);
+        case 'ls_secs':
+          prefs.lsSecs = intVal;
+          return right(true);
+        case 'min_wake_secs':
+          prefs.minWakeSecs = intVal;
+          return right(true);
+
+        case 'gps_update_interval':
+          prefs.gpsUpdateInterval = intVal;
+          return right(true);
+
+        case 'gps_attempt_time':
+          prefs.gpsAttemptTime = intVal;
+          return right(true);
+// gettable, not settable?
+        // case 'ignore_incoming':
+        //   prefs.ignoreIncoming = intVal;
+        //   return right(true);
+
+        // start string values
+        case 'wifi_ssid':
+          prefs.wifiSsid = value;
+          return right(true);
+        case 'wifi_password':
+          prefs.wifiPassword = value;
+          return right(true);
+        case 'wifi_ap_mode':
+          prefs.wifiApMode = (value.toLowerCase() == 'true');
+          return right(true);
+
+        // start other typed values
+        case 'region':
+          prefs.region = RegionCode.values
+              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
+          return right(true);
+        case 'charge_current':
+          prefs.chargeCurrent = ChargeCurrent.values
+              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
+          return right(true);
+        case 'location_share':
+          prefs.locationShare = LocationSharing.values
+              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
+          return right(true);
+        case 'gps_operation':
+          prefs.gpsOperation = GpsOperation.values
+              .firstWhere((e) => describeEnum(e) == value.toUpperCase());
+          return right(true);
+
+        // start bool values
+        case 'factory_reset':
+          prefs.factoryReset = (value.toLowerCase() == 'true');
+          return right(true);
+
+        case 'is_router':
+          prefs.isRouter = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'is_low_power':
+          prefs.isLowPower = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'fixed_position':
+          prefs.fixedPosition = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'debug_log_enabled':
+          prefs.debugLogEnabled = (value.toLowerCase() == 'true');
+          return right(true);
+
+        // serial plug-in settings
+        case 'serialplugin_enabled':
+          prefs.serialpluginEnabled = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'serialplugin_echo':
+          prefs.serialpluginEcho = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'serialplugin_rxd':
+          prefs.serialpluginRxd = intVal;
+          return right(true);
+        case 'serialplugin_txd':
+          prefs.serialpluginTxd = intVal;
+          return right(true);
+        case 'serialplugin_timeout':
+          prefs.serialpluginTimeout = intVal;
+          return right(true);
+        case 'serialplugin_mode':
+          prefs.serialpluginMode = intVal;
+          return right(true);
+
+        // notification plug-in settings
+        case 'ext_notification_plugin_enabled':
+          prefs.extNotificationPluginEnabled = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'ext_notification_plugin_active':
+          prefs.extNotificationPluginActive = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'ext_notification_plugin_output_ms':
+          prefs.extNotificationPluginOutputMs = intVal;
+          return right(true);
+        case 'ext_notification_plugin_output':
+          prefs.extNotificationPluginOutput = intVal;
+          return right(true);
+        case 'ext_notification_plugin_alert_message':
+          prefs.extNotificationPluginAlertMessage =
+              (value.toLowerCase() == 'true');
+          return right(true);
+        case 'ext_notification_plugin_alert_bell':
+          prefs.extNotificationPluginAlertBell =
+              (value.toLowerCase() == 'true');
+          return right(true);
+
+        // range test plug-in settings
+        case 'range_test_plugin_enabled':
+          prefs.rangeTestPluginEnabled = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'range_test_plugin_save':
+          prefs.rangeTestPluginSave = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'range_test_plugin_sender':
+          prefs.rangeTestPluginSender = intVal;
+          return right(true);
+
+        // store forward plug-in settings
+        case 'store_forward_plugin_enabled':
+          prefs.storeForwardPluginEnabled = (value.toLowerCase() == 'true');
+          return right(true);
+        case 'store_forward_plugin_records':
+          prefs.storeForwardPluginRecords = intVal;
+          return right(true);
+
+        // environmental sensor  plug-in settings
+        case 'environmental_measurement_plugin_measurement_enabled':
+          prefs.environmentalMeasurementPluginMeasurementEnabled =
+              (value.toLowerCase() == 'true');
+          return right(true);
+        case 'environmental_measurement_plugin_screen_enabled':
+          prefs.environmentalMeasurementPluginScreenEnabled =
+              (value.toLowerCase() == 'true');
+          return right(true);
+        case 'environmental_measurement_plugin_read_error_count_threshold':
+          prefs.environmentalMeasurementPluginReadErrorCountThreshold = intVal;
+          return right(true);
+
+        case 'environmental_measurement_plugin_update_interval':
+          prefs.environmentalMeasurementPluginUpdateInterval = intVal;
+          return right(true);
+
+        case 'environmental_measurement_plugin_recovery_interval':
+          prefs.environmentalMeasurementPluginRecoveryInterval = intVal;
+          return right(true);
+
+        case 'environmental_measurement_plugin_display_farenheit':
+          prefs.environmentalMeasurementPluginDisplayFarenheit =
+              (value.toLowerCase() == 'true');
+          return right(true);
+        case 'environmental_measurement_plugin_sensor_type':
+          prefs.environmentalMeasurementPluginSensorType =
+              RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType
+                  .values
+                  .firstWhere((e) => describeEnum(e) == value.toUpperCase());
+          return right(true);
+        case 'environmental_measurement_plugin_sensor_pin':
+          prefs.environmentalMeasurementPluginSensorPin = intVal;
+          return right(true);
+
+        //TODO needs some special setter, as is a list of ignore Nodes
+        // case 'ignoreIncoming':
+        //   prefs.ignoreIncoming = value;
+        //   return right(true);
+        default:
+          return left(const CommandFailure.incorrectParameter());
+        //raise failure - unknown command
+      }
+    } catch (e) {
+      // needs more to handle parameter type fails
+      appLogger.e('setPreference unexpected: $e');
+      return left(const CommandFailure.incorrectParameter());
+    }
+  }
 }
 
 // constructors https://medium.com/flutter-community/deconstructing-dart-constructors-e3b553f583ef
@@ -1105,8 +1100,7 @@ class BLEInterface extends MeshInterface {
   ///
   /// Packets/commands to the radio will be written (reliably) to
   /// the [toRadio] characteristic. Once the write completes the phone can
-  /// assume it is handled. Contains one of [MeshPacket], [RadioConfig],
-  /// [User], identifier [wantConfigId].
+  /// assume it is handled. Contains one [MeshPacket], with a [Data] payload.
   @override
   Future<void> _sendToRadio(ToRadio toRadio) async {
     userLogger.v('_sendToRadio writing ${toRadio} to ${device.id.toString()}');
