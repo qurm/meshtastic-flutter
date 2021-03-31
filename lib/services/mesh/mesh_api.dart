@@ -518,15 +518,15 @@ class MeshInterface {
         //   return right(true);
         case 'wait_bluetooth_secs':
           prefs.waitBluetoothSecs = intVal;
-          localNode.radioConfig.preferences = prefs;
+          // localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'screen_on_secs':
           prefs.screenOnSecs = intVal;
-          localNode.radioConfig.preferences = prefs;
+          // localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'phone_timeout_secs':
           prefs.phoneTimeoutSecs = intVal;
-          localNode.radioConfig.preferences = prefs;
+          // localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'phone_sds_timeout_sec':
           prefs.phoneSdsTimeoutSec = intVal;
@@ -565,7 +565,7 @@ class MeshInterface {
 
         case 'is_router':
           prefs.isRouter = (value.toLowerCase() == 'true');
-          localNode.radioConfig.preferences = prefs;
+          // localNode.radioConfig.preferences = prefs;
           return right(true);
         case 'is_low_power':
           prefs.isLowPower = (value.toLowerCase() == 'true');
@@ -763,9 +763,9 @@ class MeshInterface {
   /// Done with initial config messages, now send regular MeshPackets to ask for settings and channels.
   /// AF 17/03/21 updated from Python v1.20
   /// called from _handleFromRadio when configCompleteId received
-  void _handleConfigComplete() {
-    appLogger.w('MeshInterface  _handleConfigComplete');
-    localNode.requestConfig();
+  Future<void> _handleConfigComplete() async {
+    appLogger.d('MeshInterface  _handleConfigComplete');
+    await localNode.requestConfig();
   }
 
   /// Handle a packet that arrived from the radio.
@@ -774,10 +774,11 @@ class MeshInterface {
   /// It will support READ and NOTIFY.
   /// Contains one of MeshPacket, MyNodeInfo, NodeInfo,
   /// RadioConfig, DebugString, config_complete_id, rebooted
-  void _handleFromRadio(List<int> fromRadioBytes) {
+  Future<void> _handleFromRadio(List<int> fromRadioBytes) async {
     //error here InvalidProtocolBufferException due to MTU too small
     //AF 10/1/2021 - moved to class property, as used for ChannelURL
     // AF 17/03/21 updated from Python v1.20
+    // AF 29/03/21 made async due to _handleConfigComplete calling Node._requestSettings(); etc
     fromRadio = new FromRadio.fromBuffer(fromRadioBytes);
     userLogger.d('_handleFromRadio Received: ${fromRadio.toDebugString()}');
     if (fromRadio.hasMyInfo()) {
@@ -825,13 +826,13 @@ class MeshInterface {
       // if (node.hasUser()) nodes[node.user.id] = node;
       // raise Event
       controller.add(MeshtasticReceive.node);
-      userLogger.v('meshtastic.node.updated ${node.num}');
+      userLogger.v('_handleFromRadio meshtastic.node.updated ${node.num}');
     }
     // we ignore the config_complete_id, it is unneeded for our stream API fromRadio.config_complete_id
     else if (fromRadio.configCompleteId == MY_CONFIG_ID)
       // AF 17/03/21 removed as in Python v1.20
       // _connected();
-      _handleConfigComplete(); //initialise Node RadioConfig etc.
+      await _handleConfigComplete(); //initialise Node RadioConfig etc.
     else if (fromRadio.hasPacket())
       _handlePacketFromRadio(fromRadio.packet);
     else if (fromRadio.rebooted) {
@@ -839,11 +840,11 @@ class MeshInterface {
       ///  subclass version that closes the serial port
       //MeshInterface._disconnected();
       _disconnected();
-      _startConfig();
-      userLogger.i('meshtastic.node.rebooted');
+      await _startConfig();
+      userLogger.i('_handleFromRadio meshtastic.node.rebooted');
     } // redownload the node db etc...}
     else {
-      userLogger.v("Unexpected FromRadio payload");
+      userLogger.wtf('_handleFromRadio Unexpected FromRadio payload');
     }
     // userLogger.v('Node list $_nodesByNum');
   }
@@ -1053,6 +1054,7 @@ class BLEInterface extends MeshInterface {
     // appLogger.d('BLEInterface init() 3: ${_intialised}');
     if (_intialised) await super._startConfig(); // initialise MeshInterface
     // AF TODO - needs time to complete, async does not help
+    // 29/03/21 try this again as code has better async now
     appLogger.d('BLEInterface init() 4: ${_intialised}');
     // await Future.delayed(Duration(seconds: 1));
     // can check some BLE status here?
@@ -1090,7 +1092,7 @@ class BLEInterface extends MeshInterface {
   /// Device has notified data is available
   /// type Uint8List , see https://medium.com/flutter-community/working-with-bytes-in-dart-6ece83455721
   /// need to check small/big-endian on android
-  void _handleFromNumNotify(List<int> byteList) async {
+  Future<void> _handleFromNumNotify(List<int> byteList) async {
     Uint8List byteData = Uint8List.fromList(byteList);
     var bytes = byteData.buffer.asByteData();
     //seems to notify, then bytelist is zero length
@@ -1159,9 +1161,6 @@ class BLEInterface extends MeshInterface {
     //   Or does a whole command arrive.
     // add error handling, as _handleFromRadio can throw
     await Future.doWhile(() async {
-      // while (!wasEmpty) {
-      //List<int> bytes = this.device.char_read(FROMRADIO_UUID);
-
       // Leads to Exception has occurred.
       // PlatformException (PlatformException(read_characteristic_error, unknown reason,
       // may occur if readCharacteristic was called before last read finished., null, null))
@@ -1170,13 +1169,18 @@ class BLEInterface extends MeshInterface {
       // get PlatformException(set_notification_error, could not locate CCCD descriptor
       //  for characteristic: 8ba2bcc2-ee02-4a55-a531-c525c5e454d5, null, null)
       // so the fromRadio char on Meshtastic does not support Notification - need to use .read
-      userLogger.v(
+
+      // AF 29/03/20 seeing this on initial reads from device:  FIXED - Added more async in the chain
+      // on next read after the _handleConfigComplete is generated
+      // PlatformException (PlatformException(read_characteristic_error, unknown reason, may occur if
+      // readCharacteristic was called before last read finished., null, null))
+      userLogger.d(
           '_readFromRadio c.isNotifying ${device.toRadio.isNotifying} c.read ${device.toRadio.properties.write}');
       userLogger.v('_readFromRadio read from  ${device.id.toString()}');
 
       List<int> bytes = await device.fromRadio.read();
       wasEmpty = (bytes.length == 0);
-      if (!wasEmpty) _handleFromRadio(bytes);
+      if (!wasEmpty) await _handleFromRadio(bytes);
       return !wasEmpty;
     });
   }

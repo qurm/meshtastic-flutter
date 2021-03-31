@@ -132,8 +132,8 @@ class BLECharacteristic {
 
   List<int> get lastValue => _characteristic.lastValue;
 
-  /// Retrieves the value of a specified characteristic
-  /// Is a list of byte values?
+  /// Retrieves the value of a specified characteristic.
+  /// As a list of byte values.
   Future<List<int>> read() async {
     return await _characteristic.read();
   }

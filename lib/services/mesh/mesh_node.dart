@@ -90,11 +90,14 @@ class MeshNode {
   ///
   /// Uses regular MeshPackets to ask for settings and channels.
   /// Called on Interface handleConfigComplete when configCompleteId received.
-  void requestConfig() {
-    radioConfig = RadioConfig(); //empty, avoid null
+  Future<void> requestConfig() async {
+    // radioConfig.preferences will be an immutable default value, so
+    // https://github.com/dart-lang/protobuf/issues/305
+    radioConfig = RadioConfig()
+      ..preferences = RadioConfig_UserPreferences(); // avoid null
     channels = []; //empty list, avoid null
     partialChannels = []; // keep our channels in a temp array until finished
-    _requestSettings();
+    await _requestSettings();
   }
 
 /* 
@@ -387,7 +390,7 @@ def writeConfig(self):
 
   /// Done with initial config messages, now send regular MeshPackets to ask for settings.
   ///
-  void _requestSettings() async {
+  Future<void> _requestSettings() async {
     final p = AdminMessage();
     p.getRadioRequest = true;
 
@@ -416,7 +419,7 @@ def writeConfig(self):
       radioConfig = RadioConfig.fromBuffer(meshPacket.decoded.payload);
       appLogger
           .i('_requestSettings Received radio config, now fetching channels..');
-      _requestChannel(0); //now start fetching channels
+      await _requestChannel(0); //now start fetching channels
     } else
       appLogger.wtf('_requestSettings Received unexpected!!');
   }
@@ -467,7 +470,7 @@ def writeConfig(self):
  */
 
   /// Done with initial config messages, now send regular MeshPackets to ask for settings
-  void _requestChannel(int channelNum) async {
+  Future<void> _requestChannel(int channelNum) async {
     final p = AdminMessage();
     p.getChannelRequest = channelNum + 1;
     appLogger.d('_requestChannel Requesting channel ${channelNum}');
@@ -541,7 +544,7 @@ def writeConfig(self):
         // # FIXME, the following should only be called after we have settings and channels
         iface.connected(); // Tell everone else we are ready to go
       } else {
-        _requestChannel(index + 1);
+        await _requestChannel(index + 1);
       }
     } else
       appLogger.wtf('_requestChannel Received unexpected packet!!');

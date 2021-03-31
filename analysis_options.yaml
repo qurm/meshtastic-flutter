@@ -1,22 +1,24 @@
 # include: package:effective_dart/analysis_options.yaml
-# include: package:pedantic/analysis_options.yaml
-include: package:very_good_analysis/analysis_options.yaml
+include: package:pedantic/analysis_options.yaml
+# include: package:very_good_analysis/analysis_options.yaml
 
 analyzer:
   exclude: 
-    - build/**
-    - lib/services/proto/**
-    - lib/**/*.freezed.dart
+    build/**
+    lib/services/proto/**
+    lib/**/*.freezed.dart
   errors:
-    - camel_case_types
-    - await_only_futures
-    - unawaited_futures
+    avoid_void_async: error
+    camel_case_types: error
+    await_only_futures: error
+    unawaited_futures: error
 
   strong-mode:
     implicit-casts: false
 
 linter:
   rules:
+    avoid_void_async: true
     camel_case_types: true
     await_only_futures: true
     unawaited_futures: true
