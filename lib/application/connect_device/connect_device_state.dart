@@ -1,4 +1,4 @@
-// @dart=2.9
+
 part of 'connect_device_bloc.dart';
 
 /// Based on ddd-firebase pattern

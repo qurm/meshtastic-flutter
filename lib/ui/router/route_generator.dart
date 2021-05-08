@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -130,7 +130,7 @@ class RouteGenerator {
     }
   }
 
-  static Route<dynamic> _errorRoute(String route) {
+  static Route<dynamic> _errorRoute(String? route) {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
@@ -150,8 +150,8 @@ class RouteGenerator {
 
 /// used for Mesh related screens, MeshCommand etc
 class MeshRouteArguments {
-  final MeshDevice/*!*/ device;
+  final MeshDevice device;
   // final DeviceConnect deviceConnect;
-  final MeshCommand/*!*/ command;
-  MeshRouteArguments({this.device, this.command});
+  final MeshCommand command;
+  MeshRouteArguments({required this.device, required this.command});
 }

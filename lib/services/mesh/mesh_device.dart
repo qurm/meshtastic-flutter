@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:async';
 import 'package:flutter_blue/flutter_blue.dart';
 // import 'package:logger/logger.dart';
@@ -11,12 +11,12 @@ import '../bluetooth/bluetooth.dart';
 class MeshDevice extends BLEDevice2 {
   // BLEDevice2 device;
   BluetoothDevice device;
-  BLEService _meshService; //GATT service for Meshtastic
-  List<BLEService> _serviceList;
-  BLECharacteristic fromRadio;
-  BLECharacteristic toRadio;
-  BLECharacteristic fromNum;
-  bool isMeshDevice; //flag, true only for Meshtastic devices
+  late BLEService _meshService; //GATT service for Meshtastic
+  late List<BLEService> _serviceList;
+  late BLECharacteristic fromRadio;
+  late BLECharacteristic toRadio;
+  late BLECharacteristic fromNum;
+  bool? isMeshDevice; //flag, true only for Meshtastic devices
 
   //this will create another super object each time!
   //MeshDevice(this.device) : super(device.id, device.name, device.type);
@@ -28,7 +28,7 @@ class MeshDevice extends BLEDevice2 {
 
   //todo call void method to intialise constructor body
   {
-    appLogger.d('MeshDevice constructor body: ${device.id}');
+    appLogger!.d('MeshDevice constructor body: ${device.id}');
     // initialiseMeshService();  //see below moved due to async
   }
 
@@ -43,7 +43,7 @@ class MeshDevice extends BLEDevice2 {
     // appLogger.d('initialiseMeshService() Is connected ');
     _serviceList = await super.discoverServices();
     //this goes to async wait here
-    appLogger.d(
+    appLogger!.d(
         'initialiseMeshService() start ${super.id} Services found: ${_serviceList.length} ');
     if (_serviceList.length > 0) {
       // for (var service in _serviceList) {
@@ -54,11 +54,11 @@ class MeshDevice extends BLEDevice2 {
           .firstWhere((char) => char.uuid == toRadioUuid);
       fromNum = _meshService.characteristics
           .firstWhere((char) => char.uuid == fromNumUuid);
-      appLogger.v(
+      appLogger!.v(
           'initialiseMeshService() Char fromRadio found: ${fromRadio.uuid.toString()} ');
-      appLogger.v(
+      appLogger!.v(
           'initialiseMeshService() Char toRadio found: ${toRadio.uuid.toString()} ');
-      appLogger.v(
+      appLogger!.v(
           'initialiseMeshService() Char fromNum found: ${fromNum.uuid.toString()} ');
 
       _intialised = true;
@@ -66,7 +66,7 @@ class MeshDevice extends BLEDevice2 {
 
     } else {
       _intialised = false;
-      appLogger.e(
+      appLogger!.e(
           'initialiseMeshService() No services found: ${super.id.toString()} ');
     }
     return _intialised;

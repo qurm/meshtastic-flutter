@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_blue/flutter_blue.dart';
@@ -22,10 +22,10 @@ import '../router/route_generator.dart';
 // assert(deviceConnect != null),
 /// Find Devices screen
 class FindDevicesScreen extends StatelessWidget {
-  const FindDevicesScreen({Key key, this.deviceConnect}) : super(key: key);
+  const FindDevicesScreen({Key? key, required this.deviceConnect}) : super(key: key);
 
   /// BLE device repository
-  final DeviceConnect/*!*/ deviceConnect;
+  final DeviceConnect deviceConnect;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +96,7 @@ class FindDevicesScreen extends StatelessWidget {
                 // Stream created in FindDeviceBloc initialise.
                 AllDevicesTiles(
                   connectDeviceBloc: _connectDeviceBloc,
-                  devices: BlocProvider.of<FindDeviceBloc>(context).allDevices,
+                  devices: BlocProvider.of<FindDeviceBloc>(context).allDevices!,
                   // devices: state.allDevices,
                 )
               ],
@@ -110,7 +110,7 @@ class FindDevicesScreen extends StatelessWidget {
         stream: FlutterBlue.instance.isScanning,
         initialData: false,
         builder: (c, snapshot) {
-          if (snapshot.data) {
+          if (snapshot.data!) {
             return FloatingActionButton(
               child: const Icon(Icons.stop),
               // onPressed: () => FlutterBlue.instance.stopScan(),
@@ -138,13 +138,13 @@ class FindDevicesScreen extends StatelessWidget {
 /// [connectDeviceBloc] bloc used to trigger a connect request
 class AllDevicesTiles extends StatelessWidget {
   const AllDevicesTiles({
-    Key key,
-    @required this.connectDeviceBloc,
-    @required this.devices,
+    Key? key,
+    required this.connectDeviceBloc,
+    required this.devices,
   }) : super(key: key);
 
-  final ConnectDeviceBloc/*!*/ connectDeviceBloc;
-  final Stream<List<ScannedDevice>>/*!*/ devices;
+  final ConnectDeviceBloc connectDeviceBloc;
+  final Stream<List<ScannedDevice>> devices;
 
   @override
   Widget build(BuildContext context) {
@@ -152,12 +152,12 @@ class AllDevicesTiles extends StatelessWidget {
       stream: devices,
       initialData: [],
       builder: (c, snapshot) => Column(
-        children: snapshot.data
+        children: snapshot.data!
             .map(
               (r) => ScanResultTile(
                 result: r,
                 onTap: () async =>
-                    connectDeviceBloc.add(ConnectPressedEvent(r.device)),
+                    connectDeviceBloc.add(ConnectPressedEvent(r.device!)),
               ),
             )
             .toList(),
@@ -170,8 +170,8 @@ class AllDevicesTiles extends StatelessWidget {
 /// refreshes 5 times, each 2s, so shows newly connected devices.
 class ConnectedDevicesTiles extends StatelessWidget {
   ConnectedDevicesTiles({
-    Key key,
-    @required Future<List<MeshDevice>> this.devices,
+    Key? key,
+    required Future<List<MeshDevice>> this.devices,
   }) : super(key: key);
 
   final Future<List<MeshDevice>> devices;
@@ -185,7 +185,7 @@ class ConnectedDevicesTiles extends StatelessWidget {
       // initialData: devices,  //not needed
       // initialData: BlocProvider.of<FindDeviceBloc>(context).connectedDevices,
       builder: (c, snapshot) => Column(
-        children: snapshot.data
+        children: snapshot.data!
             .map((d) => ListTile(
                   title: Text(d.name),
                   subtitle: Text(d.id.toString()),
@@ -211,8 +211,8 @@ class ConnectedDevicesTiles extends StatelessWidget {
 /// refreshes 5 times, each 2s, so shows newly connected devices.
 class ConnectedDevicesRadioTiles extends StatefulWidget {
   ConnectedDevicesRadioTiles({
-    Key key,
-    @required Future<List<MeshDevice>> this.devices,
+    Key? key,
+    required Future<List<MeshDevice>> this.devices,
   }) : super(key: key);
 
   final Future<List<MeshDevice>> devices;
@@ -224,7 +224,7 @@ class ConnectedDevicesRadioTiles extends StatefulWidget {
 
 class _ConnectedDevicesRadioTilesState
     extends State<ConnectedDevicesRadioTiles> {
-  String _value = '';
+  String? _value = '';
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<List<MeshDevice>>(
@@ -236,7 +236,7 @@ class _ConnectedDevicesRadioTilesState
       builder: (c, snapshot) {
         if (snapshot.data != null) {
           return Column(
-            children: snapshot.data
+            children: snapshot.data!
                 .map((d) => RadioListTile(
                       value: d.name,
                       groupValue: _value,
@@ -247,7 +247,7 @@ class _ConnectedDevicesRadioTilesState
                           Icon(Icons.bluetooth_connected,
                               color: Theme.of(context)
                                   .iconTheme
-                                  .color
+                                  .color!
                                   .withOpacity(0.9)),
                         ],
                       ),
@@ -255,10 +255,10 @@ class _ConnectedDevicesRadioTilesState
                         d.id.toString(),
                         style: Theme.of(context)
                             .textTheme
-                            .caption
+                            .caption!
                             .apply(color: Colors.green),
                       ),
-                      onChanged: (String index) =>
+                      onChanged: (String? index) =>
                           setState(() => _value = index),
                       secondary: StreamBuilder<BLEDeviceState>(
                         stream: d.deviceState,
@@ -288,8 +288,8 @@ class _ConnectedDevicesRadioTilesState
 }
 
 class UseDeviceButton extends StatelessWidget {
-  const UseDeviceButton({Key key, this.d}) : super(key: key);
-  final MeshDevice/*!*/ d;
+  const UseDeviceButton({Key? key, required this.d}) : super(key: key);
+  final MeshDevice d;
   @override
   Widget build(BuildContext context) {
     return TextButton(
@@ -303,7 +303,7 @@ class UseDeviceButton extends StatelessWidget {
 }
 
 class NoDeviceButton extends StatelessWidget {
-  const NoDeviceButton({Key key}) : super(key: key);
+  const NoDeviceButton({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return TextButton(child: const Text('N/A'), onPressed: () => null);

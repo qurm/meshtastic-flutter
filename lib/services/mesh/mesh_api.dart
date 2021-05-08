@@ -1,4 +1,4 @@
-// @dart=2.9
+
 /// Interface classes for meshtastic devices, MeshInterface, BLEInterface
 import 'dart:async';
 import 'dart:convert';
@@ -114,17 +114,17 @@ enum MeshtasticReceive { data, text, position, user, node, established, lost }
 ///     debugOut - unused?
 class MeshInterface {
   MeshInterface(this.device, [this.debugOut, this.noProto]) {
-    appLogger.i('MeshInterface constructor: ${device.id} ${device.hashCode}');
+    appLogger!.i('MeshInterface constructor: ${device.id} ${device.hashCode}');
     localNode = MeshNode(this, -1);
   }
 
   /// current local BLE device
   MeshDevice device;
   bool isConnected = false;
-  bool/*!*/ noProto;
+  bool noProto;
 
   /// current local logical Mesh node
-  MeshNode localNode; //how to pass self,
+  late MeshNode localNode; //how to pass self,
 
   /// Full information about a node on the mesh.
   /// Contains node `num`, `snr`, and `Position`, `User`.
@@ -132,19 +132,19 @@ class MeshInterface {
   Map<int, NodeInfo> nodes = {}; //Python is Dict with strings like 'num, 'user'
 
   /// from Python, not used yet
-  int/*!*/ debugOut;
+  int debugOut;
 
   /// Unique local debugging info for this node.
   /// Sent to the phone in response to WantNodes.
   /// Contains node details like my_node_num, has_gps,
   /// num_channels, hw_model, firmware_version, etc.
-  MyNodeInfo myInfo; // = None;
+  late MyNodeInfo myInfo; // = None;
 
   /// A map from request ID to the handler - unused
   // Map responseHandlers = {};
 
   ///  If we've encountered a fatal exception it will be kept here
-  Exception failure;
+  Exception? failure;
 
   /// NodeNum, MyNodeNum - up to 254 nodes, assume uint32 in proto
   /// You can however use a BigInt and use toUnsigned(32) after
@@ -152,14 +152,14 @@ class MeshInterface {
   //Map nodes = {};  // nodes keyed by ID
   Map<int, NodeInfo> _nodesByNum = {}; // nodes keyed by nodenum
   // RadioConfig radioConfig; // now is in Node class
-  FromRadio fromRadio; //set in _handlefromRadio, contains channelSettings
+  late FromRadio fromRadio; //set in _handlefromRadio, contains channelSettings
 
 // random.seed()  # FIXME, we should not clobber the random seedval here, instead tell user they must call it
 // self.currentPacketId = random.randint(0, 0xffffffff)
 //TODO set to random, per Python
-  int currentPacketId; // = None;
+  int? currentPacketId; // = None;
 
-  StreamController<MeshtasticReceive> controller;
+  late StreamController<MeshtasticReceive> controller;
 
   /// Start device packets flowing - not part of constructor as is async.
   /// Clears internal structures, sends , then
@@ -196,11 +196,11 @@ class MeshInterface {
   /// AF changed 8/1/20 for device v>1.20, in line with python app
   /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
   Future<MeshPacket> sendText(
-      {String text,
+      {required String text,
       int destinationId = BROADCAST_NUM,
       bool wantAck = false,
       bool wantResponse = false}) async {
-    userLogger.i('MeshInterface sendText() $text');
+    userLogger!.i('MeshInterface sendText() $text');
     return await sendData(
         byteData: utf8.encode(text),
         destinationId: destinationId,
@@ -226,13 +226,13 @@ class MeshInterface {
   /// AF changed 14/03/21 for device v1.20.10, new protobufs
   /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
   Future<MeshPacket> sendData(
-      {List<int> byteData,
+      {required List<int> byteData,
       int destinationId = BROADCAST_NUM,
       PortNum portNum = PortNum.PRIVATE_APP,
       bool wantAck = false,
       bool wantResponse = false,
       int hopLimit = defaultHopLimit,
-      Function onResponse = null, //callback?
+      Function? onResponse = null, //callback?
       int channelIndex = 0}) async {
     // see https://github.com/dart-lang/protobuf/issues/305
     // subMessage is read-only, so build up as below:
@@ -318,7 +318,7 @@ class MeshInterface {
   /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
   /// Now  destinationId is String
   Future<MeshPacket> sendPacket(
-      {MeshPacket meshPacket,
+      {required MeshPacket meshPacket,
       int destinationId = BROADCAST_NUM,
       bool wantAck = false,
       int hopLimit = defaultHopLimit}) async {
@@ -345,7 +345,7 @@ class MeshInterface {
       //why lookup in the nodes map?
       // python: nodeNum = this.nodes[destinationId]['num'];
     } else {
-      nodeNum = nodes[destinationId].num;
+      nodeNum = nodes[destinationId]!.num;
     }
     meshPacket.to = nodeNum;
     meshPacket.wantAck = wantAck;
@@ -364,7 +364,7 @@ class MeshInterface {
   /// waitForConfig - not required in flutter (ported from Python)
   /// (self, sleep=0.1, maxsecs=20, attrs=('myInfo', 'nodes', 'radioConfig'))
   /// Block until radioConfig is received. Returns True if config has been received.
-  bool waitForConfig({num sleep = .1, int maxsecs = 20, List attrs}) {
+  bool waitForConfig({num sleep = .1, int maxsecs = 20, List? attrs}) {
     for (var i = 1; i <= (maxsecs ~/ sleep); i++) {
       // check that these object.properties exist 'myInfo', 'nodes', 'radioConfig'
       // if (all(map(lambda a: getattr(self, a, None), attrs)))
@@ -387,14 +387,14 @@ class MeshInterface {
 //                 {return node?.user ?? emptyUser ;}}
 //         return emptyUser;}
 
-  NodeInfo getMyNodeInfo() {
+  NodeInfo? getMyNodeInfo() {
     if (myInfo.isInitialized())
       return _nodesByNum[myInfo.myNodeNum];
     else
       return null;
   }
 
-  User getMyUser() {
+  User? getMyUser() {
     final nodeInfo = getMyNodeInfo();
     if (nodeInfo != null) {
       return nodeInfo.user;
@@ -402,13 +402,13 @@ class MeshInterface {
     return null;
   }
 
-  String getLongName() {
+  String? getLongName() {
     final user = getMyUser();
     if (user != null) return user.longName;
     return null;
   }
 
-  String getShortName() {
+  String? getShortName() {
     final user = this.getMyUser();
     if (user != null) return user.shortName;
     return null;
@@ -449,15 +449,15 @@ class MeshInterface {
  */
 
 // Get a new unique packet ID
-  int/*!*/ _generatePacketId() {
+  int _generatePacketId() {
     if (currentPacketId == null) //todo null on zero
     {
       throw Exception(
           '_generatePacketId: Not connected yet, can not generate packet');
     } else {
-      currentPacketId = (currentPacketId + 1) & 0xffffffff;
-      appLogger.i('_generatePacketId ${currentPacketId}');
-      return currentPacketId;
+      currentPacketId = (currentPacketId! + 1) & 0xffffffff;
+      appLogger!.i('_generatePacketId ${currentPacketId}');
+      return currentPacketId!;
     }
   }
 
@@ -467,7 +467,7 @@ class MeshInterface {
     // raise event
     // pub.sendMessage("meshtastic.connection.lost", interface=self)
     controller.add(MeshtasticReceive.lost);
-    userLogger.i('meshtastic.connection.lost ${device.id}');
+    userLogger!.i('meshtastic.connection.lost ${device.id}');
   }
 
   /// Called by this class to tell clients we are now fully connected to a node
@@ -481,7 +481,7 @@ class MeshInterface {
       // raise Event
       // pub.sendMessage("meshtastic.connection.established", interface=self);
       controller.add(MeshtasticReceive.established);
-      userLogger.i('meshtastic.connection.established ${device.id}');
+      userLogger!.i('meshtastic.connection.established ${device.id}');
     }
   }
 
@@ -493,7 +493,7 @@ class MeshInterface {
   /// [User], identifier [wantConfigId].
   /// This placeholder is overridden in BLEInterface, see class BLEInterface(MeshInterface):
   Future<void> _sendToRadio(ToRadio toRadio) {
-    appLogger.w(
+    appLogger!.w(
         'Sending ToRadio called in MeshInterface - no BLEInterface? : ${toRadio}');
     return Future.error(
         'Sending toradio called in MeshInterface - no BLEInterface? : ${toRadio}');
@@ -503,7 +503,7 @@ class MeshInterface {
   /// AF 17/03/21 updated from Python v1.20
   /// called from _handleFromRadio when configCompleteId received
   Future<void> _handleConfigComplete() async {
-    appLogger.d('MeshInterface  _handleConfigComplete');
+    appLogger!.d('MeshInterface  _handleConfigComplete');
     await localNode.requestConfig();
   }
 
@@ -519,7 +519,7 @@ class MeshInterface {
     // AF 17/03/21 updated from Python v1.20
     // AF 29/03/21 made async due to _handleConfigComplete calling Node._requestSettings(); etc
     fromRadio = new FromRadio.fromBuffer(fromRadioBytes);
-    userLogger.d('_handleFromRadio Received: ${fromRadio.toDebugString()}');
+    userLogger!.d('_handleFromRadio Received: ${fromRadio.toDebugString()}');
     if (fromRadio.hasMyInfo()) {
       myInfo = fromRadio.myInfo;
       localNode.nodeNum = myInfo.myNodeNum;
@@ -554,9 +554,9 @@ class MeshInterface {
       var node = fromRadio.nodeInfo;
       try {
         _fixupPosition(node.position);
-        appLogger.v('fromRadio NodeInfo ${node.position.toDebugString()}');
+        appLogger!.v('fromRadio NodeInfo ${node.position.toDebugString()}');
       } catch (e) {
-        appLogger.e('fromRadio Node without position');
+        appLogger!.e('fromRadio Node without position');
       }
       _nodesByNum[node.num] = node; //add node to the map
       // Some nodes might not have user/ids assigned yet
@@ -565,7 +565,7 @@ class MeshInterface {
       // if (node.hasUser()) nodes[node.user.id] = node;
       // raise Event
       controller.add(MeshtasticReceive.node);
-      userLogger.v('_handleFromRadio meshtastic.node.updated ${node.num}');
+      userLogger!.v('_handleFromRadio meshtastic.node.updated ${node.num}');
     }
     // we ignore the config_complete_id, it is unneeded for our stream API fromRadio.config_complete_id
     else if (fromRadio.configCompleteId == MY_CONFIG_ID)
@@ -580,10 +580,10 @@ class MeshInterface {
       //MeshInterface._disconnected();
       _disconnected();
       await _startConfig();
-      userLogger.i('_handleFromRadio meshtastic.node.rebooted');
+      userLogger!.i('_handleFromRadio meshtastic.node.rebooted');
     } // redownload the node db etc...}
     else {
-      userLogger.wtf('_handleFromRadio Unexpected FromRadio payload');
+      userLogger!.wtf('_handleFromRadio Unexpected FromRadio payload');
     }
     // userLogger.v('Node list $_nodesByNum');
   }
@@ -592,7 +592,7 @@ class MeshInterface {
   /// Arguments:
   ///     position {Position dictionary} -- object ot fix up
   void _fixupPosition(Position position) {
-    appLogger.d("_fixupPosition called lat ${position.latitudeI}");
+    appLogger!.d("_fixupPosition called lat ${position.latitudeI}");
     //TODO appears to be adding new properties to object - need a new Dart Position class
     //if (position.hasLatitudeI()) position.latitude = position.latitudeI * 1e-7;
     // if (position.hasLongitudeI())
@@ -608,16 +608,16 @@ class MeshInterface {
   String _nodeNumToId(int nodeNum) {
     if (nodeNum == BROADCAST_NUM) return BROADCAST_ADDR;
     try {
-      return _nodesByNum[nodeNum].user.id.toString();
+      return _nodesByNum[nodeNum]!.user.id.toString();
     } catch (e) {
-      userLogger.w('Node $nodeNum not found for fromId $e');
+      userLogger!.w('Node $nodeNum not found for fromId $e');
       return '';
     }
   }
 
   /// Given a nodenum find the NodeInfo in the map (or create)
   /// TODO handle exception as failure
-  NodeInfo _getOrCreateByNum(int nodeNum) {
+  NodeInfo? _getOrCreateByNum(int nodeNum) {
     if (nodeNum == BROADCAST_NUM) {
       throw Exception('Can not create/find nodenum by the broadcast num');
     }
@@ -657,7 +657,7 @@ class MeshInterface {
 
     // appLogger.w(
     //     'Device returned a packet we sent, ignoring: ${meshPacket.toString()}');
-    appLogger.d('_handlePacketFromRadio Received: ${meshPacket.toString()}');
+    appLogger!.d('_handlePacketFromRadio Received: ${meshPacket.toString()}');
 
     //add fromId and toId fields based on the node ID
 
@@ -729,10 +729,10 @@ class MeshInterface {
         //TODO - extend class to hold decoded text
         final String text = Utf8Decoder().convert(meshPacket.decoded.payload);
         controller.add(MeshtasticReceive.text);
-        userLogger
+        userLogger!
             .v('_handlePacketFromRadio: meshPacket.decoded.payload = $text');
       } catch (ex) {
-        userLogger.e(
+        userLogger!.e(
             '_handlePacketFromRadio: Malformatted utf8 in text message: ${ex}');
         //TODO should raise error to controller.add(MeshtasticReceive.unknown?);
       }
@@ -743,7 +743,7 @@ class MeshInterface {
       //TODO - not required - can remove when all working 21/03/2021
       // _fixupPosition(Position.fromBuffer(meshPacket.decoded.payload));
       // update node DB as needed, with new position
-      _getOrCreateByNum(meshPacket.from).position =
+      _getOrCreateByNum(meshPacket.from)!.position =
           Position.fromBuffer(meshPacket.decoded.payload);
       controller.add(MeshtasticReceive.position);
     }
@@ -752,7 +752,7 @@ class MeshInterface {
       topic = 'meshtastic.receive.user';
       User u = User.fromBuffer(meshPacket.decoded.payload);
       // update node DB as needed
-      NodeInfo n = _getOrCreateByNum(fromId);
+      NodeInfo n = _getOrCreateByNum(fromId)!;
       n.user = u;
       // We now have a node ID, update or add to the map
       //nodes[fromId].user = u;
@@ -762,7 +762,7 @@ class MeshInterface {
       }, ifAbsent: () => n);
       controller.add(MeshtasticReceive.user);
     }
-    userLogger.v('send message $topic');
+    userLogger!.v('send message $topic');
   }
 
   /// setPreferenceList sets a list of attributes in [UserPreferences].
@@ -774,23 +774,23 @@ class MeshInterface {
 // Uses string type for value, as most versatile
 // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
 // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
-  Either<CommandFailure, bool> setPreferenceList(Map<String/*!*/, String/*!*/> prefMap) {
+  Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
     // direct reference to the .preferences, doesnt work with dotted path
     // TODO - this is localNode, should also set remote Nodes?
     // final prefs = localNode.preferences; //Now in Node class
     //TODO - need to get a copy of
     // final prefs = RadioConfig_UserPreferences();
-    final prefs = localNode.radioConfig.preferences.clone(); //Now in Node class
+    final prefs = localNode.radioConfig!.preferences.clone(); //Now in Node class
     // localNode.radioConfig.getExtension(deepCopy());
     // localNode.radioConfig.clone();
-    appLogger.i('setPreferenceList prefs: ${prefs.hashCode}');
+    appLogger!.i('setPreferenceList prefs: ${prefs.hashCode}');
     prefMap.forEach((key, value) {
       final possibleFailure = _setPreference2(prefs, key, value);
       if (possibleFailure.isLeft()) {
         return possibleFailure;
       } else {
         // commit the change
-        localNode.radioConfig.preferences = prefs;
+        localNode.radioConfig!.preferences = prefs;
       }
     });
     return right(true);
@@ -805,12 +805,12 @@ class MeshInterface {
   /// Then must follow this with a call to writeConfig to send to the device.
   /// AF 01/04/21 Updated for all current protobuf [RadioConfig_UserPreferences]
   Either<CommandFailure, bool> _setPreference2(
-      RadioConfig_UserPreferences prefs, String/*!*/ preference, String value) {
+      RadioConfig_UserPreferences prefs, String preference, String value) {
     // logger.d('setPreference prefs ${prefs.isFrozen}');
     // prefs = RadioConfig_UserPreferences();
 
-    int intVal = int.tryParse(value); //null
-    userLogger.i('MeshInterface setPreference $preference: $value');
+    int? intVal = int.tryParse(value); //null
+    userLogger!.i('MeshInterface setPreference $preference: $value');
     // Note preference is in send_owner_interval format to align with Python and other Meshtastic apps
     // whereas the Dart Protobuf implementation uses sendOwnerInterval format
     // There is no (nice) Dart way to call a method name based on a string value.
@@ -818,42 +818,42 @@ class MeshInterface {
       switch (preference) {
         // start int values
         case 'position_broadcast_secs':
-          prefs.positionBroadcastSecs = intVal;
+          prefs.positionBroadcastSecs = intVal!;
           return right(true);
         case 'send_owner_interval':
-          prefs.sendOwnerInterval = intVal;
+          prefs.sendOwnerInterval = intVal!;
           return right(true);
         case 'wait_bluetooth_secs':
-          prefs.waitBluetoothSecs = intVal;
+          prefs.waitBluetoothSecs = intVal!;
           return right(true);
         case 'screen_on_secs':
-          prefs.screenOnSecs = intVal;
+          prefs.screenOnSecs = intVal!;
           return right(true);
         case 'phone_timeout_secs':
-          prefs.phoneTimeoutSecs = intVal;
+          prefs.phoneTimeoutSecs = intVal!;
           return right(true);
         case 'phone_sds_timeout_sec':
-          prefs.phoneSdsTimeoutSec = intVal;
+          prefs.phoneSdsTimeoutSec = intVal!;
           return right(true);
         case 'mesh_sds_timeout_secs':
-          prefs.meshSdsTimeoutSecs = intVal;
+          prefs.meshSdsTimeoutSecs = intVal!;
           return right(true);
         case 'sds_secs':
-          prefs.sdsSecs = intVal;
+          prefs.sdsSecs = intVal!;
           return right(true);
         case 'ls_secs':
-          prefs.lsSecs = intVal;
+          prefs.lsSecs = intVal!;
           return right(true);
         case 'min_wake_secs':
-          prefs.minWakeSecs = intVal;
+          prefs.minWakeSecs = intVal!;
           return right(true);
 
         case 'gps_update_interval':
-          prefs.gpsUpdateInterval = intVal;
+          prefs.gpsUpdateInterval = intVal!;
           return right(true);
 
         case 'gps_attempt_time':
-          prefs.gpsAttemptTime = intVal;
+          prefs.gpsAttemptTime = intVal!;
           return right(true);
 // gettable, not settable?
         // case 'ignore_incoming':
@@ -915,16 +915,16 @@ class MeshInterface {
           prefs.serialpluginEcho = (value.toLowerCase() == 'true');
           return right(true);
         case 'serialplugin_rxd':
-          prefs.serialpluginRxd = intVal;
+          prefs.serialpluginRxd = intVal!;
           return right(true);
         case 'serialplugin_txd':
-          prefs.serialpluginTxd = intVal;
+          prefs.serialpluginTxd = intVal!;
           return right(true);
         case 'serialplugin_timeout':
-          prefs.serialpluginTimeout = intVal;
+          prefs.serialpluginTimeout = intVal!;
           return right(true);
         case 'serialplugin_mode':
-          prefs.serialpluginMode = intVal;
+          prefs.serialpluginMode = intVal!;
           return right(true);
 
         // notification plug-in settings
@@ -935,10 +935,10 @@ class MeshInterface {
           prefs.extNotificationPluginActive = (value.toLowerCase() == 'true');
           return right(true);
         case 'ext_notification_plugin_output_ms':
-          prefs.extNotificationPluginOutputMs = intVal;
+          prefs.extNotificationPluginOutputMs = intVal!;
           return right(true);
         case 'ext_notification_plugin_output':
-          prefs.extNotificationPluginOutput = intVal;
+          prefs.extNotificationPluginOutput = intVal!;
           return right(true);
         case 'ext_notification_plugin_alert_message':
           prefs.extNotificationPluginAlertMessage =
@@ -957,7 +957,7 @@ class MeshInterface {
           prefs.rangeTestPluginSave = (value.toLowerCase() == 'true');
           return right(true);
         case 'range_test_plugin_sender':
-          prefs.rangeTestPluginSender = intVal;
+          prefs.rangeTestPluginSender = intVal!;
           return right(true);
 
         // store forward plug-in settings
@@ -965,7 +965,7 @@ class MeshInterface {
           prefs.storeForwardPluginEnabled = (value.toLowerCase() == 'true');
           return right(true);
         case 'store_forward_plugin_records':
-          prefs.storeForwardPluginRecords = intVal;
+          prefs.storeForwardPluginRecords = intVal!;
           return right(true);
 
         // environmental sensor  plug-in settings
@@ -978,15 +978,15 @@ class MeshInterface {
               (value.toLowerCase() == 'true');
           return right(true);
         case 'environmental_measurement_plugin_read_error_count_threshold':
-          prefs.environmentalMeasurementPluginReadErrorCountThreshold = intVal;
+          prefs.environmentalMeasurementPluginReadErrorCountThreshold = intVal!;
           return right(true);
 
         case 'environmental_measurement_plugin_update_interval':
-          prefs.environmentalMeasurementPluginUpdateInterval = intVal;
+          prefs.environmentalMeasurementPluginUpdateInterval = intVal!;
           return right(true);
 
         case 'environmental_measurement_plugin_recovery_interval':
-          prefs.environmentalMeasurementPluginRecoveryInterval = intVal;
+          prefs.environmentalMeasurementPluginRecoveryInterval = intVal!;
           return right(true);
 
         case 'environmental_measurement_plugin_display_farenheit':
@@ -1000,7 +1000,7 @@ class MeshInterface {
                   .firstWhere((e) => describeEnum(e) == value.toUpperCase());
           return right(true);
         case 'environmental_measurement_plugin_sensor_pin':
-          prefs.environmentalMeasurementPluginSensorPin = intVal;
+          prefs.environmentalMeasurementPluginSensorPin = intVal!;
           return right(true);
 
         //TODO needs some special setter, as is a list of ignore Nodes
@@ -1013,7 +1013,7 @@ class MeshInterface {
       }
     } catch (e) {
       // needs more to handle parameter type fails
-      appLogger.e('setPreference unexpected: $e');
+      appLogger!.e('setPreference unexpected: $e');
       return left(const CommandFailure.incorrectParameter());
     }
   }
@@ -1025,7 +1025,7 @@ class MeshInterface {
 /// [device] is connected MeshDevice
 class BLEInterface extends MeshInterface {
   BLEInterface(MeshDevice device) : super(device) {
-    appLogger
+    appLogger!
         .i('BLEInterface constructor body: ${device.id} ${device.hashCode}');
   }
 
@@ -1033,8 +1033,8 @@ class BLEInterface extends MeshInterface {
   /// has async code, so not called in the constructor, but from meshServiceStart
   Future<bool> init() async {
     bool _intialised = false;
-    userLogger.i('BLEInterface init() device: ${device.id}');
-    appLogger.d('BLEInterface init() 1: ${_intialised}');
+    userLogger!.i('BLEInterface init() device: ${device.id}');
+    appLogger!.d('BLEInterface init() 1: ${_intialised}');
     await device.requestMtu(512).timeout(const Duration(seconds: 2),
         onTimeout: () {
       throw Exception('BLEInterface requestMtu failed to complete');
@@ -1047,7 +1047,7 @@ class BLEInterface extends MeshInterface {
     if (_intialised) await super._startConfig(); // initialise MeshInterface
     // AF TODO - needs time to complete, async does not help
     // 29/03/21 try this again as code has better async now
-    appLogger.d('BLEInterface init() 4: ${_intialised}');
+    appLogger!.d('BLEInterface init() 4: ${_intialised}');
     // await Future.delayed(Duration(seconds: 1));
     // can check some BLE status here?
 
@@ -1089,7 +1089,7 @@ class BLEInterface extends MeshInterface {
     //seems to notify, then bytelist is zero length
     //int _packetNumber = bytes.getInt8(0);
     // int _packetNumber = bytes.getInt16(0);
-    userLogger.i("_handleFromNumNotify BLE Notify: ${bytes.lengthInBytes} }");
+    userLogger!.i("_handleFromNumNotify BLE Notify: ${bytes.lengthInBytes} }");
     // read packet number
     // fetch fromRadio packet, handle it.  Should repeat until up to number
     await _readFromRadio();
@@ -1103,7 +1103,7 @@ class BLEInterface extends MeshInterface {
   /// assume it is handled. Contains one [MeshPacket], with a [Data] payload.
   @override
   Future<void> _sendToRadio(ToRadio toRadio) async {
-    userLogger.v('_sendToRadio writing ${toRadio} to ${device.id.toString()}');
+    userLogger!.v('_sendToRadio writing ${toRadio} to ${device.id.toString()}');
     List<int> bytes = toRadio.writeToBuffer(); //.SerializeToString()
     // await _toRadio.write(bytes, withoutResponse: true);
     //TODO - can fail here after some downtime, may need to reconnect to device?
@@ -1138,9 +1138,9 @@ class BLEInterface extends MeshInterface {
     /// that calls _handleFromNumNotify(event)
     // await _readFromRadio(); // will handle response and update local radioConfig
     // To DO - can we wait for the sendRadio to complete, and then show user ?
-    userLogger.i(
-        'BLEInterface getConfig() Prefs:\n${localNode.radioConfig.preferences.toString()}');
-    return localNode.radioConfig.preferences.toString();
+    userLogger!.i(
+        'BLEInterface getConfig() Prefs:\n${localNode.radioConfig!.preferences.toString()}');
+    return localNode.radioConfig!.preferences.toString();
   }
 
   /// Read from Mesh device Characteristic until empty.
@@ -1163,9 +1163,9 @@ class BLEInterface extends MeshInterface {
       // on next read after the _handleConfigComplete is generated
       // PlatformException (PlatformException(read_characteristic_error, unknown reason, may occur if
       // readCharacteristic was called before last read finished., null, null))
-      userLogger.d(
-          '_readFromRadio c.isNotifying ${device.toRadio.isNotifying} c.read ${device.toRadio.properties.write}');
-      userLogger.v('_readFromRadio read from  ${device.id.toString()}');
+      userLogger!.d(
+          '_readFromRadio c.isNotifying ${device.toRadio.isNotifying} c.read ${device.toRadio.properties!.write}');
+      userLogger!.v('_readFromRadio read from  ${device.id.toString()}');
 
       List<int> bytes = await device.fromRadio.read();
       wasEmpty = (bytes.length == 0);

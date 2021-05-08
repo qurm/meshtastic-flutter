@@ -64,6 +64,7 @@ dependencies:
 # dependency_overrides:
 #   freezed: ^0.12.7
 #   freezed_annotation: ^0.12.0
+  collection: ^1.15.0-nullsafety.4
 
 dev_dependencies:
   # auto_route_generator: ^0.6.10

@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:async';
 
 import 'package:collection/collection.dart';
@@ -28,7 +28,7 @@ import 'connect_failure.dart';
 /// return them as Failures.
 ///
 
-final deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+final Logger? deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 // Logger deviceRepoLogger = Logger(
 //     printer: PrettyPrinter(
@@ -47,15 +47,15 @@ final deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 /// handles all calls to the BLE interface
 class DeviceConnect {
   final BlueAPIClient blueAPIClient;
-  MeshDevice currentDevice;
+  late MeshDevice currentDevice;
   List<BLEDevice2> deviceList = [];
-  BLEInterface bleInterface;
+  BLEInterface? bleInterface;
 
   //constructor with required BLE API
   /// the "unit" is defined with dartz
-  DeviceConnect({@required this.blueAPIClient})
+  DeviceConnect({required this.blueAPIClient})
       : assert(blueAPIClient != null) {
-    deviceRepoLogger.v('DeviceConnect constructor');
+    deviceRepoLogger!.v('DeviceConnect constructor');
   }
 
   //Future<void> connect() return blueAPIClient.connect();
@@ -128,22 +128,21 @@ class DeviceConnect {
   ///
   /// [id] must be valid MAC, like c4:4f:33:6a:a3:cb in lowercase
   /// called from FindDevice bloc on FindStarted
-  Future<Either<ConnectFailure, BLEDevice2>> scanConnect(String id) async {
-    BLEDevice2 _device;
+  Future<Either<ConnectFailure, BLEDevice2?>> scanConnect(String? id) async {
+    BLEDevice2? _device;
     try {
       //get the device [id] if already connected
       final _devices = await connectedDevices2;
       if (_devices.isNotEmpty) {
-        deviceRepoLogger.d('our id ${id}');
-        _device = _devices.firstWhere(
-            (result) => equalsIgnoreAsciiCase(result.id.toString(), id),
-            orElse: () => null);
+        deviceRepoLogger!.d('our id ${id}');
+        _device = _devices.firstWhereOrNull(
+            (result) => equalsIgnoreAsciiCase(result.id.toString(), id!));
         if (_device != null) {
-          deviceRepoLogger.d('matches id ${_devices.first.id.toString()}');
+          deviceRepoLogger!.d('matches id ${_devices.first.id.toString()}');
           return right(_device);
         }
       } else {
-        deviceRepoLogger.d('no match for ${id} in BLE connected devices');
+        deviceRepoLogger!.d('no match for ${id} in BLE connected devices');
       }
       //not connected already, so scan for [id]
       await startScan(2500);
@@ -183,12 +182,12 @@ class DeviceConnect {
   /// Creates the BLEInterface/MeshInterface for the [meshd] device
   /// and initiailises it, async.
   /// called from SetupDeviceBloc
-  Future<BLEInterface> meshServiceStart(MeshDevice meshd) async {
+  Future<BLEInterface?> meshServiceStart(MeshDevice meshd) async {
     currentDevice = meshd;
-    deviceRepoLogger.i('meshServiceStart with device ${meshd.id.toString()}');
+    deviceRepoLogger!.i('meshServiceStart with device ${meshd.id.toString()}');
     bleInterface = new BLEInterface(currentDevice);
     //may be first call to BLE/GATT - triggers any Platform exceptions
-    await bleInterface.init();
+    await bleInterface!.init();
     return bleInterface;
   }
 

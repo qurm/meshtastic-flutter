@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: deviceonly.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -22,7 +22,7 @@ class LegacyRadioConfig_LegacyPreferences extends $pb.GeneratedMessage {
 
   LegacyRadioConfig_LegacyPreferences._() : super();
   factory LegacyRadioConfig_LegacyPreferences({
-    $2.RegionCode region,
+    $2.RegionCode? region,
   }) {
     final _result = create();
     if (region != null) {
@@ -49,7 +49,7 @@ class LegacyRadioConfig_LegacyPreferences extends $pb.GeneratedMessage {
   static $pb.PbList<LegacyRadioConfig_LegacyPreferences> createRepeated() => $pb.PbList<LegacyRadioConfig_LegacyPreferences>();
   @$core.pragma('dart2js:noInline')
   static LegacyRadioConfig_LegacyPreferences getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegacyRadioConfig_LegacyPreferences>(create);
-  static LegacyRadioConfig_LegacyPreferences _defaultInstance;
+  static LegacyRadioConfig_LegacyPreferences? _defaultInstance;
 
   @$pb.TagNumber(15)
   $2.RegionCode get region => $_getN(0);
@@ -69,7 +69,7 @@ class LegacyRadioConfig extends $pb.GeneratedMessage {
 
   LegacyRadioConfig._() : super();
   factory LegacyRadioConfig({
-    LegacyRadioConfig_LegacyPreferences preferences,
+    LegacyRadioConfig_LegacyPreferences? preferences,
   }) {
     final _result = create();
     if (preferences != null) {
@@ -96,7 +96,7 @@ class LegacyRadioConfig extends $pb.GeneratedMessage {
   static $pb.PbList<LegacyRadioConfig> createRepeated() => $pb.PbList<LegacyRadioConfig>();
   @$core.pragma('dart2js:noInline')
   static LegacyRadioConfig getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LegacyRadioConfig>(create);
-  static LegacyRadioConfig _defaultInstance;
+  static LegacyRadioConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
   LegacyRadioConfig_LegacyPreferences get preferences => $_getN(0);
@@ -126,15 +126,15 @@ class DeviceState extends $pb.GeneratedMessage {
 
   DeviceState._() : super();
   factory DeviceState({
-    LegacyRadioConfig legacyRadio,
-    $0.MyNodeInfo myNode,
-    $0.User owner,
-    $core.Iterable<$0.NodeInfo> nodeDb,
-    $core.Iterable<$0.MeshPacket> receiveQueue,
-    $0.MeshPacket rxTextMessage,
-    $core.int version,
-    $core.bool noSave,
-    $core.bool didGpsReset,
+    LegacyRadioConfig? legacyRadio,
+    $0.MyNodeInfo? myNode,
+    $0.User? owner,
+    $core.Iterable<$0.NodeInfo>? nodeDb,
+    $core.Iterable<$0.MeshPacket>? receiveQueue,
+    $0.MeshPacket? rxTextMessage,
+    $core.int? version,
+    $core.bool? noSave,
+    $core.bool? didGpsReset,
   }) {
     final _result = create();
     if (legacyRadio != null) {
@@ -185,7 +185,7 @@ class DeviceState extends $pb.GeneratedMessage {
   static $pb.PbList<DeviceState> createRepeated() => $pb.PbList<DeviceState>();
   @$core.pragma('dart2js:noInline')
   static DeviceState getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<DeviceState>(create);
-  static DeviceState _defaultInstance;
+  static DeviceState? _defaultInstance;
 
   @$pb.TagNumber(1)
   LegacyRadioConfig get legacyRadio => $_getN(0);
@@ -273,7 +273,7 @@ class ChannelFile extends $pb.GeneratedMessage {
 
   ChannelFile._() : super();
   factory ChannelFile({
-    $core.Iterable<$1.Channel> channels,
+    $core.Iterable<$1.Channel>? channels,
   }) {
     final _result = create();
     if (channels != null) {
@@ -300,7 +300,7 @@ class ChannelFile extends $pb.GeneratedMessage {
   static $pb.PbList<ChannelFile> createRepeated() => $pb.PbList<ChannelFile>();
   @$core.pragma('dart2js:noInline')
   static ChannelFile getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelFile>(create);
-  static ChannelFile _defaultInstance;
+  static ChannelFile? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<$1.Channel> get channels => $_getList(0);

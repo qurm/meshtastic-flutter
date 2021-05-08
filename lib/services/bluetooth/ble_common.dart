@@ -1,4 +1,4 @@
-// @dart=2.9
+
 // Common for Ennums and other objects required in multiple layers
 // Import into domain and service layer
 
@@ -41,10 +41,10 @@ const fromNumUuidStr = 'ed9da18c-a800-4f66-a670-aa7547e34453';
 final Guid fromNumUuid = Guid(fromNumUuidStr);
 
 class BLEService {
-  Guid/*!*/ uuid;
-  String/*!*/ serviceName; //friendly name, enriched data from json list
-  String/*!*/ deviceId;
-  bool/*!*/ isPrimary;
+  Guid uuid;
+  late String serviceName; //friendly name, enriched data from json list
+  late String deviceId;
+  late bool isPrimary;
   List<BLECharacteristic> characteristics = [];
   List<BLEService> includedServices = [];
 
@@ -84,16 +84,16 @@ class BLEService {
 }
 
 class BLECharacteristic {
-  Guid/*!*/ uuid;
-  String/*!*/ name; //friendly name, enriched data from json list
-  String/*!*/ deviceId;
-  Guid/*!*/ serviceUuid;
-  Guid secondaryServiceUuid;
-  CharacteristicProperties properties;
+  Guid uuid;
+  late String name; //friendly name, enriched data from json list
+  late String deviceId;
+  late Guid serviceUuid;
+  Guid? secondaryServiceUuid;
+  CharacteristicProperties? properties;
   List<BLEDescriptor> descriptors = [];
   bool isNotifying =
       false; //default as descriptor may be null, so fb cannot provide
-  BluetoothCharacteristic _characteristic; //todo - is this needed?
+  late BluetoothCharacteristic _characteristic; //todo - is this needed?
 
   BLECharacteristic(this.uuid, this.deviceId, this.serviceUuid,
       this.secondaryServiceUuid, this.properties, this.descriptors);
@@ -141,7 +141,7 @@ class BLECharacteristic {
   /// Writes the value of a characteristic.
   /// [withoutResponse]: the write is not guaranteed and will return immediately with success.
   /// [withResponse] the method will return after the write operation has either passed or failed.
-  Future<Null> write(List<int> value, {bool withoutResponse}) async {
+  Future<Null> write(List<int> value, {required bool withoutResponse}) async {
     final type = withoutResponse ? true : false;
     return await _characteristic.write(value, withoutResponse: type);
   }
@@ -157,11 +157,11 @@ class BLECharacteristic {
 class BLEDescriptor {
   static final Guid cccd = Guid('00002902-0000-1000-8000-00805f9b34fb');
 
-  Guid/*!*/ uuid;
-  String/*!*/ deviceId;
-  Guid/*!*/ serviceUuid;
-  Guid/*!*/ characteristicUuid;
-  BluetoothDescriptor _descriptor; //handle on flutter_blue desc - needed?
+  late Guid uuid;
+  late String deviceId;
+  late Guid serviceUuid;
+  late Guid characteristicUuid;
+  late BluetoothDescriptor _descriptor; //handle on flutter_blue desc - needed?
 
   BLEDescriptor(
       this.uuid, this.deviceId, this.serviceUuid, this.characteristicUuid);
@@ -191,11 +191,11 @@ class BLEDescriptor {
 
 class BLEAdvertisementData {
   // these should be final, but prevents named constructor!?
-  String localName;
-  int txPowerLevel;
-  bool connectable;
-  Map<int, List<int>> manufacturerData;
-  Map<String, List<int>> serviceData;
+  late String localName;
+  int? txPowerLevel;
+  bool? connectable;
+  late Map<int, List<int>> manufacturerData;
+  late Map<String, List<int>> serviceData;
   List<String> serviceUuids = [];
 
   BLEAdvertisementData.fromAD(AdvertisementData ad) {

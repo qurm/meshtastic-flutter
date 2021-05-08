@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: radioconfig.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -99,57 +99,57 @@ class RadioConfig_UserPreferences extends $pb.GeneratedMessage {
 
   RadioConfig_UserPreferences._() : super();
   factory RadioConfig_UserPreferences({
-    $core.int positionBroadcastSecs,
-    $core.int sendOwnerInterval,
-    $core.int waitBluetoothSecs,
-    $core.int screenOnSecs,
-    $core.int phoneTimeoutSecs,
-    $core.int phoneSdsTimeoutSec,
-    $core.int meshSdsTimeoutSecs,
-    $core.int sdsSecs,
-    $core.int lsSecs,
-    $core.int minWakeSecs,
-    $core.String wifiSsid,
-    $core.String wifiPassword,
-    $core.bool wifiApMode,
-    RegionCode region,
-    ChargeCurrent chargeCurrent,
-    LocationSharing locationShare,
-    GpsOperation gpsOperation,
-    $core.int gpsUpdateInterval,
-    $core.int gpsAttemptTime,
-    $core.bool isRouter,
-    $core.bool isLowPower,
-    $core.bool fixedPosition,
-    $core.bool factoryReset,
-    $core.bool debugLogEnabled,
-    $core.Iterable<$core.int> ignoreIncoming,
-    $core.bool serialpluginEnabled,
-    $core.bool serialpluginEcho,
-    $core.int serialpluginRxd,
-    $core.int serialpluginTxd,
-    $core.int serialpluginTimeout,
-    $core.int serialpluginMode,
-    $core.bool extNotificationPluginEnabled,
-    $core.int extNotificationPluginOutputMs,
-    $core.int extNotificationPluginOutput,
-    $core.bool extNotificationPluginActive,
-    $core.bool extNotificationPluginAlertMessage,
-    $core.bool extNotificationPluginAlertBell,
-    $core.bool rangeTestPluginEnabled,
-    $core.int rangeTestPluginSender,
-    $core.bool rangeTestPluginSave,
-    $core.int storeForwardPluginRecords,
-    $core.bool environmentalMeasurementPluginMeasurementEnabled,
-    $core.bool environmentalMeasurementPluginScreenEnabled,
-    $core.int environmentalMeasurementPluginReadErrorCountThreshold,
-    $core.int environmentalMeasurementPluginUpdateInterval,
-    $core.int environmentalMeasurementPluginRecoveryInterval,
-    $core.bool environmentalMeasurementPluginDisplayFarenheit,
-    RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType
+    $core.int? positionBroadcastSecs,
+    $core.int? sendOwnerInterval,
+    $core.int? waitBluetoothSecs,
+    $core.int? screenOnSecs,
+    $core.int? phoneTimeoutSecs,
+    $core.int? phoneSdsTimeoutSec,
+    $core.int? meshSdsTimeoutSecs,
+    $core.int? sdsSecs,
+    $core.int? lsSecs,
+    $core.int? minWakeSecs,
+    $core.String? wifiSsid,
+    $core.String? wifiPassword,
+    $core.bool? wifiApMode,
+    RegionCode? region,
+    ChargeCurrent? chargeCurrent,
+    LocationSharing? locationShare,
+    GpsOperation? gpsOperation,
+    $core.int? gpsUpdateInterval,
+    $core.int? gpsAttemptTime,
+    $core.bool? isRouter,
+    $core.bool? isLowPower,
+    $core.bool? fixedPosition,
+    $core.bool? factoryReset,
+    $core.bool? debugLogEnabled,
+    $core.Iterable<$core.int>? ignoreIncoming,
+    $core.bool? serialpluginEnabled,
+    $core.bool? serialpluginEcho,
+    $core.int? serialpluginRxd,
+    $core.int? serialpluginTxd,
+    $core.int? serialpluginTimeout,
+    $core.int? serialpluginMode,
+    $core.bool? extNotificationPluginEnabled,
+    $core.int? extNotificationPluginOutputMs,
+    $core.int? extNotificationPluginOutput,
+    $core.bool? extNotificationPluginActive,
+    $core.bool? extNotificationPluginAlertMessage,
+    $core.bool? extNotificationPluginAlertBell,
+    $core.bool? rangeTestPluginEnabled,
+    $core.int? rangeTestPluginSender,
+    $core.bool? rangeTestPluginSave,
+    $core.int? storeForwardPluginRecords,
+    $core.bool? environmentalMeasurementPluginMeasurementEnabled,
+    $core.bool? environmentalMeasurementPluginScreenEnabled,
+    $core.int? environmentalMeasurementPluginReadErrorCountThreshold,
+    $core.int? environmentalMeasurementPluginUpdateInterval,
+    $core.int? environmentalMeasurementPluginRecoveryInterval,
+    $core.bool? environmentalMeasurementPluginDisplayFarenheit,
+    RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType?
         environmentalMeasurementPluginSensorType,
-    $core.int environmentalMeasurementPluginSensorPin,
-    $core.bool storeForwardPluginEnabled,
+    $core.int? environmentalMeasurementPluginSensorPin,
+    $core.bool? storeForwardPluginEnabled,
   }) {
     final _result = create();
     if (positionBroadcastSecs != null) {
@@ -342,7 +342,7 @@ class RadioConfig_UserPreferences extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static RadioConfig_UserPreferences getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<RadioConfig_UserPreferences>(create);
-  static RadioConfig_UserPreferences _defaultInstance;
+  static RadioConfig_UserPreferences? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get positionBroadcastSecs => $_getIZ(0);
@@ -959,7 +959,7 @@ class RadioConfig extends $pb.GeneratedMessage {
 
   RadioConfig._() : super();
   factory RadioConfig({
-    RadioConfig_UserPreferences preferences,
+    RadioConfig_UserPreferences? preferences,
   }) {
     final _result = create();
     if (preferences != null) {
@@ -991,7 +991,7 @@ class RadioConfig extends $pb.GeneratedMessage {
   @$core.pragma('dart2js:noInline')
   static RadioConfig getDefault() => _defaultInstance ??=
       $pb.GeneratedMessage.$_defaultFor<RadioConfig>(create);
-  static RadioConfig _defaultInstance;
+  static RadioConfig? _defaultInstance;
 
   @$pb.TagNumber(1)
   RadioConfig_UserPreferences get preferences => $_getN(0);

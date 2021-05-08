@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:bloc/bloc.dart';
 import 'package:logger/logger.dart';
 
@@ -13,7 +13,7 @@ class SimpleBlocObserver extends BlocObserver {
         super();
 
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     // print('onEvent $event');
     _logger.i('BlocObserver: onEvent $event');
     super.onEvent(bloc, event);

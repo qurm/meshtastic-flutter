@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: mesh.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -26,11 +26,11 @@ class Position extends $pb.GeneratedMessage {
 
   Position._() : super();
   factory Position({
-    $core.int latitudeI,
-    $core.int longitudeI,
-    $core.int altitude,
-    $core.int batteryLevel,
-    $core.int time,
+    $core.int? latitudeI,
+    $core.int? longitudeI,
+    $core.int? altitude,
+    $core.int? batteryLevel,
+    $core.int? time,
   }) {
     final _result = create();
     if (latitudeI != null) {
@@ -69,7 +69,7 @@ class Position extends $pb.GeneratedMessage {
   static $pb.PbList<Position> createRepeated() => $pb.PbList<Position>();
   @$core.pragma('dart2js:noInline')
   static Position getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Position>(create);
-  static Position _defaultInstance;
+  static Position? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get latitudeI => $_getIZ(0);
@@ -129,11 +129,11 @@ class User extends $pb.GeneratedMessage {
 
   User._() : super();
   factory User({
-    $core.String id,
-    $core.String longName,
-    $core.String shortName,
-    $core.List<$core.int> macaddr,
-    HardwareModel hwModel,
+    $core.String? id,
+    $core.String? longName,
+    $core.String? shortName,
+    $core.List<$core.int>? macaddr,
+    HardwareModel? hwModel,
   }) {
     final _result = create();
     if (id != null) {
@@ -172,7 +172,7 @@ class User extends $pb.GeneratedMessage {
   static $pb.PbList<User> createRepeated() => $pb.PbList<User>();
   @$core.pragma('dart2js:noInline')
   static User getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<User>(create);
-  static User _defaultInstance;
+  static User? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get id => $_getSZ(0);
@@ -228,7 +228,7 @@ class RouteDiscovery extends $pb.GeneratedMessage {
 
   RouteDiscovery._() : super();
   factory RouteDiscovery({
-    $core.Iterable<$core.int> route,
+    $core.Iterable<$core.int>? route,
   }) {
     final _result = create();
     if (route != null) {
@@ -255,7 +255,7 @@ class RouteDiscovery extends $pb.GeneratedMessage {
   static $pb.PbList<RouteDiscovery> createRepeated() => $pb.PbList<RouteDiscovery>();
   @$core.pragma('dart2js:noInline')
   static RouteDiscovery getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<RouteDiscovery>(create);
-  static RouteDiscovery _defaultInstance;
+  static RouteDiscovery? _defaultInstance;
 
   @$pb.TagNumber(2)
   $core.List<$core.int> get route => $_getList(0);
@@ -285,9 +285,9 @@ class Routing extends $pb.GeneratedMessage {
 
   Routing._() : super();
   factory Routing({
-    RouteDiscovery routeRequest,
-    RouteDiscovery routeReply,
-    Routing_Error errorReason,
+    RouteDiscovery? routeRequest,
+    RouteDiscovery? routeReply,
+    Routing_Error? errorReason,
   }) {
     final _result = create();
     if (routeRequest != null) {
@@ -320,9 +320,9 @@ class Routing extends $pb.GeneratedMessage {
   static $pb.PbList<Routing> createRepeated() => $pb.PbList<Routing>();
   @$core.pragma('dart2js:noInline')
   static Routing getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Routing>(create);
-  static Routing _defaultInstance;
+  static Routing? _defaultInstance;
 
-  Routing_Variant whichVariant() => _Routing_VariantByTag[$_whichOneof(0)];
+  Routing_Variant? whichVariant() => _Routing_VariantByTag[$_whichOneof(0)];
   void clearVariant() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -370,12 +370,12 @@ class Data extends $pb.GeneratedMessage {
 
   Data._() : super();
   factory Data({
-    $0.PortNum portnum,
-    $core.List<$core.int> payload,
-    $core.bool wantResponse,
-    $core.int dest,
-    $core.int source,
-    $core.int requestId,
+    $0.PortNum? portnum,
+    $core.List<$core.int>? payload,
+    $core.bool? wantResponse,
+    $core.int? dest,
+    $core.int? source,
+    $core.int? requestId,
   }) {
     final _result = create();
     if (portnum != null) {
@@ -417,7 +417,7 @@ class Data extends $pb.GeneratedMessage {
   static $pb.PbList<Data> createRepeated() => $pb.PbList<Data>();
   @$core.pragma('dart2js:noInline')
   static Data getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Data>(create);
-  static Data _defaultInstance;
+  static Data? _defaultInstance;
 
   @$pb.TagNumber(1)
   $0.PortNum get portnum => $_getN(0);
@@ -504,17 +504,17 @@ class MeshPacket extends $pb.GeneratedMessage {
 
   MeshPacket._() : super();
   factory MeshPacket({
-    $core.int from,
-    $core.int to,
-    $core.int channel,
-    Data decoded,
-    $core.List<$core.int> encrypted,
-    $core.int id,
-    $core.int rxTime,
-    $core.double rxSnr,
-    $core.int hopLimit,
-    $core.bool wantAck,
-    MeshPacket_Priority priority,
+    $core.int? from,
+    $core.int? to,
+    $core.int? channel,
+    Data? decoded,
+    $core.List<$core.int>? encrypted,
+    $core.int? id,
+    $core.int? rxTime,
+    $core.double? rxSnr,
+    $core.int? hopLimit,
+    $core.bool? wantAck,
+    MeshPacket_Priority? priority,
   }) {
     final _result = create();
     if (from != null) {
@@ -571,9 +571,9 @@ class MeshPacket extends $pb.GeneratedMessage {
   static $pb.PbList<MeshPacket> createRepeated() => $pb.PbList<MeshPacket>();
   @$core.pragma('dart2js:noInline')
   static MeshPacket getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MeshPacket>(create);
-  static MeshPacket _defaultInstance;
+  static MeshPacket? _defaultInstance;
 
-  MeshPacket_PayloadVariant whichPayloadVariant() => _MeshPacket_PayloadVariantByTag[$_whichOneof(0)];
+  MeshPacket_PayloadVariant? whichPayloadVariant() => _MeshPacket_PayloadVariantByTag[$_whichOneof(0)];
   void clearPayloadVariant() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -689,10 +689,10 @@ class NodeInfo extends $pb.GeneratedMessage {
 
   NodeInfo._() : super();
   factory NodeInfo({
-    $core.int num,
-    User user,
-    Position position,
-    $core.double snr,
+    $core.int? num,
+    User? user,
+    Position? position,
+    $core.double? snr,
   }) {
     final _result = create();
     if (num != null) {
@@ -728,7 +728,7 @@ class NodeInfo extends $pb.GeneratedMessage {
   static $pb.PbList<NodeInfo> createRepeated() => $pb.PbList<NodeInfo>();
   @$core.pragma('dart2js:noInline')
   static NodeInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<NodeInfo>(create);
-  static NodeInfo _defaultInstance;
+  static NodeInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get num => $_getIZ(0);
@@ -790,20 +790,20 @@ class MyNodeInfo extends $pb.GeneratedMessage {
 
   MyNodeInfo._() : super();
   factory MyNodeInfo({
-    $core.int myNodeNum,
-    $core.bool hasGps,
-    $core.int numBands,
+    $core.int? myNodeNum,
+    $core.bool? hasGps,
+    $core.int? numBands,
   @$core.Deprecated('This field is deprecated.')
-    $core.String region,
+    $core.String? region,
   @$core.Deprecated('This field is deprecated.')
-    $core.String hwModelDeprecated,
-    $core.String firmwareVersion,
-    CriticalErrorCode errorCode,
-    $core.int errorAddress,
-    $core.int errorCount,
-    $core.int messageTimeoutMsec,
-    $core.int minAppVersion,
-    $core.int maxChannels,
+    $core.String? hwModelDeprecated,
+    $core.String? firmwareVersion,
+    CriticalErrorCode? errorCode,
+    $core.int? errorAddress,
+    $core.int? errorCount,
+    $core.int? messageTimeoutMsec,
+    $core.int? minAppVersion,
+    $core.int? maxChannels,
   }) {
     final _result = create();
     if (myNodeNum != null) {
@@ -865,7 +865,7 @@ class MyNodeInfo extends $pb.GeneratedMessage {
   static $pb.PbList<MyNodeInfo> createRepeated() => $pb.PbList<MyNodeInfo>();
   @$core.pragma('dart2js:noInline')
   static MyNodeInfo getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<MyNodeInfo>(create);
-  static MyNodeInfo _defaultInstance;
+  static MyNodeInfo? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get myNodeNum => $_getIZ(0);
@@ -995,10 +995,10 @@ class LogRecord extends $pb.GeneratedMessage {
 
   LogRecord._() : super();
   factory LogRecord({
-    $core.String message,
-    $core.int time,
-    $core.String source,
-    LogRecord_Level level,
+    $core.String? message,
+    $core.int? time,
+    $core.String? source,
+    LogRecord_Level? level,
   }) {
     final _result = create();
     if (message != null) {
@@ -1034,7 +1034,7 @@ class LogRecord extends $pb.GeneratedMessage {
   static $pb.PbList<LogRecord> createRepeated() => $pb.PbList<LogRecord>();
   @$core.pragma('dart2js:noInline')
   static LogRecord getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<LogRecord>(create);
-  static LogRecord _defaultInstance;
+  static LogRecord? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.String get message => $_getSZ(0);
@@ -1107,13 +1107,13 @@ class FromRadio extends $pb.GeneratedMessage {
 
   FromRadio._() : super();
   factory FromRadio({
-    $core.int num,
-    MyNodeInfo myInfo,
-    NodeInfo nodeInfo,
-    LogRecord logRecord,
-    $core.int configCompleteId,
-    $core.bool rebooted,
-    MeshPacket packet,
+    $core.int? num,
+    MyNodeInfo? myInfo,
+    NodeInfo? nodeInfo,
+    LogRecord? logRecord,
+    $core.int? configCompleteId,
+    $core.bool? rebooted,
+    MeshPacket? packet,
   }) {
     final _result = create();
     if (num != null) {
@@ -1158,9 +1158,9 @@ class FromRadio extends $pb.GeneratedMessage {
   static $pb.PbList<FromRadio> createRepeated() => $pb.PbList<FromRadio>();
   @$core.pragma('dart2js:noInline')
   static FromRadio getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<FromRadio>(create);
-  static FromRadio _defaultInstance;
+  static FromRadio? _defaultInstance;
 
-  FromRadio_PayloadVariant whichPayloadVariant() => _FromRadio_PayloadVariantByTag[$_whichOneof(0)];
+  FromRadio_PayloadVariant? whichPayloadVariant() => _FromRadio_PayloadVariantByTag[$_whichOneof(0)];
   void clearPayloadVariant() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)
@@ -1256,8 +1256,8 @@ class ToRadio extends $pb.GeneratedMessage {
 
   ToRadio._() : super();
   factory ToRadio({
-    MeshPacket packet,
-    $core.int wantConfigId,
+    MeshPacket? packet,
+    $core.int? wantConfigId,
   }) {
     final _result = create();
     if (packet != null) {
@@ -1287,9 +1287,9 @@ class ToRadio extends $pb.GeneratedMessage {
   static $pb.PbList<ToRadio> createRepeated() => $pb.PbList<ToRadio>();
   @$core.pragma('dart2js:noInline')
   static ToRadio getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ToRadio>(create);
-  static ToRadio _defaultInstance;
+  static ToRadio? _defaultInstance;
 
-  ToRadio_PayloadVariant whichPayloadVariant() => _ToRadio_PayloadVariantByTag[$_whichOneof(0)];
+  ToRadio_PayloadVariant? whichPayloadVariant() => _ToRadio_PayloadVariantByTag[$_whichOneof(0)];
   void clearPayloadVariant() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(2)

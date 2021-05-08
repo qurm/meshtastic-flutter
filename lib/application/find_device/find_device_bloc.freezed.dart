@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-// @dart=2.9
+
 part of 'find_device_bloc.dart';
 
 // **************************************************************************
@@ -53,41 +53,41 @@ const $FindDeviceEvent = _$FindDeviceEventTearOff();
 mixin _$FindDeviceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   });
 }
 
@@ -147,12 +147,12 @@ class _$FindStartedEvent implements FindStartedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -166,13 +166,13 @@ class _$FindStartedEvent implements FindStartedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (started != null) {
@@ -184,12 +184,12 @@ class _$FindStartedEvent implements FindStartedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -203,13 +203,13 @@ class _$FindStartedEvent implements FindStartedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (started != null) {
@@ -262,12 +262,12 @@ class _$FindScanRequestedEvent implements FindScanRequestedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -281,13 +281,13 @@ class _$FindScanRequestedEvent implements FindScanRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scan != null) {
@@ -299,12 +299,12 @@ class _$FindScanRequestedEvent implements FindScanRequestedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -318,13 +318,13 @@ class _$FindScanRequestedEvent implements FindScanRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scan != null) {
@@ -378,12 +378,12 @@ class _$FindScanStopRequestedEvent implements FindScanStopRequestedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -397,13 +397,13 @@ class _$FindScanStopRequestedEvent implements FindScanStopRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scanStop != null) {
@@ -415,12 +415,12 @@ class _$FindScanStopRequestedEvent implements FindScanStopRequestedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -434,13 +434,13 @@ class _$FindScanStopRequestedEvent implements FindScanStopRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scanStop != null) {
@@ -493,12 +493,12 @@ class _$FindScanCompletedEvent implements FindScanCompletedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -512,13 +512,13 @@ class _$FindScanCompletedEvent implements FindScanCompletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scanComplete != null) {
@@ -530,12 +530,12 @@ class _$FindScanCompletedEvent implements FindScanCompletedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -549,13 +549,13 @@ class _$FindScanCompletedEvent implements FindScanCompletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (scanComplete != null) {
@@ -609,12 +609,12 @@ class _$FindRefreshRequestedEvent implements FindRefreshRequestedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -628,13 +628,13 @@ class _$FindRefreshRequestedEvent implements FindRefreshRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -646,12 +646,12 @@ class _$FindRefreshRequestedEvent implements FindRefreshRequestedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -665,13 +665,13 @@ class _$FindRefreshRequestedEvent implements FindRefreshRequestedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refresh != null) {
@@ -725,12 +725,12 @@ class _$FindRefreshCompletedEvent implements FindRefreshCompletedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(),
-    @required TResult scan(),
-    @required TResult scanStop(),
-    @required TResult scanComplete(),
-    @required TResult refresh(),
-    @required TResult refreshComplete(),
+    required TResult started(),
+    required TResult scan(),
+    required TResult scanStop(),
+    required TResult scanComplete(),
+    required TResult refresh(),
+    required TResult refreshComplete(),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -744,13 +744,13 @@ class _$FindRefreshCompletedEvent implements FindRefreshCompletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(),
-    TResult scan(),
-    TResult scanStop(),
-    TResult scanComplete(),
-    TResult refresh(),
-    TResult refreshComplete(),
-    @required TResult orElse(),
+    TResult started()?,
+    TResult scan()?,
+    TResult scanStop()?,
+    TResult scanComplete()?,
+    TResult refresh()?,
+    TResult refreshComplete()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refreshComplete != null) {
@@ -762,12 +762,12 @@ class _$FindRefreshCompletedEvent implements FindRefreshCompletedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(FindStartedEvent value),
-    @required TResult scan(FindScanRequestedEvent value),
-    @required TResult scanStop(FindScanStopRequestedEvent value),
-    @required TResult scanComplete(FindScanCompletedEvent value),
-    @required TResult refresh(FindRefreshRequestedEvent value),
-    @required TResult refreshComplete(FindRefreshCompletedEvent value),
+    required TResult started(FindStartedEvent value),
+    required TResult scan(FindScanRequestedEvent value),
+    required TResult scanStop(FindScanStopRequestedEvent value),
+    required TResult scanComplete(FindScanCompletedEvent value),
+    required TResult refresh(FindRefreshRequestedEvent value),
+    required TResult refreshComplete(FindRefreshCompletedEvent value),
   }) {
     assert(started != null);
     assert(scan != null);
@@ -781,13 +781,13 @@ class _$FindRefreshCompletedEvent implements FindRefreshCompletedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(FindStartedEvent value),
-    TResult scan(FindScanRequestedEvent value),
-    TResult scanStop(FindScanStopRequestedEvent value),
-    TResult scanComplete(FindScanCompletedEvent value),
-    TResult refresh(FindRefreshRequestedEvent value),
-    TResult refreshComplete(FindRefreshCompletedEvent value),
-    @required TResult orElse(),
+    TResult started(FindStartedEvent value)?,
+    TResult scan(FindScanRequestedEvent value)?,
+    TResult scanStop(FindScanStopRequestedEvent value)?,
+    TResult scanComplete(FindScanCompletedEvent value)?,
+    TResult refresh(FindRefreshRequestedEvent value)?,
+    TResult refreshComplete(FindRefreshCompletedEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (refreshComplete != null) {
@@ -844,37 +844,37 @@ const $FindDeviceState = _$FindDeviceStateTearOff();
 mixin _$FindDeviceState {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   });
 }
 
@@ -892,7 +892,7 @@ class _$FindDeviceStateCopyWithImpl<$Res>
 
   final FindDeviceState _value;
   // ignore: unused_field
-  final $Res Function(FindDeviceState) _then;
+  final $Res Function(FindDeviceState?) _then;
 }
 
 /// @nodoc
@@ -934,11 +934,11 @@ class _$FindInitialState implements FindInitialState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -951,12 +951,12 @@ class _$FindInitialState implements FindInitialState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -968,11 +968,11 @@ class _$FindInitialState implements FindInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -985,12 +985,12 @@ class _$FindInitialState implements FindInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -1043,11 +1043,11 @@ class _$FindCompletedScanState implements FindCompletedScanState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1060,12 +1060,12 @@ class _$FindCompletedScanState implements FindCompletedScanState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completedscan != null) {
@@ -1077,11 +1077,11 @@ class _$FindCompletedScanState implements FindCompletedScanState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1094,12 +1094,12 @@ class _$FindCompletedScanState implements FindCompletedScanState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completedscan != null) {
@@ -1118,7 +1118,7 @@ abstract class $FindCompletedRefreshStateCopyWith<$Res> {
   factory $FindCompletedRefreshStateCopyWith(FindCompletedRefreshState value,
           $Res Function(FindCompletedRefreshState) then) =
       _$FindCompletedRefreshStateCopyWithImpl<$Res>;
-  $Res call({List<MeshDevice> connectedDevices});
+  $Res call({List<MeshDevice>? connectedDevices});
 }
 
 /// @nodoc
@@ -1135,12 +1135,12 @@ class _$FindCompletedRefreshStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object connectedDevices = freezed,
+    Object? connectedDevices = freezed,
   }) {
     return _then(FindCompletedRefreshState(
       connectedDevices == freezed
           ? _value.connectedDevices
-          : connectedDevices as List<MeshDevice>,
+          : (connectedDevices as List<MeshDevice>?)!,
     ));
   }
 }
@@ -1181,11 +1181,11 @@ class _$FindCompletedRefreshState implements FindCompletedRefreshState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1198,12 +1198,12 @@ class _$FindCompletedRefreshState implements FindCompletedRefreshState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completedRefresh != null) {
@@ -1215,11 +1215,11 @@ class _$FindCompletedRefreshState implements FindCompletedRefreshState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1232,12 +1232,12 @@ class _$FindCompletedRefreshState implements FindCompletedRefreshState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completedRefresh != null) {
@@ -1295,11 +1295,11 @@ class _$FindRequestedState implements FindRequestedState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1312,12 +1312,12 @@ class _$FindRequestedState implements FindRequestedState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (findRequested != null) {
@@ -1329,11 +1329,11 @@ class _$FindRequestedState implements FindRequestedState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1346,12 +1346,12 @@ class _$FindRequestedState implements FindRequestedState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (findRequested != null) {
@@ -1370,7 +1370,7 @@ abstract class $FindFailureStateCopyWith<$Res> {
   factory $FindFailureStateCopyWith(
           FindFailureState value, $Res Function(FindFailureState) then) =
       _$FindFailureStateCopyWithImpl<$Res>;
-  $Res call({ConnectFailure failure});
+  $Res call({ConnectFailure? failure});
 
   $ConnectFailureCopyWith<$Res> get failure;
 }
@@ -1388,10 +1388,10 @@ class _$FindFailureStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object failure = freezed,
+    Object? failure = freezed,
   }) {
     return _then(FindFailureState(
-      failure == freezed ? _value.failure : failure as ConnectFailure,
+      failure == freezed ? _value.failure : (failure as ConnectFailure?)!,
     ));
   }
 
@@ -1438,11 +1438,11 @@ class _$FindFailureState implements FindFailureState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult completedscan(),
-    @required TResult completedRefresh(List<MeshDevice> connectedDevices),
-    @required TResult findRequested(),
-    @required TResult failed(ConnectFailure failure),
+    required TResult initial(),
+    required TResult completedscan(),
+    required TResult completedRefresh(List<MeshDevice> connectedDevices),
+    required TResult findRequested(),
+    required TResult failed(ConnectFailure failure),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1455,12 +1455,12 @@ class _$FindFailureState implements FindFailureState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult completedscan(),
-    TResult completedRefresh(List<MeshDevice> connectedDevices),
-    TResult findRequested(),
-    TResult failed(ConnectFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult completedscan()?,
+    TResult completedRefresh(List<MeshDevice> connectedDevices)?,
+    TResult findRequested()?,
+    TResult failed(ConnectFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failed != null) {
@@ -1472,11 +1472,11 @@ class _$FindFailureState implements FindFailureState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(FindInitialState value),
-    @required TResult completedscan(FindCompletedScanState value),
-    @required TResult completedRefresh(FindCompletedRefreshState value),
-    @required TResult findRequested(FindRequestedState value),
-    @required TResult failed(FindFailureState value),
+    required TResult initial(FindInitialState value),
+    required TResult completedscan(FindCompletedScanState value),
+    required TResult completedRefresh(FindCompletedRefreshState value),
+    required TResult findRequested(FindRequestedState value),
+    required TResult failed(FindFailureState value),
   }) {
     assert(initial != null);
     assert(completedscan != null);
@@ -1489,12 +1489,12 @@ class _$FindFailureState implements FindFailureState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(FindInitialState value),
-    TResult completedscan(FindCompletedScanState value),
-    TResult completedRefresh(FindCompletedRefreshState value),
-    TResult findRequested(FindRequestedState value),
-    TResult failed(FindFailureState value),
-    @required TResult orElse(),
+    TResult initial(FindInitialState value)?,
+    TResult completedscan(FindCompletedScanState value)?,
+    TResult completedRefresh(FindCompletedRefreshState value)?,
+    TResult findRequested(FindRequestedState value)?,
+    TResult failed(FindFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failed != null) {

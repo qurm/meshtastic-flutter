@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: remote_hardware.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -24,9 +24,9 @@ class HardwareMessage extends $pb.GeneratedMessage {
 
   HardwareMessage._() : super();
   factory HardwareMessage({
-    HardwareMessage_Type typ,
-    $fixnum.Int64 gpioMask,
-    $fixnum.Int64 gpioValue,
+    HardwareMessage_Type? typ,
+    $fixnum.Int64? gpioMask,
+    $fixnum.Int64? gpioValue,
   }) {
     final _result = create();
     if (typ != null) {
@@ -59,7 +59,7 @@ class HardwareMessage extends $pb.GeneratedMessage {
   static $pb.PbList<HardwareMessage> createRepeated() => $pb.PbList<HardwareMessage>();
   @$core.pragma('dart2js:noInline')
   static HardwareMessage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<HardwareMessage>(create);
-  static HardwareMessage _defaultInstance;
+  static HardwareMessage? _defaultInstance;
 
   @$pb.TagNumber(1)
   HardwareMessage_Type get typ => $_getN(0);

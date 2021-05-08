@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -17,30 +17,30 @@ import '../../services/mesh/mesh.dart';
 import '../router/route_generator.dart';
 part 'widgets/command_tiles.dart';
 
-final appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+final Logger? appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 // helpful  https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51
 
 /// Display single device, for Meshastic devices only,
 /// Generates a list of common commands as Tiles, based on josn file
 class MeshCommandListScreen extends StatelessWidget {
-  final DeviceConnect/*!*/ deviceConnect = GetIt.I<DeviceConnect>();
-  final MeshDevice/*!*/ device;
+  final DeviceConnect deviceConnect = GetIt.I<DeviceConnect>();
+  final MeshDevice device;
 
   ///const for immutable class
-  MeshCommandListScreen({Key key, this.device}) : super(key: key);
+  MeshCommandListScreen({Key? key, required this.device}) : super(key: key);
 // future: DefaultAssetBundle.of(context)
 //                       .loadString("assets/json/commands.json"),
 
-  Future<List<MeshCommand>/*!*//*!*/> _loadCommands(String jsonFile) async {
+  Future<List<MeshCommand>/*!*/> _loadCommands(String jsonFile) async {
     // List<MeshCommand> commands = [];
     String data = await rootBundle //DefaultAssetBundle.of(context)
         .loadString(jsonFile);
     // List<Map<String, dynamic>>
     final jsonData = json.decode(data);
-    List<MeshCommand> commands =
+    List<MeshCommand>? commands =
         MeshCommandList.fromJson(jsonData as List).commands;
-    return commands;
+    return commands!;
   }
 
   Future<List<MeshCommand>> _loadCommandGroups() async {
@@ -48,8 +48,8 @@ class MeshCommandListScreen extends StatelessWidget {
     String data = await rootBundle //DefaultAssetBundle.of(context)
         .loadString("assets/json/command_groups.json");
     final jsonData = json.decode(data);
-    List<MeshCommand>/*!*/ commands =
-        MeshCommandList.fromJson(jsonData as List).commands;
+    List<MeshCommand> commands =
+        MeshCommandList.fromJson(jsonData as List).commands!;
     return commands;
   }
 
@@ -57,7 +57,7 @@ class MeshCommandListScreen extends StatelessWidget {
   Widget _buildCommandTiles(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Colors.amber[600],
@@ -65,12 +65,12 @@ class MeshCommandListScreen extends StatelessWidget {
       );
     } else {
       ///Todo check for null here with meshtastic, "map called on null"
-      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return Column(
         children: commands
             ?.map((c) => CommandTile(
                 command: c,
-                parameterTiles: c.params.paramList
+                parameterTiles: c.params!.paramList!
                     .map(
                       (p) => ParameterTile(
                         parameter: p,
@@ -93,14 +93,14 @@ class MeshCommandListScreen extends StatelessWidget {
   Widget _buildCommandTiles2(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Colors.amber[600],
         child: const Center(child: Text('Null commands')),
       );
     } else {
-      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: commands.length,
@@ -108,8 +108,8 @@ class MeshCommandListScreen extends StatelessWidget {
             return CommandTile(
                 command: commands[index],
                 parameterTiles: commands[index]
-                    .params
-                    .paramList
+                    .params!
+                    .paramList!
                     .map(
                       (p) => ParameterTile(
                         parameter: p,
@@ -128,21 +128,21 @@ class MeshCommandListScreen extends StatelessWidget {
   }
 
   /// Generate the tiles from json file
-  Widget _buildCommandTiles3(List<MeshCommand>/*!*/ commands, BuildContext context) {
+  Widget _buildCommandTiles3(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Theme.of(context).errorColor,
         child: const Center(child: Text('Null commands')),
       );
     } else {
-      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return GroupedListView(
           elements: commands,
-          groupBy: (command) => command.group,
-          groupSeparatorBuilder: (commandGroup) => Container(
+          groupBy: (dynamic command) => command.group,
+          groupSeparatorBuilder: (dynamic commandGroup) => Container(
                 padding: const EdgeInsets.all(8.0),
                 color: Theme.of(context).dividerColor,
                 child: Text(commandGroup as String,
@@ -156,7 +156,7 @@ class MeshCommandListScreen extends StatelessWidget {
             //     MeshCommand.fromJson(element as Map<String, dynamic>);
             return CommandTile(
                 command: command,
-                parameterTiles: command.params.paramList
+                parameterTiles: command.params!.paramList!
                     .map(
                       (p) => ParameterTile(
                         parameter: p,
@@ -189,7 +189,7 @@ class MeshCommandListScreen extends StatelessWidget {
                     'DISCONNECT?',
                     style: Theme.of(context)
                         .primaryTextTheme
-                        .button
+                        .button!
                         .copyWith(color: Colors.white),
                   ))
             ],
@@ -203,12 +203,12 @@ class MeshCommandListScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              FutureBuilder<List<MeshCommand>/*!*/>(
+              FutureBuilder<List<MeshCommand>>(
                   future: _loadCommands(
                       'assets/json/commands.json'), //called once only?
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return _buildCommandTiles3(snapshot.data, context);
+                      return _buildCommandTiles3(snapshot.data!, context);
                     } else {
                       return Container(
                         child: const Center(
@@ -217,12 +217,12 @@ class MeshCommandListScreen extends StatelessWidget {
                       );
                     }
                   }),
-              FutureBuilder<List<MeshCommand>/*!*/>(
+              FutureBuilder<List<MeshCommand>>(
                   future: _loadCommands(
                       'assets/json/command_groups.json'), //called once only?
                   builder: (context, snapshot) {
                     if (snapshot.hasData) {
-                      return _buildCommandTiles3(snapshot.data, context);
+                      return _buildCommandTiles3(snapshot.data!, context);
                     } else {
                       return Container(
                         child: const Center(

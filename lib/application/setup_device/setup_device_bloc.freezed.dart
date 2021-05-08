@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-// @dart=2.9
+
 part of 'setup_device_bloc.dart';
 
 // **************************************************************************
@@ -44,29 +44,29 @@ const $SetupDeviceEvent = _$SetupDeviceEventTearOff();
 mixin _$SetupDeviceEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(MeshDevice device),
-    @required TResult command(MeshCommand meshCommand),
-    @required TResult eventRaised(MeshtasticReceive meshEvent),
+    required TResult started(MeshDevice device),
+    required TResult command(MeshCommand meshCommand),
+    required TResult eventRaised(MeshtasticReceive meshEvent),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device),
-    TResult command(MeshCommand meshCommand),
-    TResult eventRaised(MeshtasticReceive meshEvent),
-    @required TResult orElse(),
+    TResult started(MeshDevice device)?,
+    TResult command(MeshCommand meshCommand)?,
+    TResult eventRaised(MeshtasticReceive meshEvent)?,
+    required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(DeviceStartedEvent value),
-    @required TResult command(DeviceCommandEvent value),
-    @required TResult eventRaised(DeviceEventEvent value),
+    required TResult started(DeviceStartedEvent value),
+    required TResult command(DeviceCommandEvent value),
+    required TResult eventRaised(DeviceEventEvent value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value),
-    TResult command(DeviceCommandEvent value),
-    TResult eventRaised(DeviceEventEvent value),
-    @required TResult orElse(),
+    TResult started(DeviceStartedEvent value)?,
+    TResult command(DeviceCommandEvent value)?,
+    TResult eventRaised(DeviceEventEvent value)?,
+    required TResult orElse(),
   });
 }
 
@@ -92,7 +92,7 @@ abstract class $DeviceStartedEventCopyWith<$Res> {
   factory $DeviceStartedEventCopyWith(
           DeviceStartedEvent value, $Res Function(DeviceStartedEvent) then) =
       _$DeviceStartedEventCopyWithImpl<$Res>;
-  $Res call({MeshDevice device});
+  $Res call({MeshDevice? device});
 }
 
 /// @nodoc
@@ -108,10 +108,10 @@ class _$DeviceStartedEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object device = freezed,
+    Object? device = freezed,
   }) {
     return _then(DeviceStartedEvent(
-      device == freezed ? _value.device : device as MeshDevice,
+      device == freezed ? _value.device : (device as MeshDevice?)!,
     ));
   }
 }
@@ -148,9 +148,9 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(MeshDevice device),
-    @required TResult command(MeshCommand meshCommand),
-    @required TResult eventRaised(MeshtasticReceive meshEvent),
+    required TResult started(MeshDevice device),
+    required TResult command(MeshCommand meshCommand),
+    required TResult eventRaised(MeshtasticReceive meshEvent),
   }) {
     assert(started != null);
     assert(command != null);
@@ -161,10 +161,10 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device),
-    TResult command(MeshCommand meshCommand),
-    TResult eventRaised(MeshtasticReceive meshEvent),
-    @required TResult orElse(),
+    TResult started(MeshDevice device)?,
+    TResult command(MeshCommand meshCommand)?,
+    TResult eventRaised(MeshtasticReceive meshEvent)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (started != null) {
@@ -176,9 +176,9 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(DeviceStartedEvent value),
-    @required TResult command(DeviceCommandEvent value),
-    @required TResult eventRaised(DeviceEventEvent value),
+    required TResult started(DeviceStartedEvent value),
+    required TResult command(DeviceCommandEvent value),
+    required TResult eventRaised(DeviceEventEvent value),
   }) {
     assert(started != null);
     assert(command != null);
@@ -189,10 +189,10 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value),
-    TResult command(DeviceCommandEvent value),
-    TResult eventRaised(DeviceEventEvent value),
-    @required TResult orElse(),
+    TResult started(DeviceStartedEvent value)?,
+    TResult command(DeviceCommandEvent value)?,
+    TResult eventRaised(DeviceEventEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (started != null) {
@@ -215,7 +215,7 @@ abstract class $DeviceCommandEventCopyWith<$Res> {
   factory $DeviceCommandEventCopyWith(
           DeviceCommandEvent value, $Res Function(DeviceCommandEvent) then) =
       _$DeviceCommandEventCopyWithImpl<$Res>;
-  $Res call({MeshCommand meshCommand});
+  $Res call({MeshCommand? meshCommand});
 }
 
 /// @nodoc
@@ -231,10 +231,10 @@ class _$DeviceCommandEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object meshCommand = freezed,
+    Object? meshCommand = freezed,
   }) {
     return _then(DeviceCommandEvent(
-      meshCommand == freezed ? _value.meshCommand : meshCommand as MeshCommand,
+      meshCommand == freezed ? _value.meshCommand : (meshCommand as MeshCommand?)!,
     ));
   }
 }
@@ -272,9 +272,9 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(MeshDevice device),
-    @required TResult command(MeshCommand meshCommand),
-    @required TResult eventRaised(MeshtasticReceive meshEvent),
+    required TResult started(MeshDevice device),
+    required TResult command(MeshCommand meshCommand),
+    required TResult eventRaised(MeshtasticReceive meshEvent),
   }) {
     assert(started != null);
     assert(command != null);
@@ -285,10 +285,10 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device),
-    TResult command(MeshCommand meshCommand),
-    TResult eventRaised(MeshtasticReceive meshEvent),
-    @required TResult orElse(),
+    TResult started(MeshDevice device)?,
+    TResult command(MeshCommand meshCommand)?,
+    TResult eventRaised(MeshtasticReceive meshEvent)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (command != null) {
@@ -300,9 +300,9 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(DeviceStartedEvent value),
-    @required TResult command(DeviceCommandEvent value),
-    @required TResult eventRaised(DeviceEventEvent value),
+    required TResult started(DeviceStartedEvent value),
+    required TResult command(DeviceCommandEvent value),
+    required TResult eventRaised(DeviceEventEvent value),
   }) {
     assert(started != null);
     assert(command != null);
@@ -313,10 +313,10 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value),
-    TResult command(DeviceCommandEvent value),
-    TResult eventRaised(DeviceEventEvent value),
-    @required TResult orElse(),
+    TResult started(DeviceStartedEvent value)?,
+    TResult command(DeviceCommandEvent value)?,
+    TResult eventRaised(DeviceEventEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (command != null) {
@@ -340,7 +340,7 @@ abstract class $DeviceEventEventCopyWith<$Res> {
   factory $DeviceEventEventCopyWith(
           DeviceEventEvent value, $Res Function(DeviceEventEvent) then) =
       _$DeviceEventEventCopyWithImpl<$Res>;
-  $Res call({MeshtasticReceive meshEvent});
+  $Res call({MeshtasticReceive? meshEvent});
 }
 
 /// @nodoc
@@ -356,10 +356,10 @@ class _$DeviceEventEventCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object meshEvent = freezed,
+    Object? meshEvent = freezed,
   }) {
     return _then(DeviceEventEvent(
-      meshEvent == freezed ? _value.meshEvent : meshEvent as MeshtasticReceive,
+      meshEvent == freezed ? _value.meshEvent : (meshEvent as MeshtasticReceive?)!,
     ));
   }
 }
@@ -397,9 +397,9 @@ class _$DeviceEventEvent implements DeviceEventEvent {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult started(MeshDevice device),
-    @required TResult command(MeshCommand meshCommand),
-    @required TResult eventRaised(MeshtasticReceive meshEvent),
+    required TResult started(MeshDevice device),
+    required TResult command(MeshCommand meshCommand),
+    required TResult eventRaised(MeshtasticReceive meshEvent),
   }) {
     assert(started != null);
     assert(command != null);
@@ -410,10 +410,10 @@ class _$DeviceEventEvent implements DeviceEventEvent {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device),
-    TResult command(MeshCommand meshCommand),
-    TResult eventRaised(MeshtasticReceive meshEvent),
-    @required TResult orElse(),
+    TResult started(MeshDevice device)?,
+    TResult command(MeshCommand meshCommand)?,
+    TResult eventRaised(MeshtasticReceive meshEvent)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (eventRaised != null) {
@@ -425,9 +425,9 @@ class _$DeviceEventEvent implements DeviceEventEvent {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult started(DeviceStartedEvent value),
-    @required TResult command(DeviceCommandEvent value),
-    @required TResult eventRaised(DeviceEventEvent value),
+    required TResult started(DeviceStartedEvent value),
+    required TResult command(DeviceCommandEvent value),
+    required TResult eventRaised(DeviceEventEvent value),
   }) {
     assert(started != null);
     assert(command != null);
@@ -438,10 +438,10 @@ class _$DeviceEventEvent implements DeviceEventEvent {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value),
-    TResult command(DeviceCommandEvent value),
-    TResult eventRaised(DeviceEventEvent value),
-    @required TResult orElse(),
+    TResult started(DeviceStartedEvent value)?,
+    TResult command(DeviceCommandEvent value)?,
+    TResult eventRaised(DeviceEventEvent value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (eventRaised != null) {
@@ -497,33 +497,33 @@ const $SetupDeviceState = _$SetupDeviceStateTearOff();
 mixin _$SetupDeviceState {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult requested(),
-    @required TResult completed(String message),
-    @required TResult failed(CommandFailure failure),
+    required TResult initial(),
+    required TResult requested(),
+    required TResult completed(String message),
+    required TResult failed(CommandFailure failure),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult requested(),
-    TResult completed(String message),
-    TResult failed(CommandFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult requested()?,
+    TResult completed(String message)?,
+    TResult failed(CommandFailure failure)?,
+    required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(DeviceInitialState value),
-    @required TResult requested(DeviceInProgressState value),
-    @required TResult completed(DeviceSuccessState value),
-    @required TResult failed(DeviceFailureState value),
+    required TResult initial(DeviceInitialState value),
+    required TResult requested(DeviceInProgressState value),
+    required TResult completed(DeviceSuccessState value),
+    required TResult failed(DeviceFailureState value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value),
-    TResult requested(DeviceInProgressState value),
-    TResult completed(DeviceSuccessState value),
-    TResult failed(DeviceFailureState value),
-    @required TResult orElse(),
+    TResult initial(DeviceInitialState value)?,
+    TResult requested(DeviceInProgressState value)?,
+    TResult completed(DeviceSuccessState value)?,
+    TResult failed(DeviceFailureState value)?,
+    required TResult orElse(),
   });
 }
 
@@ -541,7 +541,7 @@ class _$SetupDeviceStateCopyWithImpl<$Res>
 
   final SetupDeviceState _value;
   // ignore: unused_field
-  final $Res Function(SetupDeviceState) _then;
+  final $Res Function(SetupDeviceState?) _then;
 }
 
 /// @nodoc
@@ -583,10 +583,10 @@ class _$DeviceInitialState implements DeviceInitialState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult requested(),
-    @required TResult completed(String message),
-    @required TResult failed(CommandFailure failure),
+    required TResult initial(),
+    required TResult requested(),
+    required TResult completed(String message),
+    required TResult failed(CommandFailure failure),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -598,11 +598,11 @@ class _$DeviceInitialState implements DeviceInitialState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult requested(),
-    TResult completed(String message),
-    TResult failed(CommandFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult requested()?,
+    TResult completed(String message)?,
+    TResult failed(CommandFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -614,10 +614,10 @@ class _$DeviceInitialState implements DeviceInitialState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(DeviceInitialState value),
-    @required TResult requested(DeviceInProgressState value),
-    @required TResult completed(DeviceSuccessState value),
-    @required TResult failed(DeviceFailureState value),
+    required TResult initial(DeviceInitialState value),
+    required TResult requested(DeviceInProgressState value),
+    required TResult completed(DeviceSuccessState value),
+    required TResult failed(DeviceFailureState value),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -629,11 +629,11 @@ class _$DeviceInitialState implements DeviceInitialState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value),
-    TResult requested(DeviceInProgressState value),
-    TResult completed(DeviceSuccessState value),
-    TResult failed(DeviceFailureState value),
-    @required TResult orElse(),
+    TResult initial(DeviceInitialState value)?,
+    TResult requested(DeviceInProgressState value)?,
+    TResult completed(DeviceSuccessState value)?,
+    TResult failed(DeviceFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (initial != null) {
@@ -686,10 +686,10 @@ class _$DeviceInProgressState implements DeviceInProgressState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult requested(),
-    @required TResult completed(String message),
-    @required TResult failed(CommandFailure failure),
+    required TResult initial(),
+    required TResult requested(),
+    required TResult completed(String message),
+    required TResult failed(CommandFailure failure),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -701,11 +701,11 @@ class _$DeviceInProgressState implements DeviceInProgressState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult requested(),
-    TResult completed(String message),
-    TResult failed(CommandFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult requested()?,
+    TResult completed(String message)?,
+    TResult failed(CommandFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (requested != null) {
@@ -717,10 +717,10 @@ class _$DeviceInProgressState implements DeviceInProgressState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(DeviceInitialState value),
-    @required TResult requested(DeviceInProgressState value),
-    @required TResult completed(DeviceSuccessState value),
-    @required TResult failed(DeviceFailureState value),
+    required TResult initial(DeviceInitialState value),
+    required TResult requested(DeviceInProgressState value),
+    required TResult completed(DeviceSuccessState value),
+    required TResult failed(DeviceFailureState value),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -732,11 +732,11 @@ class _$DeviceInProgressState implements DeviceInProgressState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value),
-    TResult requested(DeviceInProgressState value),
-    TResult completed(DeviceSuccessState value),
-    TResult failed(DeviceFailureState value),
-    @required TResult orElse(),
+    TResult initial(DeviceInitialState value)?,
+    TResult requested(DeviceInProgressState value)?,
+    TResult completed(DeviceSuccessState value)?,
+    TResult failed(DeviceFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (requested != null) {
@@ -755,7 +755,7 @@ abstract class $DeviceSuccessStateCopyWith<$Res> {
   factory $DeviceSuccessStateCopyWith(
           DeviceSuccessState value, $Res Function(DeviceSuccessState) then) =
       _$DeviceSuccessStateCopyWithImpl<$Res>;
-  $Res call({String message});
+  $Res call({String? message});
 }
 
 /// @nodoc
@@ -771,10 +771,10 @@ class _$DeviceSuccessStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object message = freezed,
+    Object? message = freezed,
   }) {
     return _then(DeviceSuccessState(
-      message == freezed ? _value.message : message as String,
+      message == freezed ? _value.message : (message as String?)!,
     ));
   }
 }
@@ -811,10 +811,10 @@ class _$DeviceSuccessState implements DeviceSuccessState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult requested(),
-    @required TResult completed(String message),
-    @required TResult failed(CommandFailure failure),
+    required TResult initial(),
+    required TResult requested(),
+    required TResult completed(String message),
+    required TResult failed(CommandFailure failure),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -826,11 +826,11 @@ class _$DeviceSuccessState implements DeviceSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult requested(),
-    TResult completed(String message),
-    TResult failed(CommandFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult requested()?,
+    TResult completed(String message)?,
+    TResult failed(CommandFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completed != null) {
@@ -842,10 +842,10 @@ class _$DeviceSuccessState implements DeviceSuccessState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(DeviceInitialState value),
-    @required TResult requested(DeviceInProgressState value),
-    @required TResult completed(DeviceSuccessState value),
-    @required TResult failed(DeviceFailureState value),
+    required TResult initial(DeviceInitialState value),
+    required TResult requested(DeviceInProgressState value),
+    required TResult completed(DeviceSuccessState value),
+    required TResult failed(DeviceFailureState value),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -857,11 +857,11 @@ class _$DeviceSuccessState implements DeviceSuccessState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value),
-    TResult requested(DeviceInProgressState value),
-    TResult completed(DeviceSuccessState value),
-    TResult failed(DeviceFailureState value),
-    @required TResult orElse(),
+    TResult initial(DeviceInitialState value)?,
+    TResult requested(DeviceInProgressState value)?,
+    TResult completed(DeviceSuccessState value)?,
+    TResult failed(DeviceFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (completed != null) {
@@ -884,7 +884,7 @@ abstract class $DeviceFailureStateCopyWith<$Res> {
   factory $DeviceFailureStateCopyWith(
           DeviceFailureState value, $Res Function(DeviceFailureState) then) =
       _$DeviceFailureStateCopyWithImpl<$Res>;
-  $Res call({CommandFailure failure});
+  $Res call({CommandFailure? failure});
 
   $CommandFailureCopyWith<$Res> get failure;
 }
@@ -902,10 +902,10 @@ class _$DeviceFailureStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object failure = freezed,
+    Object? failure = freezed,
   }) {
     return _then(DeviceFailureState(
-      failure == freezed ? _value.failure : failure as CommandFailure,
+      failure == freezed ? _value.failure : (failure as CommandFailure?)!,
     ));
   }
 
@@ -952,10 +952,10 @@ class _$DeviceFailureState implements DeviceFailureState {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult initial(),
-    @required TResult requested(),
-    @required TResult completed(String message),
-    @required TResult failed(CommandFailure failure),
+    required TResult initial(),
+    required TResult requested(),
+    required TResult completed(String message),
+    required TResult failed(CommandFailure failure),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -967,11 +967,11 @@ class _$DeviceFailureState implements DeviceFailureState {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult initial(),
-    TResult requested(),
-    TResult completed(String message),
-    TResult failed(CommandFailure failure),
-    @required TResult orElse(),
+    TResult initial()?,
+    TResult requested()?,
+    TResult completed(String message)?,
+    TResult failed(CommandFailure failure)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failed != null) {
@@ -983,10 +983,10 @@ class _$DeviceFailureState implements DeviceFailureState {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult initial(DeviceInitialState value),
-    @required TResult requested(DeviceInProgressState value),
-    @required TResult completed(DeviceSuccessState value),
-    @required TResult failed(DeviceFailureState value),
+    required TResult initial(DeviceInitialState value),
+    required TResult requested(DeviceInProgressState value),
+    required TResult completed(DeviceSuccessState value),
+    required TResult failed(DeviceFailureState value),
   }) {
     assert(initial != null);
     assert(requested != null);
@@ -998,11 +998,11 @@ class _$DeviceFailureState implements DeviceFailureState {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value),
-    TResult requested(DeviceInProgressState value),
-    TResult completed(DeviceSuccessState value),
-    TResult failed(DeviceFailureState value),
-    @required TResult orElse(),
+    TResult initial(DeviceInitialState value)?,
+    TResult requested(DeviceInProgressState value)?,
+    TResult completed(DeviceSuccessState value)?,
+    TResult failed(DeviceFailureState value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (failed != null) {

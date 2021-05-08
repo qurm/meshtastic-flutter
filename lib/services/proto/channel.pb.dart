@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: channel.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -31,17 +31,17 @@ class ChannelSettings extends $pb.GeneratedMessage {
 
   ChannelSettings._() : super();
   factory ChannelSettings({
-    $core.int txPower,
-    ChannelSettings_ModemConfig modemConfig,
-    $core.List<$core.int> psk,
-    $core.String name,
-    $core.int bandwidth,
-    $core.int spreadFactor,
-    $core.int codingRate,
-    $core.int channelNum,
-    $core.int id,
-    $core.bool uplinkEnabled,
-    $core.bool downlinkEnabled,
+    $core.int? txPower,
+    ChannelSettings_ModemConfig? modemConfig,
+    $core.List<$core.int>? psk,
+    $core.String? name,
+    $core.int? bandwidth,
+    $core.int? spreadFactor,
+    $core.int? codingRate,
+    $core.int? channelNum,
+    $core.int? id,
+    $core.bool? uplinkEnabled,
+    $core.bool? downlinkEnabled,
   }) {
     final _result = create();
     if (txPower != null) {
@@ -98,7 +98,7 @@ class ChannelSettings extends $pb.GeneratedMessage {
   static $pb.PbList<ChannelSettings> createRepeated() => $pb.PbList<ChannelSettings>();
   @$core.pragma('dart2js:noInline')
   static ChannelSettings getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelSettings>(create);
-  static ChannelSettings _defaultInstance;
+  static ChannelSettings? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get txPower => $_getIZ(0);
@@ -210,9 +210,9 @@ class Channel extends $pb.GeneratedMessage {
 
   Channel._() : super();
   factory Channel({
-    $core.int index,
-    ChannelSettings settings,
-    Channel_Role role,
+    $core.int? index,
+    ChannelSettings? settings,
+    Channel_Role? role,
   }) {
     final _result = create();
     if (index != null) {
@@ -245,7 +245,7 @@ class Channel extends $pb.GeneratedMessage {
   static $pb.PbList<Channel> createRepeated() => $pb.PbList<Channel>();
   @$core.pragma('dart2js:noInline')
   static Channel getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<Channel>(create);
-  static Channel _defaultInstance;
+  static Channel? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.int get index => $_getIZ(0);

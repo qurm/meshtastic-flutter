@@ -1,14 +1,14 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 // import 'package:flutter_blue/flutter_blue.dart';
 import '../../../services/bluetooth/ble_api.dart';
 import '../../../services/bluetooth/ble_common.dart';
 
 class ServiceTile extends StatelessWidget {
-  final BLEService/*!*/ service;
-  final List<CharacteristicTile>/*!*/ characteristicTiles;
+  final BLEService service;
+  final List<CharacteristicTile> characteristicTiles;
 
-  const ServiceTile({Key key, this.service, this.characteristicTiles})
+  const ServiceTile({Key? key, required this.service, required this.characteristicTiles})
       : super(key: key);
 
   @override
@@ -24,8 +24,8 @@ class ServiceTile extends StatelessWidget {
                 '0x ${service.uuid.toString().toUpperCase().substring(4, 8)} ${service.serviceName}',
                 style: Theme.of(context)
                     .textTheme
-                    .bodyText2
-                    .copyWith(color: Theme.of(context).textTheme.caption.color))
+                    .bodyText2!
+                    .copyWith(color: Theme.of(context).textTheme.caption!.color))
           ],
         ),
         children: characteristicTiles,
@@ -41,17 +41,17 @@ class ServiceTile extends StatelessWidget {
 }
 
 class CharacteristicTile extends StatelessWidget {
-  final BLECharacteristic/*!*/ characteristic;
-  final List<DescriptorTile>/*!*/ descriptorTiles;
-  final VoidCallback onReadPressed;
-  final VoidCallback onWritePressed;
-  final VoidCallback onNotificationPressed;
+  final BLECharacteristic characteristic;
+  final List<DescriptorTile> descriptorTiles;
+  final VoidCallback? onReadPressed;
+  final VoidCallback? onWritePressed;
+  final VoidCallback? onNotificationPressed;
   // final VoidCallback onCharacteristicChanged;
 
   const CharacteristicTile(
-      {Key key,
-      this.characteristic,
-      this.descriptorTiles,
+      {Key? key,
+      required this.characteristic,
+      required this.descriptorTiles,
       this.onReadPressed,
       this.onWritePressed,
       this.onNotificationPressed})
@@ -75,8 +75,8 @@ class CharacteristicTile extends StatelessWidget {
 
 //                    '0x${characteristic.uuid.toString().toUpperCase().substring(4, 8)}',
                     '0x ${characteristic.uuid.toString().substring(0, 8)}',
-                    style: Theme.of(context).textTheme.bodyText2.copyWith(
-                        color: Theme.of(context).textTheme.caption.color))
+                    style: Theme.of(context).textTheme.bodyText2!.copyWith(
+                        color: Theme.of(context).textTheme.caption!.color))
               ],
             ),
             subtitle: Text(value.toString()),
@@ -88,13 +88,13 @@ class CharacteristicTile extends StatelessWidget {
               IconButton(
                 icon: Icon(
                   Icons.file_download,
-                  color: Theme.of(context).iconTheme.color.withOpacity(0.5),
+                  color: Theme.of(context).iconTheme.color!.withOpacity(0.5),
                 ),
                 onPressed: onReadPressed,
               ),
               IconButton(
                 icon: Icon(Icons.file_upload,
-                    color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
+                    color: Theme.of(context).iconTheme.color!.withOpacity(0.5)),
                 onPressed: onWritePressed,
               ),
               IconButton(
@@ -104,7 +104,7 @@ class CharacteristicTile extends StatelessWidget {
                     characteristic.isNotifying
                         ? Icons.sync_disabled
                         : Icons.sync,
-                    color: Theme.of(context).iconTheme.color.withOpacity(0.5)),
+                    color: Theme.of(context).iconTheme.color!.withOpacity(0.5)),
                 onPressed: onNotificationPressed,
               )
             ],
@@ -117,12 +117,12 @@ class CharacteristicTile extends StatelessWidget {
 }
 
 class DescriptorTile extends StatelessWidget {
-  final BLEDescriptor/*!*/ descriptor;
-  final VoidCallback onReadPressed;
-  final VoidCallback onWritePressed;
+  final BLEDescriptor descriptor;
+  final VoidCallback? onReadPressed;
+  final VoidCallback? onWritePressed;
 
   const DescriptorTile(
-      {Key key, this.descriptor, this.onReadPressed, this.onWritePressed})
+      {Key? key, required this.descriptor, this.onReadPressed, this.onWritePressed})
       : super(key: key);
 
   @override
@@ -136,8 +136,8 @@ class DescriptorTile extends StatelessWidget {
           Text('0x${descriptor.uuid.toString().toUpperCase().substring(4, 8)}',
               style: Theme.of(context)
                   .textTheme
-                  .bodyText2
-                  .copyWith(color: Theme.of(context).textTheme.caption.color))
+                  .bodyText2!
+                  .copyWith(color: Theme.of(context).textTheme.caption!.color))
         ],
       ),
       subtitle: StreamBuilder<List<int>>(
@@ -151,14 +151,14 @@ class DescriptorTile extends StatelessWidget {
           IconButton(
             icon: Icon(
               Icons.file_download,
-              color: Theme.of(context).iconTheme.color.withOpacity(0.5),
+              color: Theme.of(context).iconTheme.color!.withOpacity(0.5),
             ),
             onPressed: onReadPressed,
           ),
           IconButton(
             icon: Icon(
               Icons.file_upload,
-              color: Theme.of(context).iconTheme.color.withOpacity(0.5),
+              color: Theme.of(context).iconTheme.color!.withOpacity(0.5),
             ),
             onPressed: onWritePressed,
           )

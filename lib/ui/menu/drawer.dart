@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
@@ -73,7 +73,7 @@ class AppDrawer extends StatelessWidget {
   }
 
   Widget _createDrawerItem(
-      {IconData icon, String text, GestureTapCallback onTap}) {
+      {IconData? icon, required String text, GestureTapCallback? onTap}) {
     return ListTile(
       title: Row(
         children: <Widget>[

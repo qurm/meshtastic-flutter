@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: radioconfig.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME
@@ -35,7 +35,7 @@ class RegionCode extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, RegionCode> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RegionCode valueOf($core.int value) => _byValue[value];
+  static RegionCode? valueOf($core.int value) => _byValue[value];
 
   const RegionCode._($core.int v, $core.String n) : super(v, n);
 }
@@ -80,7 +80,7 @@ class ChargeCurrent extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, ChargeCurrent> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ChargeCurrent valueOf($core.int value) => _byValue[value];
+  static ChargeCurrent? valueOf($core.int value) => _byValue[value];
 
   const ChargeCurrent._($core.int v, $core.String n) : super(v, n);
 }
@@ -101,7 +101,7 @@ class GpsOperation extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, GpsOperation> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static GpsOperation valueOf($core.int value) => _byValue[value];
+  static GpsOperation? valueOf($core.int value) => _byValue[value];
 
   const GpsOperation._($core.int v, $core.String n) : super(v, n);
 }
@@ -118,7 +118,7 @@ class LocationSharing extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, LocationSharing> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static LocationSharing valueOf($core.int value) => _byValue[value];
+  static LocationSharing? valueOf($core.int value) => _byValue[value];
 
   const LocationSharing._($core.int v, $core.String n) : super(v, n);
 }
@@ -131,7 +131,7 @@ class RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType extends $pb
   ];
 
   static final $core.Map<$core.int, RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType valueOf($core.int value) => _byValue[value];
+  static RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType? valueOf($core.int value) => _byValue[value];
 
   const RadioConfig_UserPreferences_EnvironmentalMeasurementSensorType._($core.int v, $core.String n) : super(v, n);
 }

@@ -1,4 +1,4 @@
-// @dart=2.9
+
 /// AF 2021-05-08 temp remove while doing null safe conversion
 // import 'package:freezed_annotation/freezed_annotation.dart';
 

@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
 
-// @dart=2.9
+
 part of 'connect_failure.dart';
 
 // **************************************************************************
@@ -48,37 +48,37 @@ const $ConnectFailure = _$ConnectFailureTearOff();
 mixin _$ConnectFailure {
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   });
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   });
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   });
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   });
 }
 
@@ -147,11 +147,11 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -164,12 +164,12 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cancelledByUser != null) {
@@ -181,11 +181,11 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -198,12 +198,12 @@ class _$CancelledByUser
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (cancelledByUser != null) {
@@ -259,11 +259,11 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDevice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -276,12 +276,12 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDevice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (noDevice != null) {
@@ -293,11 +293,11 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDevice {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -310,12 +310,12 @@ class _$NoDevice with DiagnosticableTreeMixin implements NoDevice {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (noDevice != null) {
@@ -375,11 +375,11 @@ class _$NoKnownDevice with DiagnosticableTreeMixin implements NoKnownDevice {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -392,12 +392,12 @@ class _$NoKnownDevice with DiagnosticableTreeMixin implements NoKnownDevice {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (noKnownDevice != null) {
@@ -409,11 +409,11 @@ class _$NoKnownDevice with DiagnosticableTreeMixin implements NoKnownDevice {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -426,12 +426,12 @@ class _$NoKnownDevice with DiagnosticableTreeMixin implements NoKnownDevice {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (noKnownDevice != null) {
@@ -492,11 +492,11 @@ class _$InvalidDeviceAddress
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -509,12 +509,12 @@ class _$InvalidDeviceAddress
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (deviceError != null) {
@@ -526,11 +526,11 @@ class _$InvalidDeviceAddress
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -543,12 +543,12 @@ class _$InvalidDeviceAddress
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (deviceError != null) {
@@ -606,11 +606,11 @@ class _$NoBluetooth with DiagnosticableTreeMixin implements NoBluetooth {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object>({
-    @required TResult cancelledByUser(),
-    @required TResult noDevice(),
-    @required TResult noKnownDevice(),
-    @required TResult deviceError(),
-    @required TResult nobluetooth(),
+    required TResult cancelledByUser(),
+    required TResult noDevice(),
+    required TResult noKnownDevice(),
+    required TResult deviceError(),
+    required TResult nobluetooth(),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -623,12 +623,12 @@ class _$NoBluetooth with DiagnosticableTreeMixin implements NoBluetooth {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser(),
-    TResult noDevice(),
-    TResult noKnownDevice(),
-    TResult deviceError(),
-    TResult nobluetooth(),
-    @required TResult orElse(),
+    TResult cancelledByUser()?,
+    TResult noDevice()?,
+    TResult noKnownDevice()?,
+    TResult deviceError()?,
+    TResult nobluetooth()?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (nobluetooth != null) {
@@ -640,11 +640,11 @@ class _$NoBluetooth with DiagnosticableTreeMixin implements NoBluetooth {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object>({
-    @required TResult cancelledByUser(CancelledByUser value),
-    @required TResult noDevice(NoDevice value),
-    @required TResult noKnownDevice(NoKnownDevice value),
-    @required TResult deviceError(InvalidDeviceAddress value),
-    @required TResult nobluetooth(NoBluetooth value),
+    required TResult cancelledByUser(CancelledByUser value),
+    required TResult noDevice(NoDevice value),
+    required TResult noKnownDevice(NoKnownDevice value),
+    required TResult deviceError(InvalidDeviceAddress value),
+    required TResult nobluetooth(NoBluetooth value),
   }) {
     assert(cancelledByUser != null);
     assert(noDevice != null);
@@ -657,12 +657,12 @@ class _$NoBluetooth with DiagnosticableTreeMixin implements NoBluetooth {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value),
-    TResult noDevice(NoDevice value),
-    TResult noKnownDevice(NoKnownDevice value),
-    TResult deviceError(InvalidDeviceAddress value),
-    TResult nobluetooth(NoBluetooth value),
-    @required TResult orElse(),
+    TResult cancelledByUser(CancelledByUser value)?,
+    TResult noDevice(NoDevice value)?,
+    TResult noKnownDevice(NoKnownDevice value)?,
+    TResult deviceError(InvalidDeviceAddress value)?,
+    TResult nobluetooth(NoBluetooth value)?,
+    required TResult orElse(),
   }) {
     assert(orElse != null);
     if (nobluetooth != null) {

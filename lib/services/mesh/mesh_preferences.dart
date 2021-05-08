@@ -1,4 +1,4 @@
-// @dart=2.9
+
 /// Interface classes for meshtastic devices, MeshInterface, BLEInterface
 import 'dart:async';
 import 'dart:convert';

@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: admin.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -55,15 +55,15 @@ class AdminMessage extends $pb.GeneratedMessage {
 
   AdminMessage._() : super();
   factory AdminMessage({
-    $0.RadioConfig setRadio,
-    $1.User setOwner,
-    $2.Channel setChannel,
-    $core.bool getRadioRequest,
-    $0.RadioConfig getRadioResponse,
-    $core.int getChannelRequest,
-    $2.Channel getChannelResponse,
-    $core.bool confirmSetChannel,
-    $core.bool confirmSetRadio,
+    $0.RadioConfig? setRadio,
+    $1.User? setOwner,
+    $2.Channel? setChannel,
+    $core.bool? getRadioRequest,
+    $0.RadioConfig? getRadioResponse,
+    $core.int? getChannelRequest,
+    $2.Channel? getChannelResponse,
+    $core.bool? confirmSetChannel,
+    $core.bool? confirmSetRadio,
   }) {
     final _result = create();
     if (setRadio != null) {
@@ -114,9 +114,9 @@ class AdminMessage extends $pb.GeneratedMessage {
   static $pb.PbList<AdminMessage> createRepeated() => $pb.PbList<AdminMessage>();
   @$core.pragma('dart2js:noInline')
   static AdminMessage getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<AdminMessage>(create);
-  static AdminMessage _defaultInstance;
+  static AdminMessage? _defaultInstance;
 
-  AdminMessage_Variant whichVariant() => _AdminMessage_VariantByTag[$_whichOneof(0)];
+  AdminMessage_Variant? whichVariant() => _AdminMessage_VariantByTag[$_whichOneof(0)];
   void clearVariant() => clearField($_whichOneof(0));
 
   @$pb.TagNumber(1)

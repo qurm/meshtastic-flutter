@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -34,12 +34,12 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
   //cannot run the DeviceStarted event on bloc create, as _device not initialised.:
   // add(DeviceStarted());
 
-  final ConnectDeviceBloc/*!*/ connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
-  final DeviceConnect/*!*/ _connectFacade = GetIt.I<DeviceConnect>();
-  MeshDevice _device;
-  StreamSubscription<MeshtasticReceive> _meshSubscription;
-  StreamSubscription _connectDeviceSubscription;
-  BLEInterface/*!*/ _meshInterface;
+  final ConnectDeviceBloc connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
+  final DeviceConnect _connectFacade = GetIt.I<DeviceConnect>();
+  late MeshDevice _device;
+  StreamSubscription<MeshtasticReceive>? _meshSubscription;
+  StreamSubscription? _connectDeviceSubscription;
+  late BLEInterface _meshInterface;
 
   @override
   Stream<SetupDeviceState> mapEventToState(
@@ -59,12 +59,12 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
           if (state is DeviceOfflineState) {
             _meshInterface.disconnected();
           }
-          appLogger.d('connectDeviceBloc state: ${state.toString()} ');
+          appLogger!.d('connectDeviceBloc state: ${state.toString()} ');
         });
 
         // creates the BLEinterface
         _device = event.device;
-        _meshInterface = await _connectFacade.meshServiceStart(_device);
+        _meshInterface = await (_connectFacade.meshServiceStart(_device) as FutureOr<BLEInterface>);
         _meshSubscription = _meshInterface.meshEvents.listen((event) {
           add(DeviceEventEvent(event));
         });
@@ -72,12 +72,12 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
         yield DeviceSuccessState('Connected to ${_device.id}');
       } catch (e) {
         yield const DeviceFailureState(CommandFailure.unexpected());
-        appLogger.d('DeviceStarted event  unexpected falure: $e ');
+        appLogger!.d('DeviceStarted event  unexpected falure: $e ');
       }
     }
 
     if (event is DeviceEventEvent) {
-      appLogger.i('SetupDevice: Mesh Event ${event.meshEvent}');
+      appLogger!.i('SetupDevice: Mesh Event ${event.meshEvent}');
     }
 
     /// Command submitted by form/application, call setPreference
@@ -85,20 +85,20 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
       yield const DeviceInProgressState();
       try {
         // set Preference and write to device
-        String msg;
+        late String msg;
         // appLogger.i(
         //     'SetupDevice: setPreferenceList ${event.meshCommand.params.paramList}');
         final prefMap = {
-          for (var p in event.meshCommand.params.paramList)
-            p.id as String/*!*/: p.value as String/*!*/
+          for (var p in event.meshCommand.params!.paramList!)
+            p.id as String: p.value as String
         };
-        appLogger.i('SetupDevice: setPreferenceList ${prefMap}');
+        appLogger!.i('SetupDevice: setPreferenceList ${prefMap}');
         final possibleFailure =
-            _connectFacade.bleInterface.setPreferenceList(prefMap);
+            _connectFacade.bleInterface!.setPreferenceList(prefMap);
 
         //TODO - handle writeConfig failures also
         if (possibleFailure.isRight()) {
-          await _connectFacade.bleInterface.localNode
+          await _connectFacade.bleInterface!.localNode
               .writeConfig(); //Now on Node class
           // TODO temp disable
           // msg = await _connectFacade.bleInterface.getConfig();
@@ -114,7 +114,7 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
 
       } catch (e) {
         yield const DeviceFailureState(CommandFailure.unexpected());
-        appLogger.e('SetupDevice: event unexpected falure: $e ');
+        appLogger!.e('SetupDevice: event unexpected falure: $e ');
       }
     }
   }

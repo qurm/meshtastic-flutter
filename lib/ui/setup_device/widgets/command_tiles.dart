@@ -1,4 +1,4 @@
-// @dart=2.9
+
 part of '../mesh_command_list.dart';
 
 // Mesh command contains widgets to build command list
@@ -6,17 +6,17 @@ part of '../mesh_command_list.dart';
 //use https://javiercbk.github.io/json_to_dart/
 
 class CommandTile extends StatelessWidget {
-  final MeshCommand/*!*/ command;
-  final List<ParameterTile>/*!*/ parameterTiles;
-  final VoidCallback/*!*/ onRunPressed;
+  final MeshCommand command;
+  final List<ParameterTile> parameterTiles;
+  final VoidCallback onRunPressed;
 
   const CommandTile(
-      {Key key, this.command, this.parameterTiles, this.onRunPressed})
+      {Key? key, required this.command, required this.parameterTiles, required this.onRunPressed})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    if (command.params.paramList.length > 0) {
+    if (command.params!.paramList!.length > 0) {
       return ListTileTheme(
         tileColor: Colors.green[50], //command.id as int],
         child: ExpansionTile(
@@ -38,7 +38,7 @@ class CommandTile extends StatelessWidget {
             trailing: IconButton(
               // use launch, open_in_new, hourglass_empty, done, done_all
               icon: Icon(Icons.launch,
-                  color: Theme.of(context).iconTheme.color.withOpacity(0.9)),
+                  color: Theme.of(context).iconTheme.color!.withOpacity(0.9)),
               onPressed: onRunPressed,
             ),
             backgroundColor: Colors.green[100]), //expanded only colour
@@ -53,11 +53,11 @@ class CommandTile extends StatelessWidget {
 }
 
 class ParameterTile extends StatelessWidget {
-  final MeshCommandParameter/*!*/ parameter;
+  final MeshCommandParameter parameter;
 
   const ParameterTile({
-    Key key,
-    this.parameter,
+    Key? key,
+    required this.parameter,
   }) : super(key: key);
 
   @override
@@ -87,11 +87,11 @@ class ParameterTile extends StatelessWidget {
 ///  keep the child params dumb just a Text field and validator
 // see https://github.com/seenickcode/flutter_realistic_forms/blob/master/lib/screens/home_material.dart
 class MeshCommandForm extends StatefulWidget {
-  const MeshCommandForm({Key key, this.command, this.onRunPressed})
+  const MeshCommandForm({Key? key, required this.command, required this.onRunPressed})
       : super(key: key);
 
-  final MeshCommand/*!*/ command; // = MeshCommandForm();
-  final VoidCallback/*!*/ onRunPressed;
+  final MeshCommand command; // = MeshCommandForm();
+  final VoidCallback onRunPressed;
 
   @override
   MeshCommandFormState createState() => MeshCommandFormState();
@@ -104,7 +104,7 @@ class MeshCommandFormState extends State<MeshCommandForm> {
   @override
   Widget build(BuildContext context) {
     // AutovalidateMode __autovalidate = AutovalidateMode.disabled;
-    if (widget.command.params.paramList.length > 0) {
+    if (widget.command.params!.paramList!.length > 0) {
       // return ExpansionTile(
       return Padding(
         padding: const EdgeInsets.all(8.0),
@@ -132,8 +132,8 @@ class MeshCommandFormState extends State<MeshCommandForm> {
                       children: [
                         Column(
                             mainAxisSize: MainAxisSize.min,
-                            children: widget.command.params.paramList
-                                .where((p) => (p.visible)) //only visible tiles
+                            children: widget.command.params!.paramList!
+                                .where((p) => p.visible!) //only visible tiles
                                 .map((p) => ParameterEdit(parameter: p))
                                 .toList()),
                         Row(
@@ -149,7 +149,7 @@ class MeshCommandFormState extends State<MeshCommandForm> {
                               OutlinedButton(
                                   onPressed: _enableBtn
                                       ? () {
-                                          final form = _formKey.currentState;
+                                          final form = _formKey.currentState!;
                                           if (form.validate()) {
                                             form.save();
                                             BlocProvider.of<SetupDeviceBloc>(
@@ -196,8 +196,8 @@ class MeshCommandFormState extends State<MeshCommandForm> {
 
 // https://medium.com/flutter-community/flutter-forms-validation-the-ultimate-guide-1b469169ca6e
 class ParameterEdit extends StatelessWidget {
-  const ParameterEdit({Key key, this.parameter});
-  final MeshCommandParameter/*!*/ parameter;
+  const ParameterEdit({Key? key, required this.parameter});
+  final MeshCommandParameter parameter;
 
   @override
   Widget build(BuildContext context) {
@@ -236,7 +236,7 @@ class ParameterEdit extends StatelessWidget {
                       : null),
               onSaved: (newValue) {
                 parameter.value = newValue;
-                appLogger.v('ParameterEdit onSave: ${parameter.value} ');
+                appLogger!.v('ParameterEdit onSave: ${parameter.value} ');
               },
               autovalidateMode: AutovalidateMode.disabled, //onUserInteraction,
               validator: (value) {
@@ -254,14 +254,14 @@ class ParameterEdit extends StatelessWidget {
                     break;
                   case 'bool':
                     if (!['1', 'true', '0', 'false']
-                        .contains(value.toLowerCase())) {
+                        .contains(value!.toLowerCase())) {
                       return 'Must be true, 1  or false, 0';
                     }
                     break;
 
                   //todo validate length
                   case 'string':
-                    if ((value.length > parameter.max)) {
+                    if ((value!.length > parameter.max!)) {
                       return 'Max allowed length is ${parameter.max}';
                     }
                     break;

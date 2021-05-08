@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: environmental_measurement.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -19,9 +19,9 @@ class EnvironmentalMeasurement extends $pb.GeneratedMessage {
 
   EnvironmentalMeasurement._() : super();
   factory EnvironmentalMeasurement({
-    $core.double temperature,
-    $core.double relativeHumidity,
-    $core.double barometricPressure,
+    $core.double? temperature,
+    $core.double? relativeHumidity,
+    $core.double? barometricPressure,
   }) {
     final _result = create();
     if (temperature != null) {
@@ -54,7 +54,7 @@ class EnvironmentalMeasurement extends $pb.GeneratedMessage {
   static $pb.PbList<EnvironmentalMeasurement> createRepeated() => $pb.PbList<EnvironmentalMeasurement>();
   @$core.pragma('dart2js:noInline')
   static EnvironmentalMeasurement getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<EnvironmentalMeasurement>(create);
-  static EnvironmentalMeasurement _defaultInstance;
+  static EnvironmentalMeasurement? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.double get temperature => $_getN(0);

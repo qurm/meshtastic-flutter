@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: channel.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME
@@ -23,7 +23,7 @@ class ChannelSettings_ModemConfig extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, ChannelSettings_ModemConfig> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static ChannelSettings_ModemConfig valueOf($core.int value) => _byValue[value];
+  static ChannelSettings_ModemConfig? valueOf($core.int value) => _byValue[value];
 
   const ChannelSettings_ModemConfig._($core.int v, $core.String n) : super(v, n);
 }
@@ -40,7 +40,7 @@ class Channel_Role extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, Channel_Role> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Channel_Role valueOf($core.int value) => _byValue[value];
+  static Channel_Role? valueOf($core.int value) => _byValue[value];
 
   const Channel_Role._($core.int v, $core.String n) : super(v, n);
 }

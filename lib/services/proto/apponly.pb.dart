@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: apponly.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 import 'dart:core' as $core;
@@ -22,9 +22,9 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
 
   ServiceEnvelope._() : super();
   factory ServiceEnvelope({
-    $0.MeshPacket packet,
-    $core.String channelId,
-    $core.String gatewayId,
+    $0.MeshPacket? packet,
+    $core.String? channelId,
+    $core.String? gatewayId,
   }) {
     final _result = create();
     if (packet != null) {
@@ -57,7 +57,7 @@ class ServiceEnvelope extends $pb.GeneratedMessage {
   static $pb.PbList<ServiceEnvelope> createRepeated() => $pb.PbList<ServiceEnvelope>();
   @$core.pragma('dart2js:noInline')
   static ServiceEnvelope getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ServiceEnvelope>(create);
-  static ServiceEnvelope _defaultInstance;
+  static ServiceEnvelope? _defaultInstance;
 
   @$pb.TagNumber(1)
   $0.MeshPacket get packet => $_getN(0);
@@ -97,7 +97,7 @@ class ChannelSet extends $pb.GeneratedMessage {
 
   ChannelSet._() : super();
   factory ChannelSet({
-    $core.Iterable<$1.ChannelSettings> settings,
+    $core.Iterable<$1.ChannelSettings>? settings,
   }) {
     final _result = create();
     if (settings != null) {
@@ -124,7 +124,7 @@ class ChannelSet extends $pb.GeneratedMessage {
   static $pb.PbList<ChannelSet> createRepeated() => $pb.PbList<ChannelSet>();
   @$core.pragma('dart2js:noInline')
   static ChannelSet getDefault() => _defaultInstance ??= $pb.GeneratedMessage.$_defaultFor<ChannelSet>(create);
-  static ChannelSet _defaultInstance;
+  static ChannelSet? _defaultInstance;
 
   @$pb.TagNumber(1)
   $core.List<$1.ChannelSettings> get settings => $_getList(0);

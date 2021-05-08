@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -36,8 +36,8 @@ class ConnectDeviceBloc extends Bloc<ConnectDeviceEvent, ConnectDeviceState> {
   ConnectDeviceBloc() : super(const ConnectDeviceState.initial());
 
   /// BLE device repository
-  DeviceConnect/*!*/ connectRepo = GetIt.I<DeviceConnect>();
-  StreamSubscription _deviceSubscription;
+  DeviceConnect connectRepo = GetIt.I<DeviceConnect>();
+  StreamSubscription? _deviceSubscription;
   // StreamSubscription _periodicSubscription;
   List<MeshDevice> connectedDevices = [];
 

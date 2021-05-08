@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'package:dartz/dartz.dart';
 import 'package:logger/logger.dart';
 // import 'package:logger_flutter/logger_flutter.dart';
@@ -50,9 +50,9 @@ class SimpleLogPrinter extends LogPrinter {
   SimpleLogPrinter(this.className);
 
   @override
-  List<String/*!*/> log(LogEvent event) {
-    AnsiColor color = PrettyPrinter.levelColors[event.level];
-    String/*!*/ emoji = PrettyPrinter.levelEmojis[event.level];
+  List<String> log(LogEvent event) {
+    AnsiColor color = PrettyPrinter.levelColors[event.level]!;
+    String emoji = PrettyPrinter.levelEmojis[event.level]!;
     return [color('$emoji $className - ${event.message}')];
   }
 }

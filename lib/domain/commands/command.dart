@@ -1,8 +1,8 @@
-// @dart=2.9
+
 /// List of [MeshCommand], Data object, used with [CommandTile] to build Command list UI
 /// should be in the domain layer?
 class MeshCommandList {
-  final List<MeshCommand> commands;
+  final List<MeshCommand>? commands;
 
   MeshCommandList({
     this.commands,
@@ -27,12 +27,12 @@ class MeshCommandList {
 
 /// Data object, used with [CommandTile] to build Command list UI
 class MeshCommand {
-  final int id;
-  final String group;
-  final String command;
-  final String commandDescription;
+  final int? id;
+  final String? group;
+  final String? command;
+  final String? commandDescription;
   // final List<MeshCommandParameter> params;
-  final MeshCommandParameterList params;
+  final MeshCommandParameterList? params;
 
   MeshCommand(
       {this.id,
@@ -43,10 +43,10 @@ class MeshCommand {
 
   factory MeshCommand.fromJson(Map<String, dynamic> json) {
     return MeshCommand(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       group: (json['group'] ?? 'Ungrouped') as String,
-      command: json['command'] as String,
-      commandDescription: json['commandDescription'] as String,
+      command: json['command'] as String?,
+      commandDescription: json['commandDescription'] as String?,
       params: new MeshCommandParameterList.fromJson(
           json['params'] as List<dynamic>),
     );
@@ -57,7 +57,7 @@ class MeshCommand {
 /// used with [ParameterTile] to build Command list UI
 /// extends Iterable<MeshCommandParameter>
 class MeshCommandParameterList {
-  final List<MeshCommandParameter> paramList;
+  final List<MeshCommandParameter>? paramList;
 
   MeshCommandParameterList({
     this.paramList,
@@ -85,15 +85,15 @@ class MeshCommandParameterList {
 /// "pEdit": "false"    optional, default true, can edit?
 /// "pHide": "true"    optional, default false, can edit?
 class MeshCommandParameter {
-  final String id;
-  String value; //editable by user
-  final String description;
-  final String defaultValue;
-  final String type;
-  final int max;
-  final int min;
-  final bool editable;
-  final bool visible;
+  final String? id;
+  String? value; //editable by user
+  final String? description;
+  final String? defaultValue;
+  final String? type;
+  final int? max;
+  final int? min;
+  final bool? editable;
+  final bool? visible;
   // add callback function
 
   MeshCommandParameter(
@@ -109,10 +109,10 @@ class MeshCommandParameter {
 
   factory MeshCommandParameter.fromJson(Map<String, dynamic> json) {
     return MeshCommandParameter(
-      id: json['id'] as String,
-      value: json['pValue'] as String,
-      description: json['pDescription'] as String,
-      defaultValue: json['pDefault'] as String,
+      id: json['id'] as String?,
+      value: json['pValue'] as String?,
+      description: json['pDescription'] as String?,
+      defaultValue: json['pDefault'] as String?,
       type: (json['pType'] ?? 'int') as String,
       max: (json['pMax'] ?? 32) as int,
       min: (json['pMin'] ?? 0) as int,
@@ -122,7 +122,7 @@ class MeshCommandParameter {
   }
 }
 
-bool isNumericInteger(String string) {
+bool isNumericInteger(String? string) {
   // Null or empty string is not a number
   if (string == null || string.isEmpty) {
     return false;

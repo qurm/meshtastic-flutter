@@ -14,7 +14,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-// @dart=2.9
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -58,7 +58,7 @@ void main() {
 }
 
 class BLEApp extends StatelessWidget {
-  BLEApp({Key /*?*/ key, /*required*/ @required this.router}) : super(key: key);
+  BLEApp({Key? key, /*required*/ required this.router}) : super(key: key);
   final RouteGenerator router;
   final sl = GetIt.instance; //sl = service locator
   @override

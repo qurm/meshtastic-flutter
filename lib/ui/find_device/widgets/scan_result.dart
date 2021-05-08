@@ -1,4 +1,4 @@
-// @dart=2.9
+
 // Copyright 2017, Paul DeMarco.
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -14,13 +14,13 @@ import '../../../services/bluetooth/ble_api.dart';
 //ANDY TODO started to get NULL results here after merging BLEDevice, BLEDevice2
 
 class ScanResultTile extends StatelessWidget {
-  final ScannedDevice/*!*/ result;
-  final VoidCallback/*!*/ onTap;
-  const ScanResultTile({Key key, this.result, this.onTap}) : super(key: key);
+  final ScannedDevice result;
+  final VoidCallback onTap;
+  const ScanResultTile({Key? key, required this.result, required this.onTap}) : super(key: key);
 
   Widget _buildTitle(BuildContext context) {
     if (result != null) {
-      if (result.device.name.length > 0) {
+      if (result.device!.name.length > 0) {
         // logger.v(
         //     'ScanResult for BLEDevice ${result.device.id} ${result.hashCode}');
         return Column(
@@ -28,16 +28,16 @@ class ScanResultTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              result.device.name ?? '<null name>',
+              result.device!.name ?? '<null name>',
               overflow: TextOverflow.ellipsis,
             ),
             Text(
-              result.device.id.toString(),
+              result.device!.id.toString(),
               style:
-                  Theme.of(context).textTheme.caption.apply(color: Colors.red),
+                  Theme.of(context).textTheme.caption!.apply(color: Colors.red),
             ),
             Icon(Icons.bluetooth,
-                color: Theme.of(context).iconTheme.color.withOpacity(0.9)),
+                color: Theme.of(context).iconTheme.color!.withOpacity(0.9)),
             // RSSI also shown in title leading
             // Text(
             //   'RSSI: ${result.rssi.toString()}',
@@ -47,7 +47,7 @@ class ScanResultTile extends StatelessWidget {
           ],
         );
       } else {
-        return Text(result.device.id.toString());
+        return Text(result.device!.id.toString());
       }
     }
   }
@@ -66,7 +66,7 @@ class ScanResultTile extends StatelessWidget {
             child: Text(
               value,
               style:
-                  Theme.of(context).textTheme.caption.apply(color: Colors.red),
+                  Theme.of(context).textTheme.caption!.apply(color: Colors.red),
               softWrap: true,
             ),
           ),
@@ -80,7 +80,7 @@ class ScanResultTile extends StatelessWidget {
         .toUpperCase();
   }
 
-  String getNiceManufacturerData(Map<int, List<int>> data) {
+  String? getNiceManufacturerData(Map<int, List<int>> data) {
     if (data.isEmpty) {
       return null;
     }
@@ -126,7 +126,7 @@ class ScanResultTile extends StatelessWidget {
       leading: Text(result.rssi.toString()),
       initiallyExpanded: false, //toggle this for expand/collapse layout
       trailing: OutlinedButton(
-        child: (result.advertisementData.connectable)
+        child: result.advertisementData!.connectable!
             ? const Text('CONNECT')
             : const Text('Not Meshtastic'),
         // color: Colors.black,
@@ -136,26 +136,26 @@ class ScanResultTile extends StatelessWidget {
       ),
       children: <Widget>[
         _buildAdvRow(
-            context, 'Complete Local Name', result.advertisementData.localName),
+            context, 'Complete Local Name', result.advertisementData!.localName),
         _buildAdvRow(context, 'Connectable',
-            '${result.advertisementData.connectable ?? 'N/A'}'),
+            '${result.advertisementData!.connectable ?? 'N/A'}'),
         _buildAdvRow(context, 'Tx Power Level',
-            '${result.advertisementData.txPowerLevel ?? 'N/A'}'),
+            '${result.advertisementData!.txPowerLevel ?? 'N/A'}'),
         _buildAdvRow(
             context,
             'Manufacturer Data',
             getNiceManufacturerData(
-                    result.advertisementData.manufacturerData) ??
+                    result.advertisementData!.manufacturerData) ??
                 'N/A'),
         _buildAdvRow(
             context,
             'Service UUIDs',
-            getNiceServiceUUID(result.advertisementData.serviceUuids) ??
+            getNiceServiceUUID(result.advertisementData!.serviceUuids) ??
                 'N/A'), // (result.advertisementData.serviceUuids.isNotEmpty)
         //     ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
         //     : 'N/A'),
         _buildAdvRow(context, 'Service Data',
-            getNiceServiceData(result.advertisementData.serviceData) ?? 'N/A'),
+            getNiceServiceData(result.advertisementData!.serviceData) ?? 'N/A'),
       ],
     );
   }

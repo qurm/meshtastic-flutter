@@ -2,7 +2,7 @@
 //  Generated code. Do not modify.
 //  source: mesh.proto
 //
-// @dart = 2.7
+
 // ignore_for_file: annotate_overrides,camel_case_types,unnecessary_const,non_constant_identifier_names,library_prefixes,unused_import,unused_shown_name,return_of_invalid_type,unnecessary_this,prefer_final_fields
 
 // ignore_for_file: UNDEFINED_SHOWN_NAME
@@ -47,7 +47,7 @@ class HardwareModel extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, HardwareModel> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static HardwareModel valueOf($core.int value) => _byValue[value];
+  static HardwareModel? valueOf($core.int value) => _byValue[value];
 
   const HardwareModel._($core.int v, $core.String n) : super(v, n);
 }
@@ -62,7 +62,7 @@ class Constants extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, Constants> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Constants valueOf($core.int value) => _byValue[value];
+  static Constants? valueOf($core.int value) => _byValue[value];
 
   const Constants._($core.int v, $core.String n) : super(v, n);
 }
@@ -93,7 +93,7 @@ class CriticalErrorCode extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, CriticalErrorCode> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static CriticalErrorCode valueOf($core.int value) => _byValue[value];
+  static CriticalErrorCode? valueOf($core.int value) => _byValue[value];
 
   const CriticalErrorCode._($core.int v, $core.String n) : super(v, n);
 }
@@ -122,7 +122,7 @@ class Routing_Error extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, Routing_Error> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static Routing_Error valueOf($core.int value) => _byValue[value];
+  static Routing_Error? valueOf($core.int value) => _byValue[value];
 
   const Routing_Error._($core.int v, $core.String n) : super(v, n);
 }
@@ -147,7 +147,7 @@ class MeshPacket_Priority extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, MeshPacket_Priority> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static MeshPacket_Priority valueOf($core.int value) => _byValue[value];
+  static MeshPacket_Priority? valueOf($core.int value) => _byValue[value];
 
   const MeshPacket_Priority._($core.int v, $core.String n) : super(v, n);
 }
@@ -172,7 +172,7 @@ class LogRecord_Level extends $pb.ProtobufEnum {
   ];
 
   static final $core.Map<$core.int, LogRecord_Level> _byValue = $pb.ProtobufEnum.initByValue(values);
-  static LogRecord_Level valueOf($core.int value) => _byValue[value];
+  static LogRecord_Level? valueOf($core.int value) => _byValue[value];
 
   const LogRecord_Level._($core.int v, $core.String n) : super(v, n);
 }

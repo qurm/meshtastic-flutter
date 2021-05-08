@@ -1,4 +1,4 @@
-// @dart=2.9
+
 import 'dart:convert';
 
 import '../bluetooth/bluetooth.dart';
@@ -31,7 +31,7 @@ String pskToString(List<int> psk) {
 ///  repo meshServiceStart
 class MeshNode {
   MeshNode(this.iface, this.nodeNum) {
-    appLogger
+    appLogger!
         .i('MeshNode constructor: ${iface.device.id} ${iface.device.hashCode}');
   }
 
@@ -43,7 +43,7 @@ class MeshNode {
 
   /// [radioConfig] - Current radio configuration and device settings, if you
   /// write to this the new settings will be applied to the device.
-  RadioConfig radioConfig;
+  RadioConfig? radioConfig;
   // RadioConfig_UserPreferences preferences;
 
   /// actual channels available on Node
@@ -51,7 +51,7 @@ class MeshNode {
   List<Channel> partialChannels = [];
 
   RadioConfig_UserPreferences get preferences {
-    return radioConfig.preferences;
+    return radioConfig!.preferences;
   }
 
   // def showInfo(self):
@@ -65,18 +65,18 @@ class MeshNode {
 
   /// Show/log human readable description of our node.
   void showInfo() {
-    userLogger
-        .i('showInfo radioConfig: ${radioConfig.preferences.toProto3Json()}');
+    userLogger!
+        .i('showInfo radioConfig: ${radioConfig!.preferences.toProto3Json()}');
     showChannels();
   }
 
   /// Show/log human readable description of our channels
   void showChannels() {
-    userLogger.i('showChannels Channels:');
+    userLogger!.i('showChannels Channels:');
     for (final c in channels) {
       if (c.role != Channel_Role.DISABLED) {
         var cStr = c.settings.toProto3Json();
-        userLogger
+        userLogger!
             .i(' ${c.role.name} psk=${pskToString(c.settings.psk)} $cStr');
       }
     }
@@ -116,7 +116,7 @@ class MeshNode {
   /// waitForConfig - not required in flutter (ported from Python)
   /// (self, sleep=0.1, maxsecs=20, attrs=('myInfo', 'nodes', 'radioConfig'))
   /// Block until radioConfig is received. Returns True if config has been received.
-  bool waitForConfig({num sleep = .1, int maxsecs = 20, List attrs}) {
+  bool waitForConfig({num sleep = .1, int maxsecs = 20, List? attrs}) {
     for (var i = 1; i <= (maxsecs ~/ sleep); i++) {
       // check that these object.properties exist 'myInfo', 'nodes', 'radioConfig'
       // if (all(map(lambda a: getattr(self, a, None), attrs)))
@@ -143,12 +143,12 @@ def writeConfig(self):
   ///
   /// AF (ported from Python) 14/03/21 now in Node
   Future<void> writeConfig() async {
-    userLogger.i('Node.writeConfig called ');
-    if (!radioConfig.isInitialized()) {
+    userLogger!.i('Node.writeConfig called ');
+    if (!radioConfig!.isInitialized()) {
       throw Exception('Node.writeConfig RadioConfig has been read');
     }
     final p = AdminMessage();
-    p.setRadio = radioConfig;
+    p.setRadio = radioConfig!;
     await _sendAdmin(p: p);
   }
 /* 
@@ -167,7 +167,7 @@ def writeConfig(self):
     final p = AdminMessage();
     p.setChannel = channels[channelIndex];
     _sendAdmin(p: p, adminIndex: adminIndex);
-    appLogger.i('MeshNode.writeChannel Wrote channel: ${channelIndex}');
+    appLogger!.i('MeshNode.writeChannel Wrote channel: ${channelIndex}');
   }
 
 /* 
@@ -354,7 +354,7 @@ def writeConfig(self):
 
   /// Set mesh network URL, converts base 64 string url into [channelSet]
   void setURL(String url) {
-    if (radioConfig.isInitialized())
+    if (radioConfig!.isInitialized())
       throw Exception("No RadioConfig has been read");
 
     //URLs are of the form https://www.meshtastic.org/d/#{base64_channel_set}
@@ -424,11 +424,11 @@ def writeConfig(self):
     );
     if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
       radioConfig = RadioConfig.fromBuffer(meshPacket.decoded.payload);
-      appLogger
+      appLogger!
           .i('_requestSettings Received radio config, now fetching channels..');
       await _requestChannel(0); //now start fetching channels
     } else
-      appLogger.wtf('_requestSettings Received unexpected!!');
+      appLogger!.wtf('_requestSettings Received unexpected!!');
   }
 /* 
   def _requestChannel(self, channelNum: int):
@@ -480,7 +480,7 @@ def writeConfig(self):
   Future<void> _requestChannel(int channelNum) async {
     final p = AdminMessage();
     p.getChannelRequest = channelNum + 1;
-    appLogger.d('_requestChannel Requesting channel ${channelNum}');
+    appLogger!.d('_requestChannel Requesting channel ${channelNum}');
 
     /// A closure to handle the response packet - we use async await instead.
     /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
@@ -525,7 +525,7 @@ def writeConfig(self):
     if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
       final c = Channel.fromBuffer(meshPacket.decoded.payload);
       partialChannels.add(c);
-      appLogger.d('_requestChannel Received channel ${c.toString()}');
+      appLogger!.d('_requestChannel Received channel ${c.toString()}');
       int index = c.index;
 
       // for stress testing, we can always download all channels
@@ -535,7 +535,7 @@ def writeConfig(self):
       var quitEarly = (c.role == Channel_Role.DISABLED) && fastChannelDownload;
 
       if (quitEarly || (index >= iface.myInfo.maxChannels - 1)) {
-        appLogger.d('_requestChannel Finished downloading channels');
+        appLogger!.d('_requestChannel Finished downloading channels');
 
         // Fill the rest of array with DISABLED channels
         index += 1;
@@ -554,7 +554,7 @@ def writeConfig(self):
         await _requestChannel(index + 1);
       }
     } else
-      appLogger.wtf('_requestChannel Received unexpected packet!!');
+      appLogger!.wtf('_requestChannel Received unexpected packet!!');
   }
 /*   
 def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,
@@ -572,9 +572,9 @@ def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,
   ///Send an admin message to the specified node (or the local node if destNodeNum is zero)
   // AF 20/3/2021 change to Future async, as _sendToRadio is async write
   Future<MeshPacket> _sendAdmin(
-      {AdminMessage p,
+      {required AdminMessage p,
       bool wantResponse = false,
-      Function onResponse = null,
+      Function? onResponse = null,
       int adminIndex = 0}) async {
     return await iface.sendData(
         byteData: p.writeToBuffer(),
