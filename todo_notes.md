@@ -4,8 +4,10 @@
 seeing two instances of this in widget tree - are they same Singleton.
 SetupDeviceBloc
 
+Platform exception on startup - need to repro
+Maybe when device sleeps?
 
-Excpetion in meshAPS
+Excpetion in meshAPI
 
     if (_intialised) {
       await _readFromRadio();

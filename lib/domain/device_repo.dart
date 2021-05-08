@@ -17,7 +17,9 @@ import '../services/bluetooth/ble_api.dart';
 import '../services/bluetooth/ble_common.dart';
 import '../services/mesh/mesh.dart';
 import 'connect_failure.dart';
-import 'value_objects.dart';
+
+/// AF 2021-05-08 temp remove while doing null safe conversion
+// import 'value_objects.dart';
 
 /// This is a repository/data level class -extend to handle streams etc
 /// and merge with the device_repo file.
@@ -57,23 +59,23 @@ class DeviceConnect {
   }
 
   //Future<void> connect() return blueAPIClient.connect();
-
-  Future<Either<ConnectFailure, Unit>> connect2(
-      DeviceAddress deviceAddress) async {
-    try {
-      final state = blueAPIClient.state;
-      if (state == BluetoothState.on) {
-        return right(unit);
-      }
-      // todo - must return a value
-      return right(unit);
-    } catch (e) {
-      if (e.message.contains('error') != null) {
-        return left(const ConnectFailure.nobluetooth());
-      } //todo add further elseif
-      return left(const ConnectFailure.nobluetooth());
-    }
-  }
+  /// AF 2021-05-08 temp remove while doing null safe conversion
+  // Future<Either<ConnectFailure, Unit>> connect2(
+  //     DeviceAddress deviceAddress) async {
+  //   try {
+  //     final state = blueAPIClient.state;
+  //     if (state == BluetoothState.on) {
+  //       return right(unit);
+  //     }
+  //     // todo - must return a value
+  //     return right(unit);
+  //   } catch (e) {
+  //     if (e.message.contains('error') != null) {
+  //       return left(const ConnectFailure.nobluetooth());
+  //     } //todo add further elseif
+  //     return left(const ConnectFailure.nobluetooth());
+  //   }
+  // }
 
   /// AF this does not appear to return anything, only the Unit/void
   /// other examples set state or value some other way

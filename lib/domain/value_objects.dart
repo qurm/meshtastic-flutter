@@ -3,19 +3,21 @@ import 'package:meshtastic_app/domain/core/failures.dart';
 import 'package:meshtastic_app/domain/core/value_objects.dart';
 import 'package:meshtastic_app/domain/core/value_validators.dart';
 
-class DeviceAddress extends ValueObject<String> {
-  @override
-  final Either<ValueFailure<String>, String> value;
+/// AF 2021-05-08 temp remove while doing null safe conversion
 
-  factory DeviceAddress(String input) {
-    assert(input != null);
-    return DeviceAddress._(
-      validateDeviceAddress(input),
-    );
-  }
+// class DeviceAddress extends ValueObject<String> {
+//   @override
+//   final Either<ValueFailure<String>, String> value;
 
-  const DeviceAddress._(this.value);
-}
+//   factory DeviceAddress(String input) {
+//     assert(input != null);
+//     return DeviceAddress._(
+//       validateDeviceAddress(input),
+//     );
+//   }
+
+//   const DeviceAddress._(this.value);
+// }
 
 // class Password extends ValueObject<String> {
 //   @override

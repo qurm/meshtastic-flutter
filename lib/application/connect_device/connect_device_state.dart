@@ -25,4 +25,7 @@ abstract class ConnectDeviceState with _$ConnectDeviceState {
   // when the device has been connected and disconnects
   // could be range, power-off, unpair, etc
   const factory ConnectDeviceState.deviceOffline() = DeviceOfflineState;
+  // when the device has been disconnected and reconnects
+  // could be range, power-off, unpair, etc
+  // const factory ConnectDeviceState.deviceOnline() = DeviceOnlineState;
 }

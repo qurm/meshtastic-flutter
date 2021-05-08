@@ -27,6 +27,7 @@ environment:
   flutter: ">=1.22.00 <2.0.0"
 
 dependencies:
+  # analyzer: ^1.5.0
   # auto_route: ^0.6.9  # could not resolve package uri Dec 2020 - try again later?
   flutter:
     sdk: flutter
@@ -36,7 +37,8 @@ dependencies:
   flutter_bloc: ^7.0.0
   flex_color_scheme: ^2.0.0
   # convex_bottom_bar: ^2.7.1+2
-  freezed_annotation: ^0.14.1
+  # freezed_annotation: ^0.14.1
+  freezed_annotation: ^0.12.0
   get_it: ^6.0.0
   grouped_list: ^4.0.0-nullsafety.1
   injectable: ^1.2.2
@@ -48,7 +50,8 @@ dependencies:
   #   git: https://github.com/ewertonrp/logger_flutter.git
   logger: ^1.0.0
   # recase: ^3.0.1
-  protobuf: ^2.0.0      # flutter blue also uses
+  protobuf: ^2.0.0      # flutter blue also uses ^2.0.0
+  rxdart: ^0.26.0       # flutter blue also uses ^0.26.0   
   shared_preferences: ^2.0.5
   # preferences: '^5.2.1'   // see https://pub.dev/packages/pref
   wakelock: ^0.5.0+2
@@ -57,12 +60,20 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
 
+# see https://pub.dev/packages/freezed  needed to make it build pre null safety
+dependency_overrides:
+  freezed: ^0.12.7
+  freezed_annotation: ^0.12.0
+
 dev_dependencies:
   # auto_route_generator: ^0.6.10
   flutter_test:
     sdk: flutter
+  # build_runner: ^1.12.0   # was ^1.12.2, conflict with freezed
   build_runner: ^1.11.5   # was ^1.12.2, conflict with freezed
+  # build_runner: ^2.0.2   # was ^1.12.2, conflict with freezed
   freezed: ^0.12.7    #build runner dependency
+  # freezed: ^0.14.1+3    #build runner dependency??
   # json_serializable: ^3.3.0
   effective_dart: ^1.0.0
   pedantic: ^1.9.0
