@@ -68,7 +68,7 @@ class BLEDevice2 {
   }
   String id = ''; // 'C4:4F:33:6A:AC:47'
   String name = ''; // 'Meshtastic_ac45', can be null for a non-Meshdevice
-  BLEDeviceType type;
+  BLEDeviceType/*!*/ type;
   BLEDeviceState _deviceState = BLEDeviceState.disconnected; //safe default,
   BluetoothDevice _device; //handle for the flutter_blue device
 

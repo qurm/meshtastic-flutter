@@ -121,7 +121,7 @@ class MeshInterface {
   /// current local BLE device
   MeshDevice device;
   bool isConnected = false;
-  bool noProto;
+  bool/*!*/ noProto;
 
   /// current local logical Mesh node
   MeshNode localNode; //how to pass self,
@@ -132,7 +132,7 @@ class MeshInterface {
   Map<int, NodeInfo> nodes = {}; //Python is Dict with strings like 'num, 'user'
 
   /// from Python, not used yet
-  int debugOut;
+  int/*!*/ debugOut;
 
   /// Unique local debugging info for this node.
   /// Sent to the phone in response to WantNodes.
@@ -449,7 +449,7 @@ class MeshInterface {
  */
 
 // Get a new unique packet ID
-  int _generatePacketId() {
+  int/*!*/ _generatePacketId() {
     if (currentPacketId == null) //todo null on zero
     {
       throw Exception(
@@ -774,7 +774,7 @@ class MeshInterface {
 // Uses string type for value, as most versatile
 // https://stackoverflow.com/questions/61401756/how-to-extract-number-only-from-string-in-flutter/61401948#61401948
 // aStr = a.replaceAll(new RegExp(r'[^0-9]'),'');
-  Either<CommandFailure, bool> setPreferenceList(Map<String, String> prefMap) {
+  Either<CommandFailure, bool> setPreferenceList(Map<String/*!*/, String/*!*/> prefMap) {
     // direct reference to the .preferences, doesnt work with dotted path
     // TODO - this is localNode, should also set remote Nodes?
     // final prefs = localNode.preferences; //Now in Node class
@@ -805,7 +805,7 @@ class MeshInterface {
   /// Then must follow this with a call to writeConfig to send to the device.
   /// AF 01/04/21 Updated for all current protobuf [RadioConfig_UserPreferences]
   Either<CommandFailure, bool> _setPreference2(
-      RadioConfig_UserPreferences prefs, String preference, String value) {
+      RadioConfig_UserPreferences prefs, String/*!*/ preference, String value) {
     // logger.d('setPreference prefs ${prefs.isFrozen}');
     // prefs = RadioConfig_UserPreferences();
 

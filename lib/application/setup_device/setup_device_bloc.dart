@@ -34,12 +34,12 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
   //cannot run the DeviceStarted event on bloc create, as _device not initialised.:
   // add(DeviceStarted());
 
-  final ConnectDeviceBloc connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
-  final DeviceConnect _connectFacade = GetIt.I<DeviceConnect>();
+  final ConnectDeviceBloc/*!*/ connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
+  final DeviceConnect/*!*/ _connectFacade = GetIt.I<DeviceConnect>();
   MeshDevice _device;
   StreamSubscription<MeshtasticReceive> _meshSubscription;
   StreamSubscription _connectDeviceSubscription;
-  BLEInterface _meshInterface;
+  BLEInterface/*!*/ _meshInterface;
 
   @override
   Stream<SetupDeviceState> mapEventToState(
@@ -90,7 +90,7 @@ class SetupDeviceBloc extends Bloc<SetupDeviceEvent, SetupDeviceState> {
         //     'SetupDevice: setPreferenceList ${event.meshCommand.params.paramList}');
         final prefMap = {
           for (var p in event.meshCommand.params.paramList)
-            p.id as String: p.value as String
+            p.id as String/*!*/: p.value as String/*!*/
         };
         appLogger.i('SetupDevice: setPreferenceList ${prefMap}');
         final possibleFailure =

@@ -25,7 +25,7 @@ class FindDevicesScreen extends StatelessWidget {
   const FindDevicesScreen({Key key, this.deviceConnect}) : super(key: key);
 
   /// BLE device repository
-  final DeviceConnect deviceConnect;
+  final DeviceConnect/*!*/ deviceConnect;
 
   @override
   Widget build(BuildContext context) {
@@ -143,8 +143,8 @@ class AllDevicesTiles extends StatelessWidget {
     @required this.devices,
   }) : super(key: key);
 
-  final ConnectDeviceBloc connectDeviceBloc;
-  final Stream<List<ScannedDevice>> devices;
+  final ConnectDeviceBloc/*!*/ connectDeviceBloc;
+  final Stream<List<ScannedDevice>>/*!*/ devices;
 
   @override
   Widget build(BuildContext context) {
@@ -289,7 +289,7 @@ class _ConnectedDevicesRadioTilesState
 
 class UseDeviceButton extends StatelessWidget {
   const UseDeviceButton({Key key, this.d}) : super(key: key);
-  final MeshDevice d;
+  final MeshDevice/*!*/ d;
   @override
   Widget build(BuildContext context) {
     return TextButton(

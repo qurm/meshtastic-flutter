@@ -150,8 +150,8 @@ class RouteGenerator {
 
 /// used for Mesh related screens, MeshCommand etc
 class MeshRouteArguments {
-  final MeshDevice device;
+  final MeshDevice/*!*/ device;
   // final DeviceConnect deviceConnect;
-  final MeshCommand command;
+  final MeshCommand/*!*/ command;
   MeshRouteArguments({this.device, this.command});
 }

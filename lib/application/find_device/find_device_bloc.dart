@@ -51,8 +51,8 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
     // _initialiseBloc();
   }
 
-  DeviceConnect _connectRepo;
-  final ConnectDeviceBloc connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
+  DeviceConnect/*!*/ _connectRepo;
+  final ConnectDeviceBloc/*!*/ connectDeviceBloc = GetIt.I<ConnectDeviceBloc>();
   // StreamSubscription _periodicSubscription; //problematic, keeps running in bloc
   StreamSubscription _connectDeviceSubscription;
 

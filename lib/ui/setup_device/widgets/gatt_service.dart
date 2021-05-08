@@ -5,8 +5,8 @@ import '../../../services/bluetooth/ble_api.dart';
 import '../../../services/bluetooth/ble_common.dart';
 
 class ServiceTile extends StatelessWidget {
-  final BLEService service;
-  final List<CharacteristicTile> characteristicTiles;
+  final BLEService/*!*/ service;
+  final List<CharacteristicTile>/*!*/ characteristicTiles;
 
   const ServiceTile({Key key, this.service, this.characteristicTiles})
       : super(key: key);
@@ -41,8 +41,8 @@ class ServiceTile extends StatelessWidget {
 }
 
 class CharacteristicTile extends StatelessWidget {
-  final BLECharacteristic characteristic;
-  final List<DescriptorTile> descriptorTiles;
+  final BLECharacteristic/*!*/ characteristic;
+  final List<DescriptorTile>/*!*/ descriptorTiles;
   final VoidCallback onReadPressed;
   final VoidCallback onWritePressed;
   final VoidCallback onNotificationPressed;
@@ -117,7 +117,7 @@ class CharacteristicTile extends StatelessWidget {
 }
 
 class DescriptorTile extends StatelessWidget {
-  final BLEDescriptor descriptor;
+  final BLEDescriptor/*!*/ descriptor;
   final VoidCallback onReadPressed;
   final VoidCallback onWritePressed;
 

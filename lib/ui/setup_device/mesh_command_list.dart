@@ -24,15 +24,15 @@ final appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 /// Display single device, for Meshastic devices only,
 /// Generates a list of common commands as Tiles, based on josn file
 class MeshCommandListScreen extends StatelessWidget {
-  final DeviceConnect deviceConnect = GetIt.I<DeviceConnect>();
-  final MeshDevice device;
+  final DeviceConnect/*!*/ deviceConnect = GetIt.I<DeviceConnect>();
+  final MeshDevice/*!*/ device;
 
   ///const for immutable class
   MeshCommandListScreen({Key key, this.device}) : super(key: key);
 // future: DefaultAssetBundle.of(context)
 //                       .loadString("assets/json/commands.json"),
 
-  Future<List<MeshCommand>> _loadCommands(String jsonFile) async {
+  Future<List<MeshCommand>/*!*//*!*/> _loadCommands(String jsonFile) async {
     // List<MeshCommand> commands = [];
     String data = await rootBundle //DefaultAssetBundle.of(context)
         .loadString(jsonFile);
@@ -48,7 +48,7 @@ class MeshCommandListScreen extends StatelessWidget {
     String data = await rootBundle //DefaultAssetBundle.of(context)
         .loadString("assets/json/command_groups.json");
     final jsonData = json.decode(data);
-    List<MeshCommand> commands =
+    List<MeshCommand>/*!*/ commands =
         MeshCommandList.fromJson(jsonData as List).commands;
     return commands;
   }
@@ -128,7 +128,7 @@ class MeshCommandListScreen extends StatelessWidget {
   }
 
   /// Generate the tiles from json file
-  Widget _buildCommandTiles3(List<MeshCommand> commands, BuildContext context) {
+  Widget _buildCommandTiles3(List<MeshCommand>/*!*/ commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
       appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
@@ -203,7 +203,7 @@ class MeshCommandListScreen extends StatelessWidget {
           ),
           body: TabBarView(
             children: [
-              FutureBuilder<List<MeshCommand>>(
+              FutureBuilder<List<MeshCommand>/*!*/>(
                   future: _loadCommands(
                       'assets/json/commands.json'), //called once only?
                   builder: (context, snapshot) {
@@ -217,7 +217,7 @@ class MeshCommandListScreen extends StatelessWidget {
                       );
                     }
                   }),
-              FutureBuilder<List<MeshCommand>>(
+              FutureBuilder<List<MeshCommand>/*!*/>(
                   future: _loadCommands(
                       'assets/json/command_groups.json'), //called once only?
                   builder: (context, snapshot) {

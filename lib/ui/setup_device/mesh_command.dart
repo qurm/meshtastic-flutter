@@ -18,9 +18,9 @@ var appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 /// Display single command, called from selection on Command list
 /// as Card using [MeshCommandForm] with submit button
 class MeshCommandScreen extends StatelessWidget {
-  final DeviceConnect deviceConnect = GetIt.I<DeviceConnect>();
+  final DeviceConnect/*!*/ deviceConnect = GetIt.I<DeviceConnect>();
   final MeshDevice device;
-  final MeshCommand command;
+  final MeshCommand/*!*/ command;
 
   ///const for immutable class
   MeshCommandScreen({Key key, this.device, this.command})
@@ -28,7 +28,7 @@ class MeshCommandScreen extends StatelessWidget {
         super(key: key);
 
   /// Generate the tiles from json file
-  Widget _buildCommandCard(MeshCommand command, BuildContext context) {
+  Widget _buildCommandCard(MeshCommand/*!*/ command, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (command == null) {
       appLogger.w('command is Null', 'app.DeviceScreen._buildCommandCard');

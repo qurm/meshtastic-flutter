@@ -14,8 +14,8 @@ import '../../../services/bluetooth/ble_api.dart';
 //ANDY TODO started to get NULL results here after merging BLEDevice, BLEDevice2
 
 class ScanResultTile extends StatelessWidget {
-  final ScannedDevice result;
-  final VoidCallback onTap;
+  final ScannedDevice/*!*/ result;
+  final VoidCallback/*!*/ onTap;
   const ScanResultTile({Key key, this.result, this.onTap}) : super(key: key);
 
   Widget _buildTitle(BuildContext context) {

@@ -6,9 +6,9 @@ part of '../mesh_command_list.dart';
 //use https://javiercbk.github.io/json_to_dart/
 
 class CommandTile extends StatelessWidget {
-  final MeshCommand command;
-  final List<ParameterTile> parameterTiles;
-  final VoidCallback onRunPressed;
+  final MeshCommand/*!*/ command;
+  final List<ParameterTile>/*!*/ parameterTiles;
+  final VoidCallback/*!*/ onRunPressed;
 
   const CommandTile(
       {Key key, this.command, this.parameterTiles, this.onRunPressed})
@@ -53,7 +53,7 @@ class CommandTile extends StatelessWidget {
 }
 
 class ParameterTile extends StatelessWidget {
-  final MeshCommandParameter parameter;
+  final MeshCommandParameter/*!*/ parameter;
 
   const ParameterTile({
     Key key,
@@ -90,8 +90,8 @@ class MeshCommandForm extends StatefulWidget {
   const MeshCommandForm({Key key, this.command, this.onRunPressed})
       : super(key: key);
 
-  final MeshCommand command; // = MeshCommandForm();
-  final VoidCallback onRunPressed;
+  final MeshCommand/*!*/ command; // = MeshCommandForm();
+  final VoidCallback/*!*/ onRunPressed;
 
   @override
   MeshCommandFormState createState() => MeshCommandFormState();
@@ -197,7 +197,7 @@ class MeshCommandFormState extends State<MeshCommandForm> {
 // https://medium.com/flutter-community/flutter-forms-validation-the-ultimate-guide-1b469169ca6e
 class ParameterEdit extends StatelessWidget {
   const ParameterEdit({Key key, this.parameter});
-  final MeshCommandParameter parameter;
+  final MeshCommandParameter/*!*/ parameter;
 
   @override
   Widget build(BuildContext context) {

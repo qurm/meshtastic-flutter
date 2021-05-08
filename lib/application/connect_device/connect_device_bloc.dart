@@ -36,7 +36,7 @@ class ConnectDeviceBloc extends Bloc<ConnectDeviceEvent, ConnectDeviceState> {
   ConnectDeviceBloc() : super(const ConnectDeviceState.initial());
 
   /// BLE device repository
-  DeviceConnect connectRepo = GetIt.I<DeviceConnect>();
+  DeviceConnect/*!*/ connectRepo = GetIt.I<DeviceConnect>();
   StreamSubscription _deviceSubscription;
   // StreamSubscription _periodicSubscription;
   List<MeshDevice> connectedDevices = [];

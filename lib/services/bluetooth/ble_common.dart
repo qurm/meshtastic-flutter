@@ -41,10 +41,10 @@ const fromNumUuidStr = 'ed9da18c-a800-4f66-a670-aa7547e34453';
 final Guid fromNumUuid = Guid(fromNumUuidStr);
 
 class BLEService {
-  Guid uuid;
-  String serviceName; //friendly name, enriched data from json list
-  String deviceId;
-  bool isPrimary;
+  Guid/*!*/ uuid;
+  String/*!*/ serviceName; //friendly name, enriched data from json list
+  String/*!*/ deviceId;
+  bool/*!*/ isPrimary;
   List<BLECharacteristic> characteristics = [];
   List<BLEService> includedServices = [];
 
@@ -84,10 +84,10 @@ class BLEService {
 }
 
 class BLECharacteristic {
-  Guid uuid;
-  String name; //friendly name, enriched data from json list
-  String deviceId;
-  Guid serviceUuid;
+  Guid/*!*/ uuid;
+  String/*!*/ name; //friendly name, enriched data from json list
+  String/*!*/ deviceId;
+  Guid/*!*/ serviceUuid;
   Guid secondaryServiceUuid;
   CharacteristicProperties properties;
   List<BLEDescriptor> descriptors = [];
@@ -157,10 +157,10 @@ class BLECharacteristic {
 class BLEDescriptor {
   static final Guid cccd = Guid('00002902-0000-1000-8000-00805f9b34fb');
 
-  Guid uuid;
-  String deviceId;
-  Guid serviceUuid;
-  Guid characteristicUuid;
+  Guid/*!*/ uuid;
+  String/*!*/ deviceId;
+  Guid/*!*/ serviceUuid;
+  Guid/*!*/ characteristicUuid;
   BluetoothDescriptor _descriptor; //handle on flutter_blue desc - needed?
 
   BLEDescriptor(
