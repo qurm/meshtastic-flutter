@@ -1,6 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
-
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'setup_device_bloc.dart';
 
@@ -10,25 +9,25 @@ part of 'setup_device_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$SetupDeviceEventTearOff {
   const _$SetupDeviceEventTearOff();
 
-// ignore: unused_element
   DeviceStartedEvent started(MeshDevice device) {
     return DeviceStartedEvent(
       device,
     );
   }
 
-// ignore: unused_element
   DeviceCommandEvent command(MeshCommand meshCommand) {
     return DeviceCommandEvent(
       meshCommand,
     );
   }
 
-// ignore: unused_element
   DeviceEventEvent eventRaised(MeshtasticReceive meshEvent) {
     return DeviceEventEvent(
       meshEvent,
@@ -37,37 +36,40 @@ class _$SetupDeviceEventTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SetupDeviceEvent = _$SetupDeviceEventTearOff();
 
 /// @nodoc
 mixin _$SetupDeviceEvent {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult started(MeshDevice device),
-    required TResult command(MeshCommand meshCommand),
-    required TResult eventRaised(MeshtasticReceive meshEvent),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function(MeshDevice device) started,
+    required TResult Function(MeshCommand meshCommand) command,
+    required TResult Function(MeshtasticReceive meshEvent) eventRaised,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device)?,
-    TResult command(MeshCommand meshCommand)?,
-    TResult eventRaised(MeshtasticReceive meshEvent)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MeshDevice device)? started,
+    TResult Function(MeshCommand meshCommand)? command,
+    TResult Function(MeshtasticReceive meshEvent)? eventRaised,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult started(DeviceStartedEvent value),
-    required TResult command(DeviceCommandEvent value),
-    required TResult eventRaised(DeviceEventEvent value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceStartedEvent value) started,
+    required TResult Function(DeviceCommandEvent value) command,
+    required TResult Function(DeviceEventEvent value) eventRaised,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value)?,
-    TResult command(DeviceCommandEvent value)?,
-    TResult eventRaised(DeviceEventEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceStartedEvent value)? started,
+    TResult Function(DeviceCommandEvent value)? command,
+    TResult Function(DeviceEventEvent value)? eventRaised,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -92,7 +94,7 @@ abstract class $DeviceStartedEventCopyWith<$Res> {
   factory $DeviceStartedEventCopyWith(
           DeviceStartedEvent value, $Res Function(DeviceStartedEvent) then) =
       _$DeviceStartedEventCopyWithImpl<$Res>;
-  $Res call({MeshDevice? device});
+  $Res call({MeshDevice device});
 }
 
 /// @nodoc
@@ -111,14 +113,18 @@ class _$DeviceStartedEventCopyWithImpl<$Res>
     Object? device = freezed,
   }) {
     return _then(DeviceStartedEvent(
-      device == freezed ? _value.device : (device as MeshDevice?)!,
+      device == freezed
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as MeshDevice,
     ));
   }
 }
 
 /// @nodoc
+
 class _$DeviceStartedEvent implements DeviceStartedEvent {
-  const _$DeviceStartedEvent(this.device) : assert(device != null);
+  const _$DeviceStartedEvent(this.device);
 
   @override
   final MeshDevice device;
@@ -147,26 +153,22 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult started(MeshDevice device),
-    required TResult command(MeshCommand meshCommand),
-    required TResult eventRaised(MeshtasticReceive meshEvent),
+  TResult when<TResult extends Object?>({
+    required TResult Function(MeshDevice device) started,
+    required TResult Function(MeshCommand meshCommand) command,
+    required TResult Function(MeshtasticReceive meshEvent) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return started(device);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device)?,
-    TResult command(MeshCommand meshCommand)?,
-    TResult eventRaised(MeshtasticReceive meshEvent)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MeshDevice device)? started,
+    TResult Function(MeshCommand meshCommand)? command,
+    TResult Function(MeshtasticReceive meshEvent)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (started != null) {
       return started(device);
     }
@@ -175,26 +177,22 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult started(DeviceStartedEvent value),
-    required TResult command(DeviceCommandEvent value),
-    required TResult eventRaised(DeviceEventEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceStartedEvent value) started,
+    required TResult Function(DeviceCommandEvent value) command,
+    required TResult Function(DeviceEventEvent value) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return started(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value)?,
-    TResult command(DeviceCommandEvent value)?,
-    TResult eventRaised(DeviceEventEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceStartedEvent value)? started,
+    TResult Function(DeviceCommandEvent value)? command,
+    TResult Function(DeviceEventEvent value)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (started != null) {
       return started(this);
     }
@@ -205,9 +203,10 @@ class _$DeviceStartedEvent implements DeviceStartedEvent {
 abstract class DeviceStartedEvent implements SetupDeviceEvent {
   const factory DeviceStartedEvent(MeshDevice device) = _$DeviceStartedEvent;
 
-  MeshDevice get device;
+  MeshDevice get device => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceStartedEventCopyWith<DeviceStartedEvent> get copyWith;
+  $DeviceStartedEventCopyWith<DeviceStartedEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -215,7 +214,7 @@ abstract class $DeviceCommandEventCopyWith<$Res> {
   factory $DeviceCommandEventCopyWith(
           DeviceCommandEvent value, $Res Function(DeviceCommandEvent) then) =
       _$DeviceCommandEventCopyWithImpl<$Res>;
-  $Res call({MeshCommand? meshCommand});
+  $Res call({MeshCommand meshCommand});
 }
 
 /// @nodoc
@@ -234,14 +233,18 @@ class _$DeviceCommandEventCopyWithImpl<$Res>
     Object? meshCommand = freezed,
   }) {
     return _then(DeviceCommandEvent(
-      meshCommand == freezed ? _value.meshCommand : (meshCommand as MeshCommand?)!,
+      meshCommand == freezed
+          ? _value.meshCommand
+          : meshCommand // ignore: cast_nullable_to_non_nullable
+              as MeshCommand,
     ));
   }
 }
 
 /// @nodoc
+
 class _$DeviceCommandEvent implements DeviceCommandEvent {
-  const _$DeviceCommandEvent(this.meshCommand) : assert(meshCommand != null);
+  const _$DeviceCommandEvent(this.meshCommand);
 
   @override
   final MeshCommand meshCommand;
@@ -271,26 +274,22 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult started(MeshDevice device),
-    required TResult command(MeshCommand meshCommand),
-    required TResult eventRaised(MeshtasticReceive meshEvent),
+  TResult when<TResult extends Object?>({
+    required TResult Function(MeshDevice device) started,
+    required TResult Function(MeshCommand meshCommand) command,
+    required TResult Function(MeshtasticReceive meshEvent) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return command(meshCommand);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device)?,
-    TResult command(MeshCommand meshCommand)?,
-    TResult eventRaised(MeshtasticReceive meshEvent)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MeshDevice device)? started,
+    TResult Function(MeshCommand meshCommand)? command,
+    TResult Function(MeshtasticReceive meshEvent)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (command != null) {
       return command(meshCommand);
     }
@@ -299,26 +298,22 @@ class _$DeviceCommandEvent implements DeviceCommandEvent {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult started(DeviceStartedEvent value),
-    required TResult command(DeviceCommandEvent value),
-    required TResult eventRaised(DeviceEventEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceStartedEvent value) started,
+    required TResult Function(DeviceCommandEvent value) command,
+    required TResult Function(DeviceEventEvent value) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return command(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value)?,
-    TResult command(DeviceCommandEvent value)?,
-    TResult eventRaised(DeviceEventEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceStartedEvent value)? started,
+    TResult Function(DeviceCommandEvent value)? command,
+    TResult Function(DeviceEventEvent value)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (command != null) {
       return command(this);
     }
@@ -330,9 +325,10 @@ abstract class DeviceCommandEvent implements SetupDeviceEvent {
   const factory DeviceCommandEvent(MeshCommand meshCommand) =
       _$DeviceCommandEvent;
 
-  MeshCommand get meshCommand;
+  MeshCommand get meshCommand => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceCommandEventCopyWith<DeviceCommandEvent> get copyWith;
+  $DeviceCommandEventCopyWith<DeviceCommandEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -340,7 +336,7 @@ abstract class $DeviceEventEventCopyWith<$Res> {
   factory $DeviceEventEventCopyWith(
           DeviceEventEvent value, $Res Function(DeviceEventEvent) then) =
       _$DeviceEventEventCopyWithImpl<$Res>;
-  $Res call({MeshtasticReceive? meshEvent});
+  $Res call({MeshtasticReceive meshEvent});
 }
 
 /// @nodoc
@@ -359,14 +355,18 @@ class _$DeviceEventEventCopyWithImpl<$Res>
     Object? meshEvent = freezed,
   }) {
     return _then(DeviceEventEvent(
-      meshEvent == freezed ? _value.meshEvent : (meshEvent as MeshtasticReceive?)!,
+      meshEvent == freezed
+          ? _value.meshEvent
+          : meshEvent // ignore: cast_nullable_to_non_nullable
+              as MeshtasticReceive,
     ));
   }
 }
 
 /// @nodoc
+
 class _$DeviceEventEvent implements DeviceEventEvent {
-  const _$DeviceEventEvent(this.meshEvent) : assert(meshEvent != null);
+  const _$DeviceEventEvent(this.meshEvent);
 
   @override
   final MeshtasticReceive meshEvent;
@@ -396,26 +396,22 @@ class _$DeviceEventEvent implements DeviceEventEvent {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult started(MeshDevice device),
-    required TResult command(MeshCommand meshCommand),
-    required TResult eventRaised(MeshtasticReceive meshEvent),
+  TResult when<TResult extends Object?>({
+    required TResult Function(MeshDevice device) started,
+    required TResult Function(MeshCommand meshCommand) command,
+    required TResult Function(MeshtasticReceive meshEvent) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return eventRaised(meshEvent);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult started(MeshDevice device)?,
-    TResult command(MeshCommand meshCommand)?,
-    TResult eventRaised(MeshtasticReceive meshEvent)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(MeshDevice device)? started,
+    TResult Function(MeshCommand meshCommand)? command,
+    TResult Function(MeshtasticReceive meshEvent)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (eventRaised != null) {
       return eventRaised(meshEvent);
     }
@@ -424,26 +420,22 @@ class _$DeviceEventEvent implements DeviceEventEvent {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult started(DeviceStartedEvent value),
-    required TResult command(DeviceCommandEvent value),
-    required TResult eventRaised(DeviceEventEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceStartedEvent value) started,
+    required TResult Function(DeviceCommandEvent value) command,
+    required TResult Function(DeviceEventEvent value) eventRaised,
   }) {
-    assert(started != null);
-    assert(command != null);
-    assert(eventRaised != null);
     return eventRaised(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult started(DeviceStartedEvent value)?,
-    TResult command(DeviceCommandEvent value)?,
-    TResult eventRaised(DeviceEventEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceStartedEvent value)? started,
+    TResult Function(DeviceCommandEvent value)? command,
+    TResult Function(DeviceEventEvent value)? eventRaised,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (eventRaised != null) {
       return eventRaised(this);
     }
@@ -455,33 +447,30 @@ abstract class DeviceEventEvent implements SetupDeviceEvent {
   const factory DeviceEventEvent(MeshtasticReceive meshEvent) =
       _$DeviceEventEvent;
 
-  MeshtasticReceive get meshEvent;
+  MeshtasticReceive get meshEvent => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceEventEventCopyWith<DeviceEventEvent> get copyWith;
+  $DeviceEventEventCopyWith<DeviceEventEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$SetupDeviceStateTearOff {
   const _$SetupDeviceStateTearOff();
 
-// ignore: unused_element
   DeviceInitialState initial() {
     return const DeviceInitialState();
   }
 
-// ignore: unused_element
   DeviceInProgressState requested() {
     return const DeviceInProgressState();
   }
 
-// ignore: unused_element
   DeviceSuccessState completed(String message) {
     return DeviceSuccessState(
       message,
     );
   }
 
-// ignore: unused_element
   DeviceFailureState failed(CommandFailure failure) {
     return DeviceFailureState(
       failure,
@@ -490,41 +479,44 @@ class _$SetupDeviceStateTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $SetupDeviceState = _$SetupDeviceStateTearOff();
 
 /// @nodoc
 mixin _$SetupDeviceState {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult requested(),
-    required TResult completed(String message),
-    required TResult failed(CommandFailure failure),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() requested,
+    required TResult Function(String message) completed,
+    required TResult Function(CommandFailure failure) failed,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult requested()?,
-    TResult completed(String message)?,
-    TResult failed(CommandFailure failure)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? requested,
+    TResult Function(String message)? completed,
+    TResult Function(CommandFailure failure)? failed,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(DeviceInitialState value),
-    required TResult requested(DeviceInProgressState value),
-    required TResult completed(DeviceSuccessState value),
-    required TResult failed(DeviceFailureState value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceInitialState value) initial,
+    required TResult Function(DeviceInProgressState value) requested,
+    required TResult Function(DeviceSuccessState value) completed,
+    required TResult Function(DeviceFailureState value) failed,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value)?,
-    TResult requested(DeviceInProgressState value)?,
-    TResult completed(DeviceSuccessState value)?,
-    TResult failed(DeviceFailureState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceInitialState value)? initial,
+    TResult Function(DeviceInProgressState value)? requested,
+    TResult Function(DeviceSuccessState value)? completed,
+    TResult Function(DeviceFailureState value)? failed,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -541,7 +533,7 @@ class _$SetupDeviceStateCopyWithImpl<$Res>
 
   final SetupDeviceState _value;
   // ignore: unused_field
-  final $Res Function(SetupDeviceState?) _then;
+  final $Res Function(SetupDeviceState) _then;
 }
 
 /// @nodoc
@@ -564,6 +556,7 @@ class _$DeviceInitialStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$DeviceInitialState implements DeviceInitialState {
   const _$DeviceInitialState();
 
@@ -582,29 +575,24 @@ class _$DeviceInitialState implements DeviceInitialState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult requested(),
-    required TResult completed(String message),
-    required TResult failed(CommandFailure failure),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() requested,
+    required TResult Function(String message) completed,
+    required TResult Function(CommandFailure failure) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult requested()?,
-    TResult completed(String message)?,
-    TResult failed(CommandFailure failure)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? requested,
+    TResult Function(String message)? completed,
+    TResult Function(CommandFailure failure)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -613,29 +601,24 @@ class _$DeviceInitialState implements DeviceInitialState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(DeviceInitialState value),
-    required TResult requested(DeviceInProgressState value),
-    required TResult completed(DeviceSuccessState value),
-    required TResult failed(DeviceFailureState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceInitialState value) initial,
+    required TResult Function(DeviceInProgressState value) requested,
+    required TResult Function(DeviceSuccessState value) completed,
+    required TResult Function(DeviceFailureState value) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value)?,
-    TResult requested(DeviceInProgressState value)?,
-    TResult completed(DeviceSuccessState value)?,
-    TResult failed(DeviceFailureState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceInitialState value)? initial,
+    TResult Function(DeviceInProgressState value)? requested,
+    TResult Function(DeviceSuccessState value)? completed,
+    TResult Function(DeviceFailureState value)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -667,6 +650,7 @@ class _$DeviceInProgressStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$DeviceInProgressState implements DeviceInProgressState {
   const _$DeviceInProgressState();
 
@@ -685,29 +669,24 @@ class _$DeviceInProgressState implements DeviceInProgressState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult requested(),
-    required TResult completed(String message),
-    required TResult failed(CommandFailure failure),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() requested,
+    required TResult Function(String message) completed,
+    required TResult Function(CommandFailure failure) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return requested();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult requested()?,
-    TResult completed(String message)?,
-    TResult failed(CommandFailure failure)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? requested,
+    TResult Function(String message)? completed,
+    TResult Function(CommandFailure failure)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requested != null) {
       return requested();
     }
@@ -716,29 +695,24 @@ class _$DeviceInProgressState implements DeviceInProgressState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(DeviceInitialState value),
-    required TResult requested(DeviceInProgressState value),
-    required TResult completed(DeviceSuccessState value),
-    required TResult failed(DeviceFailureState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceInitialState value) initial,
+    required TResult Function(DeviceInProgressState value) requested,
+    required TResult Function(DeviceSuccessState value) completed,
+    required TResult Function(DeviceFailureState value) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return requested(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value)?,
-    TResult requested(DeviceInProgressState value)?,
-    TResult completed(DeviceSuccessState value)?,
-    TResult failed(DeviceFailureState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceInitialState value)? initial,
+    TResult Function(DeviceInProgressState value)? requested,
+    TResult Function(DeviceSuccessState value)? completed,
+    TResult Function(DeviceFailureState value)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requested != null) {
       return requested(this);
     }
@@ -755,7 +729,7 @@ abstract class $DeviceSuccessStateCopyWith<$Res> {
   factory $DeviceSuccessStateCopyWith(
           DeviceSuccessState value, $Res Function(DeviceSuccessState) then) =
       _$DeviceSuccessStateCopyWithImpl<$Res>;
-  $Res call({String? message});
+  $Res call({String message});
 }
 
 /// @nodoc
@@ -774,14 +748,18 @@ class _$DeviceSuccessStateCopyWithImpl<$Res>
     Object? message = freezed,
   }) {
     return _then(DeviceSuccessState(
-      message == freezed ? _value.message : (message as String?)!,
+      message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
 
 /// @nodoc
+
 class _$DeviceSuccessState implements DeviceSuccessState {
-  const _$DeviceSuccessState(this.message) : assert(message != null);
+  const _$DeviceSuccessState(this.message);
 
   @override
   final String message;
@@ -810,29 +788,24 @@ class _$DeviceSuccessState implements DeviceSuccessState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult requested(),
-    required TResult completed(String message),
-    required TResult failed(CommandFailure failure),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() requested,
+    required TResult Function(String message) completed,
+    required TResult Function(CommandFailure failure) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return completed(message);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult requested()?,
-    TResult completed(String message)?,
-    TResult failed(CommandFailure failure)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? requested,
+    TResult Function(String message)? completed,
+    TResult Function(CommandFailure failure)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (completed != null) {
       return completed(message);
     }
@@ -841,29 +814,24 @@ class _$DeviceSuccessState implements DeviceSuccessState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(DeviceInitialState value),
-    required TResult requested(DeviceInProgressState value),
-    required TResult completed(DeviceSuccessState value),
-    required TResult failed(DeviceFailureState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceInitialState value) initial,
+    required TResult Function(DeviceInProgressState value) requested,
+    required TResult Function(DeviceSuccessState value) completed,
+    required TResult Function(DeviceFailureState value) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return completed(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value)?,
-    TResult requested(DeviceInProgressState value)?,
-    TResult completed(DeviceSuccessState value)?,
-    TResult failed(DeviceFailureState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceInitialState value)? initial,
+    TResult Function(DeviceInProgressState value)? requested,
+    TResult Function(DeviceSuccessState value)? completed,
+    TResult Function(DeviceFailureState value)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (completed != null) {
       return completed(this);
     }
@@ -874,9 +842,10 @@ class _$DeviceSuccessState implements DeviceSuccessState {
 abstract class DeviceSuccessState implements SetupDeviceState {
   const factory DeviceSuccessState(String message) = _$DeviceSuccessState;
 
-  String get message;
+  String get message => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceSuccessStateCopyWith<DeviceSuccessState> get copyWith;
+  $DeviceSuccessStateCopyWith<DeviceSuccessState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -884,7 +853,7 @@ abstract class $DeviceFailureStateCopyWith<$Res> {
   factory $DeviceFailureStateCopyWith(
           DeviceFailureState value, $Res Function(DeviceFailureState) then) =
       _$DeviceFailureStateCopyWithImpl<$Res>;
-  $Res call({CommandFailure? failure});
+  $Res call({CommandFailure failure});
 
   $CommandFailureCopyWith<$Res> get failure;
 }
@@ -905,15 +874,15 @@ class _$DeviceFailureStateCopyWithImpl<$Res>
     Object? failure = freezed,
   }) {
     return _then(DeviceFailureState(
-      failure == freezed ? _value.failure : (failure as CommandFailure?)!,
+      failure == freezed
+          ? _value.failure
+          : failure // ignore: cast_nullable_to_non_nullable
+              as CommandFailure,
     ));
   }
 
   @override
   $CommandFailureCopyWith<$Res> get failure {
-    if (_value.failure == null) {
-      return null;
-    }
     return $CommandFailureCopyWith<$Res>(_value.failure, (value) {
       return _then(_value.copyWith(failure: value));
     });
@@ -921,8 +890,9 @@ class _$DeviceFailureStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$DeviceFailureState implements DeviceFailureState {
-  const _$DeviceFailureState(this.failure) : assert(failure != null);
+  const _$DeviceFailureState(this.failure);
 
   @override
   final CommandFailure failure;
@@ -951,29 +921,24 @@ class _$DeviceFailureState implements DeviceFailureState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult requested(),
-    required TResult completed(String message),
-    required TResult failed(CommandFailure failure),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() requested,
+    required TResult Function(String message) completed,
+    required TResult Function(CommandFailure failure) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return failed(failure);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult requested()?,
-    TResult completed(String message)?,
-    TResult failed(CommandFailure failure)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? requested,
+    TResult Function(String message)? completed,
+    TResult Function(CommandFailure failure)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (failed != null) {
       return failed(failure);
     }
@@ -982,29 +947,24 @@ class _$DeviceFailureState implements DeviceFailureState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(DeviceInitialState value),
-    required TResult requested(DeviceInProgressState value),
-    required TResult completed(DeviceSuccessState value),
-    required TResult failed(DeviceFailureState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(DeviceInitialState value) initial,
+    required TResult Function(DeviceInProgressState value) requested,
+    required TResult Function(DeviceSuccessState value) completed,
+    required TResult Function(DeviceFailureState value) failed,
   }) {
-    assert(initial != null);
-    assert(requested != null);
-    assert(completed != null);
-    assert(failed != null);
     return failed(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(DeviceInitialState value)?,
-    TResult requested(DeviceInProgressState value)?,
-    TResult completed(DeviceSuccessState value)?,
-    TResult failed(DeviceFailureState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(DeviceInitialState value)? initial,
+    TResult Function(DeviceInProgressState value)? requested,
+    TResult Function(DeviceSuccessState value)? completed,
+    TResult Function(DeviceFailureState value)? failed,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (failed != null) {
       return failed(this);
     }
@@ -1016,7 +976,8 @@ abstract class DeviceFailureState implements SetupDeviceState {
   const factory DeviceFailureState(CommandFailure failure) =
       _$DeviceFailureState;
 
-  CommandFailure get failure;
+  CommandFailure get failure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceFailureStateCopyWith<DeviceFailureState> get copyWith;
+  $DeviceFailureStateCopyWith<DeviceFailureState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

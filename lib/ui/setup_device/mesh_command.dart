@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/services.dart';
@@ -13,7 +12,7 @@ import '../../services/mesh/mesh.dart';
 import '../menu/drawer.dart';
 import 'mesh_command_list.dart';
 
-Logger? appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+Logger appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 /// Display single command, called from selection on Command list
 /// as Card using [MeshCommandForm] with submit button
@@ -31,14 +30,14 @@ class MeshCommandScreen extends StatelessWidget {
   Widget _buildCommandCard(MeshCommand command, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (command == null) {
-      appLogger!.w('command is Null', 'app.DeviceScreen._buildCommandCard');
+      appLogger.w('command is Null', 'app.DeviceScreen._buildCommandCard');
       return Container(
         height: 50,
         color: Colors.amber[600],
         child: const Center(child: Text('Null command')),
       );
     } else {
-      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return Column(children: [
         MeshCommandForm(
             command: command,

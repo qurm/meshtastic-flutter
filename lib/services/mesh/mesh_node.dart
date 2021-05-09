@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import '../bluetooth/bluetooth.dart';
@@ -31,7 +30,7 @@ String pskToString(List<int> psk) {
 ///  repo meshServiceStart
 class MeshNode {
   MeshNode(this.iface, this.nodeNum) {
-    appLogger!
+    appLogger
         .i('MeshNode constructor: ${iface.device.id} ${iface.device.hashCode}');
   }
 
@@ -65,18 +64,18 @@ class MeshNode {
 
   /// Show/log human readable description of our node.
   void showInfo() {
-    userLogger!
+    userLogger
         .i('showInfo radioConfig: ${radioConfig!.preferences.toProto3Json()}');
     showChannels();
   }
 
   /// Show/log human readable description of our channels
   void showChannels() {
-    userLogger!.i('showChannels Channels:');
+    userLogger.i('showChannels Channels:');
     for (final c in channels) {
       if (c.role != Channel_Role.DISABLED) {
         var cStr = c.settings.toProto3Json();
-        userLogger!
+        userLogger
             .i(' ${c.role.name} psk=${pskToString(c.settings.psk)} $cStr');
       }
     }
@@ -143,7 +142,7 @@ def writeConfig(self):
   ///
   /// AF (ported from Python) 14/03/21 now in Node
   Future<void> writeConfig() async {
-    userLogger!.i('Node.writeConfig called ');
+    userLogger.i('Node.writeConfig called ');
     if (!radioConfig!.isInitialized()) {
       throw Exception('Node.writeConfig RadioConfig has been read');
     }
@@ -167,7 +166,7 @@ def writeConfig(self):
     final p = AdminMessage();
     p.setChannel = channels[channelIndex];
     _sendAdmin(p: p, adminIndex: adminIndex);
-    appLogger!.i('MeshNode.writeChannel Wrote channel: ${channelIndex}');
+    appLogger.i('MeshNode.writeChannel Wrote channel: ${channelIndex}');
   }
 
 /* 
@@ -424,11 +423,11 @@ def writeConfig(self):
     );
     if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
       radioConfig = RadioConfig.fromBuffer(meshPacket.decoded.payload);
-      appLogger!
+      appLogger
           .i('_requestSettings Received radio config, now fetching channels..');
       await _requestChannel(0); //now start fetching channels
     } else
-      appLogger!.wtf('_requestSettings Received unexpected!!');
+      appLogger.wtf('_requestSettings Received unexpected!!');
   }
 /* 
   def _requestChannel(self, channelNum: int):
@@ -480,7 +479,7 @@ def writeConfig(self):
   Future<void> _requestChannel(int channelNum) async {
     final p = AdminMessage();
     p.getChannelRequest = channelNum + 1;
-    appLogger!.d('_requestChannel Requesting channel ${channelNum}');
+    appLogger.d('_requestChannel Requesting channel ${channelNum}');
 
     /// A closure to handle the response packet - we use async await instead.
     /// AF 20/3/2021 change to Future async, as _sendToRadio is async write
@@ -525,7 +524,7 @@ def writeConfig(self):
     if (meshPacket.decoded.portnum == PortNum.ADMIN_APP) {
       final c = Channel.fromBuffer(meshPacket.decoded.payload);
       partialChannels.add(c);
-      appLogger!.d('_requestChannel Received channel ${c.toString()}');
+      appLogger.d('_requestChannel Received channel ${c.toString()}');
       int index = c.index;
 
       // for stress testing, we can always download all channels
@@ -535,7 +534,7 @@ def writeConfig(self):
       var quitEarly = (c.role == Channel_Role.DISABLED) && fastChannelDownload;
 
       if (quitEarly || (index >= iface.myInfo.maxChannels - 1)) {
-        appLogger!.d('_requestChannel Finished downloading channels');
+        appLogger.d('_requestChannel Finished downloading channels');
 
         // Fill the rest of array with DISABLED channels
         index += 1;
@@ -554,7 +553,7 @@ def writeConfig(self):
         await _requestChannel(index + 1);
       }
     } else
-      appLogger!.wtf('_requestChannel Received unexpected packet!!');
+      appLogger.wtf('_requestChannel Received unexpected packet!!');
   }
 /*   
 def _sendAdmin(self, p: admin_pb2.AdminMessage, wantResponse=False,

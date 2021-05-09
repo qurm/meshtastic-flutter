@@ -1,4 +1,3 @@
-
 part of '../mesh_command_list.dart';
 
 // Mesh command contains widgets to build command list
@@ -11,7 +10,10 @@ class CommandTile extends StatelessWidget {
   final VoidCallback onRunPressed;
 
   const CommandTile(
-      {Key? key, required this.command, required this.parameterTiles, required this.onRunPressed})
+      {Key? key,
+      required this.command,
+      required this.parameterTiles,
+      required this.onRunPressed})
       : super(key: key);
 
   @override
@@ -87,7 +89,8 @@ class ParameterTile extends StatelessWidget {
 ///  keep the child params dumb just a Text field and validator
 // see https://github.com/seenickcode/flutter_realistic_forms/blob/master/lib/screens/home_material.dart
 class MeshCommandForm extends StatefulWidget {
-  const MeshCommandForm({Key? key, required this.command, required this.onRunPressed})
+  const MeshCommandForm(
+      {Key? key, required this.command, required this.onRunPressed})
       : super(key: key);
 
   final MeshCommand command; // = MeshCommandForm();
@@ -236,7 +239,7 @@ class ParameterEdit extends StatelessWidget {
                       : null),
               onSaved: (newValue) {
                 parameter.value = newValue;
-                appLogger!.v('ParameterEdit onSave: ${parameter.value} ');
+                appLogger.v('ParameterEdit onSave: ${parameter.value} ');
               },
               autovalidateMode: AutovalidateMode.disabled, //onUserInteraction,
               validator: (value) {

@@ -7,13 +7,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:get_it/get_it.dart';
 
 import 'package:meshtastic_app/main.dart';
+import 'package:meshtastic_app/ui/router/route_generator.dart';
+import 'package:meshtastic_app/domain/device_repo.dart';
 
 void main() {
+  final sl = GetIt.instance; //sl = service locator
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(BLEApp());
+    await tester
+        .pumpWidget(BLEApp(router: RouteGenerator(sl.get<DeviceConnect>())));
 
     // Verify that our counter starts at 0.
     expect(find.text('0'), findsOneWidget);

@@ -1,4 +1,3 @@
-
 /// infrastruture layer
 /// communicate with the phone bluetooth
 /// really just a generic interface to flutter_blue api - may differ for nrf52 etc.
@@ -49,8 +48,8 @@ const meshServiceStr = '6ba1b218-15a8-461f-9fa8-5dcae273eafd';
 Guid meshServiceUuid = Guid(meshServiceStr);
 
 // final sl = GetIt.instance; //sl = service locator
-final Logger? userLogger = GetIt.I<Logger>(instanceName: 'userLogger');
-final Logger? appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+final Logger userLogger = GetIt.I<Logger>(instanceName: 'userLogger');
+final Logger appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 /// Tracks the connected Devices
 Map<String, MeshDevice> currentDevices = {};
@@ -84,7 +83,7 @@ class BLEDevice2 {
     _device = device;
     //assume called from connectedDevices method, so set = connected
     _deviceState = BLEDeviceState.connected;
-    appLogger!.i(
+    appLogger.i(
         'BLEDevice2.fromBluetoothDevice construct ${this.id} $hashCode ${_device.hashCode}');
   }
 
@@ -124,12 +123,12 @@ class BLEDevice2 {
       return await _device.requestMtu(desiredMtu);
     } on PlatformException catch (err) {
       // PlatformException when device is not available
-      appLogger!
+      appLogger
           .e('requestMtu: handled PlatformException from ${_device.id} $err');
       rethrow;
     } catch (err) {
       // if (e = )
-      appLogger!.e('requestMtu: $err');
+      appLogger.e('requestMtu: $err');
 
       rethrow;
     }
@@ -207,13 +206,13 @@ class BLEDevice2 {
     Duration timeout = const Duration(seconds: 4),
     bool autoConnect = true,
   }) async {
-    appLogger!.v("BLEDevice2.connect to ${this.id}");
+    appLogger.v("BLEDevice2.connect to ${this.id}");
     await _device.connect(timeout: timeout, autoConnect: autoConnect);
     _deviceState = BLEDeviceState.connected;
   }
 
   Future<void> disconnect() async {
-    appLogger!.v("BLEAPI disconnect from ${this.id}");
+    appLogger.v("BLEAPI disconnect from ${this.id}");
     _deviceState = BLEDeviceState.disconnected; // to be sure
     return await _device.disconnect();
   }
@@ -230,7 +229,7 @@ class ScannedDevice {
   ScannedDevice({this.device, this.advertisementData, this.rssi});
 
   ScannedDevice.fromScanResult(ScanResult scanresult) {
-    appLogger!.d("create ScannedDevice.fromscanResult ${scanresult.toString()}");
+    appLogger.d("create ScannedDevice.fromscanResult ${scanresult.toString()}");
     device = new BLEDevice2.fromBluetoothDevice(scanresult.device);
     advertisementData =
         new BLEAdvertisementData.fromAD(scanresult.advertisementData);
@@ -304,13 +303,13 @@ class BlueAPIClient {
     } on PlatformException catch (err) {
       // PlatformException when device is already connected via another app
       // PlatformException (PlatformException(discover_services_error,
-      appLogger!
+      appLogger
           .e('hasMeshtasticService: handled PlatformException from ${d.id}');
       throw err;
       return false;
     } catch (err) {
       // if (e = )
-      appLogger!.e('hasMeshtasticService: $err');
+      appLogger.e('hasMeshtasticService: $err');
 
       rethrow;
       return false;
@@ -343,9 +342,9 @@ class BlueAPIClient {
     if (deviceList.isNotEmpty) {
       //https://stackoverflow.com/questions/42467663/async-await-in-list-foreach
       await Future.forEach(deviceList, (BluetoothDevice d) async {
-        appLogger!.i('connectedDevices Device reported: ${d.id}');
+        appLogger.i('connectedDevices Device reported: ${d.id}');
         if (currentDevices.containsKey(d.id.toString())) {
-          appLogger!
+          appLogger
               .i('connectedDevices Device already in currentDevices ${d.id}');
         } else {
           // _isMeshDevice = true;
@@ -369,7 +368,7 @@ class BlueAPIClient {
           _isMeshDevice = true;
           if (_isMeshDevice) {
             currentDevices[d.id.toString()] = MeshDevice(d);
-            appLogger!.i(
+            appLogger.i(
                 'connectedDevices Device added to currentDevices ${d.id} ${currentDevices.toString()}');
           }
         }
@@ -403,8 +402,9 @@ class BlueAPIClient {
   ///
   /// note, can supply   List<Guid> [withServices] = const [],
   /// Meshtastic device serviceUuids = [6ba1b218-15a8-461f-9fa8-5dcae273eafd]
-  Future<void> startScan({int timeoutms = 4000, required String serviceUuid}) async {
-    appLogger!.v("get startScan with ${serviceUuid}");
+  Future<void> startScan(
+      {int timeoutms = 4000, required String serviceUuid}) async {
+    appLogger.v("get startScan with ${serviceUuid}");
     List<Guid> guid = []; //todo make a list
     try {
       guid = [Guid(serviceUuid)]; //convert to 16-byte
@@ -442,9 +442,9 @@ class BlueAPIClient {
     Stream<List<ScanResult>> _scanList;
     //_scanList should be error free after handling
     _scanList = flutterBlue.scanResults
-        .handleError((e) => appLogger!.e("get scanResults stream error ${e}"));
+        .handleError((e) => appLogger.e("get scanResults stream error ${e}"));
     await for (var results in _scanList) {
-      appLogger!.d("get scanResults ${results.length} devices");
+      appLogger.d("get scanResults ${results.length} devices");
       yield results
           .map((result) => ScannedDevice.fromScanResult(result))
           .toList();
@@ -464,20 +464,19 @@ class BlueAPIClient {
       _scanList = flutterBlue.scanResults;
       List<ScanResult> resultList = await _scanList.first;
 
-      appLogger!.d('get scanResultDevice ${resultList.length} devices');
+      appLogger.d('get scanResultDevice ${resultList.length} devices');
       if (resultList.isNotEmpty) {
-        appLogger!.d(
+        appLogger.d(
             'list id ${resultList.first.device.id.toString().toLowerCase()}');
-        appLogger!.d('our id ${id!.toLowerCase()}');
+        appLogger.d('our id ${id!.toLowerCase()}');
         //TODO this does not get a result
-        _scanResult = resultList.firstWhereOrNull(
-            (result) =>
-                result.device.id.toString().toLowerCase() == id.toLowerCase());
+        _scanResult = resultList.firstWhereOrNull((result) =>
+            result.device.id.toString().toLowerCase() == id.toLowerCase());
       } else {
         return null;
       }
     } catch (e) {
-      appLogger!.e('get scanResultDevice ${e.toString()}');
+      appLogger.e('get scanResultDevice ${e.toString()}');
       rethrow;
     }
     return _scanResult;

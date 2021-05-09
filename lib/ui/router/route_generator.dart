@@ -54,17 +54,18 @@ class RouteGenerator {
 
     switch (settings.name) {
       case '/':
-        if (args is MeshRouteArguments) {
-          return MaterialPageRoute(
+        // args are not used here
+        // if (args is MeshRouteArguments) {
+        return MaterialPageRoute(
 
-              /// Start the Find Bloc immediately and raise FindStarted event
-              builder: (_) => BlocProvider<FindDeviceBloc>(
-                  lazy: false,
-                  create: (context) =>
-                      FindDeviceBloc()..add(const FindStartedEvent()),
-                  child: FindDevicesScreen(deviceConnect: _deviceConnect)));
-        }
-        return _errorRoute(settings.name);
+            /// Start the Find Bloc immediately and raise FindStarted event
+            builder: (_) => BlocProvider<FindDeviceBloc>(
+                lazy: false,
+                create: (context) =>
+                    FindDeviceBloc()..add(const FindStartedEvent()),
+                child: FindDevicesScreen(deviceConnect: _deviceConnect)));
+      // }
+      // return _errorRoute(settings.name);
 
       // case '/userLogScreen':
       //   // return MaterialPageRoute(builder: (_) => UserLogScreen());

@@ -1,6 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
-
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'connect_device_bloc.dart';
 
@@ -10,28 +9,27 @@ part of 'connect_device_bloc.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$ConnectDeviceEventTearOff {
   const _$ConnectDeviceEventTearOff();
 
-// ignore: unused_element
   ConnectPressedEvent connect(BLEDevice2 device) {
     return ConnectPressedEvent(
       device,
     );
   }
 
-// ignore: unused_element
   ConnectCompletedEvent connectComplete() {
     return const ConnectCompletedEvent();
   }
 
-// ignore: unused_element
   IntialiseRequestedEvent initialise() {
     return const IntialiseRequestedEvent();
   }
 
-// ignore: unused_element
   ConnectStateChangedEvent stateChange(BLEDeviceState deviceState) {
     return ConnectStateChangedEvent(
       deviceState,
@@ -40,41 +38,44 @@ class _$ConnectDeviceEventTearOff {
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ConnectDeviceEvent = _$ConnectDeviceEventTearOff();
 
 /// @nodoc
 mixin _$ConnectDeviceEvent {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult connect(BLEDevice2 device),
-    required TResult connectComplete(),
-    required TResult initialise(),
-    required TResult stateChange(BLEDeviceState deviceState),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function(BLEDevice2 device) connect,
+    required TResult Function() connectComplete,
+    required TResult Function() initialise,
+    required TResult Function(BLEDeviceState deviceState) stateChange,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult connect(BLEDevice2 device)?,
-    TResult connectComplete()?,
-    TResult initialise()?,
-    TResult stateChange(BLEDeviceState deviceState)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BLEDevice2 device)? connect,
+    TResult Function()? connectComplete,
+    TResult Function()? initialise,
+    TResult Function(BLEDeviceState deviceState)? stateChange,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult connect(ConnectPressedEvent value),
-    required TResult connectComplete(ConnectCompletedEvent value),
-    required TResult initialise(IntialiseRequestedEvent value),
-    required TResult stateChange(ConnectStateChangedEvent value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectPressedEvent value) connect,
+    required TResult Function(ConnectCompletedEvent value) connectComplete,
+    required TResult Function(IntialiseRequestedEvent value) initialise,
+    required TResult Function(ConnectStateChangedEvent value) stateChange,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult connect(ConnectPressedEvent value)?,
-    TResult connectComplete(ConnectCompletedEvent value)?,
-    TResult initialise(IntialiseRequestedEvent value)?,
-    TResult stateChange(ConnectStateChangedEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectPressedEvent value)? connect,
+    TResult Function(ConnectCompletedEvent value)? connectComplete,
+    TResult Function(IntialiseRequestedEvent value)? initialise,
+    TResult Function(ConnectStateChangedEvent value)? stateChange,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -99,7 +100,7 @@ abstract class $ConnectPressedEventCopyWith<$Res> {
   factory $ConnectPressedEventCopyWith(
           ConnectPressedEvent value, $Res Function(ConnectPressedEvent) then) =
       _$ConnectPressedEventCopyWithImpl<$Res>;
-  $Res call({BLEDevice2? device});
+  $Res call({BLEDevice2 device});
 }
 
 /// @nodoc
@@ -118,16 +119,20 @@ class _$ConnectPressedEventCopyWithImpl<$Res>
     Object? device = freezed,
   }) {
     return _then(ConnectPressedEvent(
-      device == freezed ? _value.device : (device as BLEDevice2?)!,
+      device == freezed
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as BLEDevice2,
     ));
   }
 }
 
 /// @nodoc
+
 class _$ConnectPressedEvent
     with DiagnosticableTreeMixin
     implements ConnectPressedEvent {
-  const _$ConnectPressedEvent(this.device) : assert(device != null);
+  const _$ConnectPressedEvent(this.device);
 
   @override
   final BLEDevice2 device;
@@ -164,29 +169,24 @@ class _$ConnectPressedEvent
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult connect(BLEDevice2 device),
-    required TResult connectComplete(),
-    required TResult initialise(),
-    required TResult stateChange(BLEDeviceState deviceState),
+  TResult when<TResult extends Object?>({
+    required TResult Function(BLEDevice2 device) connect,
+    required TResult Function() connectComplete,
+    required TResult Function() initialise,
+    required TResult Function(BLEDeviceState deviceState) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return connect(device);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult connect(BLEDevice2 device)?,
-    TResult connectComplete()?,
-    TResult initialise()?,
-    TResult stateChange(BLEDeviceState deviceState)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BLEDevice2 device)? connect,
+    TResult Function()? connectComplete,
+    TResult Function()? initialise,
+    TResult Function(BLEDeviceState deviceState)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connect != null) {
       return connect(device);
     }
@@ -195,29 +195,24 @@ class _$ConnectPressedEvent
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult connect(ConnectPressedEvent value),
-    required TResult connectComplete(ConnectCompletedEvent value),
-    required TResult initialise(IntialiseRequestedEvent value),
-    required TResult stateChange(ConnectStateChangedEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectPressedEvent value) connect,
+    required TResult Function(ConnectCompletedEvent value) connectComplete,
+    required TResult Function(IntialiseRequestedEvent value) initialise,
+    required TResult Function(ConnectStateChangedEvent value) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return connect(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult connect(ConnectPressedEvent value)?,
-    TResult connectComplete(ConnectCompletedEvent value)?,
-    TResult initialise(IntialiseRequestedEvent value)?,
-    TResult stateChange(ConnectStateChangedEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectPressedEvent value)? connect,
+    TResult Function(ConnectCompletedEvent value)? connectComplete,
+    TResult Function(IntialiseRequestedEvent value)? initialise,
+    TResult Function(ConnectStateChangedEvent value)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connect != null) {
       return connect(this);
     }
@@ -228,9 +223,10 @@ class _$ConnectPressedEvent
 abstract class ConnectPressedEvent implements ConnectDeviceEvent {
   const factory ConnectPressedEvent(BLEDevice2 device) = _$ConnectPressedEvent;
 
-  BLEDevice2 get device;
+  BLEDevice2 get device => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ConnectPressedEventCopyWith<ConnectPressedEvent> get copyWith;
+  $ConnectPressedEventCopyWith<ConnectPressedEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -253,6 +249,7 @@ class _$ConnectCompletedEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ConnectCompletedEvent
     with DiagnosticableTreeMixin
     implements ConnectCompletedEvent {
@@ -280,29 +277,24 @@ class _$ConnectCompletedEvent
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult connect(BLEDevice2 device),
-    required TResult connectComplete(),
-    required TResult initialise(),
-    required TResult stateChange(BLEDeviceState deviceState),
+  TResult when<TResult extends Object?>({
+    required TResult Function(BLEDevice2 device) connect,
+    required TResult Function() connectComplete,
+    required TResult Function() initialise,
+    required TResult Function(BLEDeviceState deviceState) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return connectComplete();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult connect(BLEDevice2 device)?,
-    TResult connectComplete()?,
-    TResult initialise()?,
-    TResult stateChange(BLEDeviceState deviceState)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BLEDevice2 device)? connect,
+    TResult Function()? connectComplete,
+    TResult Function()? initialise,
+    TResult Function(BLEDeviceState deviceState)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connectComplete != null) {
       return connectComplete();
     }
@@ -311,29 +303,24 @@ class _$ConnectCompletedEvent
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult connect(ConnectPressedEvent value),
-    required TResult connectComplete(ConnectCompletedEvent value),
-    required TResult initialise(IntialiseRequestedEvent value),
-    required TResult stateChange(ConnectStateChangedEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectPressedEvent value) connect,
+    required TResult Function(ConnectCompletedEvent value) connectComplete,
+    required TResult Function(IntialiseRequestedEvent value) initialise,
+    required TResult Function(ConnectStateChangedEvent value) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return connectComplete(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult connect(ConnectPressedEvent value)?,
-    TResult connectComplete(ConnectCompletedEvent value)?,
-    TResult initialise(IntialiseRequestedEvent value)?,
-    TResult stateChange(ConnectStateChangedEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectPressedEvent value)? connect,
+    TResult Function(ConnectCompletedEvent value)? connectComplete,
+    TResult Function(IntialiseRequestedEvent value)? initialise,
+    TResult Function(ConnectStateChangedEvent value)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connectComplete != null) {
       return connectComplete(this);
     }
@@ -365,6 +352,7 @@ class _$IntialiseRequestedEventCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$IntialiseRequestedEvent
     with DiagnosticableTreeMixin
     implements IntialiseRequestedEvent {
@@ -392,29 +380,24 @@ class _$IntialiseRequestedEvent
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult connect(BLEDevice2 device),
-    required TResult connectComplete(),
-    required TResult initialise(),
-    required TResult stateChange(BLEDeviceState deviceState),
+  TResult when<TResult extends Object?>({
+    required TResult Function(BLEDevice2 device) connect,
+    required TResult Function() connectComplete,
+    required TResult Function() initialise,
+    required TResult Function(BLEDeviceState deviceState) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return initialise();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult connect(BLEDevice2 device)?,
-    TResult connectComplete()?,
-    TResult initialise()?,
-    TResult stateChange(BLEDeviceState deviceState)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BLEDevice2 device)? connect,
+    TResult Function()? connectComplete,
+    TResult Function()? initialise,
+    TResult Function(BLEDeviceState deviceState)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialise != null) {
       return initialise();
     }
@@ -423,29 +406,24 @@ class _$IntialiseRequestedEvent
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult connect(ConnectPressedEvent value),
-    required TResult connectComplete(ConnectCompletedEvent value),
-    required TResult initialise(IntialiseRequestedEvent value),
-    required TResult stateChange(ConnectStateChangedEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectPressedEvent value) connect,
+    required TResult Function(ConnectCompletedEvent value) connectComplete,
+    required TResult Function(IntialiseRequestedEvent value) initialise,
+    required TResult Function(ConnectStateChangedEvent value) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return initialise(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult connect(ConnectPressedEvent value)?,
-    TResult connectComplete(ConnectCompletedEvent value)?,
-    TResult initialise(IntialiseRequestedEvent value)?,
-    TResult stateChange(ConnectStateChangedEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectPressedEvent value)? connect,
+    TResult Function(ConnectCompletedEvent value)? connectComplete,
+    TResult Function(IntialiseRequestedEvent value)? initialise,
+    TResult Function(ConnectStateChangedEvent value)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initialise != null) {
       return initialise(this);
     }
@@ -462,7 +440,7 @@ abstract class $ConnectStateChangedEventCopyWith<$Res> {
   factory $ConnectStateChangedEventCopyWith(ConnectStateChangedEvent value,
           $Res Function(ConnectStateChangedEvent) then) =
       _$ConnectStateChangedEventCopyWithImpl<$Res>;
-  $Res call({BLEDeviceState? deviceState});
+  $Res call({BLEDeviceState deviceState});
 }
 
 /// @nodoc
@@ -484,17 +462,18 @@ class _$ConnectStateChangedEventCopyWithImpl<$Res>
     return _then(ConnectStateChangedEvent(
       deviceState == freezed
           ? _value.deviceState
-          : (deviceState as BLEDeviceState?)!,
+          : deviceState // ignore: cast_nullable_to_non_nullable
+              as BLEDeviceState,
     ));
   }
 }
 
 /// @nodoc
+
 class _$ConnectStateChangedEvent
     with DiagnosticableTreeMixin
     implements ConnectStateChangedEvent {
-  const _$ConnectStateChangedEvent(this.deviceState)
-      : assert(deviceState != null);
+  const _$ConnectStateChangedEvent(this.deviceState);
 
   @override
   final BLEDeviceState deviceState;
@@ -533,29 +512,24 @@ class _$ConnectStateChangedEvent
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult connect(BLEDevice2 device),
-    required TResult connectComplete(),
-    required TResult initialise(),
-    required TResult stateChange(BLEDeviceState deviceState),
+  TResult when<TResult extends Object?>({
+    required TResult Function(BLEDevice2 device) connect,
+    required TResult Function() connectComplete,
+    required TResult Function() initialise,
+    required TResult Function(BLEDeviceState deviceState) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return stateChange(deviceState);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult connect(BLEDevice2 device)?,
-    TResult connectComplete()?,
-    TResult initialise()?,
-    TResult stateChange(BLEDeviceState deviceState)?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(BLEDevice2 device)? connect,
+    TResult Function()? connectComplete,
+    TResult Function()? initialise,
+    TResult Function(BLEDeviceState deviceState)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (stateChange != null) {
       return stateChange(deviceState);
     }
@@ -564,29 +538,24 @@ class _$ConnectStateChangedEvent
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult connect(ConnectPressedEvent value),
-    required TResult connectComplete(ConnectCompletedEvent value),
-    required TResult initialise(IntialiseRequestedEvent value),
-    required TResult stateChange(ConnectStateChangedEvent value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(ConnectPressedEvent value) connect,
+    required TResult Function(ConnectCompletedEvent value) connectComplete,
+    required TResult Function(IntialiseRequestedEvent value) initialise,
+    required TResult Function(ConnectStateChangedEvent value) stateChange,
   }) {
-    assert(connect != null);
-    assert(connectComplete != null);
-    assert(initialise != null);
-    assert(stateChange != null);
     return stateChange(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult connect(ConnectPressedEvent value)?,
-    TResult connectComplete(ConnectCompletedEvent value)?,
-    TResult initialise(IntialiseRequestedEvent value)?,
-    TResult stateChange(ConnectStateChangedEvent value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ConnectPressedEvent value)? connect,
+    TResult Function(ConnectCompletedEvent value)? connectComplete,
+    TResult Function(IntialiseRequestedEvent value)? initialise,
+    TResult Function(ConnectStateChangedEvent value)? stateChange,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (stateChange != null) {
       return stateChange(this);
     }
@@ -598,96 +567,94 @@ abstract class ConnectStateChangedEvent implements ConnectDeviceEvent {
   const factory ConnectStateChangedEvent(BLEDeviceState deviceState) =
       _$ConnectStateChangedEvent;
 
-  BLEDeviceState get deviceState;
+  BLEDeviceState get deviceState => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ConnectStateChangedEventCopyWith<ConnectStateChangedEvent> get copyWith;
+  $ConnectStateChangedEventCopyWith<ConnectStateChangedEvent> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 class _$ConnectDeviceStateTearOff {
   const _$ConnectDeviceStateTearOff();
 
-// ignore: unused_element
   Initial initial() {
     return const Initial();
   }
 
-// ignore: unused_element
   ConnectedState connected(BLEDevice2 device) {
     return ConnectedState(
       device,
     );
   }
 
-// ignore: unused_element
   ConnectingState requested() {
     return const ConnectingState();
   }
 
-// ignore: unused_element
   NoDeviceState nodevice(ConnectFailure connectFailure) {
     return NoDeviceState(
       connectFailure,
     );
   }
 
-// ignore: unused_element
   DeviceKnownState deviceKnown(dynamic deviceList) {
     return DeviceKnownState(
       deviceList,
     );
   }
 
-// ignore: unused_element
   DeviceOfflineState deviceOffline() {
     return const DeviceOfflineState();
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $ConnectDeviceState = _$ConnectDeviceStateTearOff();
 
 /// @nodoc
 mixin _$ConnectDeviceState {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -704,7 +671,7 @@ class _$ConnectDeviceStateCopyWithImpl<$Res>
 
   final ConnectDeviceState _value;
   // ignore: unused_field
-  final $Res Function(ConnectDeviceState?) _then;
+  final $Res Function(ConnectDeviceState) _then;
 }
 
 /// @nodoc
@@ -724,6 +691,7 @@ class _$InitialCopyWithImpl<$Res> extends _$ConnectDeviceStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$Initial with DiagnosticableTreeMixin implements Initial {
   const _$Initial();
 
@@ -748,35 +716,28 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return initial();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial();
     }
@@ -785,35 +746,28 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return initial(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (initial != null) {
       return initial(this);
     }
@@ -830,7 +784,7 @@ abstract class $ConnectedStateCopyWith<$Res> {
   factory $ConnectedStateCopyWith(
           ConnectedState value, $Res Function(ConnectedState) then) =
       _$ConnectedStateCopyWithImpl<$Res>;
-  $Res call({BLEDevice2? device});
+  $Res call({BLEDevice2 device});
 }
 
 /// @nodoc
@@ -849,14 +803,18 @@ class _$ConnectedStateCopyWithImpl<$Res>
     Object? device = freezed,
   }) {
     return _then(ConnectedState(
-      device == freezed ? _value.device : (device as BLEDevice2?)!,
+      device == freezed
+          ? _value.device
+          : device // ignore: cast_nullable_to_non_nullable
+              as BLEDevice2,
     ));
   }
 }
 
 /// @nodoc
+
 class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
-  const _$ConnectedState(this.device) : assert(device != null);
+  const _$ConnectedState(this.device);
 
   @override
   final BLEDevice2 device;
@@ -893,35 +851,28 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return connected(device);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connected != null) {
       return connected(device);
     }
@@ -930,35 +881,28 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return connected(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (connected != null) {
       return connected(this);
     }
@@ -969,9 +913,10 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
 abstract class ConnectedState implements ConnectDeviceState {
   const factory ConnectedState(BLEDevice2 device) = _$ConnectedState;
 
-  BLEDevice2 get device;
+  BLEDevice2 get device => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $ConnectedStateCopyWith<ConnectedState> get copyWith;
+  $ConnectedStateCopyWith<ConnectedState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -994,6 +939,7 @@ class _$ConnectingStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$ConnectingState
     with DiagnosticableTreeMixin
     implements ConnectingState {
@@ -1021,35 +967,28 @@ class _$ConnectingState
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return requested();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requested != null) {
       return requested();
     }
@@ -1058,35 +997,28 @@ class _$ConnectingState
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return requested(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (requested != null) {
       return requested(this);
     }
@@ -1103,7 +1035,7 @@ abstract class $NoDeviceStateCopyWith<$Res> {
   factory $NoDeviceStateCopyWith(
           NoDeviceState value, $Res Function(NoDeviceState) then) =
       _$NoDeviceStateCopyWithImpl<$Res>;
-  $Res call({ConnectFailure? connectFailure});
+  $Res call({ConnectFailure connectFailure});
 
   $ConnectFailureCopyWith<$Res> get connectFailure;
 }
@@ -1126,15 +1058,13 @@ class _$NoDeviceStateCopyWithImpl<$Res>
     return _then(NoDeviceState(
       connectFailure == freezed
           ? _value.connectFailure
-          : (connectFailure as ConnectFailure?)!,
+          : connectFailure // ignore: cast_nullable_to_non_nullable
+              as ConnectFailure,
     ));
   }
 
   @override
   $ConnectFailureCopyWith<$Res> get connectFailure {
-    if (_value.connectFailure == null) {
-      return null;
-    }
     return $ConnectFailureCopyWith<$Res>(_value.connectFailure, (value) {
       return _then(_value.copyWith(connectFailure: value));
     });
@@ -1142,8 +1072,9 @@ class _$NoDeviceStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
-  const _$NoDeviceState(this.connectFailure) : assert(connectFailure != null);
+  const _$NoDeviceState(this.connectFailure);
 
   @override
   final ConnectFailure connectFailure;
@@ -1182,35 +1113,28 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return nodevice(connectFailure);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (nodevice != null) {
       return nodevice(connectFailure);
     }
@@ -1219,35 +1143,28 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return nodevice(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (nodevice != null) {
       return nodevice(this);
     }
@@ -1258,9 +1175,10 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
 abstract class NoDeviceState implements ConnectDeviceState {
   const factory NoDeviceState(ConnectFailure connectFailure) = _$NoDeviceState;
 
-  ConnectFailure get connectFailure;
+  ConnectFailure get connectFailure => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $NoDeviceStateCopyWith<NoDeviceState> get copyWith;
+  $NoDeviceStateCopyWith<NoDeviceState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1293,10 +1211,11 @@ class _$DeviceKnownStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$DeviceKnownState
     with DiagnosticableTreeMixin
     implements DeviceKnownState {
-  const _$DeviceKnownState(this.deviceList) : assert(deviceList != null);
+  const _$DeviceKnownState(this.deviceList);
 
   @override
   final dynamic deviceList;
@@ -1334,35 +1253,28 @@ class _$DeviceKnownState
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return deviceKnown(deviceList);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (deviceKnown != null) {
       return deviceKnown(deviceList);
     }
@@ -1371,35 +1283,28 @@ class _$DeviceKnownState
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return deviceKnown(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (deviceKnown != null) {
       return deviceKnown(this);
     }
@@ -1410,9 +1315,10 @@ class _$DeviceKnownState
 abstract class DeviceKnownState implements ConnectDeviceState {
   const factory DeviceKnownState(dynamic deviceList) = _$DeviceKnownState;
 
-  dynamic get deviceList;
+  dynamic get deviceList => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $DeviceKnownStateCopyWith<DeviceKnownState> get copyWith;
+  $DeviceKnownStateCopyWith<DeviceKnownState> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -1435,6 +1341,7 @@ class _$DeviceOfflineStateCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$DeviceOfflineState
     with DiagnosticableTreeMixin
     implements DeviceOfflineState {
@@ -1462,35 +1369,28 @@ class _$DeviceOfflineState
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult initial(),
-    required TResult connected(BLEDevice2 device),
-    required TResult requested(),
-    required TResult nodevice(ConnectFailure connectFailure),
-    required TResult deviceKnown(dynamic deviceList),
-    required TResult deviceOffline(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return deviceOffline();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult initial()?,
-    TResult connected(BLEDevice2 device)?,
-    TResult requested()?,
-    TResult nodevice(ConnectFailure connectFailure)?,
-    TResult deviceKnown(dynamic deviceList)?,
-    TResult deviceOffline()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (deviceOffline != null) {
       return deviceOffline();
     }
@@ -1499,35 +1399,28 @@ class _$DeviceOfflineState
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult initial(Initial value),
-    required TResult connected(ConnectedState value),
-    required TResult requested(ConnectingState value),
-    required TResult nodevice(NoDeviceState value),
-    required TResult deviceKnown(DeviceKnownState value),
-    required TResult deviceOffline(DeviceOfflineState value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
   }) {
-    assert(initial != null);
-    assert(connected != null);
-    assert(requested != null);
-    assert(nodevice != null);
-    assert(deviceKnown != null);
-    assert(deviceOffline != null);
     return deviceOffline(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult initial(Initial value)?,
-    TResult connected(ConnectedState value)?,
-    TResult requested(ConnectingState value)?,
-    TResult nodevice(NoDeviceState value)?,
-    TResult deviceKnown(DeviceKnownState value)?,
-    TResult deviceOffline(DeviceOfflineState value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (deviceOffline != null) {
       return deviceOffline(this);
     }

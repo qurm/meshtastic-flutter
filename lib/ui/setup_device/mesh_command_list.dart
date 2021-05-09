@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -17,7 +16,7 @@ import '../../services/mesh/mesh.dart';
 import '../router/route_generator.dart';
 part 'widgets/command_tiles.dart';
 
-final Logger? appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+final Logger appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 // helpful  https://medium.com/flutter-community/parsing-complex-json-in-flutter-747c46655f51
 
@@ -32,7 +31,7 @@ class MeshCommandListScreen extends StatelessWidget {
 // future: DefaultAssetBundle.of(context)
 //                       .loadString("assets/json/commands.json"),
 
-  Future<List<MeshCommand>/*!*/> _loadCommands(String jsonFile) async {
+  Future<List<MeshCommand> /*!*/ > _loadCommands(String jsonFile) async {
     // List<MeshCommand> commands = [];
     String data = await rootBundle //DefaultAssetBundle.of(context)
         .loadString(jsonFile);
@@ -57,7 +56,7 @@ class MeshCommandListScreen extends StatelessWidget {
   Widget _buildCommandTiles(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Colors.amber[600],
@@ -65,10 +64,10 @@ class MeshCommandListScreen extends StatelessWidget {
       );
     } else {
       ///Todo check for null here with meshtastic, "map called on null"
-      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return Column(
         children: commands
-            ?.map((c) => CommandTile(
+            .map((c) => CommandTile(
                 command: c,
                 parameterTiles: c.params!.paramList!
                     .map(
@@ -80,11 +79,11 @@ class MeshCommandListScreen extends StatelessWidget {
                 // Open the command in the run page
                 onRunPressed: () =>
                     Navigator.of(context).pushNamed('/meshCommandScreen',
-                        arguments: MeshRouteArguments(
+                        arguments: MeshCommandRouteArguments(
                             device: device,
                             // deviceConnect: deviceConnect,
                             command: c))))
-            ?.toList(),
+            .toList(),
       );
     }
   }
@@ -93,14 +92,14 @@ class MeshCommandListScreen extends StatelessWidget {
   Widget _buildCommandTiles2(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Colors.amber[600],
         child: const Center(child: Text('Null commands')),
       );
     } else {
-      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return ListView.builder(
           padding: const EdgeInsets.all(8),
           itemCount: commands.length,
@@ -119,7 +118,7 @@ class MeshCommandListScreen extends StatelessWidget {
                 // Open the command in the run page
                 onRunPressed: () =>
                     Navigator.of(context).pushNamed('/meshCommandScreen',
-                        arguments: MeshRouteArguments(
+                        arguments: MeshCommandRouteArguments(
                             device: device,
                             // deviceConnect: deviceConnect,
                             command: commands[index])));
@@ -131,14 +130,14 @@ class MeshCommandListScreen extends StatelessWidget {
   Widget _buildCommandTiles3(List<MeshCommand> commands, BuildContext context) {
     // bleInterface = BLEInterface(this.device);
     if (commands == null) {
-      appLogger!.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
+      appLogger.w('commands are Null', 'app.DeviceScreen._buildCommandTiles');
       return Container(
         height: 50,
         color: Theme.of(context).errorColor,
         child: const Center(child: Text('Null commands')),
       );
     } else {
-      appLogger!.v('app.DeviceScreen._buildCommandTiles: Commands Found');
+      appLogger.v('app.DeviceScreen._buildCommandTiles: Commands Found');
       return GroupedListView(
           elements: commands,
           groupBy: (dynamic command) => command.group,
@@ -166,7 +165,7 @@ class MeshCommandListScreen extends StatelessWidget {
                 // Open the command in the run page
                 onRunPressed: () =>
                     Navigator.of(context).pushNamed('/meshCommandScreen',
-                        arguments: MeshRouteArguments(
+                        arguments: MeshCommandRouteArguments(
                             device: device,
                             // deviceConnect: deviceConnect,
                             command: command)));

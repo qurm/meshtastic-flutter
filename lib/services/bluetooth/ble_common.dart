@@ -1,4 +1,3 @@
-
 // Common for Ennums and other objects required in multiple layers
 // Import into domain and service layer
 
@@ -41,7 +40,7 @@ const fromNumUuidStr = 'ed9da18c-a800-4f66-a670-aa7547e34453';
 final Guid fromNumUuid = Guid(fromNumUuidStr);
 
 class BLEService {
-  Guid uuid;
+  late Guid uuid;
   late String serviceName; //friendly name, enriched data from json list
   late String deviceId;
   late bool isPrimary;
@@ -78,18 +77,19 @@ class BLEService {
   }
 
   // is this needed.  or pass thru to flutter_blue?
+  @override
   String toString() {
     return 'BluetoothService{uuid: $uuid, deviceId: $deviceId, isPrimary: $isPrimary, characteristics: $characteristics, includedServices: $includedServices}';
   }
 }
 
 class BLECharacteristic {
-  Guid uuid;
+  late Guid uuid;
   late String name; //friendly name, enriched data from json list
   late String deviceId;
   late Guid serviceUuid;
   Guid? secondaryServiceUuid;
-  CharacteristicProperties? properties;
+  late CharacteristicProperties properties;
   List<BLEDescriptor> descriptors = [];
   bool isNotifying =
       false; //default as descriptor may be null, so fb cannot provide
@@ -191,21 +191,20 @@ class BLEDescriptor {
 
 class BLEAdvertisementData {
   // these should be final, but prevents named constructor!?
-  late String localName;
-  int? txPowerLevel;
-  bool? connectable;
-  late Map<int, List<int>> manufacturerData;
-  late Map<String, List<int>> serviceData;
+  final String localName;
+  final int? txPowerLevel;
+  final bool connectable;
+  final Map<int, List<int>> manufacturerData;
+  final Map<String, List<int>> serviceData;
   List<String> serviceUuids = [];
 
-  BLEAdvertisementData.fromAD(AdvertisementData ad) {
-    this.localName = ad.localName;
-    this.txPowerLevel = ad.txPowerLevel ?? 0; //avoid null
-    this.connectable = ad.connectable;
-    this.manufacturerData = ad.manufacturerData;
-    this.serviceData = ad.serviceData;
-    this.serviceUuids = ad.serviceUuids;
-  }
+  BLEAdvertisementData.fromAD(AdvertisementData ad)
+      : localName = ad.localName,
+        txPowerLevel = ad.txPowerLevel ?? 0, //avoid null
+        connectable = ad.connectable,
+        manufacturerData = ad.manufacturerData,
+        serviceData = ad.serviceData,
+        serviceUuids = ad.serviceUuids;
 
   @override
   String toString() {

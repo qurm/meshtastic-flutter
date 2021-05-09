@@ -42,10 +42,10 @@ dependencies:
   get_it: ^6.0.0
   grouped_list: ^4.0.0-nullsafety.1
   injectable: ^1.2.2
-  logging: '>=0.11.4 <2.0.0'
+  # logging: '>=0.11.4 <2.0.0'
   #  see https://github.com/leisim/logger_flutter/issues/6  
   # and https://github.com/ewertonrp/logger_flutter
-  # logger_flutter: '^0.7.1'
+  # logger_flutter: '^0.7.1' # - any longer maintained
   # logger_flutter:
   #   git: https://github.com/ewertonrp/logger_flutter.git
   logger: ^1.0.0

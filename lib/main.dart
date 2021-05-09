@@ -14,7 +14,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 */
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
@@ -82,12 +81,12 @@ class BLEApp extends StatelessWidget {
       onGenerateInitialRoutes: (String initialRouteName) {
         return [
           router.onGenerateRoute(RouteSettings(
-              name: '/',
-              arguments: MeshRouteArguments(
-                device: null,
-                // deviceConnect: sl.get<DeviceConnect>(),
-                //RepositoryProvider.of<DeviceConnect>(context),
-              )))
+            name: '/',
+            // args are not used in initial page route, dont want to pass a null
+            // arguments: MeshRouteArguments(
+            //   device: null,
+            // )
+          ))
         ];
       },
     );

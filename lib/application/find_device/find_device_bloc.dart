@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -38,7 +37,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
     //set this early, so Scan list can show before any event button pressed
     _allDevices = _connectRepo.scanResults;
 
-    _appLogger!.i('FindDeviceBloc: initiasing.');
+    _appLogger.i('FindDeviceBloc: initiasing.');
     _connectDeviceSubscription = connectDeviceBloc.stream.listen((state) {
       if (state is ConnectedState) {
         // show the new connected list, and store to share prefs
@@ -61,7 +60,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
 
   /// settings - will attempt reconnect to last known device.
   bool findDeviceAutoReconnect = true;
-  final Logger? _appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+  final Logger _appLogger = GetIt.I<Logger>(instanceName: 'appLogger');
   Stream<List<ScannedDevice>>? _allDevices;
 
   Future<void> _initialiseBloc() async {
@@ -98,7 +97,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
       try {
         if (findDeviceAutoReconnect && _lastDevice!.isNotEmpty) {
           // try to connect to lastGoodDevice
-          _appLogger!
+          _appLogger
               .i('FindStarted: try connecting to last device $_lastDevice');
           // TODO check bluetooth is running -and repo is initial.  This is first call to BLE
 
@@ -108,7 +107,7 @@ class FindDeviceBloc extends Bloc<FindDeviceEvent, FindDeviceState> {
 
           if (deviceEither.isRight()) {
             var device = deviceEither.getOrElse(() => null)!;
-            _appLogger!.i('FindStarted: now connecting to device $device');
+            _appLogger.i('FindStarted: now connecting to device $device');
             connectDeviceBloc.add(ConnectPressedEvent(device));
             // replace with bloc property
             // connectedDevices = await _connectRepo.connectedDevices3;

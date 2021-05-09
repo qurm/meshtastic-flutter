@@ -1,6 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies
-
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
 part of 'command_failure.dart';
 
@@ -10,67 +9,69 @@ part of 'command_failure.dart';
 
 T _$identity<T>(T value) => value;
 
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+
 /// @nodoc
 class _$CommandFailureTearOff {
   const _$CommandFailureTearOff();
 
-// ignore: unused_element
   CancelledByUser cancelledByUser() {
     return const CancelledByUser();
   }
 
-// ignore: unused_element
   UnknownCommand unknownCommand() {
     return const UnknownCommand();
   }
 
-// ignore: unused_element
   IncorrectParameter incorrectParameter() {
     return const IncorrectParameter();
   }
 
-// ignore: unused_element
   UnexpectedFailure unexpected() {
     return const UnexpectedFailure();
   }
 }
 
 /// @nodoc
-// ignore: unused_element
 const $CommandFailure = _$CommandFailureTearOff();
 
 /// @nodoc
 mixin _$CommandFailure {
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult cancelledByUser(),
-    required TResult unknownCommand(),
-    required TResult incorrectParameter(),
-    required TResult unexpected(),
-  });
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() unknownCommand,
+    required TResult Function() incorrectParameter,
+    required TResult Function() unexpected,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser()?,
-    TResult unknownCommand()?,
-    TResult incorrectParameter()?,
-    TResult unexpected()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? unknownCommand,
+    TResult Function()? incorrectParameter,
+    TResult Function()? unexpected,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult cancelledByUser(CancelledByUser value),
-    required TResult unknownCommand(UnknownCommand value),
-    required TResult incorrectParameter(IncorrectParameter value),
-    required TResult unexpected(UnexpectedFailure value),
-  });
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(UnknownCommand value) unknownCommand,
+    required TResult Function(IncorrectParameter value) incorrectParameter,
+    required TResult Function(UnexpectedFailure value) unexpected,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value)?,
-    TResult unknownCommand(UnknownCommand value)?,
-    TResult incorrectParameter(IncorrectParameter value)?,
-    TResult unexpected(UnexpectedFailure value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(UnknownCommand value)? unknownCommand,
+    TResult Function(IncorrectParameter value)? incorrectParameter,
+    TResult Function(UnexpectedFailure value)? unexpected,
     required TResult orElse(),
-  });
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -110,6 +111,7 @@ class _$CancelledByUserCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$CancelledByUser
     with DiagnosticableTreeMixin
     implements CancelledByUser {
@@ -137,29 +139,24 @@ class _$CancelledByUser
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult cancelledByUser(),
-    required TResult unknownCommand(),
-    required TResult incorrectParameter(),
-    required TResult unexpected(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() unknownCommand,
+    required TResult Function() incorrectParameter,
+    required TResult Function() unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return cancelledByUser();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser()?,
-    TResult unknownCommand()?,
-    TResult incorrectParameter()?,
-    TResult unexpected()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? unknownCommand,
+    TResult Function()? incorrectParameter,
+    TResult Function()? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (cancelledByUser != null) {
       return cancelledByUser();
     }
@@ -168,29 +165,24 @@ class _$CancelledByUser
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult cancelledByUser(CancelledByUser value),
-    required TResult unknownCommand(UnknownCommand value),
-    required TResult incorrectParameter(IncorrectParameter value),
-    required TResult unexpected(UnexpectedFailure value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(UnknownCommand value) unknownCommand,
+    required TResult Function(IncorrectParameter value) incorrectParameter,
+    required TResult Function(UnexpectedFailure value) unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return cancelledByUser(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value)?,
-    TResult unknownCommand(UnknownCommand value)?,
-    TResult incorrectParameter(IncorrectParameter value)?,
-    TResult unexpected(UnexpectedFailure value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(UnknownCommand value)? unknownCommand,
+    TResult Function(IncorrectParameter value)? incorrectParameter,
+    TResult Function(UnexpectedFailure value)? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (cancelledByUser != null) {
       return cancelledByUser(this);
     }
@@ -222,6 +214,7 @@ class _$UnknownCommandCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$UnknownCommand with DiagnosticableTreeMixin implements UnknownCommand {
   const _$UnknownCommand();
 
@@ -247,29 +240,24 @@ class _$UnknownCommand with DiagnosticableTreeMixin implements UnknownCommand {
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult cancelledByUser(),
-    required TResult unknownCommand(),
-    required TResult incorrectParameter(),
-    required TResult unexpected(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() unknownCommand,
+    required TResult Function() incorrectParameter,
+    required TResult Function() unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return unknownCommand();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser()?,
-    TResult unknownCommand()?,
-    TResult incorrectParameter()?,
-    TResult unexpected()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? unknownCommand,
+    TResult Function()? incorrectParameter,
+    TResult Function()? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (unknownCommand != null) {
       return unknownCommand();
     }
@@ -278,29 +266,24 @@ class _$UnknownCommand with DiagnosticableTreeMixin implements UnknownCommand {
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult cancelledByUser(CancelledByUser value),
-    required TResult unknownCommand(UnknownCommand value),
-    required TResult incorrectParameter(IncorrectParameter value),
-    required TResult unexpected(UnexpectedFailure value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(UnknownCommand value) unknownCommand,
+    required TResult Function(IncorrectParameter value) incorrectParameter,
+    required TResult Function(UnexpectedFailure value) unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return unknownCommand(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value)?,
-    TResult unknownCommand(UnknownCommand value)?,
-    TResult incorrectParameter(IncorrectParameter value)?,
-    TResult unexpected(UnexpectedFailure value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(UnknownCommand value)? unknownCommand,
+    TResult Function(IncorrectParameter value)? incorrectParameter,
+    TResult Function(UnexpectedFailure value)? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (unknownCommand != null) {
       return unknownCommand(this);
     }
@@ -332,6 +315,7 @@ class _$IncorrectParameterCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$IncorrectParameter
     with DiagnosticableTreeMixin
     implements IncorrectParameter {
@@ -359,29 +343,24 @@ class _$IncorrectParameter
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult cancelledByUser(),
-    required TResult unknownCommand(),
-    required TResult incorrectParameter(),
-    required TResult unexpected(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() unknownCommand,
+    required TResult Function() incorrectParameter,
+    required TResult Function() unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return incorrectParameter();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser()?,
-    TResult unknownCommand()?,
-    TResult incorrectParameter()?,
-    TResult unexpected()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? unknownCommand,
+    TResult Function()? incorrectParameter,
+    TResult Function()? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (incorrectParameter != null) {
       return incorrectParameter();
     }
@@ -390,29 +369,24 @@ class _$IncorrectParameter
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult cancelledByUser(CancelledByUser value),
-    required TResult unknownCommand(UnknownCommand value),
-    required TResult incorrectParameter(IncorrectParameter value),
-    required TResult unexpected(UnexpectedFailure value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(UnknownCommand value) unknownCommand,
+    required TResult Function(IncorrectParameter value) incorrectParameter,
+    required TResult Function(UnexpectedFailure value) unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return incorrectParameter(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value)?,
-    TResult unknownCommand(UnknownCommand value)?,
-    TResult incorrectParameter(IncorrectParameter value)?,
-    TResult unexpected(UnexpectedFailure value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(UnknownCommand value)? unknownCommand,
+    TResult Function(IncorrectParameter value)? incorrectParameter,
+    TResult Function(UnexpectedFailure value)? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (incorrectParameter != null) {
       return incorrectParameter(this);
     }
@@ -444,6 +418,7 @@ class _$UnexpectedFailureCopyWithImpl<$Res>
 }
 
 /// @nodoc
+
 class _$UnexpectedFailure
     with DiagnosticableTreeMixin
     implements UnexpectedFailure {
@@ -470,29 +445,24 @@ class _$UnexpectedFailure
 
   @override
   @optionalTypeArgs
-  TResult when<TResult extends Object>({
-    required TResult cancelledByUser(),
-    required TResult unknownCommand(),
-    required TResult incorrectParameter(),
-    required TResult unexpected(),
+  TResult when<TResult extends Object?>({
+    required TResult Function() cancelledByUser,
+    required TResult Function() unknownCommand,
+    required TResult Function() incorrectParameter,
+    required TResult Function() unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return unexpected();
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object>({
-    TResult cancelledByUser()?,
-    TResult unknownCommand()?,
-    TResult incorrectParameter()?,
-    TResult unexpected()?,
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? cancelledByUser,
+    TResult Function()? unknownCommand,
+    TResult Function()? incorrectParameter,
+    TResult Function()? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (unexpected != null) {
       return unexpected();
     }
@@ -501,29 +471,24 @@ class _$UnexpectedFailure
 
   @override
   @optionalTypeArgs
-  TResult map<TResult extends Object>({
-    required TResult cancelledByUser(CancelledByUser value),
-    required TResult unknownCommand(UnknownCommand value),
-    required TResult incorrectParameter(IncorrectParameter value),
-    required TResult unexpected(UnexpectedFailure value),
+  TResult map<TResult extends Object?>({
+    required TResult Function(CancelledByUser value) cancelledByUser,
+    required TResult Function(UnknownCommand value) unknownCommand,
+    required TResult Function(IncorrectParameter value) incorrectParameter,
+    required TResult Function(UnexpectedFailure value) unexpected,
   }) {
-    assert(cancelledByUser != null);
-    assert(unknownCommand != null);
-    assert(incorrectParameter != null);
-    assert(unexpected != null);
     return unexpected(this);
   }
 
   @override
   @optionalTypeArgs
-  TResult maybeMap<TResult extends Object>({
-    TResult cancelledByUser(CancelledByUser value)?,
-    TResult unknownCommand(UnknownCommand value)?,
-    TResult incorrectParameter(IncorrectParameter value)?,
-    TResult unexpected(UnexpectedFailure value)?,
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(CancelledByUser value)? cancelledByUser,
+    TResult Function(UnknownCommand value)? unknownCommand,
+    TResult Function(IncorrectParameter value)? incorrectParameter,
+    TResult Function(UnexpectedFailure value)? unexpected,
     required TResult orElse(),
   }) {
-    assert(orElse != null);
     if (unexpected != null) {
       return unexpected(this);
     }

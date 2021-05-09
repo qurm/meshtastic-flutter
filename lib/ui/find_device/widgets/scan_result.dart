@@ -1,4 +1,3 @@
-
 // Copyright 2017, Paul DeMarco.
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
@@ -16,7 +15,8 @@ import '../../../services/bluetooth/ble_api.dart';
 class ScanResultTile extends StatelessWidget {
   final ScannedDevice result;
   final VoidCallback onTap;
-  const ScanResultTile({Key? key, required this.result, required this.onTap}) : super(key: key);
+  const ScanResultTile({Key? key, required this.result, required this.onTap})
+      : super(key: key);
 
   Widget _buildTitle(BuildContext context) {
     if (result != null) {
@@ -49,6 +49,8 @@ class ScanResultTile extends StatelessWidget {
       } else {
         return Text(result.device!.id.toString());
       }
+    } else {
+      return Text('No Device');
     }
   }
 
@@ -135,8 +137,8 @@ class ScanResultTile extends StatelessWidget {
         onPressed: onTap,
       ),
       children: <Widget>[
-        _buildAdvRow(
-            context, 'Complete Local Name', result.advertisementData!.localName),
+        _buildAdvRow(context, 'Complete Local Name',
+            result.advertisementData!.localName),
         _buildAdvRow(context, 'Connectable',
             '${result.advertisementData!.connectable ?? 'N/A'}'),
         _buildAdvRow(context, 'Tx Power Level',
