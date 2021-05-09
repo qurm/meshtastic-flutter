@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
@@ -63,7 +62,7 @@ class RouteGenerator {
                   lazy: false,
                   create: (context) =>
                       FindDeviceBloc()..add(const FindStartedEvent()),
-                  child: const FindDevicesScreen()));
+                  child: FindDevicesScreen(deviceConnect: _deviceConnect)));
         }
         return _errorRoute(settings.name);
 
@@ -108,7 +107,7 @@ class RouteGenerator {
         return _errorRoute(settings.name);
       case '/meshCommandScreen':
         // Validation of correct data type
-        if (args is MeshRouteArguments) {
+        if (args is MeshCommandRouteArguments) {
           return MaterialPageRoute(
             builder: (_) => BlocProvider.value(
                 value: sl.get<SetupDeviceBloc>(),
@@ -152,6 +151,14 @@ class RouteGenerator {
 class MeshRouteArguments {
   final MeshDevice device;
   // final DeviceConnect deviceConnect;
+  // final MeshCommand? command;
+  MeshRouteArguments({required this.device});
+}
+
+/// used for MeshCommand etc
+class MeshCommandRouteArguments {
+  final MeshDevice device;
+  // final DeviceConnect deviceConnect;
   final MeshCommand command;
-  MeshRouteArguments({required this.device, required this.command});
+  MeshCommandRouteArguments({required this.device, required this.command});
 }
