@@ -1,10 +1,10 @@
-
 import 'dart:async';
 
 import 'package:collection/collection.dart';
 
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 //AF not sure that this is required/correct in the repo,
 // but using the BluetoothState.on - should avaoid.
 import 'package:flutter_blue/flutter_blue.dart';
@@ -28,7 +28,7 @@ import 'connect_failure.dart';
 /// return them as Failures.
 ///
 
-final Logger? deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
+final Logger deviceRepoLogger = GetIt.I<Logger>(instanceName: 'appLogger');
 
 // Logger deviceRepoLogger = Logger(
 //     printer: PrettyPrinter(
@@ -53,9 +53,8 @@ class DeviceConnect {
 
   //constructor with required BLE API
   /// the "unit" is defined with dartz
-  DeviceConnect({required this.blueAPIClient})
-      : assert(blueAPIClient != null) {
-    deviceRepoLogger!.v('DeviceConnect constructor');
+  DeviceConnect({required this.blueAPIClient}) {
+    deviceRepoLogger.v('DeviceConnect constructor');
   }
 
   //Future<void> connect() return blueAPIClient.connect();
@@ -79,6 +78,8 @@ class DeviceConnect {
 
   /// AF this does not appear to return anything, only the Unit/void
   /// other examples set state or value some other way
+  /// AF 2021-05-09 removed during null-safe conv - TODO maybe replace with a Behaviour rx, if needed.
+  ///
   Future<Either<ConnectFailure, Unit>> initialise() async {
     ///check the state, either reconnect or scan
     ///
@@ -87,11 +88,15 @@ class DeviceConnect {
       if (state == BluetoothState.on) {
         return right(unit);
       }
+      // } on PlatformException catch (err) {
+      //   // PlatformException when device is not available
+      //   appLogger.e('scan1: handled PlatformException from } $err');
+      //   rethrow;
+      //   return left(const ConnectFailure.noDevice());
     } catch (e) {
-      if (e.message.contains('error') != null) {
-        return left(const ConnectFailure.nobluetooth());
-      } //todo add further elseif
+      return left(const ConnectFailure.nobluetooth());
     }
+    return left(const ConnectFailure.nobluetooth());
   }
 
   /// These simple states are not really intended for use outside Repo
@@ -134,15 +139,15 @@ class DeviceConnect {
       //get the device [id] if already connected
       final _devices = await connectedDevices2;
       if (_devices.isNotEmpty) {
-        deviceRepoLogger!.d('our id ${id}');
+        deviceRepoLogger.d('our id ${id}');
         _device = _devices.firstWhereOrNull(
             (result) => equalsIgnoreAsciiCase(result.id.toString(), id!));
         if (_device != null) {
-          deviceRepoLogger!.d('matches id ${_devices.first.id.toString()}');
+          deviceRepoLogger.d('matches id ${_devices.first.id.toString()}');
           return right(_device);
         }
       } else {
-        deviceRepoLogger!.d('no match for ${id} in BLE connected devices');
+        deviceRepoLogger.d('no match for ${id} in BLE connected devices');
       }
       //not connected already, so scan for [id]
       await startScan(2500);
@@ -184,7 +189,7 @@ class DeviceConnect {
   /// called from SetupDeviceBloc
   Future<BLEInterface?> meshServiceStart(MeshDevice meshd) async {
     currentDevice = meshd;
-    deviceRepoLogger!.i('meshServiceStart with device ${meshd.id.toString()}');
+    deviceRepoLogger.i('meshServiceStart with device ${meshd.id.toString()}');
     bleInterface = new BLEInterface(currentDevice);
     //may be first call to BLE/GATT - triggers any Platform exceptions
     await bleInterface!.init();
@@ -297,8 +302,13 @@ class DeviceConnect {
     try {
       await blueAPIClient.scanForDevicesStream(4000);
       return right(unit);
+    } on PlatformException catch (err) {
+      // PlatformException when device is not available
+      appLogger.e('scan1: handled PlatformException from } $err');
+      rethrow;
+      return left(const ConnectFailure.noDevice());
     } catch (e) {
-      if (e.message.contains('error') != null) {
+      {
         return left(const ConnectFailure.noDevice());
       } //todo add further elseif
       //always return some Failure here
@@ -306,7 +316,7 @@ class DeviceConnect {
     }
   }
 
-// AF not important now, as can depend on already paired devices for Mesht
+  // AF not important now, as can depend on already paired devices for Mesht
   /// AF pattern bsed on ddd-firebase, note_repository.dart
   /// However 2 patterns are there - use Stream for this: ??
   Future<Either<ConnectFailure, Stream<List<ScanResult>>>> scan() async {
@@ -320,13 +330,17 @@ class DeviceConnect {
       }
       // try to filter by the GUID for Mesh
       return right(devices);
+    } on PlatformException catch (err) {
+      // PlatformException when device is not available
+      appLogger.e('scan1: handled PlatformException from } $err');
+      rethrow;
+      return left(const ConnectFailure.noDevice());
     } catch (e) {
-      if (e.message.contains('error') != null) {
-        return left(const ConnectFailure.noDevice());
-      } //todo add further elseif
-      //always return some Failure here
       return left(const ConnectFailure.noDevice());
     }
+
+    // always return some Failure here
+    return left(const ConnectFailure.noDevice());
   }
 }
 
