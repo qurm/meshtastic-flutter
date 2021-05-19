@@ -1,4 +1,3 @@
-
 part of 'connect_device_bloc.dart';
 
 /// Based on ddd-firebase pattern
@@ -27,5 +26,5 @@ abstract class ConnectDeviceState with _$ConnectDeviceState {
   const factory ConnectDeviceState.deviceOffline() = DeviceOfflineState;
   // when the device has been disconnected and reconnects
   // could be range, power-off, unpair, etc
-  // const factory ConnectDeviceState.deviceOnline() = DeviceOnlineState;
+  const factory ConnectDeviceState.deviceOnline() = DeviceOnlineState;
 }

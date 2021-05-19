@@ -606,6 +606,10 @@ class _$ConnectDeviceStateTearOff {
   DeviceOfflineState deviceOffline() {
     return const DeviceOfflineState();
   }
+
+  DeviceOnlineState deviceOnline() {
+    return const DeviceOnlineState();
+  }
 }
 
 /// @nodoc
@@ -621,6 +625,7 @@ mixin _$ConnectDeviceState {
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -631,6 +636,7 @@ mixin _$ConnectDeviceState {
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -642,6 +648,7 @@ mixin _$ConnectDeviceState {
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -652,6 +659,7 @@ mixin _$ConnectDeviceState {
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -723,6 +731,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return initial();
   }
@@ -736,6 +745,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -753,6 +763,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return initial(this);
   }
@@ -766,6 +777,7 @@ class _$Initial with DiagnosticableTreeMixin implements Initial {
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -858,6 +870,7 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return connected(device);
   }
@@ -871,6 +884,7 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (connected != null) {
@@ -888,6 +902,7 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return connected(this);
   }
@@ -901,6 +916,7 @@ class _$ConnectedState with DiagnosticableTreeMixin implements ConnectedState {
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (connected != null) {
@@ -974,6 +990,7 @@ class _$ConnectingState
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return requested();
   }
@@ -987,6 +1004,7 @@ class _$ConnectingState
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (requested != null) {
@@ -1004,6 +1022,7 @@ class _$ConnectingState
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return requested(this);
   }
@@ -1017,6 +1036,7 @@ class _$ConnectingState
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (requested != null) {
@@ -1120,6 +1140,7 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return nodevice(connectFailure);
   }
@@ -1133,6 +1154,7 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (nodevice != null) {
@@ -1150,6 +1172,7 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return nodevice(this);
   }
@@ -1163,6 +1186,7 @@ class _$NoDeviceState with DiagnosticableTreeMixin implements NoDeviceState {
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (nodevice != null) {
@@ -1260,6 +1284,7 @@ class _$DeviceKnownState
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return deviceKnown(deviceList);
   }
@@ -1273,6 +1298,7 @@ class _$DeviceKnownState
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (deviceKnown != null) {
@@ -1290,6 +1316,7 @@ class _$DeviceKnownState
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return deviceKnown(this);
   }
@@ -1303,6 +1330,7 @@ class _$DeviceKnownState
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (deviceKnown != null) {
@@ -1376,6 +1404,7 @@ class _$DeviceOfflineState
     required TResult Function(ConnectFailure connectFailure) nodevice,
     required TResult Function(dynamic deviceList) deviceKnown,
     required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
   }) {
     return deviceOffline();
   }
@@ -1389,6 +1418,7 @@ class _$DeviceOfflineState
     TResult Function(ConnectFailure connectFailure)? nodevice,
     TResult Function(dynamic deviceList)? deviceKnown,
     TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
     required TResult orElse(),
   }) {
     if (deviceOffline != null) {
@@ -1406,6 +1436,7 @@ class _$DeviceOfflineState
     required TResult Function(NoDeviceState value) nodevice,
     required TResult Function(DeviceKnownState value) deviceKnown,
     required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
   }) {
     return deviceOffline(this);
   }
@@ -1419,6 +1450,7 @@ class _$DeviceOfflineState
     TResult Function(NoDeviceState value)? nodevice,
     TResult Function(DeviceKnownState value)? deviceKnown,
     TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
     required TResult orElse(),
   }) {
     if (deviceOffline != null) {
@@ -1430,4 +1462,119 @@ class _$DeviceOfflineState
 
 abstract class DeviceOfflineState implements ConnectDeviceState {
   const factory DeviceOfflineState() = _$DeviceOfflineState;
+}
+
+/// @nodoc
+abstract class $DeviceOnlineStateCopyWith<$Res> {
+  factory $DeviceOnlineStateCopyWith(
+          DeviceOnlineState value, $Res Function(DeviceOnlineState) then) =
+      _$DeviceOnlineStateCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class _$DeviceOnlineStateCopyWithImpl<$Res>
+    extends _$ConnectDeviceStateCopyWithImpl<$Res>
+    implements $DeviceOnlineStateCopyWith<$Res> {
+  _$DeviceOnlineStateCopyWithImpl(
+      DeviceOnlineState _value, $Res Function(DeviceOnlineState) _then)
+      : super(_value, (v) => _then(v as DeviceOnlineState));
+
+  @override
+  DeviceOnlineState get _value => super._value as DeviceOnlineState;
+}
+
+/// @nodoc
+
+class _$DeviceOnlineState
+    with DiagnosticableTreeMixin
+    implements DeviceOnlineState {
+  const _$DeviceOnlineState();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ConnectDeviceState.deviceOnline()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ConnectDeviceState.deviceOnline'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) || (other is DeviceOnlineState);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(BLEDevice2 device) connected,
+    required TResult Function() requested,
+    required TResult Function(ConnectFailure connectFailure) nodevice,
+    required TResult Function(dynamic deviceList) deviceKnown,
+    required TResult Function() deviceOffline,
+    required TResult Function() deviceOnline,
+  }) {
+    return deviceOnline();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(BLEDevice2 device)? connected,
+    TResult Function()? requested,
+    TResult Function(ConnectFailure connectFailure)? nodevice,
+    TResult Function(dynamic deviceList)? deviceKnown,
+    TResult Function()? deviceOffline,
+    TResult Function()? deviceOnline,
+    required TResult orElse(),
+  }) {
+    if (deviceOnline != null) {
+      return deviceOnline();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Initial value) initial,
+    required TResult Function(ConnectedState value) connected,
+    required TResult Function(ConnectingState value) requested,
+    required TResult Function(NoDeviceState value) nodevice,
+    required TResult Function(DeviceKnownState value) deviceKnown,
+    required TResult Function(DeviceOfflineState value) deviceOffline,
+    required TResult Function(DeviceOnlineState value) deviceOnline,
+  }) {
+    return deviceOnline(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Initial value)? initial,
+    TResult Function(ConnectedState value)? connected,
+    TResult Function(ConnectingState value)? requested,
+    TResult Function(NoDeviceState value)? nodevice,
+    TResult Function(DeviceKnownState value)? deviceKnown,
+    TResult Function(DeviceOfflineState value)? deviceOffline,
+    TResult Function(DeviceOnlineState value)? deviceOnline,
+    required TResult orElse(),
+  }) {
+    if (deviceOnline != null) {
+      return deviceOnline(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DeviceOnlineState implements ConnectDeviceState {
+  const factory DeviceOnlineState() = _$DeviceOnlineState;
 }

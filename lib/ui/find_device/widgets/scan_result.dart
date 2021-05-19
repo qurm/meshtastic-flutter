@@ -28,7 +28,7 @@ class ScanResultTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Text(
-              result.device!.name ?? '<null name>',
+              result.device!.name,
               overflow: TextOverflow.ellipsis,
             ),
             Text(
@@ -128,19 +128,19 @@ class ScanResultTile extends StatelessWidget {
       leading: Text(result.rssi.toString()),
       initiallyExpanded: false, //toggle this for expand/collapse layout
       trailing: OutlinedButton(
-        child: result.advertisementData!.connectable!
-            ? const Text('CONNECT')
-            : const Text('Not Meshtastic'),
         // color: Colors.black,
         // textColor: Colors.white,
         // onPressed: (result.advertisementData.connectable) ? onTap : null,
         onPressed: onTap,
+        child: result.advertisementData!.connectable
+            ? const Text('CONNECT')
+            : const Text('Not Meshtastic'),
       ),
       children: <Widget>[
         _buildAdvRow(context, 'Complete Local Name',
             result.advertisementData!.localName),
-        _buildAdvRow(context, 'Connectable',
-            '${result.advertisementData!.connectable ?? 'N/A'}'),
+        _buildAdvRow(
+            context, 'Connectable', '${result.advertisementData!.connectable}'),
         _buildAdvRow(context, 'Tx Power Level',
             '${result.advertisementData!.txPowerLevel ?? 'N/A'}'),
         _buildAdvRow(
@@ -152,12 +152,12 @@ class ScanResultTile extends StatelessWidget {
         _buildAdvRow(
             context,
             'Service UUIDs',
-            getNiceServiceUUID(result.advertisementData!.serviceUuids) ??
-                'N/A'), // (result.advertisementData.serviceUuids.isNotEmpty)
+            getNiceServiceUUID(result.advertisementData!
+                .serviceUuids)), // (result.advertisementData.serviceUuids.isNotEmpty)
         //     ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
         //     : 'N/A'),
         _buildAdvRow(context, 'Service Data',
-            getNiceServiceData(result.advertisementData!.serviceData) ?? 'N/A'),
+            getNiceServiceData(result.advertisementData!.serviceData)),
       ],
     );
   }

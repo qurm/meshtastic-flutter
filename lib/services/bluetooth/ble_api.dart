@@ -10,6 +10,7 @@ import 'package:flutter/services.dart';
 import 'package:dartz/dartz.dart';
 import 'package:logger/logger.dart';
 import 'package:get_it/get_it.dart';
+import 'package:rxdart/rxdart.dart';
 
 import 'package:flutter_blue/flutter_blue.dart';
 import 'ble_common.dart';
@@ -72,6 +73,8 @@ class BLEDevice2 {
   BLEDeviceState _deviceState = BLEDeviceState.disconnected; //safe default,
   late BluetoothDevice _device; //handle for the flutter_blue device
 
+  final BehaviorSubject<BLEDeviceState> _stateSubject =
+      BehaviorSubject.seeded(BLEDeviceState.disconnected);
   // this will keep creating new BLEDevice objects,
   // which are garbage collected - leak?
   // TODO called only for connected devices? see _deviceState
@@ -83,12 +86,16 @@ class BLEDevice2 {
     _device = device;
     //assume called from connectedDevices method, so set = connected
     _deviceState = BLEDeviceState.connected;
+    //listen to device and stream to the BehaviorSubject
+    _device.state.listen((event) {
+      _stateSubject.add(BLEDeviceState.values[event.index]);
+    });
     appLogger.i(
-        'BLEDevice2.fromBluetoothDevice construct ${this.id} $hashCode ${_device.hashCode}');
+        'BLEDevice2.fromBluetoothDevice construct ${id} $hashCode ${_device.hashCode}');
   }
 
   //Casts the state to the abstracted internal BLEDeviceState
-  Stream<BLEDeviceState> get deviceState async* {
+  Stream<BLEDeviceState> get deviceState2 async* {
     Stream<BluetoothDeviceState> _state;
     // appLogger.v('BLEDevice State for ${this.id} $hashCode ${_device.hashCode}');
     //todo change the log, error handling
@@ -102,6 +109,35 @@ class BLEDevice2 {
     }
   }
 
+  // //Casts the state to the abstracted internal BLEDeviceState
+  // Stream<BLEDeviceState> get deviceStateSubject async* {
+  //   Stream<BluetoothDeviceState> _state;
+
+  //   // appLogger.v('BLEDevice State for ${this.id} $hashCode ${_device.hashCode}');
+  //   //todo change the log, error handling
+  //   _state = _device.state.handleError((e) => print(e));
+  //   await for (var event in _state) {
+  //     // yield event as BLEDeviceState;
+  //     _deviceState = BLEDeviceState.values[event.index];
+  //     stateSubject.add(BLEDeviceState.values[event.index]);
+  //     // }
+  //     // yield BLEDeviceState.disconnected; //just a default
+  //   }
+  // }
+
+  //Casts the state to the abstracted internal BLEDeviceState
+  //Now is a BehaviorSubject
+  Stream<BLEDeviceState> get deviceState => _stateSubject.stream;
+
+  // should never be null, but dart thinks not null-safe
+  // this is sync
+  BLEDeviceState get currentState =>
+      _stateSubject.value ?? BLEDeviceState.disconnected;
+
+// BLEDeviceState get currentState => ((_stateSubject.hasValue) ? _stateSubject.value : BLEDeviceState.disconnected);
+// BLEDeviceState get currentState => ((_stateSubject.hasValue) ? BLEDeviceState.disconnected : BLEDeviceState.disconnected);
+  // _stateSubject.stream
+
   bool get isConnected => (_deviceState == BLEDeviceState.connected);
 
   Stream<int> get mtu async* {
@@ -113,6 +149,7 @@ class BLEDevice2 {
   }
 
   /// Request to change the MTU Size
+  /// May be the first BLE call - so first error
   /// Todo handle error - or setup as default for Meshtastic, part of initialist
   /// https://github.com/pauldemarco/flutter_blue/pull/579
   /// add this to flutter blue if needed
@@ -140,7 +177,7 @@ class BLEDevice2 {
   /// check for dodgy meshtastic services
   Stream<List<BLEService>> get services async* {
     Stream<List<BluetoothService>> _serviceList;
-    BluetoothService _service;
+    //BluetoothService _service;
     _serviceList = _device.services.handleError((e) => print(e));
     await for (var service in _serviceList) {
       yield service.map((e) => BLEService.fromBluetoothService(e)).toList();
@@ -190,8 +227,7 @@ class BLEDevice2 {
     // } else
     // if (this.isConnected)
     // {
-    final List<BluetoothService> serviceList =
-        await _device.discoverServices() ?? [];
+    final List<BluetoothService> serviceList = await _device.discoverServices();
     return serviceList
         .map((service) => BLEService.fromBluetoothService(service))
         .toList();
@@ -206,13 +242,13 @@ class BLEDevice2 {
     Duration timeout = const Duration(seconds: 4),
     bool autoConnect = true,
   }) async {
-    appLogger.v("BLEDevice2.connect to ${this.id}");
+    appLogger.v('BLEDevice2.connect to ${id}');
     await _device.connect(timeout: timeout, autoConnect: autoConnect);
     _deviceState = BLEDeviceState.connected;
   }
 
   Future<void> disconnect() async {
-    appLogger.v("BLEAPI disconnect from ${this.id}");
+    appLogger.v('BLEAPI disconnect from ${id}');
     _deviceState = BLEDeviceState.disconnected; // to be sure
     return await _device.disconnect();
   }
@@ -229,7 +265,7 @@ class ScannedDevice {
   ScannedDevice({this.device, this.advertisementData, this.rssi});
 
   ScannedDevice.fromScanResult(ScanResult scanresult) {
-    appLogger.d("create ScannedDevice.fromscanResult ${scanresult.toString()}");
+    appLogger.d('create ScannedDevice.fromscanResult ${scanresult.toString()}');
     device = new BLEDevice2.fromBluetoothDevice(scanresult.device);
     advertisementData =
         new BLEAdvertisementData.fromAD(scanresult.advertisementData);
@@ -295,8 +331,7 @@ class BlueAPIClient {
   Future<bool> hasGATTService(BluetoothDevice d, Guid serviceUuid) async {
     try {
       /// Exception if try to discover when not connected.  See this for non-Meshtastic devices.
-      final List<BluetoothService> serviceList =
-          await d.discoverServices() ?? [];
+      final List<BluetoothService> serviceList = await d.discoverServices();
       final mesh = serviceList.where((s) => s.uuid == serviceUuid);
       // if(mesh.isEmpty) return false else return true;
       return mesh.isNotEmpty;
@@ -404,7 +439,7 @@ class BlueAPIClient {
   /// Meshtastic device serviceUuids = [6ba1b218-15a8-461f-9fa8-5dcae273eafd]
   Future<void> startScan(
       {int timeoutms = 4000, required String serviceUuid}) async {
-    appLogger.v("get startScan with ${serviceUuid}");
+    appLogger.v('get startScan with ${serviceUuid}');
     List<Guid> guid = []; //todo make a list
     try {
       guid = [Guid(serviceUuid)]; //convert to 16-byte
@@ -426,7 +461,7 @@ class BlueAPIClient {
 
   /// Stop BLE scan. Not used, here for completeness.
   Future<void> stopScan() async {
-    print("Start stopScan");
+    print('Start stopScan');
     if (await flutterBlue.isOn == false && _scanning) {}
     try {
       await flutterBlue.stopScan();
@@ -442,9 +477,9 @@ class BlueAPIClient {
     Stream<List<ScanResult>> _scanList;
     //_scanList should be error free after handling
     _scanList = flutterBlue.scanResults
-        .handleError((e) => appLogger.e("get scanResults stream error ${e}"));
+        .handleError((e) => appLogger.e('get scanResults stream error ${e}'));
     await for (var results in _scanList) {
-      appLogger.d("get scanResults ${results.length} devices");
+      appLogger.d('get scanResults ${results.length} devices');
       yield results
           .map((result) => ScannedDevice.fromScanResult(result))
           .toList();
@@ -485,7 +520,7 @@ class BlueAPIClient {
   // from DTUFeedme - scan method
   /// Scan for other devices (not connected yet)
   Future<Stream<List<ScanResult>>> scanForDevicesStream(int timeoutms) async {
-    print("Start scanForDevicesStream");
+    print('Start scanForDevicesStream');
     if (await flutterBlue.isOn == false || _scanning) {
       return const Stream.empty();
     }

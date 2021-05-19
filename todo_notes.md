@@ -1,6 +1,9 @@
 
 ## To Do 
 
+Setup state offline/online in connect and setup device bloc.
+Log changes to disk
+
 seeing two instances of this in widget tree - are they same Singleton.
 SetupDeviceBloc
 
