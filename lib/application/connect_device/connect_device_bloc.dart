@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
@@ -94,11 +93,13 @@ class ConnectDeviceBloc extends Bloc<ConnectDeviceEvent, ConnectDeviceState> {
             yield const DeviceOfflineState();
             break;
           case BLEDeviceState.connecting:
+            //what to od here
             // yield DeviceOffline();
             break;
           //resume after brief interruption, or...
           case BLEDeviceState.connected:
             // yield Connected(event.device);
+            yield const DeviceOnlineState();
             break;
         }
       } catch (e) {
